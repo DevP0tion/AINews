@@ -17,6 +17,8 @@ concurrency:
 
 permissions:
   contents: write
+  id-token: write    # claude-code-action이 OIDC 토큰을 요구
+  pull-requests: write  # Claude가 필요시 PR/이슈 조작할 때 사용
 
 jobs:
   # ---------------------------------------------------------------------------
@@ -73,6 +75,10 @@ jobs:
   curate:
     needs: collect
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
     env:
       TARGET_DATE: ${{ needs.collect.outputs.target_date }}
       INBOX_PATH: ${{ needs.collect.outputs.inbox_path }}
