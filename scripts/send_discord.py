@@ -152,16 +152,16 @@ def main() -> None:
 
     year, month = date[:4], date[5:7]
     report_path = REPO_DIR / "archive" / year / month / f"{date}.json"
-    if not report_path.exists():
-        log(f"ERROR: 리포트 파일 없음: {report_path}")
-        raise SystemExit(5)
-
-    report = json.loads(report_path.read_text(encoding="utf-8"))
-    log(
-        f"리포트 로드: 뉴스 {len(report.get('news', []))}, "
-        f"Claude {len(report.get('claude_updates', []))}, "
-        f"특이 {len(report.get('specials', []))}"
-    )
+    if report_path.exists():
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        log(
+            f"리포트 로드: 뉴스 {len(report.get('news', []))}, "
+            f"Claude {len(report.get('claude_updates', []))}, "
+            f"특이 {len(report.get('specials', []))}"
+        )
+    else:
+        log(f"리포트 파일 없음 — 빈 리포트로 전송: {report_path}")
+        report = {"news": [], "claude_updates": [], "specials": []}
 
     payload = build_payload(date, report)
     post_discord(webhook, payload)
