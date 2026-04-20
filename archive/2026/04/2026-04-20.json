@@ -1,0 +1,39 @@
+{
+  "date": "2026-04-20",
+  "news": [
+    {
+      "title": "Graphs that explain the state of AI in 2026",
+      "summary": "스탠퍼드 AI Index 2026 기반의 IEEE Spectrum 시각화 보고서로, 미국 기업이 AI 모델 개발을 주도하는 가운데 글로벌 컴퓨팅 용량이 연간 3배씩 성장하고 있음을 보여줍니다. 2025년 AI 투자액은 5,810억 달러를 기록했으나, 프론티어 모델 학습의 탄소 배출(최대 7만 2천 톤)과 엔트리 레벨 직업 감소 등 부작용도 부각됩니다. 미국 내 정부 AI 규제 신뢰도가 31%에 그치는 등 지역별 체감 격차도 뚜렷합니다.",
+      "url": "https://spectrum.ieee.org/state-of-ai-index-2026"
+    },
+    {
+      "title": "Prove you are a robot: CAPTCHAs for agents",
+      "summary": "Browser Use가 AI 에이전트 전용 역(逆)-CAPTCHA 시스템을 공개했습니다. 난독화된 수학 문제를 제시해 사람은 풀기 어렵고 에이전트는 즉시 해결할 수 있도록 설계한 것으로, 에이전트 네이티브 온보딩에서 이메일·OAuth 없이 API 키를 발급하는 새로운 접근법입니다. 에이전트가 일상적으로 웹 서비스에 가입하는 미래를 위한 인프라 논의를 촉발하고 있습니다.",
+      "url": "https://browser-use.com/posts/prove-you-are-a-robot"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Claude Opus 4.7 출시",
+      "content": "복잡한 추론·에이전트 코딩에 최적화된 최신 Opus 모델로, 비전(최대 2,576px), 코딩, 멀티스텝 태스크 전반의 성능이 향상됐으며 Opus 4.6 대비 API breaking changes 포함 — Amazon Bedrock 전체 고객 대상 동시 제공.",
+      "url": "https://www.anthropic.com/news/claude-opus-4-7",
+      "special": true
+    },
+    {
+      "category": "제품",
+      "title": "Claude Design (Anthropic Labs) 출시",
+      "content": "Claude Opus 4.7 기반 비주얼 협업 툴로, 디자인·프로토타입·슬라이드·원페이저를 대화형으로 생성·수정할 수 있으며 Canva·PowerPoint·HTML 내보내기 지원 — Claude Pro/Max/Team/Enterprise 구독자 대상 research preview.",
+      "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+      "special": true
+    }
+  ],
+  "specials": [
+    "Claude Opus 4.7 출시",
+    "Claude Design (Anthropic Labs) 출시"
+  ],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
