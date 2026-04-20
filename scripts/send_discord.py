@@ -126,7 +126,11 @@ def post_discord(webhook: str, payload: dict) -> None:
     req = urllib.request.Request(
         webhook,
         data=body,
-        headers={"Content-Type": "application/json; charset=utf-8"},
+        headers={
+            "Content-Type": "application/json; charset=utf-8",
+            # Discord (Cloudflare)가 기본 Python UA를 봇으로 차단하므로 명시
+            "User-Agent": "PotionBot-News/1.0 (+https://github.com/DevP0tion/AINews)",
+        },
         method="POST",
     )
     try:
