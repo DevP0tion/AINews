@@ -1,13 +1,13 @@
 # AINews
 
 PotionBot News 일일 리포트 저장소.
-**GitHub Actions + Claude Code Action**으로 매일 09:00 KST에 자동 실행되어
+**GitHub Actions + Claude Code Action**으로 매일 07:00 KST에 자동 실행되어
 AI/IT 뉴스 + Claude/Anthropic 업데이트를 Discord로 전송한다.
 
 ## 아키텍처
 
 ```
-[매일 09:00 KST cron]
+[매일 07:00 KST cron]
    ↓
 [Job 1: collect] ── 결정론적 fetching (Python)
    · Anthropic 뉴스 RSS / Claude 릴리즈 노트 / GitHub Releases / HN AI / arxiv
