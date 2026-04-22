@@ -2,6 +2,7 @@
   "items": [
     "생태계::amazon, anthropic에 추가 50억 달러 투자 – 총 130억 달러·aws 1,000억 달러 지출 약속",
     "제품::anthropic, openclaw 방식의 claude cli 사용 재허용 공식 확인",
-    "제품::claude code v2.1.116"
+    "제품::claude code v2.1.116",
+    "제품::claude code v2.1.117"
   ]
 }

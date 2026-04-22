@@ -1,12 +1,15 @@
 {
   "urls": [
+    "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/eighth-generation-tpu-agentic-era",
     "https://browser-use.com/posts/prove-you-are-a-robot",
     "https://github.com/ENTERPILOT/GOModel",
     "https://github.com/gizmo64k/soulplayer-c64",
+    "https://openai.com/index/introducing-chatgpt-images-2-0",
     "https://simonwillison.net/2026/Apr/18/opus-system-prompt",
     "https://spectrum.ieee.org/state-of-ai-index-2026",
     "https://www.adweek.com/media/exclusive-leaked-deck-reveals-stackadapts-playbook-for-chatgpt-ads",
     "https://www.axios.com/2026/04/19/nsa-anthropic-mythos-pentagon",
-    "https://www.reuters.com/sustainability/boards-policy-regulation/meta-start-capturing-employee-mouse-movements-keystrokes-ai-training-data-2026-04-21"
+    "https://www.reuters.com/sustainability/boards-policy-regulation/meta-start-capturing-employee-mouse-movements-keystrokes-ai-training-data-2026-04-21",
+    "https://zed.dev/blog/parallel-agents"
   ]
 }
