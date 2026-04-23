@@ -1,8 +1,11 @@
 {
   "items": [
+    "SDK::python sdk v0.97.0 / typescript sdk v0.91.0 — cma memory 퍼블릭 베타",
     "생태계::amazon, anthropic에 추가 50억 달러 투자 – 총 130억 달러·aws 1,000억 달러 지출 약속",
     "제품::anthropic, openclaw 방식의 claude cli 사용 재허용 공식 확인",
     "제품::claude code v2.1.116",
-    "제품::claude code v2.1.117"
+    "제품::claude code v2.1.117",
+    "제품::claude code v2.1.118 — vim 비주얼 모드·커스텀 테마·/usage 통합",
+    "제품::claude code 품질 저하 3건 원인 공개 — anthropic 사후 분석 보고서"
   ]
 }
