@@ -1,0 +1,50 @@
+{
+  "date": "2026-04-25",
+  "news": [
+    {
+      "title": "Google, Anthropic에 최대 400억 달러 투자 계획",
+      "summary": "Bloomberg 보도에 따르면 Google이 Anthropic에 최대 400억 달러를 투자할 계획이다. 이번 투자는 AI 경쟁에서 Anthropic을 지원하기 위한 전략적 결정으로, 구체적인 조건과 시기는 공개되지 않았다.",
+      "url": "https://www.bloomberg.com/news/articles/2026-04-24/google-plans-to-invest-up-to-40-billion-in-anthropic"
+    },
+    {
+      "title": "Tesla, 20억 달러 규모 AI 하드웨어 기업 인수 공시",
+      "summary": "Tesla가 2026년 1분기 10-Q 보고서에 최대 20억 달러 규모의 AI 하드웨어 기업 인수 계획을 단 한 문장으로 공개했다. 인수 대금 중 약 18억 달러는 서비스 조건·성과 마일스톤에 연동된 주식 지급 방식이며, 인수 대상 기업명과 기술 세부 사항은 공개되지 않았다.",
+      "url": "https://electrek.co/2026/04/23/tesla-tsla-quietly-discloses-2-billion-ai-hardware-acquisition-10q/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Anthropic, Claude Code 품질 저하 원인 규명 및 수정 완료 발표",
+      "content": "Anthropic이 3~4월 사이 발생한 Claude Code 품질 이슈의 원인을 추론 노력 기본값의 'medium' 하향, 세션 반복 시 이전 추론을 누락하는 캐싱 버그, 응답 간결화 시스템 프롬프트 세 가지로 밝히고 4월 20일까지 전부 수정했다고 공식 발표했다.",
+      "url": "https://www.anthropic.com/engineering/april-23-postmortem",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.119 릴리즈",
+      "content": "/config 설정이 ~/.claude/settings.json에 영구 저장되어 프로젝트·로컬·정책 우선순위에 참여하고, --from-pr이 GitLab·Bitbucket·GitHub Enterprise URL을 지원하며, PostToolUse 훅 입력에 duration_ms 필드가 추가됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.119",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.97.0 — CMA Memory 퍼블릭 베타",
+      "content": "Python SDK v0.97.0이 CMA(Claude Memory API) Memory 퍼블릭 베타를 지원하고, API 스펙 오류 수정 및 multipart 요청 파일 구조 복사 성능이 개선됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.97.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.91.0 — CMA Memory 퍼블릭 베타",
+      "content": "TypeScript SDK v0.91.0이 CMA Memory 퍼블릭 베타를 지원하고, Bedrock 클라이언트에 mantle auth 헤더 방식이 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.91.0",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
