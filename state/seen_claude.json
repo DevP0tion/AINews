@@ -2,6 +2,7 @@
   "items": [
     "SDK::anthropic-sdk-python v0.97.0 — cma memory 퍼블릭 베타",
     "SDK::anthropic-sdk-typescript v0.91.0 — cma memory 퍼블릭 베타",
+    "SDK::anthropic-sdk-typescript v0.91.1 — memory 파일 보안 수정",
     "SDK::python sdk v0.97.0 / typescript sdk v0.91.0 — cma memory 퍼블릭 베타",
     "생태계::amazon, anthropic에 추가 50억 달러 투자 – 총 130억 달러·aws 1,000억 달러 지출 약속",
     "제품::anthropic, claude code 품질 저하 원인 규명 및 수정 완료 발표",

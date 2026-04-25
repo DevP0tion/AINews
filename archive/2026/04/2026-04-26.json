@@ -1,0 +1,24 @@
+{
+  "date": "2026-04-26",
+  "news": [
+    {
+      "title": "딥러닝의 과학적 이론 수립 가능하다 — 14인 연구팀 논문",
+      "summary": "14명의 연구자들이 딥러닝의 과학적 이론 정립이 가능하다는 내용의 논문을 발표해 Hacker News에서 주목을 받았다. 저자들은 이를 '학습 역학(learning mechanics)'이라 명명하며, 해석 가능한 이상적 설정·극한 분석·수학적 법칙 등 5개 연구 분야를 통합하는 프레임워크를 제시했다. 훈련 과정 동역학을 수학적으로 기술하고 검증 가능한 정량적 예측을 제공함으로써 딥러닝 근본 이론의 토대를 제안한다.",
+      "url": "https://arxiv.org/abs/2604.21691"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.91.1 — memory 파일 보안 수정",
+      "content": "memory 파일 생성 시 제한적인 파일 권한(restrictive file mode)을 적용하도록 수정해 로컬 파일 시스템 보안을 강화했다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.91.1",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 0
+  }
+}
