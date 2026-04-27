@@ -1,0 +1,21 @@
+{
+  "date": "2026-04-28",
+  "news": [
+    {
+      "title": "Microsoft와 OpenAI, 독점 계약 및 수익 공유 구조 재편",
+      "summary": "Microsoft와 OpenAI가 오랜 독점 파트너십을 공식 종료하고 새로운 계약을 체결했습니다. Microsoft는 OpenAI 모델에 대한 독점 라이선스를 잃게 되며, OpenAI는 이제 Amazon·Google 등 다른 클라우드 제공사와도 자유롭게 협력할 수 있게 됩니다. Microsoft는 2032년까지 비독점 라이선스와 27% 지분을 유지하고, 수익 공유는 2030년까지 지속되지만 지급 상한이 설정되었습니다.",
+      "url": "https://openai.com/index/next-phase-of-microsoft-partnership/"
+    },
+    {
+      "title": "Google DeepMind, 대규모 분산 AI 훈련 기법 'Decoupled DiLoCo' 공개",
+      "summary": "Google DeepMind가 글로벌 분산 데이터센터에서 대규모 모델을 효율적으로 훈련하는 새로운 아키텍처 Decoupled DiLoCo를 발표했습니다. 통신 대역폭을 기존 198 Gbps에서 0.84 Gbps로 약 230배 절감하고, 12B 파라미터 Gemma 4 모델 기준 기존 동기식 훈련과 동등한 성능(64.1% vs 64.4%)을 유지하면서 훈련 속도는 20배 이상 향상되었습니다.",
+      "url": "https://deepmind.google/blog/decoupled-diloco/"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
