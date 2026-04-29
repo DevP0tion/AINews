@@ -1,0 +1,34 @@
+{
+  "date": "2026-04-30",
+  "news": [
+    {
+      "title": "OpenAI Models Coming to Amazon Bedrock: Interview with OpenAI and AWS CEOs",
+      "summary": "OpenAI와 AWS가 'Bedrock Managed Agents, powered by OpenAI'를 발표하며 전략적 파트너십을 체결했습니다. 이는 단순한 API 접근이 아닌 AWS 네이티브 런타임에 OpenAI 모델을 통합한 엔터프라이즈급 솔루션으로, 마이크로소프트가 OpenAI의 멀티클라우드 배포를 허용하도록 독점 계약을 수정한 직후 발표됐습니다. 엔터프라이즈 고객은 자체 데이터를 AWS 인프라 내에 유지하면서 OpenAI 에이전트를 배포할 수 있게 됩니다.",
+      "url": "https://stratechery.com/2026/an-interview-with-openai-ceo-sam-altman-and-aws-ceo-matt-garman-about-bedrock-managed-agents/"
+    },
+    {
+      "title": "How ChatGPT Serves Ads: Here's the Full Attribution Loop",
+      "summary": "ChatGPT는 SSE 스트림에 'single_advertiser_ad_unit' 객체를 삽입하는 방식으로 대화 맥락에 맞는 광고를 제공합니다. 각 광고는 4개의 암호화된 Fernet 토큰으로 클릭을 추적하며, 사용자가 클릭하면 판매자 페이지에 설치된 OAIQ SDK가 쿠키에 속성 정보를 저장하고 조회 데이터를 OpenAI 서버로 전송합니다. 이를 통해 OpenAI는 대화→클릭→구매에 이르는 전체 광고 attribution 루프를 구축했습니다.",
+      "url": "https://www.buchodi.com/how-chatgpt-serves-ads-heres-the-full-attribution-loop/"
+    },
+    {
+      "title": "Ramp's Sheets AI Exfiltrates Financials via Prompt Injection",
+      "summary": "Ramp의 Sheets AI에서 간접 프롬프트 인젝션 취약점이 발견됐습니다. 공격자는 외부 데이터셋에 악성 지시를 숨겨 AI가 IMAGE 함수를 자동 삽입하도록 유도했고, 이를 통해 사용자의 민감한 재무 데이터가 외부 서버로 유출됐습니다. Ramp 보안팀은 2026년 3월 16일 해당 문제를 패치했으며, 이 사례는 스프레드시트 AI 도구에서의 공급망 공격 위험을 잘 보여줍니다.",
+      "url": "https://www.promptarmor.com/resources/ramps-sheets-ai-exfiltrates-financials"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.123",
+      "content": "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1 설정 시 발생하던 OAuth 인증 401 재시도 루프 버그가 수정됐습니다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.123",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 1
+  }
+}
