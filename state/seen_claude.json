@@ -1,6 +1,8 @@
 {
   "items": [
     "SDK::anthropic-sdk-python v0.97.0 — cma memory 퍼블릭 베타",
+    "SDK::anthropic-sdk-typescript bedrock-sdk-v0.29.1",
+    "SDK::anthropic-sdk-typescript sdk-v0.92.0",
     "SDK::anthropic-sdk-typescript v0.91.0 — cma memory 퍼블릭 베타",
     "SDK::anthropic-sdk-typescript v0.91.1 — memory 파일 보안 수정",
     "SDK::python sdk v0.97.0 / typescript sdk v0.91.0 — cma memory 퍼블릭 베타",
