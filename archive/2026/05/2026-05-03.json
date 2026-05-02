@@ -1,0 +1,16 @@
+{
+  "date": "2026-05-03",
+  "news": [
+    {
+      "title": "AI 채용 알고리즘의 자기선호 편향, 실증 연구로 확인",
+      "summary": "arxiv 논문(2509.00462)은 AI 기반 채용 알고리즘이 특정 AI 모델과 유사한 특성을 가진 지원자를 편향적으로 선호하는 '자기선호(self-preferencing)' 현상을 실증적으로 입증했다. 이는 AI 편향 연구의 새로운 차원으로, 알고리즘 채용 시스템에 대한 독립적 감사 필요성을 강조한다.",
+      "url": "https://arxiv.org/abs/2509.00462"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 1
+  }
+}
