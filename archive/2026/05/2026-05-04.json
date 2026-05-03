@@ -1,0 +1,26 @@
+{
+  "date": "2026-05-04",
+  "news": [
+    {
+      "title": "Specsmaxxing – AI 에이전트를 위한 YAML 스펙 주도 개발 방법론",
+      "summary": "Acai.sh 팀이 제안한 'Specsmaxxing'은 AI 코딩 에이전트가 구현에 앞서 YAML 형식의 상세 스펙을 작성하고 AUTH-1·AUTH-2 형태의 'Acceptance Criteria ID'로 스펙과 코드 간 추적 가능성을 유지하는 방법론이다. 에이전트가 엣지 케이스를 누락하거나 비최적 코드를 생성하는 문제를 줄이는 데 중점을 두며, feature.yaml 포맷과 오픈소스 CLI 도구, 무료 웹 대시보드도 함께 공개되었다.",
+      "url": "https://acai.sh/blog/specsmaxxing"
+    },
+    {
+      "title": "Open Design – 13개 코딩 에이전트를 지원하는 오픈소스 로컬 디자인 엔진",
+      "summary": "Nexu-io가 공개한 Open Design은 Claude Code·Cursor·Gemini CLI 등 13종의 코딩 에이전트 CLI를 자동 감지해 사용하는 로컬 퍼스트 오픈소스 디자인 도구다. Stripe·Notion·Apple 등 129개 디자인 시스템과 31개 컴포저블 스킬을 내장하며, 'AI 슬롭(slop)' 방지를 위한 5차원 자기비평과 필수 질문 양식을 포함한다. 프로젝트는 SQLite에 로컬 저장되고 HTML 프로토타입, PDF/PPTX/MP4 내보내기를 지원하며 Apache-2.0으로 배포된다.",
+      "url": "https://github.com/nexu-io/open-design"
+    },
+    {
+      "title": "Harvard 임상시험: OpenAI o1, 응급실 트리아지 진단 정확도 67% — 의사(50~55%) 상회",
+      "summary": "The Guardian이 보도한 Harvard 임상시험에 따르면 OpenAI의 o1 모델이 응급실(ER) 환자 진단에서 67%의 정확도를 보인 반면, 기존 트리아지 의사는 50~55%에 그쳤다. 이 결과는 AI가 임상 의사결정 보조를 넘어 일부 시나리오에서 의사를 능가할 수 있다는 가능성을 제시하지만, 실제 배포 시 맥락적 판단과 책임 소재 문제는 여전히 과제로 남는다.",
+      "url": "https://www.theguardian.com/technology/2026/apr/30/ai-outperforms-doctors-in-harvard-trial-of-emergency-triage-diagnoses"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}

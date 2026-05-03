@@ -1,5 +1,6 @@
 {
   "urls": [
+    "https://acai.sh/blog/specsmaxxing",
     "https://arxiv.org/abs/2509.00462",
     "https://arxiv.org/abs/2604.21691",
     "https://aws.amazon.com/bedrock/openai",
@@ -10,6 +11,7 @@
     "https://github.com/ENTERPILOT/GOModel",
     "https://github.com/gizmo64k/soulplayer-c64",
     "https://github.com/intel/auto-round",
+    "https://github.com/nexu-io/open-design",
     "https://openai.com/index/introducing-chatgpt-images-2-0",
     "https://openai.com/index/introducing-gpt-5-5",
     "https://openai.com/index/introducing-openai-privacy-filter",
@@ -29,6 +31,7 @@
     "https://www.promptarmor.com/resources/ramps-sheets-ai-exfiltrates-financials",
     "https://www.reuters.com/sustainability/boards-policy-regulation/meta-start-capturing-employee-mouse-movements-keystrokes-ai-training-data-2026-04-21",
     "https://www.scientificamerican.com/article/amateur-armed-with-chatgpt-vibe-maths-a-60-year-old-problem",
+    "https://www.theguardian.com/technology/2026/apr/30/ai-outperforms-doctors-in-harvard-trial-of-emergency-triage-diagnoses",
     "https://zed.dev/blog/parallel-agents"
   ]
 }
