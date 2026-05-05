@@ -1,0 +1,55 @@
+{
+  "date": "2026-05-06",
+  "news": [
+    {
+      "title": "Google Chrome, 사용자 동의 없이 4GB Gemini Nano 온디바이스 AI 모델 자동 설치",
+      "summary": "Google Chrome이 Gemini Nano 온디바이스 AI 모델(약 4GB)을 사용자 동의 없이 자동 설치한 사실이 알려져 논란이 되고 있다. 해당 모델은 텍스트 작성 보조, 스캠 탐지, 탭 그룹 제안 등의 기능에 활용되며, 사용자가 삭제해도 Chrome이 자동으로 재다운로드한다. 사용자에게 설치 사실을 알리거나 동의를 구하는 과정이 전혀 없었다는 점에서 프라이버시 우려가 제기되고 있다.",
+      "url": "https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/"
+    },
+    {
+      "title": "Train Your Own LLM from Scratch: GPT 훈련 파이프라인 직접 구현 실습 워크숍 공개",
+      "summary": "Python과 PyTorch만으로 약 1000만 파라미터 규모의 GPT 모델을 처음부터 훈련하는 실습 기반 오픈소스 워크숍이 GitHub에 공개되어 주목받고 있다. 토크나이저, 트랜스포머 아키텍처, 훈련 루프 등 LLM의 모든 구성 요소를 직접 구현하도록 설계됐으며, 특별한 ML 경험 없이도 노트북에서 1시간 내에 실습 가능하다. Apple Silicon, NVIDIA GPU, Google Colab 등 다양한 하드웨어 환경을 지원한다.",
+      "url": "https://github.com/angelos-p/llm-from-scratch"
+    },
+    {
+      "title": "코드가 저렴해진 시대, Agentic Coding의 10가지 교훈",
+      "summary": "AI 에이전트 기반 코딩이 일반화됨에 따라 개발자 역할의 변화를 다룬 글이 Hacker News에서 화제가 됐다. AI가 코드 생성을 자동화할수록 설계·성능·보안 등 고차원 판단에 집중해야 하며, 빈번한 재구현과 실험을 통해 빠르게 학습하되 장기 유지보수 비용도 함께 고려해야 한다고 조언한다.",
+      "url": "https://www.dbreunig.com/2026/05/04/10-lessons-for-agentic-coding.html"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "Anthropic, 금융 서비스·보험 분야용 에이전트 템플릿 10종 공개",
+      "content": "KYC 심사, 피치북 작성, 월말 결산 등 금융 업무 자동화를 위한 사전 구축 에이전트 10종을 Claude Code 플러그인 및 Claude Managed Agents로 제공하며, Claude Opus 4.7이 Vals AI Finance Agent 벤치마크에서 64.37%로 업계 최고 성과를 기록했다.",
+      "url": "https://www.anthropic.com/news/finance-agents",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code 최신 릴리즈: EnterWorktree 버그 수정, MCP 개선, Opus 4.7 모델 피커 업데이트",
+      "content": "EnterWorktree가 이제 로컬 HEAD에서 브랜치를 생성해 미푸시 커밋 유실 버그가 수정됐고, /mcp 명령에 도구 수 표시 및 서버 중복 감지 기능이 추가됐으며, /model 피커에서 중복 Opus 4.7 항목이 통합됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.99.0: OIDC federation 워크스페이스 타겟팅 지원",
+      "content": "OIDC federation 토큰 교환 시 특정 워크스페이스를 타겟팅할 수 있는 기능이 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.99.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.94.0: OIDC federation 워크스페이스 타겟팅 지원",
+      "content": "OIDC federation 토큰 교환 시 특정 워크스페이스를 타겟팅할 수 있는 기능이 TypeScript SDK에도 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.94.0",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
