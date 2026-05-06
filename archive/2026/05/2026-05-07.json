@@ -1,0 +1,52 @@
+{
+  "date": "2026-05-07",
+  "news": [
+    {
+      "title": "Cloudflare 에이전트, 계정 생성·도메인 구매·배포까지 자율 수행",
+      "summary": "Cloudflare와 Stripe Projects가 파트너십을 통해 AI 에이전트가 별도 설정 없이 Cloudflare 계정을 개설하고 도메인을 구매하며 애플리케이션을 배포할 수 있는 기능을 공개했다. 에이전트는 discovery, authorization, payment 세 가지 컴포넌트를 통해 자율적으로 인프라를 프로비저닝하며 기본 지출 한도는 월 $100으로 설정된다. 인증된 사용자를 보유한 모든 플랫폼이 동일한 에이전트 주도 워크플로를 채택할 수 있다.",
+      "url": "https://blog.cloudflare.com/agents-stripe-projects/"
+    },
+    {
+      "title": "\"Vibe coding과 에이전틱 엔지니어링이 위험하게 수렴하고 있다\" — Simon Willison",
+      "summary": "Simon Willison은 비전문가의 빠른 프로토타이핑을 돕는 'vibe coding'과 AI 에이전트가 실제 인프라에 영향을 미치는 '에이전틱 엔지니어링'의 경계가 모호해지고 있다고 경고했다. 이 수렴은 사소한 실수가 실제 시스템에 심각한 결과를 초래할 수 있다는 점에서 리스크를 높인다. 개발자들이 AI 보조 코딩과 자율 에이전트 행동의 차이를 명확히 구분해야 할 필요성을 강조했다.",
+      "url": "https://simonwillison.net/2026/May/6/vibe-coding-and-agentic-engineering/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude 사용량 한도 대폭 상향 및 SpaceX Colossus 1 컴퓨트 계약 체결",
+      "content": "Pro·Max·Team·Enterprise 플랜의 Claude Code 5시간 rate limit를 2배로 높이고 피크 시간대 스로틀링을 폐지했으며, SpaceX Colossus 1 데이터센터(22만 개 이상 GPU)와의 컴퓨트 계약을 통해 처리 용량을 대규모 확대한다.",
+      "url": "https://www.anthropic.com/news/higher-limits-spacex",
+      "special": true
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.129–v2.1.132 업데이트",
+      "content": "`--plugin-url` 플래그 추가, `CLAUDE_CODE_SESSION_ID` 환경 변수를 Bash 서브프로세스에 전달, `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1`로 대체 스크린 렌더러 비활성화 옵션 추가, Windows VS Code 확장 활성화 오류 및 Mantle 인증 버그 수정이 포함됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.132",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.100.0 — Managed Agents 멀티에이전트·웹훅 지원 추가",
+      "content": "Managed Agents의 multiagents, outcomes, webhooks, vault validation 기능이 Python SDK에 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.100.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.95.0 — Managed Agents 멀티에이전트·웹훅 지원 추가",
+      "content": "Managed Agents의 multiagents, outcomes, webhooks, vault validation 기능이 TypeScript SDK에 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.95.0",
+      "special": false
+    }
+  ],
+  "specials": [
+    "Claude 사용량 한도 대폭 상향 및 SpaceX Colossus 1 컴퓨트 계약 체결"
+  ],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}

@@ -1,5 +1,6 @@
 {
   "items": [
+    "SDK::anthropic-sdk-python v0.100.0 — managed agents 멀티에이전트·웹훅 지원 추가",
     "SDK::anthropic-sdk-python v0.97.0 — cma memory 퍼블릭 베타",
     "SDK::anthropic-sdk-python v0.98.0",
     "SDK::anthropic-sdk-python v0.99.0: oidc federation 워크스페이스 타겟팅 지원",
@@ -11,6 +12,7 @@
     "SDK::anthropic-sdk-typescript v0.92.0",
     "SDK::anthropic-sdk-typescript v0.93.0",
     "SDK::anthropic-sdk-typescript v0.94.0: oidc federation 워크스페이스 타겟팅 지원",
+    "SDK::anthropic-sdk-typescript v0.95.0 — managed agents 멀티에이전트·웹훅 지원 추가",
     "SDK::python sdk v0.97.0 / typescript sdk v0.91.0 — cma memory 퍼블릭 베타",
     "생태계::amazon, anthropic에 추가 50억 달러 투자 – 총 130억 달러·aws 1,000억 달러 지출 약속",
     "생태계::anthropic, 금융 서비스·보험 분야용 에이전트 템플릿 10종 공개",
@@ -24,7 +26,9 @@
     "제품::claude code v2.1.122",
     "제품::claude code v2.1.123",
     "제품::claude code v2.1.126",
+    "제품::claude code v2.1.129–v2.1.132 업데이트",
     "제품::claude code 최신 릴리즈: enterworktree 버그 수정, mcp 개선, opus 4.7 모델 피커 업데이트",
-    "제품::claude code 품질 저하 3건 원인 공개 — anthropic 사후 분석 보고서"
+    "제품::claude code 품질 저하 3건 원인 공개 — anthropic 사후 분석 보고서",
+    "제품::claude 사용량 한도 대폭 상향 및 spacex colossus 1 컴퓨트 계약 체결"
   ]
 }
