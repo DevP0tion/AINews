@@ -1,0 +1,48 @@
+{
+  "date": "2026-05-08",
+  "news": [
+    {
+      "title": "AlphaEvolve: Gemini 기반 코딩 에이전트의 다분야 성과 공개",
+      "summary": "Google DeepMind가 Gemini 언어 모델과 진화 알고리즘을 결합한 코딩 에이전트 AlphaEvolve의 광범위한 적용 사례를 공개했습니다. DNA 시퀀싱 오류 교정 30% 향상, 양자 회로 효율 10배 개선, Klarna의 트랜스포머 학습 속도 2배 향상 등 과학·인프라·상업 분야에서 구체적 성과를 보고했습니다. 알고리즘 자동 발견·최적화 에이전트가 실제 산업 환경에 배포된 사례를 체계적으로 정리한 보고서입니다.",
+      "url": "https://deepmind.google/blog/alphaevolve-impact/"
+    },
+    {
+      "title": "AI 에이전트에 필요한 것은 프롬프트 개선이 아닌 제어 흐름",
+      "summary": "에이전트 시스템의 신뢰성을 높이려면 프롬프트를 정교화하는 것보다 조건 분기·루프·상태 관리 같은 명시적 제어 흐름(control flow)이 핵심이라는 주장이 주목받고 있습니다. 복잡한 다단계 작업에서 LLM에 모든 판단을 맡기는 설계는 예측 불가능성을 높이며, 프로그래밍적 구조로 실행 경로를 제한해야 한다는 실용적 관점을 제시합니다.",
+      "url": "https://bsuh.bearblog.dev/agents-need-control-flow/"
+    },
+    {
+      "title": "Diffusion Transformer 아웃라이어 토큰 억제 기법 제안 (arxiv)",
+      "summary": "이미지 생성용 Diffusion Transformer(DiT)에서 소수의 아웃라이어 토큰이 어텐션 가중치를 독점해 생성 품질을 저하시키는 현상을 분석하고, 이를 효과적으로 억제하는 방법을 제안한 논문이 공개됐습니다. Vision Transformer에서 알려진 유사 현상을 DiT에 적용·분석해 아키텍처 안정성 개선 방향을 제시합니다.",
+      "url": "https://arxiv.org/abs/2605.05206v1"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "SDK",
+      "title": "Python SDK v0.100.0 — Managed Agents 멀티에이전트·outcomes·웹훅 지원 추가",
+      "content": "Managed Agents API에 멀티에이전트 구성, outcomes, 웹훅, vault 검증 기능이 추가됐습니다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/compare/v0.99.0...v0.100.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "TypeScript SDK v0.95.0 — Managed Agents 멀티에이전트·outcomes·웹훅 지원 추가",
+      "content": "Python SDK v0.100.0과 동일하게 Managed Agents 멀티에이전트 구성, outcomes, 웹훅, vault 검증이 TypeScript SDK에도 추가됐습니다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.94.0...sdk-v0.95.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "TypeScript SDK v0.95.1 — debug 로그 API 키 자동 마스킹",
+      "content": "디버그 로그에서 api-key 헤더를 자동으로 redact(마스킹)하는 보안 개선이 적용됐습니다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.95.0...sdk-v0.95.1",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
