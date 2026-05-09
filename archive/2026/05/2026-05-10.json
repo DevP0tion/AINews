@@ -1,0 +1,36 @@
+{
+  "date": "2026-05-10",
+  "news": [
+    {
+      "title": "ChatGPT 5.5 Pro, 수학 박사급 연구 문제 2시간 만에 해결",
+      "summary": "수학자 Timothy Gowers가 ChatGPT 5.5 Pro와 함께 수론 연구를 진행한 경험을 공유했다. GPT-5.5 Pro는 약 2시간 만에 가산 집합 크기 개선 및 다항식 차수 증명을 생성했으며, 공동 연구자가 \"꽤 인상적\"이라 평가한 독창적 아이디어(h²-dissociated sets 활용)를 스스로 제시했다. 이는 고급 LLM이 실질적인 박사급 수학 연구를 수행할 수 있음을 보여주며, 대학원 교육 및 AI 저작권 문제에 새로운 과제를 제기한다.",
+      "url": "https://gowers.wordpress.com/2026/05/08/a-recent-experience-with-chatgpt-5-5-pro/"
+    },
+    {
+      "title": "LLM에 문서 작업 위임 시 평균 25% 내용 손상 — DELEGATE-52 벤치마크",
+      "summary": "52개 전문 도메인에 걸친 DELEGATE-52 벤치마크 연구에서 GPT-5.4, Claude 4.6 Opus 등 최신 LLM도 장기 워크플로우 내 문서 내용의 평균 25%를 손상시킨다는 결과가 밝혀졌다. 오류는 상호작용이 길어지거나 문서가 커질수록 누적되며, agentic tool use를 적용해도 이 문제는 해결되지 않았다. LLM에 복잡한 문서 편집 작업을 위임할 때의 신뢰성 한계를 구체적 수치로 입증한 중요한 연구다.",
+      "url": "https://arxiv.org/abs/2604.15597"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.138",
+      "content": "내부 수정 사항이 반영된 패치 릴리즈.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.138",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.137",
+      "content": "VSCode 확장 프로그램이 Windows에서 활성화되지 않는 버그가 수정됨.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.137",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
