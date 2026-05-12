@@ -1,0 +1,38 @@
+{
+  "date": "2026-05-13",
+  "news": [
+    {
+      "title": "Training an LLM in Swift, Part 1: Taking matrix mult from Gflop/s to Tflop/s",
+      "summary": "Apple Silicon에서 Swift로 LLM 훈련에 필요한 행렬 곱셈을 최적화하는 과정을 단계별로 다룬 기술 글이다. SIMD, 멀티스레딩, AMX 코프로세서, GPU compute shader를 차례로 도입해 2.8 Gflop/s에서 1.1 Tflop/s로 약 382배 성능 향상을 달성했다. 최종 구현체는 초당 약 11 토큰으로 동작하며, Metal 기반 접근법이 가장 빠른 결과를 보였다.",
+      "url": "https://www.cocoawithlove.com/blog/matrix-multiplications-swift.html"
+    },
+    {
+      "title": "Show HN: Needle – Distilled Gemini Tool Calling into a 26M Model",
+      "summary": "Gemini의 tool calling(함수 호출) 능력을 26M 파라미터 소형 모델로 증류한 Needle을 오픈소스로 공개했다. 스마트폰·스마트워치 등 엣지 기기에서 동작하도록 설계되었으며, prefill 6,000 tokens/s·decode 1,200 tokens/s의 빠른 처리 속도를 달성했다. 200B 토큰 사전학습 후 function calling 태스크로 fine-tuning되었으며 가중치는 Hugging Face에 완전 공개되어 있다.",
+      "url": "https://github.com/cactus-compute/needle"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Platform on AWS 출시",
+      "content": "AWS 인증·청구·IAM 통합과 함께 전체 Claude API 기능을 AWS 고객에게 처음으로 제공하는 신규 서비스로, managed agents, code execution, web search 도구를 AWS 인프라 내에서 바로 사용할 수 있으며 신규 기능 및 베타도 native Claude API와 동일한 날 배포된다.",
+      "url": "https://claude.com/blog/claude-platform-on-aws",
+      "special": true
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code 버그 수정 릴리즈",
+      "content": "Agent tool의 subagent_type 대소문자·구분자 무시 매칭 개선, symlink 설정 파일 hot-reload 버그 수정, `/loop` 중복 wakeup 수정, Windows event-loop stall 해결, `Read` tool 유효성 검사 오류 수정 등 다수의 안정성 개선이 포함됐다.",
+      "url": "",
+      "special": false
+    }
+  ],
+  "specials": [
+    "Claude Platform on AWS 출시"
+  ],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
