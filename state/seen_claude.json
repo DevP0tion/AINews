@@ -1,5 +1,7 @@
 {
   "items": [
+    "SDK::anthropic python sdk v0.102.0",
+    "SDK::anthropic typescript sdk v0.96.0",
     "SDK::anthropic-sdk-python v0.100.0 — managed agents 멀티에이전트·웹훅 지원 추가",
     "SDK::anthropic-sdk-python v0.101.0: aws client 지원 추가",
     "SDK::anthropic-sdk-python v0.97.0 — cma memory 퍼블릭 베타",
@@ -37,6 +39,7 @@
     "제품::claude code v2.1.137",
     "제품::claude code v2.1.138",
     "제품::claude code v2.1.139: agent view 및 /goal 커맨드 추가",
+    "제품::claude code v2.1.140",
     "제품::claude code 버그 수정 릴리즈",
     "제품::claude code 최신 릴리즈: enterworktree 버그 수정, mcp 개선, opus 4.7 모델 피커 업데이트",
     "제품::claude code 품질 저하 3건 원인 공개 — anthropic 사후 분석 보고서",
