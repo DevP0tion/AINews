@@ -4,6 +4,7 @@
     "SDK::anthropic typescript sdk v0.96.0",
     "SDK::anthropic-sdk-python v0.100.0 — managed agents 멀티에이전트·웹훅 지원 추가",
     "SDK::anthropic-sdk-python v0.101.0: aws client 지원 추가",
+    "SDK::anthropic-sdk-python v0.102.0",
     "SDK::anthropic-sdk-python v0.97.0 — cma memory 퍼블릭 베타",
     "SDK::anthropic-sdk-python v0.98.0",
     "SDK::anthropic-sdk-python v0.99.0: oidc federation 워크스페이스 타겟팅 지원",
@@ -17,6 +18,7 @@
     "SDK::anthropic-sdk-typescript v0.93.0",
     "SDK::anthropic-sdk-typescript v0.94.0: oidc federation 워크스페이스 타겟팅 지원",
     "SDK::anthropic-sdk-typescript v0.95.0 — managed agents 멀티에이전트·웹훅 지원 추가",
+    "SDK::anthropic-sdk-typescript v0.96.0",
     "SDK::python sdk v0.100.0 — managed agents 멀티에이전트·outcomes·웹훅 지원 추가",
     "SDK::python sdk v0.97.0 / typescript sdk v0.91.0 — cma memory 퍼블릭 베타",
     "SDK::typescript sdk v0.95.0 — managed agents 멀티에이전트·outcomes·웹훅 지원 추가",
@@ -40,9 +42,12 @@
     "제품::claude code v2.1.138",
     "제품::claude code v2.1.139: agent view 및 /goal 커맨드 추가",
     "제품::claude code v2.1.140",
+    "제품::claude code v2.1.141",
+    "제품::claude code v2.1.142",
     "제품::claude code 버그 수정 릴리즈",
     "제품::claude code 최신 릴리즈: enterworktree 버그 수정, mcp 개선, opus 4.7 모델 피커 업데이트",
     "제품::claude code 품질 저하 3건 원인 공개 — anthropic 사후 분석 보고서",
+    "제품::claude for small business ga 출시",
     "제품::claude platform on aws 출시",
     "제품::claude 사용량 한도 대폭 상향 및 spacex colossus 1 컴퓨트 계약 체결"
   ]
