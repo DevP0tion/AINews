@@ -1,0 +1,16 @@
+{
+  "date": "2026-05-17",
+  "news": [
+    {
+      "title": "Frontier AI가 오픈 CTF 보안 대회 형식을 붕괴시키고 있다",
+      "summary": "Claude Opus 4.5와 GPT-5.5 등 최신 AI 모델이 CTF 보안 대회의 대부분 과제를 자동으로 풀 수 있게 되면서, 오픈 온라인 CTF의 경쟁 무결성이 사실상 무너졌다는 주장이 제기됐다. AI 에이전트 자동화 능력으로 경쟁하는 구도로 바뀌어 실력 측정 수단으로서의 의미를 잃게 됐고, Plaid CTF 등 권위 있는 대회들이 운영을 중단했다. 보안 전문가 지망생들의 학습 경로도 위협받고 있다.",
+      "url": "https://kabir.au/blog/the-ctf-scene-is-dead"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 1
+  }
+}
