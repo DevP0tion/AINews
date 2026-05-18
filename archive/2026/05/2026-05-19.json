@@ -1,0 +1,29 @@
+{
+  "date": "2026-05-19",
+  "news": [
+    {
+      "title": "Agora-1: 멀티 에이전트 월드 모델 공개",
+      "summary": "Odyssey가 최대 4명의 플레이어(인간·AI)가 동시에 상호작용하는 실시간 시뮬레이션 환경을 지원하는 멀티 에이전트 월드 모델 'Agora-1'을 공개했다. 시뮬레이션 역학과 렌더링을 분리한 구조를 채택했으며, DiT 기반 렌더러가 텍스트 프롬프트 대신 게임 상태를 조건으로 동작하는 것이 특징이다. 연결(concatenation) 방식의 선형적 컨텍스트 증가 문제를 해결하는 확장 가능한 상태 표현 방식을 적용했다.",
+      "url": "https://odyssey.ml/introducing-agora-1"
+    },
+    {
+      "title": "일론 머스크, OpenAI·샘 올트먼 상대 소송에서 패소",
+      "summary": "미국 법원이 일론 머스크가 OpenAI와 샘 올트먼을 상대로 제기한 소송을 기각했다. 머스크는 OpenAI가 비영리 사명을 위반하며 영리법인으로 전환했다고 주장했으나 법원이 받아들이지 않았다. 이번 판결은 AI 대형 기업의 지배구조 분쟁에서 중요한 법적 선례가 될 전망이다.",
+      "url": "https://techcrunch.com/2026/05/18/elon-musk-has-lost-his-lawsuit-against-sam-altman-and-openai/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "Anthropic, Stainless 인수",
+      "content": "Anthropic이 TypeScript·Python·Go·Java·Kotlin 등 공식 SDK 전체를 개발해온 Stainless를 인수해 에이전트의 외부 시스템 연결 역량을 강화한다고 발표했다.",
+      "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
