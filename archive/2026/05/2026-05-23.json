@@ -1,0 +1,62 @@
+{
+  "date": "2026-05-23",
+  "news": [
+    {
+      "title": "Anna's Archive, LLM에게 직접 메시지 — 합법적 데이터 접근 경로 공개",
+      "summary": "지식 보존 단체 Anna's Archive가 LLM을 향한 공개 서한을 통해, 보안 우회 대신 GitLab 저장소·토렌트·Torrents JSON API 등 공식 경로로 대규모 데이터를 접근할 수 있음을 안내했다. 모델들이 훈련 과정에서 이 데이터를 활용했을 가능성이 크다며 기부와 상호 협력을 촉구했고, 기업용 고속 SFTP 접근도 유료로 제공한다.",
+      "url": "https://annas-archive.gl/blog/llms-txt.html"
+    },
+    {
+      "title": "Multi-Stream LLMs: 병렬 입출력 스트림으로 LLM 순차 구조 한계 돌파",
+      "summary": "Cornell 연구팀이 arxiv에 발표한 이 논문은 기존 LLM의 단일 순차 입출력 구조를 탈피해, 복수의 입력 스트림과 출력 스트림을 동시에 처리하는 새로운 아키텍처를 제안한다. 이 설계는 입력을 읽는 동안 출력을 병렬 생성할 수 있어 처리 효율이 향상되고, 관심사 분리를 통해 보안도 개선된다. 자율 에이전트 시나리오에서의 유연성도 핵심 이점으로 언급된다.",
+      "url": "https://arxiv.org/abs/2605.12460"
+    },
+    {
+      "title": "CODA: Transformer 블록을 GEMM-Epilogue 프로그램으로 재작성해 GPU 효율 극대화",
+      "summary": "CODA는 Transformer 학습에서 메모리 병목이 되는 비어텐션 연산자를 GEMM 타일이 칩에 머무는 동안 인-레지스터로 실행하는 GPU 커널 추상화다. 정규화·활성화·잔차 업데이트 등을 DRAM 왕복 없이 처리해 불필요한 메모리 이동을 제거하며, 순방향·역방향 패스 전반에 적용 가능하다. 인간이 작성한 커널뿐 아니라 LLM이 생성한 커널과도 호환된다.",
+      "url": "https://arxiv.org/abs/2605.19269"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.149",
+      "content": "`/usage`에 카테고리별(skills·subagents·plugins·MCP 서버) 사용량 세분화가 추가되고, PowerShell `cd` 함수를 통한 샌드박스 우회 및 git worktree 쓰기 허용 범위 누수 등 다수의 보안 버그가 수정됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.149",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.148",
+      "content": "v2.1.147에서 회귀된 Bash 도구의 exit code 127 오류(모든 명령 실패로 표시되던 문제)가 수정됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.148",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.104.0 — thinking-token-count beta 지원",
+      "content": "스트리밍 중 thinking 블록 델타에서 예상 토큰 수를 반환하는 `thinking-token-count` beta가 Python SDK에 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.104.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.104.1 — 스트리밍 버그 수정",
+      "content": "beta compaction accumulator 스트리밍 시 `encrypted_content`가 전달되지 않던 버그가 수정됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.104.1",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.98.0 — thinking-token-count beta 지원",
+      "content": "스트리밍 중 thinking 블록 델타에서 예상 토큰 수를 반환하는 `thinking-token-count` beta가 TypeScript SDK에도 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.98.0",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
