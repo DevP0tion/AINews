@@ -1,0 +1,26 @@
+{
+  "date": "2026-05-25",
+  "news": [
+    {
+      "title": "Memory has grown to nearly two-thirds of AI chip component costs",
+      "summary": "AI 칩 컴포넌트 비용에서 HBM(High Bandwidth Memory)이 차지하는 비중이 2024년 초 52%에서 2025년 말 63%로 급증했으며, 같은 기간 주요 칩 설계사들의 HBM 지출 합계는 약 120억 달러에서 320억 달러로 두 배 이상 늘었다. 공급 부족이 지속되며 2026년에도 가격 상승이 예상되고, 이미 Microsoft·Meta 등이 HBM 비용 상승을 명시적 이유로 설비투자(capex) 전망을 상향했다. 이로써 AI 인프라 확장의 핵심 병목은 연산 칩이 아닌 메모리로 전환됐음이 데이터로 확인됐다.",
+      "url": "https://epoch.ai/data-insights/ai-chip-component-cost-shares"
+    },
+    {
+      "title": "Constraint Decay: The Fragility of LLM Agents in Back End Code Generation",
+      "summary": "LLM 에이전트가 백엔드 코드 생성 과정에서 구조적 요구사항이 누적될수록 assertion 통과율이 평균 30점 이상 급락하는 'Constraint Decay' 현상이 실험으로 입증됐다. 성능 저하는 Django·FastAPI처럼 컨벤션이 많은 프레임워크에서 특히 심했으며, 데이터 계층 결함이 주된 실패 원인으로 지목됐다. 이 연구는 현재 LLM 에이전트가 복잡한 실제 코드베이스 요구사항 하에서 얼마나 취약한지를 정량적으로 보여준다.",
+      "url": "https://arxiv.org/abs/2605.06445"
+    },
+    {
+      "title": "DeepSeek to Make Permanent 75% Discount on Flagship AI Model",
+      "summary": "DeepSeek이 주력 AI 모델의 API 이용 가격을 영구적으로 75% 인하한다고 발표했다. 이는 DeepSeek의 오픈소스 모델 공개로 촉발된 AI API 가격 경쟁의 연장선으로, 중국 AI 기업이 본격적인 저가 공세를 고착화하는 신호탄이다. 이번 조치가 OpenAI·Google·Anthropic 등 경쟁사들의 추가 가격 인하를 압박할 것으로 업계는 전망한다.",
+      "url": "https://www.bloomberg.com/news/articles/2026-05-23/deepseek-to-make-permanent-75-discount-on-flagship-ai-model"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
