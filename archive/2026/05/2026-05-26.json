@@ -1,0 +1,16 @@
+{
+  "date": "2026-05-26",
+  "news": [
+    {
+      "title": "DeepSeek Reasonix: DeepSeek 네이티브 터미널 코딩 에이전트",
+      "summary": "DeepSeek Reasonix는 터미널 환경에서 동작하는 DeepSeek 네이티브 AI 코딩 에이전트로, 높은 caching 효율과 낮은 비용을 핵심 특징으로 내세운다. DeepSeek의 추론 능력을 활용해 코드 생성·디버깅 등의 작업을 터미널에서 직접 수행할 수 있다. Hacker News에서 702점을 기록하며 개발자 커뮤니티의 높은 관심을 받고 있다.",
+      "url": "https://esengine.github.io/DeepSeek-Reasonix/"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 0
+  }
+}
