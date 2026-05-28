@@ -1,0 +1,57 @@
+{
+  "date": "2026-05-29",
+  "news": [
+    {
+      "title": "Disagreement among frontier LLMs on real-world fact-checks",
+      "summary": "실제 팩트체크 대상 1,000개에 GPT-5.4, Claude Opus 4.7, Gemini 3 Pro 등 최전선 LLM 5종의 판정을 비교한 결과, 전체 사례의 67%에서 모델 간 의견 불일치가 발생했습니다. 판정 차이가 2단계 이상인 실질적 불일치도 34%에 달했으며, 완전 합의는 True·False 극단에서만 나타났습니다. 팩트체크 등 정확성이 중요한 영역에서 단일 LLM에 의존하는 것의 위험성을 실증적으로 보여준 연구입니다.",
+      "url": "https://lenz.io/research/llm-disagreement"
+    },
+    {
+      "title": "Anthropic raises $65B in Series H funding at $965B post-money valuation",
+      "summary": "Anthropic이 Altimeter Capital, Sequoia Capital, Amazon 등으로부터 650억 달러 규모의 시리즈 H 펀딩을 완료해 기업 가치가 9,650억 달러로 평가되었습니다. 조달 자금은 AI 안전성·해석 가능성 연구, Claude 서비스 수요 대응 컴퓨팅 확충, 파트너십 확대에 사용될 예정입니다. 현재 Anthropic의 연환산 매출은 470억 달러를 넘어섰으며, Amazon·Google과의 대규모 컴퓨팅 계약도 체결 완료된 상태입니다.",
+      "url": "https://www.anthropic.com/news/series-h"
+    },
+    {
+      "title": "Sam Altman and Dario Amodei are both walking back AI jobs apocalypse predictions",
+      "summary": "OpenAI의 Sam Altman과 Anthropic의 Dario Amodei가 AI로 인한 대규모 일자리 소멸을 경고했던 기존 발언에서 공개적으로 입장을 바꿨습니다. Altman은 AI의 경제적 영향에 대한 예측이 \"상당히 틀렸다\"고 인정했고, Amodei는 자동화가 일자리 파괴보다 생산성 배증 효과를 낼 것이라고 재해석했습니다. 두 회사 모두 IPO를 앞두고 있는 시점에서 나온 태도 변화라는 점이 주목받고 있습니다.",
+      "url": "https://fortune.com/2026/05/26/sam-altman-dario-amodei-walking-back-ai-jobs-apocalypse-prophecies-ipo/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Claude Opus 4.8 출시",
+      "content": "Anthropic이 Claude Opus 4.8을 출시했습니다. 기존 4.7과 동일한 가격($5/$25 per million tokens)을 유지하면서 코딩·에이전틱·추론 벤치마크에서 성능이 향상되었고, API 식별자 `claude-opus-4-8`로 즉시 사용 가능하며 Fast mode는 표준 요금의 2배(2.5배 속도)로 제공됩니다.",
+      "url": "https://www.anthropic.com/news/claude-opus-4-8",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.154: Dynamic Workflows 정식 출시 및 Opus 4.8 기본 탑재",
+      "content": "Claude Code v2.1.154에서 수십~수백 개의 서브에이전트를 병렬 오케스트레이션하는 Dynamic Workflows가 정식 출시되었고(`/workflows`로 실행 현황 확인), Opus 4.8이 기본 모델로 설정되었으며 `/simplify` 명령이 cleanup-only 리뷰 방식으로 개선되었습니다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.154",
+      "special": true
+    },
+    {
+      "category": "SDK",
+      "title": "Python SDK v0.105.0: claude-opus-4-8 및 mid-conversation system blocks 지원",
+      "content": "anthropic-sdk-python v0.105.0에서 `claude-opus-4-8` 모델 지원, 대화 중간 system block 업데이트(mid-conversation system blocks), `usage.output_tokens_details` 필드가 추가되었습니다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.105.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "TypeScript SDK v0.100.0: claude-opus-4-8 및 mid-conversation system blocks 지원",
+      "content": "anthropic-sdk-typescript v0.100.0에서 `claude-opus-4-8` 모델 지원, mid-conversation system blocks, `usage.output_tokens_details` 필드가 추가되었습니다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.100.0",
+      "special": false
+    }
+  ],
+  "specials": [
+    "Claude Code v2.1.154: Dynamic Workflows 정식 출시 및 Opus 4.8 기본 탑재"
+  ],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
