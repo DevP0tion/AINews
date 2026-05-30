@@ -1,0 +1,59 @@
+{
+  "date": "2026-05-31",
+  "news": [
+    {
+      "title": "MCP is dead?",
+      "summary": "Quandri 엔지니어링팀이 Model Context Protocol(MCP)의 실용성에 의문을 제기했다. MCP 서버 4개 스택이 컨텍스트 윈도우의 10.5%를 소비하고 세션 중 충돌·성능 저하가 빈번하며 기존 CLI·API 도구와 기능이 중복된다는 게 주요 논거다. 대안으로 CLI 우선 전략과 필요 시에만 도구 정의를 로드하는 Skills 패턴을 권장했다.",
+      "url": "https://www.quandri.io/engineering-blog/mcp-is-dead"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code Dynamic Workflows 도입",
+      "content": "Claude Code에 수십~수백 개의 서브에이전트를 병렬 조율하는 Dynamic Workflows가 research preview로 추가됐다 (Max/Team/Enterprise 플랜 대상).",
+      "url": "https://claude.com/blog/introducing-dynamic-workflows-in-claude-code",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.154 — Opus 4.8 기본 탑재",
+      "content": "Claude Code v2.1.154가 Opus 4.8을 기본 모델로 채택하고 Dynamic Workflows, /effort xhigh 명령, 서브에이전트 사용 통계 표시 등을 도입했다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.154",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.157 — 플러그인 자동 로딩",
+      "content": "`.claude/skills` 디렉토리의 플러그인이 마켓플레이스 없이 자동으로 로드되며, `claude plugin init <name>` 스캐폴딩 커맨드와 `/plugin` 자동완성이 추가됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.157",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.158 — Bedrock/Vertex/Foundry Auto mode 지원",
+      "content": "Bedrock, Vertex AI, Foundry에서 Opus 4.7·4.8의 Auto mode를 사용할 수 있다 (`CLAUDE_CODE_ENABLE_AUTO_MODE=1` 환경변수 설정 필요).",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.158",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "Python SDK v0.105.0 — claude-opus-4-8 지원 추가",
+      "content": "anthropic-sdk-python v0.105.0에서 claude-opus-4-8 모델, mid-conversation system block, `usage.output_tokens_details` 필드 지원이 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.105.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "TypeScript SDK v0.100.0 — claude-opus-4-8 지원 추가",
+      "content": "anthropic-sdk-typescript v0.100.0에서 claude-opus-4-8 모델, mid-conversation system block, `usage.output_tokens_details` 필드 지원이 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.100.0",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 1
+  }
+}
