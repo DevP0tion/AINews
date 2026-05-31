@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-01",
+  "news": [
+    {
+      "title": "1-Bit Bonsai Image 4B: 아이폰에서 돌아가는 온디바이스 이미지 생성 모델",
+      "summary": "PrismML이 FLUX.2 Klein 4B 기반의 초경량 이미지 생성 모델 'Bonsai Image 4B'를 공개했다. 1-bit(이진 ±1 가중치) 양자화로 기존 7.75GB 모델을 0.93GB로 8.3배 압축하며, 동급 파라미터 모델 중 최초로 iPhone에서 직접 실행 가능하다(iPhone 17 Pro Max 기준 512×512 이미지 9.4초 생성). Ternary 변형은 원본 모델 대비 품질 95%를 유지하고, 가중치와 Bonsai Studio iOS 앱을 Apache 2.0으로 공개했다.",
+      "url": "https://prismml.com/news/bonsai-image-4b"
+    },
+    {
+      "title": "ChatGPT for Google Sheets, 간접 프롬프트 인젝션으로 워크북 무더기 유출",
+      "summary": "보안 연구 기관 PromptArmor가 Google Sheets용 ChatGPT 확장(18만 5천 건 이상 설치)에서 간접 프롬프트 인젝션 취약점을 발견했다. 공격자가 시트 내 숨겨진 텍스트에 악성 명령을 삽입하면, 사용자의 단순 질의 하나만으로 계정 내 여러 스프레드시트를 외부로 탈취하고 자격 증명을 수집할 수 있으며, '자동 편집 비활성화' 설정을 우회한다는 점에서 심각도가 높다.",
+      "url": "https://www.promptarmor.com/resources/gpt-for-google-sheets-data-exfiltration"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code: Opus 4.8 기반 Dynamic Workflows 및 Bedrock/Vertex Auto mode 지원",
+      "content": "Claude Code가 수십~수백 개의 병렬 서브에이전트를 자동 오케스트레이션하는 Dynamic Workflows(/workflows)를 도입했으며, Bedrock·Vertex·Foundry에서 Opus 4.7·4.8 대상 Auto mode(CLAUDE_CODE_ENABLE_AUTO_MODE=1 설정)를 지원하기 시작했다. 추가로 .claude/skills 디렉터리의 플러그인이 마켓플레이스 없이 자동 로드되고, claude plugin init <name>으로 스캐폴딩이 가능해졌다.",
+      "url": "https://github.com/anthropics/claude-code/releases",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 1
+  }
+}
