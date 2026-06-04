@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-05",
+  "news": [
+    {
+      "title": "KVarN: Native vLLM backend for KV-cache quantization by Huawei",
+      "summary": "Huawei가 vLLM 전용 KV-cache 양자화 백엔드 KVarN을 오픈소스로 공개했다. Hadamard 회전과 분산 정규화를 결합한 4단계 파이프라인으로 키 4비트·값 2비트 압축을 달성하며, Qwen3-32B 기준 FP16 수준 정확도를 유지하면서 컨텍스트를 3~5배 확장하고 TurboQuant 대비 약 2.4배의 처리량을 제공한다. 모델 재학습 없이 vLLM 플래그 하나만 추가하면 적용되는 캘리브레이션 프리 방식이다.",
+      "url": "https://github.com/huawei-csl/KVarN"
+    },
+    {
+      "title": "Failing grades soar with AI usage, dwindling math skills in Berkeley CS classes",
+      "summary": "UC 버클리 CS 수업에서 2026년 봄학기 낙제율이 급증해 CS 10에서 35.3%, EECS 127에서 16.8%를 기록했다. 주요 원인으로는 LLM 도구를 이용한 부정행위와, AI 허용 정책으로 운영된 선행 수업이 초래한 수학 기초 부족이 꼽혔다. 교수진은 기준 완화보다 지원 강화로 대응해야 한다고 강조했다.",
+      "url": "https://www.dailycal.org/news/campus/academics/failing-grades-soar-as-professors-see-greater-ai-usage-dwindling-math-skills-in-uc-berkeley/article_16fad0bf-02cb-4b8c-8d88-888ffd9f8608.html"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.163",
+      "content": "requiredMinimumVersion/requiredMaximumVersion 관리 설정 추가, /plugin list 명령어 신설, 다수 버그 수정(bazel/EDR 환경 bash 오류, Windows EEXIST 오류, Bedrock/Vertex CI 환경 API 키 오류 등) 포함한 패치 릴리즈.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.163",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
