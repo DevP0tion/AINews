@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-06",
+  "news": [
+    {
+      "title": "Anthropic, AI 기반 자율 취약점 탐지 오픈소스 프레임워크 공개",
+      "summary": "Anthropic이 Claude를 활용해 소스 코드의 취약점을 자율적으로 발견·검증·패치하는 참조 구현체를 오픈소스로 공개했다. C/C++ 메모리 버그를 대상으로 gVisor 샌드박스 안에서 recon→find→verify→report→patch 파이프라인을 실행하며, Claude Code 내 인터랙티브 스킬(/threat-model, /vuln-scan 등)도 함께 제공한다. 다른 언어·취약점 클래스로 커스터마이징이 가능해 보안팀의 자체 스캐닝 파이프라인 구축에 활용할 수 있다.",
+      "url": "https://github.com/anthropics/defending-code-reference-harness"
+    },
+    {
+      "title": "트랜스포머에 Q·K·V 프로젝션 세 개가 모두 필요한가? 체계적 연구",
+      "summary": "어텐션 메커니즘의 Q·K·V 프로젝션 조합을 체계적으로 비교한 연구로, Q-K=V 공유 방식이 KV 캐시를 50% 절감하면서 perplexity 저하는 3.1%에 그침을 보였다. 단순화된 프로젝션 변형이 표준 트랜스포머와 유사한 성능을 유지해, 메모리 제약이 큰 엣지 배포 시나리오에 유리한 아키텍처 선택지를 제시했다.",
+      "url": "https://arxiv.org/abs/2606.04032"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "SDK",
+      "title": "Python SDK 0.106.0 — Claude Opus 4.1 deprecated 표시",
+      "content": "anthropic-sdk-python 0.106.0(2026-06-05)에서 API 상 Claude Opus 4.1을 deprecated로 표시하고, Foundry 클라이언트의 copy()/with_options() 동작 오류를 수정했다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "TypeScript SDK 다중 패키지 업데이트 — 미들웨어 지원 및 Opus 4.1 deprecated",
+      "content": "anthropic-sdk-typescript의 sdk(0.101.0)/vertex(0.17.0)/bedrock(0.30.0)/foundry(0.3.0)/aws(0.4.0) 패키지가 2026-06-05 일제히 업데이트됐으며, Claude Opus 4.1 deprecated 표시와 클라이언트 미들웨어 지원이 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
