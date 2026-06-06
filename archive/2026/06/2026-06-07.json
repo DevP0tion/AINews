@@ -1,0 +1,57 @@
+{
+  "date": "2026-06-07",
+  "news": [
+    {
+      "title": "S&P 500, 수익성 기준으로 SpaceX·OpenAI·Anthropic 입성 차단",
+      "summary": "S&P 500이 SpaceX의 빠른 편입 요청을 거부하고, 미수익 AI 기업에 대한 예외 적용도 허용하지 않겠다는 방침을 확인했다. GAAP 기준 최근 분기 흑자를 요구하는 규정이 유지됨에 따라 OpenAI·Anthropic 등 대형 AI 스타트업들도 당분간 S&P 500 편입이 불가능해졌다. AI 산업의 급성장에도 불구하고 수익성 문턱이 주요 시장 접근을 가로막는 구조적 장벽으로 부각되고 있다.",
+      "url": "https://arstechnica.com/tech-policy/2026/06/sp-500-blocks-fast-spacex-entry-wont-waive-rule-for-unprofitable-ai-firms/"
+    },
+    {
+      "title": "Meta AI 챗봇 취약점으로 인스타그램 계정 2만여 개 해킹",
+      "summary": "Meta의 AI 기반 계정 복구 챗봇에서 비밀번호 재설정 링크를 공격자가 제어하는 이메일 주소로 잘못 전송하는 버그가 발견됐다. 이 취약점을 악용해 4월 17일부터 6월 초까지 최소 20,225개의 인스타그램 계정이 탈취됐으며, Meta는 해당 코드를 제거하고 챗봇을 비활성화한 뒤 피해자에게 비밀번호 재설정을 안내하고 있다.",
+      "url": "https://this.weekinsecurity.com/meta-confirms-thousands-of-instagram-accounts-were-hacked-by-abusing-its-ai-chatbot/"
+    },
+    {
+      "title": "Lowfat: CLI 출력 필터링으로 LLM 토큰 최대 91% 절감하는 오픈소스 도구",
+      "summary": "Lowfat은 CLI 파이프라인에서 LLM 에이전트로 전달되는 명령 출력을 lite·full·ultra 3단계로 압축·필터링하는 Rust 기반 오픈소스 도구다. .lf DSL 기반 플러그인 시스템을 통해 `git status` 등의 출력을 최대 91% 줄여 에이전트 토큰 비용을 절감하며, Claude Code·OpenCode 등 주요 AI 코딩 도구와 통합된다. 단, 91% 수치는 특정 명령 단위 결과이며 전체 에이전트 비용 절감과는 다르다.",
+      "url": "https://github.com/zdk/lowfat"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.166: fallbackModel 설정·glob 패턴 지원·크로스 세션 보안 강화",
+      "content": "최대 3개 폴백 모델을 순서대로 시도하는 `fallbackModel` 설정 추가, deny 규칙 tool-name에 glob 패턴 지원, 다른 Claude 세션에서 릴레이된 메시지가 사용자 권한을 갖지 못하도록 크로스 세션 메시징 보안이 강화됨(기존 권한 릴레이 동작 변경).",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.166",
+      "special": true
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.167: 버그 수정 및 안정성 개선",
+      "content": "버그 수정 및 안정성 개선.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.167",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.107.0: Managed Agents 타입 업데이트",
+      "content": "Managed Agents API 관련 타입 정의 소규모 업데이트.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.107.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.102.0: Managed Agents 타입 업데이트 및 미들웨어 버그 수정",
+      "content": "Managed Agents 타입 업데이트, 요청 서명 전 미들웨어가 실행되지 않던 버그(`client: run middleware before request signing`) 수정.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.102.0",
+      "special": false
+    }
+  ],
+  "specials": [
+    "Claude Code v2.1.166: fallbackModel 설정·glob 패턴 지원·크로스 세션 보안 강화"
+  ],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
