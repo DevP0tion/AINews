@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-16",
+  "news": [
+    {
+      "title": "EuroMesh: Can Europe train a frontier AI model on the compute it owns?",
+      "summary": "EuroMesh 프로젝트는 유럽이 EuroHPC 슈퍼컴퓨터 및 국립 AI 팩토리 등 기존 공공 컴퓨팅 인프라를 DiLoCo 계열의 저통신 분산 훈련 기법으로 연합하면 2028년경 프론티어급 주권 AI 모델 개발이 가능하다고 분석한다. 신규 기가와트 데이터센터 건설은 전력망 연결에 평균 7.6년이 걸리는 반면, 기존 분산 인프라 활용은 이를 크게 앞당길 수 있다는 게 핵심 주장이다.",
+      "url": "https://github.com/sammysltd/euromesh"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.178",
+      "content": "`Tool(param:value)` 문법으로 권한 규칙에서 도구 입력 파라미터 매칭 지원, 중첩 `.claude/skills` 디렉터리 자동 로드, auto mode 서브에이전트 보안 분류 강화 등 다수 기능 개선 및 버그 수정이 포함됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.178",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Anthropic, Claude Code 구독 크레딧 변경 계획 보류",
+      "content": "Anthropic이 Claude Agent SDK 및 서드파티 앱의 사용량을 기존 구독 rate limit에서 분리해 별도 월정액 크레딧으로 전환하려던 계획을 시행 직전 철회하고, 사용자 피드백을 반영해 재검토하기로 했다.",
+      "url": "https://news.ycombinator.com/item?id=48546618",
+      "special": true
+    },
+    {
+      "category": "SDK",
+      "title": "Python SDK v0.109.2 — 퇴역 모델 제거",
+      "content": "API 및 SDK에서 퇴역 모델 식별자가 삭제됐다; 해당 model ID를 코드에서 직접 사용하는 경우 업데이트가 필요하다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.109.2",
+      "special": true
+    },
+    {
+      "category": "SDK",
+      "title": "TypeScript SDK v0.104.2 — 퇴역 모델 제거",
+      "content": "Python SDK와 동일하게 API 및 SDK에서 퇴역 모델 식별자가 삭제됐다; 해당 model ID를 코드에서 직접 사용하는 경우 업데이트가 필요하다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.104.2",
+      "special": true
+    },
+    {
+      "category": "생태계",
+      "title": "Claude Corps 펠로우십 프로그램 출시",
+      "content": "Anthropic이 $1.5억 규모의 Claude Corps 프로그램을 통해 비영리 단체에서 근무할 조기 경력자 1,000명을 모집하며, 연봉 $85,000과 주 5시간 AI 활용 교육을 지원한다.",
+      "url": "https://www.anthropic.com/news/claude-corps",
+      "special": false
+    }
+  ],
+  "specials": [
+    "Anthropic, Claude Code 구독 크레딧 변경 계획 보류",
+    "Python SDK v0.109.2 — 퇴역 모델 제거",
+    "TypeScript SDK v0.104.2 — 퇴역 모델 제거"
+  ],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
