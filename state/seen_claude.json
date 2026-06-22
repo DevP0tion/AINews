@@ -131,6 +131,7 @@
     "제품::claude code: requiredminimumversion / requiredmaximumversion 관리 설정 추가",
     "제품::claude for small business ga 출시",
     "제품::claude platform on aws 출시",
-    "제품::claude 사용량 한도 대폭 상향 및 spacex colossus 1 컴퓨트 계약 체결"
+    "제품::claude 사용량 한도 대폭 상향 및 spacex colossus 1 컴퓨트 계약 체결",
+    "제품::claude 신원 인증(identity verification) 단계적 도입"
   ]
 }

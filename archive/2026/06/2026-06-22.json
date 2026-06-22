@@ -1,0 +1,24 @@
+{
+  "date": "2026-06-22",
+  "news": [
+    {
+      "title": "Cloudflare, AI 에이전트용 임시 계정 기능 출시",
+      "summary": "Cloudflare가 AI 에이전트가 별도 계정 가입 없이 `wrangler deploy --temporary` 명령 하나로 즉시 Worker를 배포할 수 있는 임시 계정 기능을 선보였다. 생성된 임시 계정은 60분 내 미청구 시 자동 삭제되며, 청구 시 Workers 및 데이터베이스 등 리소스를 영구 계정으로 이전할 수 있어 AI 에이전트의 자율 배포 사이클을 간소화하는 인프라 혁신으로 주목받고 있다.",
+      "url": "https://blog.cloudflare.com/temporary-accounts/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude 신원 인증(Identity Verification) 단계적 도입",
+      "content": "Anthropic이 남용 방지 및 법적 의무 준수를 위해 특정 기능 접근·플랫폼 무결성 점검 등 일부 상황에서 Persona Identities와 협력한 정부 발급 신분증 기반 신원 인증을 Claude에 단계적으로 적용하기 시작했다.",
+      "url": "https://support.claude.com/en/articles/14328960-identity-verification-on-claude",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
