@@ -120,7 +120,7 @@ cat inbox/2026-04-20-raw.json
 
 ```bash
 export AINEWS_REPO=$(pwd)
-echo '{"news": [], "claude_updates": []}' | python3 scripts/daily_report.py
+echo '{"news": [], "claude_updates": []}' | python3 scripts/daily_report.py --date 2026-04-20
 ```
 
 ### Discord 전송만 테스트

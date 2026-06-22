@@ -86,7 +86,7 @@ cat {{INBOX_PATH}}
 ### 5단계. 처리 스크립트 실행
 
 ```bash
-python3 scripts/daily_report.py /tmp/processed.json
+python3 scripts/daily_report.py --date {{TARGET_DATE}} /tmp/processed.json
 ```
 
 이 스크립트가 다음을 자동 처리:

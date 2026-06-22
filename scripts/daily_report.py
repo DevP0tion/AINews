@@ -20,9 +20,11 @@ daily_report.py — Routine 환경에서 실행되는 처리 스크립트.
 from __future__ import annotations
 
 import datetime
+import argparse
 import json
 import os
 import pathlib
+import re
 import sys
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 from zoneinfo import ZoneInfo
@@ -37,6 +39,7 @@ SEEN_URLS_PATH = STATE_DIR / "seen_urls.json"
 SEEN_CLAUDE_PATH = STATE_DIR / "seen_claude.json"
 
 KST = ZoneInfo("Asia/Seoul")
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 TRACKING_PARAMS = {
     "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
@@ -158,9 +161,29 @@ def render_markdown(date, news_new, claude_new, specials, dup_counts) -> str:
     return "\n".join(lines)
 
 
-def load_collected() -> dict:
-    if len(sys.argv) > 1:
-        return json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="처리 결과 JSON을 archive/state에 반영")
+    p.add_argument("input", nargs="?", default=None,
+                   help="처리 결과 JSON 경로 (생략 시 stdin)")
+    p.add_argument("--date", default=None,
+                   help="리포트 대상 날짜 YYYY-MM-DD "
+                        "(생략 시 TARGET_DATE env → KST 오늘)")
+    return p.parse_args()
+
+
+def resolve_report_date(arg_date: str | None) -> str:
+    raw = (arg_date
+           or os.environ.get("TARGET_DATE")
+           or datetime.datetime.now(KST).strftime("%Y-%m-%d")).strip()
+    if not DATE_RE.match(raw):
+        log(f"ERROR: 잘못된 날짜 형식 {raw!r} — YYYY-MM-DD 필요")
+        raise SystemExit(1)
+    return raw
+
+
+def load_collected(input_path: str | None) -> dict:
+    if input_path:
+        return json.loads(pathlib.Path(input_path).read_text(encoding="utf-8"))
     data = sys.stdin.read()
     if not data.strip():
         log("ERROR: 수집 결과 입력 없음")
@@ -169,11 +192,12 @@ def load_collected() -> dict:
 
 
 def main() -> None:
-    today = datetime.datetime.now(KST).strftime("%Y-%m-%d")
-    log(f"Today (KST): {today}")
+    args = parse_args()
+    today = resolve_report_date(args.date)   # 벽시계가 아닌 '대상 날짜'
+    log(f"대상 날짜 (KST): {today}")
     log(f"Repo: {REPO_DIR}")
 
-    collected = load_collected()
+    collected = load_collected(args.input)
     log(
         f"입력: 뉴스 {len(collected.get('news', []))}건, "
         f"Claude {len(collected.get('claude_updates', []))}건"
