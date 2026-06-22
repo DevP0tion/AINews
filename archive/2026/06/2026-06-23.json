@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-23",
+  "news": [
+    {
+      "title": "Show HN: Oak – Git alternative designed for agents",
+      "summary": "AI 에이전트 워크플로에 특화된 콘텐츠 주소 기반 버전 관리 시스템 Oak가 공개됐다. 커밋이 아닌 '세션 단위 브랜치'를 기본 작업 단위로 채택하고, lazy mounting과 content-defined chunking을 통해 에이전트 중심 작업에서 기존 Git 대비 빠른 성능을 제공한다.",
+      "url": "https://oak.space/oak/oak"
+    },
+    {
+      "title": "Good results fine tuning a local LLM like Qwen 3:0.6B to categorize questions",
+      "summary": "Qwen 3:0.6B 같은 소형 로컬 LLM을 파인튜닝해 질문 분류 작업에서 좋은 결과를 얻은 사례가 공유됐다. 대형 클라우드 모델 없이도 특정 도메인의 분류 태스크에 소형 모델 파인튜닝이 실용적인 대안이 될 수 있음을 보여준다.",
+      "url": "https://www.teachmecoolstuff.com/viewarticle/fine-tuning-a-local-llm-to-categorize-questions"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.186",
+      "content": "CLI에서 `claude mcp login/logout <name>` 명령으로 MCP 서버 인증을 지원하고, `!` bash 명령 실행 후 Claude가 자동으로 응답하는 기능이 추가됐으며(`respondToBashCommands: false`로 비활성화 가능), `/workflows` 상태 필터링 및 다수 버그 수정이 포함됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.186",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude 신원 인증(Identity Verification) 도입",
+      "content": "특정 기능 접근 시 정부 발급 신분증과 실시간 셀카를 통한 신원 인증 절차가 도입됐으며, Persona Identities와의 파트너십으로 운영되고 인증 데이터는 Anthropic 시스템에 저장되지 않는다.",
+      "url": "https://support.claude.com/en/articles/14328960-identity-verification-on-claude",
+      "special": true
+    }
+  ],
+  "specials": [
+    "Claude 신원 인증(Identity Verification) 도입"
+  ],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
