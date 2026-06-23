@@ -124,6 +124,7 @@
     "제품::claude code v2.1.181 — /config 명령어·스트리밍·자동 재연결 등 대규모 업데이트",
     "제품::claude code v2.1.183 — auto mode 파괴적 명령 차단 강화",
     "제품::claude code v2.1.186",
+    "제품::claude code v2.1.187",
     "제품::claude code 버그 수정 릴리즈",
     "제품::claude code 최신 릴리즈: enterworktree 버그 수정, mcp 개선, opus 4.7 모델 피커 업데이트",
     "제품::claude code 품질 저하 3건 원인 공개 — anthropic 사후 분석 보고서",
@@ -132,6 +133,7 @@
     "제품::claude code: requiredminimumversion / requiredmaximumversion 관리 설정 추가",
     "제품::claude for small business ga 출시",
     "제품::claude platform on aws 출시",
+    "제품::claude tag 베타 출시 — slack 팀 협업 통합",
     "제품::claude 사용량 한도 대폭 상향 및 spacex colossus 1 컴퓨트 계약 체결",
     "제품::claude 신원 인증(identity verification) 단계적 도입",
     "제품::claude 신원 인증(identity verification) 도입"

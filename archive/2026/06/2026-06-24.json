@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-24",
+  "news": [
+    {
+      "title": "The text in Claude Code's \"Extended Thinking\" output is not authentic",
+      "summary": "Claude Code의 Extended Thinking 출력이 실제 모델 내부 추론을 그대로 보여주는 것이 아니라는 분석이 제기됐다. Anthropic은 실제 추론을 암호화된 서명으로 처리하고 사용자에게는 요약본만 제공하며, 로컬 세션 로그에도 원본 추론은 저장되지 않는다. 감사 추적이나 신뢰성 검증이 필요한 사용자에게는 중요한 제약으로, 문서화가 불충분하다는 비판이 따른다.",
+      "url": "https://patrickmccanna.net/the-text-in-claude-codes-extended-thinking-output-is-not-authentic/"
+    },
+    {
+      "title": "Show HN: Neural Particle Automata",
+      "summary": "Neural Cellular Automata(NCA)를 고정 격자 대신 동적 파티클 시스템으로 확장한 Neural Particle Automata(NPA)가 공개됐다. 각 파티클은 연속적인 위치와 내부 상태를 가지며, Smoothed Particle Hydrodynamics(SPH) 연산자로 인접 파티클 정보를 집계하는 학습 가능한 공유 규칙으로 동작한다. 형태생성·분류·텍스처 합성 등 다양한 태스크에서 NCA의 자기조직화 및 재생성 특성을 유지하면서 더 유연한 표현이 가능하다.",
+      "url": "https://selforg-npa.github.io/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Tag 베타 출시 — Slack 팀 협업 통합",
+      "content": "Anthropic이 Claude를 Slack 채널에 팀 멤버로 초대해 비동기 협업할 수 있는 Claude Tag를 발표했으며, Claude Enterprise·Team 고객 대상 베타로 제공된다.",
+      "url": "https://www.anthropic.com/news/introducing-claude-tag",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.187",
+      "content": "sandbox.credentials 설정으로 샌드박스 명령의 자격증명 파일·환경변수 접근을 차단하는 기능과, 조직 수준 모델 제한을 모델 선택기 및 CLI(--model, /model, ANTHROPIC_MODEL)에 적용하는 기능이 추가됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.187",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 1
+  }
+}
