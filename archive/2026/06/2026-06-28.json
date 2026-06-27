@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-28",
+  "news": [
+    {
+      "title": "DeepSeek, LLM 추론 가속 프레임워크 DSpark 오픈소스 공개",
+      "summary": "DeepSeek AI가 speculative decoding 전용 full-stack 프레임워크 DeepSpec/DSpark를 오픈소스로 공개했다. 드래프트 모델 학습·평가·추론 파이프라인을 포함하며, Qwen3-4B 등의 모델을 타깃으로 한 설정을 제공해 실전 적용이 용이하다. HN에서 700점 이상의 높은 반응을 받으며 LLM 추론 최적화 기술로 주목받고 있다.",
+      "url": "https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf"
+    },
+    {
+      "title": "미국, Anthropic Mythos 5를 100여 개 신뢰 기업·기관에 제한 공개",
+      "summary": "미국 상무부가 Anthropic의 최신 AI 모델 Mythos 5에 대한 접근을 100개 이상의 미국 기업 및 정부 기관에 한정적으로 허용했다. 트럼프 행정부가 2주 전부터 Mythos에 수출 통제를 적용해온 배경에는 중국과 연계된 파트너를 통한 기술 유출 우려가 있었다. 이번 조치는 미국 정부가 첨단 AI 모델 배포를 직접 심사·승인하는 새로운 규제 패러다임의 시작으로 평가된다.",
+      "url": "https://www.semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
