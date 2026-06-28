@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-29",
+  "news": [
+    {
+      "title": "GLM 5.2, 사이버보안 벤치마크에서 Claude Code 능가",
+      "summary": "Zhipu AI의 오픈웨이트 모델 GLM 5.2(MoE 구조, 약 750억 파라미터)가 IDOR 취약점 탐지 벤치마크에서 Claude Code의 F1 32%를 웃도는 39%를 기록했다. 프론티어 모델 대비 약 1/6 비용으로 별도 스캐폴딩 없이 순수 프롬프트만으로 동작하며, 코드 보안 분야에서 비용 대비 경쟁력 있는 대안임을 입증했다.",
+      "url": "https://semgrep.dev/blog/2026/we-have-mythos-at-home-glm-52-beats-claude-in-our-cyber-benchmarks/"
+    },
+    {
+      "title": "아시아 AI 스타트업, Anthropic 수출 규제 틈새 겨냥한 신모델 출시",
+      "summary": "도쿄 기반 Sakana AI는 Fugu 모델을, 중국 사이버보안 업체 360은 Tulongfeng을 공개하며 아시아 시장을 공략하고 있다. 미국 정부의 Anthropic Mythos·Fable 5 수출 금지령으로 생긴 공백을 활용한 전략으로, 두 회사 모두 수출 통제 리스크 없는 최고 수준의 성능을 강조했다.",
+      "url": "https://techcrunch.com/2026/06/27/asian-ai-startups-launch-mythos-like-models-as-anthropics-export-ban-drags-on/"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
