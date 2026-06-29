@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-30",
+  "news": [
+    {
+      "title": "Ornith-1.0: self-improving open-source models for agentic coding",
+      "summary": "DeepReinforce AI가 에이전틱 코딩에 특화된 오픈소스 모델 패밀리 Ornith-1.0을 MIT 라이선스로 공개했습니다. 9B Dense부터 397B MoE까지 네 가지 변형을 제공하며, Gemma 4·Qwen 3.5 기반으로 256K 토큰 컨텍스트를 지원합니다. 강화학습을 통해 솔루션 생성과 스캐폴딩을 함께 학습하는 자기 개선 메커니즘을 채택해 Terminal-Bench 2.1·SWE-Bench 등 코딩 벤치마크에서 대형 상용 모델에 근접하는 성능을 달성했습니다.",
+      "url": "https://github.com/deepreinforce-ai/Ornith-1"
+    },
+    {
+      "title": "Professor denounces mass AI fraud on an exam at Brown",
+      "summary": "미국 브라운 대학교에서 교수가 시험에서 발생한 대규모 AI 부정행위를 공개적으로 비판하며 학문적 무결성 훼손에 대한 심각한 우려를 제기했습니다. 이 사건은 생성형 AI 시대에 기존 온라인 제출 방식의 취약성을 부각시켰으며, 필기 시험·제한 네트워크 환경 시험·구술 평가 등 평가 방식 전환에 대한 광범위한 논의를 촉발했습니다.",
+      "url": "https://english.elpais.com/education/2026-06-28/ai-fraud-at-brown-university-academic-integrity-is-at-risk.html"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.113.0",
+      "content": "Python SDK에 20260318 버전의 web fetch 및 support tools API 지원이 추가되었고, async count_tokens의 output_format 누락 버그가 수정되었습니다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.113.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.107.0",
+      "content": "TypeScript SDK에 20260318 버전의 web fetch 및 support tools API 지원이 추가되었으며, agent-toolset 관련 버그 수정이 포함되었습니다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.107.0",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
