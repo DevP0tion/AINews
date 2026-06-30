@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-01",
+  "news": [
+    {
+      "title": "vLLM, 단일 모델 API 안에서 여러 모델을 협업시키는 'Micro-Agent' 공개",
+      "summary": "vLLM팀은 서빙 레이어의 라우터가 여러 모델의 협업을 조율하는 'Micro-Agent'를 발표했다. 순차 에스컬레이션·다중 응답 비교 등 'looper' 패턴을 통해 애플리케이션 코드 변경 없이 LiveCodeBench 92.6, GPQA-Diamond 96.0 등 프론티어 모델과 경쟁하는 성능을 달성했다.",
+      "url": "https://vllm.ai/blog/2026-06-29-micro-agent-frontier-models"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Claude Sonnet 5 출시, Claude Code 기본 모델로 적용",
+      "content": "Claude Code 2.1.197부터 네이티브 100만 토큰 컨텍스트를 지원하는 Claude Sonnet 5가 기본 모델로 적용되며, 8월 31일까지 프로모션 가격(입력 $2/출력 $10 per Mtok)이 제공된다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.197",
+      "special": true
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code 2.1.196: 조직 기본 모델 설정 등 추가",
+      "content": "관리자가 콘솔에서 조직/역할 기본 모델을 지정할 수 있는 기능과 세션 이름 가독성 개선, 첨부파일 탐색기 연동 등이 추가됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.196",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "Python·TypeScript SDK에 Claude Sonnet 5 지원 추가",
+      "content": "anthropic-sdk-python v0.114.0과 anthropic-sdk-typescript v0.108.0에 claude-sonnet-5 모델 지원이 각각 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.114.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "Python·TypeScript SDK, Managed Agents 이벤트 스트리밍 지원",
+      "content": "두 SDK에 Managed Agents의 이벤트 델타 스트리밍, 에이전트 오버라이드, 역방향 페이지네이션, 볼트 자격증명 주입 범위 지정, 웹훅 이벤트 지원이 추가됐다(python v0.115.0, typescript sdk v0.109.0).",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.115.0",
+      "special": false
+    }
+  ],
+  "specials": [
+    "Claude Sonnet 5 출시, Claude Code 기본 모델로 적용"
+  ],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 0
+  }
+}
