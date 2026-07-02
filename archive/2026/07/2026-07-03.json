@@ -1,0 +1,41 @@
+{
+  "date": "2026-07-03",
+  "news": [
+    {
+      "title": "Asymmetric Quantization: Near-Lossless Retrieval with 97% Storage Reduction",
+      "summary": "Mixedbread가 문서 벡터는 1비트 바이너리로, 쿼리 벡터는 int8로 유지하는 비대칭 양자화 기법을 공개했다. 문서당 저장 용량을 393KiB에서 12.28KiB로 약 32배 줄이면서도 검색 정확도(NDCG@10)는 90.26에서 89.65로 소폭만 하락해, 완전 바이너리 방식(7.2점 하락) 대비 훨씬 우수한 트레이드오프를 보였다.",
+      "url": "https://www.mixedbread.com/blog/asymmetric-quant"
+    },
+    {
+      "title": "Senior SWE-Bench: open-source benchmark that assesses agents as senior engineers",
+      "summary": "프린스턴·위스콘신대 연구진과 Snorkel AI가 AI 코딩 에이전트를 주니어가 아닌 시니어 엔지니어 수준의 실전 과제로 평가하는 새 벤치마크를 공개했다. 자연어 지시문, 적응형 검증 에이전트, 코드 품질까지 평가하는 '테이스트 스코어링'이 특징이며, 최상위 모델인 Claude Opus 4.8도 해결률 24%에 그쳐 프론티어 모델 대부분이 시니어급 정확성·품질 기준을 75% 이상 충족하지 못했다.",
+      "url": "https://senior-swe-bench.snorkel.ai/"
+    },
+    {
+      "title": "Is One Layer Enough? A Single Transformer Layer Matches Full-Parameter RL Training",
+      "summary": "연구진은 RL 파인튜닝의 성능 향상이 트랜스포머 전체가 아니라 중간층의 소수 레이어에 집중된다는 것을 발견, 해당 레이어 하나만 학습해도 전체 파라미터 RL 학습과 비슷하거나 더 나은 성능을 낼 수 있음을 보였다. Qwen3·Qwen2.5 등 7개 모델, GRPO 등 3가지 RL 알고리즘, 수학 추론·코드 생성 과제에 걸쳐 일관된 패턴이 확인됐다.",
+      "url": "https://arxiv.org/abs/2607.01232"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.116.0",
+      "content": "Python SDK에 agent-memory-2026-07-22 베타 헤더가 추가되어 에이전트 메모리 기능을 실험적으로 지원한다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.116.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.110.0",
+      "content": "TypeScript SDK에도 동일하게 agent-memory-2026-07-22 베타 헤더가 추가되어 에이전트 메모리 기능을 실험적으로 지원한다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.110.0",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
