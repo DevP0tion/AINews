@@ -1,0 +1,57 @@
+{
+  "date": "2026-07-04",
+  "news": [
+    {
+      "title": "알리바바, 백도어 의혹으로 사내 Claude Code 사용 금지 예정",
+      "summary": "로이터 보도에 따르면 알리바바가 오는 7월 10일부터 사내에서 Claude Code 사용을 금지할 예정이라고 소식통이 전했다. 지난 6월 30일 한 Reddit 사용자가 Claude Code v2.1.91 이후 버전이 사용자의 프록시 설정이나 시스템 시간대를 알리바바·바이두·바이트댄스 등 중국 기업 네트워크 목록과 대조해왔다고 주장하는 리버스엔지니어링 글을 올리면서 논란이 촉발됐다. 알리바바와 Anthropic 모두 공식 입장을 밝히지 않았고 독립 보안 감사 결과도 아직 없어 실체는 불확실한 상태다.",
+      "url": "https://www.reuters.com/world/china/alibaba-ban-claude-code-workplace-over-alleged-backdoor-risks-source-says-2026-07-03/"
+    },
+    {
+      "title": "애플, 웹 개발자용 Safari MCP 서버 공개",
+      "summary": "애플이 Safari Technology Preview 247에 MCP(Model Context Protocol) 서버를 도입해 AI 코딩 에이전트가 Safari 브라우저 창에 직접 연결, DOM 조회·네트워크 모니터링·스크린샷·콘솔 로그 확인·JS 실행 등을 수행할 수 있게 했다. 개발자는 에디터·브라우저·AI 어시스턴트를 오가지 않고도 렌더링 확인과 디버깅을 자동화할 수 있으며, 서버는 로컬에서만 동작하고 캡처된 데이터는 애플이 아닌 사용 중인 AI 모델로만 전달된다.",
+      "url": "https://webkit.org/blog/18136/introducing-the-safari-mcp-server-for-web-developers/"
+    },
+    {
+      "title": "OrbitQuant: 데이터 무관 방식의 Diffusion Transformer 양자화 기법",
+      "summary": "이미지·비디오 생성에 쓰이는 diffusion transformer(DiT)는 다단계 샘플링과 큰 파라미터 수로 추론 비용이 크며, 기존 post-training quantization은 체크포인트나 모달리티가 바뀔 때마다 캘리브레이션 데이터를 다시 맞춰야 하는 문제가 있었다. OrbitQuant는 정규화된 회전 기저(randomized permuted block-Hadamard rotation)에서 양자화를 수행해 활성값 범위 추정 없이 데이터에 구애받지 않는 weight-activation quantization을 구현했다.",
+      "url": "https://arxiv.org/abs/2607.02461v1"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.200: 기본 권한 모드 'Manual'로 전환",
+      "content": "Claude Code v2.1.200에서 CLI·VS Code·JetBrains 전반의 기본 권한 모드가 'Manual'로 바뀌고 AskUserQuestion 대화상자가 더 이상 자동으로 진행되지 않도록 변경됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.200",
+      "special": true
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.199: 연속 스킬 호출 개선 및 다수 버그 수정",
+      "content": "Claude Code v2.1.199에서 `/skill-a /skill-b` 형태의 연속 슬래시 스킬 호출이 최대 5개까지 모두 로드되도록 개선되고, 백그라운드 에이전트 데몬 관련 다수의 크래시와 SSL 인증서 오류 처리가 수정됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.199",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "Python SDK v0.116.0: agent-memory 베타 헤더 추가",
+      "content": "anthropic-sdk-python v0.116.0에 agent-memory-2026-07-22 베타 헤더 지원이 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.116.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "TypeScript SDK v0.110.0: agent-memory 베타 헤더 추가",
+      "content": "anthropic-sdk-typescript v0.110.0에도 동일하게 agent-memory-2026-07-22 베타 헤더 지원이 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.110.0",
+      "special": false
+    }
+  ],
+  "specials": [
+    "Claude Code v2.1.200: 기본 권한 모드 'Manual'로 전환"
+  ],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
