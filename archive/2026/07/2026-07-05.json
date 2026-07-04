@@ -1,0 +1,41 @@
+{
+  "date": "2026-07-05",
+  "news": [
+    {
+      "title": "Jamesob's guide to running SOTA LLMs locally",
+      "summary": "로컬 환경에서 최신 SOTA LLM을 직접 구동하기 위한 실전 가이드로, 약 200만원대 구성(RTX 3090 2장 48GB VRAM + Qwen3.6-27B)부터 약 5천만원대 고사양 구성(RTX Pro 6000 4장 384GB VRAM + \"거의 Opus급\"이라는 GLM-5.2-594B)까지 예산별 하드웨어·모델 조합을 제시한다. Docker 기반 실행 스크립트와 GPU 벤치마크 도구도 함께 공개해 HN에서 큰 호응을 얻었다.",
+      "url": "https://github.com/jamesob/local-llm"
+    },
+    {
+      "title": "Claude Mythos Preview 출시 이후 고심각도 CVE 공개 3.5배 급증",
+      "summary": "Epoch AI 분석에 따르면 2026년 6월 고심각도·긴급 CVE 공개 건수가 약 1,500건으로, Anthropic의 Claude Mythos Preview 출시 이전 월평균 대비 3.5배 이상 늘었다. Microsoft·Google·Apple·AWS 등이 참여한 Project Glasswing 파트너들이 이 모델로 1만 건 이상의 취약점을 찾아냈다고 주장했으며, 아직 비공개인 취약점은 집계에서 빠져 있어 실제 규모는 더 클 수 있다.",
+      "url": "https://epoch.ai/data-insights/cve-severity-spike"
+    },
+    {
+      "title": "GPT-5.5 Codex의 reasoning-token 클러스터링, 성능 저하 우려",
+      "summary": "사용자들이 GPT-5.5의 reasoning 토큰 수가 516·1034·1552 같은 특정 값에 비정상적으로 몰리는 현상을 발견했는데, 자연스러운 분포가 아니라 의도된 상한선처럼 보인다는 지적이다. 평균 reasoning 토큰은 2월 268개에서 5월 107개로 줄었는데 정확히 516개로 끊기는 비율은 최대 53%까지 늘어, reasoning 예산 제한이나 조기 종료로 복잡한 작업의 성능이 저하됐을 가능성이 제기됐다.",
+      "url": "https://github.com/openai/codex/issues/30364"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.201",
+      "content": "Claude Sonnet 5 세션에서 대화 중간 하네스 알림에 system 역할을 더 이상 사용하지 않도록 수정됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.201",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.200",
+      "content": "AskUserQuestion 대화상자가 기본적으로 자동 진행되지 않도록 바뀌고 기본 권한 모드 명칭이 \"default\"에서 \"Manual\"로 변경되는 등 백그라운드 세션 안정성 관련 다수 버그가 수정됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.200",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
