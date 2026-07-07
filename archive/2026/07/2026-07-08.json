@@ -1,0 +1,41 @@
+{
+  "date": "2026-07-08",
+  "news": [
+    {
+      "title": "GLM 5.2와 다가오는 AI 마진 붕괴",
+      "summary": "오픈웨이트 모델 GLM 5.2가 Opus·GPT 프론티어 모델에 근접한 품질을 보이면서도 정가 기준 20% 미만의 가격으로 제공돼, 그동안 추론(inference) 서비스에서 약 90%에 달했던 프론티어 AI 기업들의 고마진 구조가 위협받고 있다는 분석이 나왔다. Z.ai, Fireworks 등이 API 호환 엔드포인트를 제공해 기존 모델에서의 전환 비용이 거의 들지 않는다는 점도 이런 전망을 뒷받침한다.",
+      "url": "https://martinalderson.com/posts/the-upcoming-ai-margin-collapse-part-1-glm-5-2/"
+    },
+    {
+      "title": "네트워크가 불안정한 지역에서 힘을 얻는 소형 AI 모델",
+      "summary": "전력망·데이터센터·안정적 네트워크가 부족한 개발도상국에서는 대형 LLM 대신 스마트폰이나 아두이노 같은 저전력 기기에서 로컬로 구동되는 소형 AI 모델이 주목받고 있다. 나이지리아의 위조 의약품 판별 앱, 인도의 드론 기반 캐슈나무 질병 탐지, 말라리아 매개모기 감지, 브라질의 저전력 심전도 생성 등이 실제 활용 사례로 소개됐다.",
+      "url": "https://spectrum.ieee.org/small-language-models-ai-pharmaceuticals"
+    },
+    {
+      "title": "RAG 컨텍스트 가지치기: 답변에 필요한 만큼만 남기기",
+      "summary": "AI 스타트업 Kapa는 검색된 청크를 5단계 관련도로 평가해 생성 모델에 전달하기 전 불필요한 청크를 걸러내는 경량 LLM 프루너를 도입했다. 이 방식으로 컨텍스트를 68% 줄이면서도 리콜은 96% 유지했고, 프루너 자체의 연산 비용을 감안해도 쿼리당 비용을 34% 절감하는 효과를 확인했다.",
+      "url": "https://www.kapa.ai/blog/how-we-prune-rag-context"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.203",
+      "content": "로그인 만료 사전 경고와 수동 권한 모드 표시가 추가됐고, macOS 백그라운드 세션 정지·응답 불가, 메모리/CPU 회귀 등 다수의 안정성 버그가 수정됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.203",
+      "special": false
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.202",
+      "content": "/config에 워크플로우 생성 규모를 조절하는 설정이 추가됐고, Remote Control 명령 실패, 이미지 첨부 누락, 인증 URL 하이퍼링크 등 다수 버그가 수정됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.202",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
