@@ -152,17 +152,21 @@
     "제품::claude code v2.1.202",
     "제품::claude code v2.1.202 릴리즈",
     "제품::claude code v2.1.203",
+    "제품::claude code v2.1.204",
+    "제품::claude code v2.1.205",
     "제품::claude code 버그 수정 릴리즈",
     "제품::claude code 최신 릴리즈: enterworktree 버그 수정, mcp 개선, opus 4.7 모델 피커 업데이트",
     "제품::claude code 품질 저하 3건 원인 공개 — anthropic 사후 분석 보고서",
     "제품::claude code: fallbackmodel 설정 추가",
     "제품::claude code: opus 4.8 기반 dynamic workflows 및 bedrock/vertex auto mode 지원",
     "제품::claude code: requiredminimumversion / requiredmaximumversion 관리 설정 추가",
+    "제품::claude cowork 웹·모바일로 확장",
     "제품::claude for small business ga 출시",
     "제품::claude platform on aws 출시",
     "제품::claude tag 베타 출시 — slack 팀 협업 통합",
     "제품::claude 사용량 한도 대폭 상향 및 spacex colossus 1 컴퓨트 계약 체결",
     "제품::claude 신원 인증(identity verification) 단계적 도입",
-    "제품::claude 신원 인증(identity verification) 도입"
+    "제품::claude 신원 인증(identity verification) 도입",
+    "제품::microsoft 365 커넥터에 쓰기(write) 도구 추가"
   ]
 }
