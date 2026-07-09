@@ -1,0 +1,34 @@
+{
+  "date": "2026-07-10",
+  "news": [
+    {
+      "title": "OpenAI, GPT-5.6 모델군(Sol/Terra/Luna) 정식 공개",
+      "summary": "OpenAI가 미국 정부 요청으로 2주간 소수 파트너에게만 제한 공개했던 GPT-5.6을 정식 출시했다. 최고 성능의 Sol, 균형형 Terra, 고속형 Luna 세 가지로 구성되며 Sol은 코딩·과학·사이버보안 등에서 경쟁 모델보다 적은 토큰으로 SOTA 성능을 낸다고 밝혔다. 새 명명 체계에서 숫자는 모델 세대를, Sol/Terra/Luna는 독자적으로 발전하는 성능 등급을 의미한다.",
+      "url": "https://openai.com/index/gpt-5-6/"
+    },
+    {
+      "title": "DeepSeek, 자체 AI 추론 칩 개발 착수",
+      "summary": "로이터 보도에 따르면 중국 DeepSeek이 Nvidia·Huawei 등 외부 칩 의존도를 낮추기 위해 자체 AI 추론용 칩 개발을 약 1년 전부터 진행 중이다. 반도체 설계·위탁생산·메모리 분야 외부 파트너와 협의하며 관련 엔지니어를 비공개로 채용하고 있고, 보도 직후 Nvidia 주가는 프리마켓에서 약 1.6% 하락했다.",
+      "url": "https://www.proactiveinvestors.com/companies/news/1095178/deepseek-makes-pivot-that-should-put-silicon-valley-on-high-alert-1095178.html"
+    },
+    {
+      "title": "OpenAI, 업무 전담 에이전트 'ChatGPT Work' 출시",
+      "summary": "OpenAI가 GPT-5.6 기반의 새 에이전트 'ChatGPT Work'를 공개했다. 여러 단계로 나눈 작업을 몇 시간에 걸쳐 독립적으로 수행해 문서·슬라이드·웹앱 등 완성물을 만들며, Google Drive·Slack·GitHub 등을 통합한 플러그인 디렉터리와 주요 작업 실행 전 점검하는 Auto-Review 보안 기능을 갖췄다. Pro·Enterprise·Edu 요금제부터 우선 제공되며 곧 Plus·Business로 확대된다.",
+      "url": "https://openai.com/index/chatgpt-for-your-most-ambitious-work/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.205 릴리즈",
+      "content": "세션 트랜스크립트 변조를 막는 auto mode 규칙이 추가되고, --json-schema 오류 처리 및 Windows worktree 삭제 버그 등 다수 문제가 수정됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.205",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
