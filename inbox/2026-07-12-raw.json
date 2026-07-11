@@ -1,0 +1,383 @@
+{
+  "date": "2026-07-12",
+  "collected_at": "2026-07-11T22:53:56Z",
+  "anthropic_news": [],
+  "claude_release_notes_md": "",
+  "github_releases": {
+    "claude_code": [
+      {
+        "title": "v2.1.207",
+        "tag": "v2.1.207",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.207",
+        "body": "## What's changed\n\n- Auto mode is now available without `CLAUDE_CODE_ENABLE_AUTO_MODE` opt-in on Bedrock, Vertex AI, and Foundry; disable via `disableAutoMode` in settings\n- Fixed the terminal freezing and keystrokes lagging while streaming responses containing very long lists, tables, paragraphs, or code blocks\n- Fixed remote managed settings from a non-interactive run (`claude -p`, the SDK) being permanently recorded as consented without ever showing the security consent dialog\n- Fixed spurious prompt-injection warnings triggered by benign system-generated conversation updates\n- Fixed the auto-updater overwriting a custom launcher script or symlink at `~/.local/bin/claude` on every release; `/doctor` now reports an externally managed launcher\n- Fixed compound commands with `cd` prompting for permission when the only output redirect was to `/dev/null`\n- Fixed the transcript jumping above the start of the answer when a response finishes streaming\n- Fixed `extensions.worktreeConfig` being left in the repo's `.git/config` (breaking go-git tools like `tea`) after the last `worktree.sparsePaths` worktree was removed\n- Fixed malformed bracket patterns in rules globs, skill paths, `.ignore`, and `.worktreeinclude` breaking file reads, file suggestions, and worktree creation\n- Fixed a crash loop in agent teams where a malformed teammate mailbox message caused repeated errors every second until the mailbox file was manually deleted\n- Fixed background sessions auto-named by accepting a plan not showing that name on their agent-view row\n- Fixed background sessions that entered a git worktree resuming blank after a cold reopen from the agent list\n- Fixed Remote Control task status updates being lost when the connection recovered from a network interruption or credential refresh\n- Fixed Remote Control sessions hosted by the desktop app not showing background agent and workflow progress on mobile and web\n- Fixed Deep research runs labeling every Fetch-phase agent \"unknown\" — chi",
+        "published": "2026-07-11T00:52:10Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.206",
+        "tag": "v2.1.206",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.206",
+        "body": "## What's changed\n\n- Added directory path suggestions to `/cd`, matching `/add-dir` behavior\n- Added a `/doctor` check that proposes trimming checked-in `CLAUDE.md` files by cutting content Claude could derive from the codebase\n- `/commit-push-pr` now auto-allows `git push` to the repo's configured push remote (`remote.pushDefault`, or the sole remote when only one is configured) in addition to `origin`\n- Gateway: `/login` now supports Anthropic-operated public gateway endpoints\n- `EnterWorktree` now asks for confirmation before entering a git worktree outside the project's `.claude/worktrees/` directory\n- Background agents now upgrade to a new version in the background right after a Claude Code update, instead of paying a slow stale-session upgrade when you attach\n- Fixed an expired login failing every model with a misleading \"There's an issue with the selected model\" error instead of prompting to run `/login`\n- Fixed `claude --resume` and `--continue` not responding to keyboard input on startup\n- Fixed MCP servers configured via `--mcp-config` or `.mcp.json` ignoring a per-server `request_timeout_ms`, which caused long-running MCP tool calls to time out at the 60s default in fresh sessions\n- Fixed `CLAUDE_CODE_EXTRA_BODY` being silently ignored by `claude agents` / `--bg` background workers; the shell-exported override now follows the dispatching session\n- Fixed OAuth MCP servers requiring manual re-authentication after a single failed token refresh\n- Fixed `--permission-prompt-tool` pointing at an MCP server crashing with \"MCP tool not found\" on cold start before the server finishes connecting\n- Fixed `/model` picker rows printing a price for a different model than the row named, and stopped quoting first-party list prices on providers that don't bill them\n- Fixed server-provided model rows being misplaced in the `/model` picker when an entitlement or allowlist restriction drops the row they were positioned against\n- Fixed desktop sessions getting stuck showing \"",
+        "published": "2026-07-10T01:45:26Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.205",
+        "tag": "v2.1.205",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.205",
+        "body": "## What's changed\n\n- Added an auto mode rule that blocks tampering with session transcript files\n- Fixed `--json-schema` silently producing unstructured output when the schema was invalid, and schemas using the `format` keyword being rejected\n- Fixed a message sent while Claude was working being silently lost when the turn ended at the `--max-turns` limit\n- Fixed Windows worktree removal deleting files outside the worktree when an NTFS junction or directory symlink existed inside it\n- Fixed background agents staying shown as \"failed\" or \"completed\" in the agent list after being resumed with `SendMessage`\n- Fixed background jobs flipping from \"needs input\" back to \"working\" in the agent list when the agent's turn contained no readable text\n- Fixed `claude attach` erroring when a background agent was mid-upgrade restart instead of waiting for it to come back\n- Fixed session-to-PR linking missing a PR created in a Bash call whose output exceeded the 30K inline limit\n- Fixed `claude mcp add-from-claude-desktop` getting stuck when a server name contains unsupported characters; invalid names are now reported and remaining servers still import\n- Fixed a plugin LSP server that fails to initialize preventing a valid LSP server from another plugin handling the same file extension\n- Fixed a Windows crash when the directory Claude was launched from is deleted, locked, or unmounted while a command is running\n- Fixed a crash when a file watcher was closed while a directory scan was still in flight\n- Fixed project verify skills being rewritten on every session instead of only when a documented command changed\n- Fixed the agent view rendering one line too high and clipping its header when the job list slightly overflowed the screen\n- Fixed background tasks in the web and mobile Remote Control panels showing stale \"Running\" status by forwarding full task state on every membership change\n- Improved auto mode to ask before running `rm -rf` on a variable it can't resolve from context\n-",
+        "published": "2026-07-08T21:22:06Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.204",
+        "tag": "v2.1.204",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.204",
+        "body": "## What's changed\n\n- Fixed hook events not streaming during SessionStart hooks in headless sessions, which could cause remote workers to be idle-reaped mid-hook\n",
+        "published": "2026-07-08T00:27:50Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.203",
+        "tag": "v2.1.203",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.203",
+        "body": "## What's changed\n\n- Added a warning when your login is about to expire, so you can re-authenticate before background sessions are interrupted\n- Added a grey ⏸ badge to the footer when in manual permission mode, making the active mode always visible\n- Added the session's additional working directories to MCP `roots/list`, with `notifications/roots/list_changed` sent when the set changes\n- Fixed opening or switching background agent sessions on macOS stalling for 15–20 seconds due to a false low-memory detection (regression in 2.1.196)\n- Fixed background sessions becoming permanently unresponsive to attach, replies, and stop when the daemon's session token went stale — the session now recovers automatically\n- Fixed returning to `claude agents` silently stopping running subagents and re-running the prompt from scratch — their work now carries over\n- Fixed a memory and per-turn CPU regression in interactive sessions: the context-usage indicator no longer re-analyzes the entire transcript after every turn\n- Fixed background agents inheriting a stale `PATH` from the daemon instead of the dispatching shell, causing missing tools on Windows\n- Fixed background and agent-view sessions dropping a shell-exported `ANTHROPIC_BASE_URL`, which sent API keys to the default endpoint and failed with 401\n- Fixed Bash failing with \"argument list too long\" in repos with many git worktrees\n- Fixed worktree-isolated subagents sometimes running shell commands in the parent checkout instead of their own worktree\n- Fixed worktree creation rejecting nested repositories in multi-repo workspaces, leaving background sessions unable to isolate and edit\n- Fixed background agents crash-looping when their working directory was deleted, replaced by a file, or became an invalid path — they now fail once with a clear error\n- Fixed a background daemon auto-upgrade failure silently killing all running background sessions\n- Fixed `TaskStop` and `TaskOutput` failing to find background agents spawned by ano",
+        "published": "2026-07-07T21:06:12Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_python": [
+      {
+        "title": "v0.116.0",
+        "tag": "v0.116.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.116.0",
+        "body": "## 0.116.0 (2026-07-02)\n\nFull Changelog: [v0.115.1...v0.116.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.115.1...v0.116.0)\n\n### Features\n\n* **api:** add agent-memory-2026-07-22 beta header ([e181d5c](https://github.com/anthropics/anthropic-sdk-python/commit/e181d5c1b233d5b0b313c78b27cf1dd27f620e74))",
+        "published": "2026-07-02T19:07:55Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.115.1",
+        "tag": "v0.115.1",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.115.1",
+        "body": "## 0.115.1 (2026-07-01)\n\nFull Changelog: [v0.115.0...v0.115.1](https://github.com/anthropics/anthropic-sdk-python/compare/v0.115.0...v0.115.1)\n\n### Chores\n\n* **api:** remove some nonfunctional types from the SDKs ([5e7c431](https://github.com/anthropics/anthropic-sdk-python/commit/5e7c431ef31b72b3f1f59902e678316fea14d983))",
+        "published": "2026-07-01T21:54:06Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.115.0",
+        "tag": "v0.115.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.115.0",
+        "body": "## 0.115.0 (2026-06-30)\n\nFull Changelog: [v0.114.0...v0.115.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.114.0...v0.115.0)\n\n### Features\n\n* **api:** add support for Managed Agents event delta streaming, agent overrides, reverse pagination, vault credential injection scoping, and agent and deployment webhook events ([8c23f7e](https://github.com/anthropics/anthropic-sdk-python/commit/8c23f7ef103c287362364c12503de85eb31f07fb))",
+        "published": "2026-06-30T19:47:18Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.114.0",
+        "tag": "v0.114.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.114.0",
+        "body": "## 0.114.0 (2026-06-30)\n\nFull Changelog: [v0.113.0...v0.114.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.113.0...v0.114.0)\n\n### Features\n\n* **api:** add support for claude-sonnet-5 ([b893033](https://github.com/anthropics/anthropic-sdk-python/commit/b893033b32951e0e2e04afa36a3a7eb016ae4b99))\n\n\n### Bug Fixes\n\n* **agent_toolset:** allow absolute paths that resolve inside workdir ([#121](https://github.com/anthropics/anthropic-sdk-python/issues/121)) ([0105529](https://github.com/anthropics/anthropic-sdk-python/commit/0105529fe15b1f80bbf9c56f4ae684fdfa10e2b3))",
+        "published": "2026-06-30T17:48:39Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.113.0",
+        "tag": "v0.113.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.113.0",
+        "body": "## 0.113.0 (2026-06-29)\n\nFull Changelog: [v0.112.0...v0.113.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.112.0...v0.113.0)\n\n### Features\n\n* **api:** add support for 20260318 web fetch and support tools ([88dbfb1](https://github.com/anthropics/anthropic-sdk-python/commit/88dbfb14a2a838eda889469ad7fe07a47618e85f))\n\n\n### Bug Fixes\n\n* async count_tokens missing output_format/output_config merge block ([#162](https://github.com/anthropics/anthropic-sdk-python/issues/162)) ([122c958](https://github.com/anthropics/anthropic-sdk-python/commit/122c95811566bf6f5cbc682ae0a74972ae75a223))\n\n\n### Chores\n\n* **api:** accept user profile ID's when counting tokens ([0b4d17a](https://github.com/anthropics/anthropic-sdk-python/commit/0b4d17a49d39e8224adbee6a97be0e8b1b7ebff5))\n* **docs:** updates to descriptions and example values ([f3ab694](https://github.com/anthropics/anthropic-sdk-python/commit/f3ab694453326a2765623b9aafeb7588ea296325))",
+        "published": "2026-06-29T14:57:11Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_typescript": [
+      {
+        "title": "sdk: v0.111.0",
+        "tag": "sdk-v0.111.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.111.0",
+        "body": "## 0.111.0 (2026-07-10)\n\nFull Changelog: [sdk-v0.110.0...sdk-v0.111.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.110.0...sdk-v0.111.0)\n\n### Features\n\n* **api:** add support for dreaming ([77b28a6](https://github.com/anthropics/anthropic-sdk-typescript/commit/77b28a647239fd66d3a31b04fca4a58ebc86e493))\n* **tools:** gate session tool calls on evaluated_permission; bound idle by server stop_reason ([68a6d7b](https://github.com/anthropics/anthropic-sdk-typescript/commit/68a6d7b92aaea4d3eaf3a7567db18e3bf6d695ef))\n\n\n### Chores\n\n* **docs:** small updates to field descriptions ([e25b885](https://github.com/anthropics/anthropic-sdk-typescript/commit/e25b885eacbf26332e6133abff2ea7d72fef2b30))\n* **docs:** update model example ([a33f3f0](https://github.com/anthropics/anthropic-sdk-typescript/commit/a33f3f0b7cee244f2dc894900e9fa07cf686228b))\n* **docs:** updates to descriptions and examples ([eac4bac](https://github.com/anthropics/anthropic-sdk-typescript/commit/eac4bace325ae901465edf7a503183f669c3c2d8))",
+        "published": "2026-07-10T17:12:15Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.110.0",
+        "tag": "sdk-v0.110.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.110.0",
+        "body": "## 0.110.0 (2026-07-02)\n\nFull Changelog: [sdk-v0.109.1...sdk-v0.110.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.109.1...sdk-v0.110.0)\n\n### Features\n\n* **api:** add agent-memory-2026-07-22 beta header ([a470e10](https://github.com/anthropics/anthropic-sdk-typescript/commit/a470e10aaad12078e3e5f2bb9adf6c2652ea9ca0))",
+        "published": "2026-07-02T19:19:40Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.109.1",
+        "tag": "sdk-v0.109.1",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.109.1",
+        "body": "## 0.109.1 (2026-07-01)\n\nFull Changelog: [sdk-v0.109.0...sdk-v0.109.1](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.109.0...sdk-v0.109.1)\n\n### Chores\n\n* **api:** remove some nonfunctional types from the SDKs ([cc4dd4e](https://github.com/anthropics/anthropic-sdk-typescript/commit/cc4dd4e257cc3354f14e263b0d2441ddae71759e))",
+        "published": "2026-07-01T21:55:39Z",
+        "prerelease": false
+      },
+      {
+        "title": "vertex-sdk: v0.19.0",
+        "tag": "vertex-sdk-v0.19.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/vertex-sdk-v0.19.0",
+        "body": "## 0.19.0 (2026-06-30)\n\nFull Changelog: [vertex-sdk-v0.18.0...vertex-sdk-v0.19.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/vertex-sdk-v0.18.0...vertex-sdk-v0.19.0)\n\n### Features\n\n* **vertex:** bump google-auth-library to ^10.2.0 (SDK-91) ([#30](https://github.com/anthropics/anthropic-sdk-typescript/issues/30)) ([eb2d25c](https://github.com/anthropics/anthropic-sdk-typescript/commit/eb2d25cb868c74d0106d460f85f48465e35f83dd))",
+        "published": "2026-06-30T17:57:56Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.109.0",
+        "tag": "sdk-v0.109.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.109.0",
+        "body": "## 0.109.0 (2026-06-30)\n\nFull Changelog: [sdk-v0.108.0...sdk-v0.109.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.108.0...sdk-v0.109.0)\n\n### Features\n\n* **api:** add support for Managed Agents event delta streaming, agent overrides, reverse pagination, vault credential injection scoping, and agent and deployment webhook events ([7f3211b](https://github.com/anthropics/anthropic-sdk-typescript/commit/7f3211b4886053d25e98b91edc90fedc199ef186))",
+        "published": "2026-06-30T19:47:11Z",
+        "prerelease": false
+      }
+    ]
+  },
+  "hn_ai_stories": [
+    {
+      "title": "Stop Telling Me to Ask an LLM",
+      "url": "https://blog.yaelwrites.com/stop-telling-me-to-ask-an-llm/",
+      "score": 15,
+      "hn_url": "https://news.ycombinator.com/item?id=48876441",
+      "time": 1783808928
+    },
+    {
+      "title": "Mesh LLM: distributed AI computing on iroh",
+      "url": "https://www.iroh.computer/blog/mesh-llm",
+      "score": 3,
+      "hn_url": "https://news.ycombinator.com/item?id=48876505",
+      "time": 1783809537
+    },
+    {
+      "title": "AI Can't Recreate the Thrust Game (But It Can Help You Understand It)",
+      "url": "https://www.jamesdrandall.com/posts/thrust_ai_powered_software_archaeology/",
+      "score": 47,
+      "hn_url": "https://news.ycombinator.com/item?id=48865903",
+      "time": 1783721085
+    },
+    {
+      "title": "Reverse centaurs are the answer to the AI paradox (2025)",
+      "url": "https://pluralistic.net/2025/09/11/vulgar-thatcherism/#there-is-an-alternative",
+      "score": 82,
+      "hn_url": "https://news.ycombinator.com/item?id=48873855",
+      "time": 1783790632
+    },
+    {
+      "title": "AI 2040 and the cult of intelligence",
+      "url": "https://geohot.github.io//blog/jekyll/update/2026/07/11/ai-2040.html",
+      "score": 164,
+      "hn_url": "https://news.ycombinator.com/item?id=48874200",
+      "time": 1783793041
+    },
+    {
+      "title": "Ghost Font: A font that humans can read but AI cannot",
+      "url": "https://www.mixfont.com/ghost-font",
+      "score": 183,
+      "hn_url": "https://news.ycombinator.com/item?id=48870381",
+      "time": 1783762613
+    },
+    {
+      "title": "AI 2040: Plan A",
+      "url": "https://ai-2040.com/",
+      "score": 377,
+      "hn_url": "https://news.ycombinator.com/item?id=48848425",
+      "time": 1783614104
+    },
+    {
+      "title": "Who manages the agents?",
+      "url": "https://www.off-policy.com/dont-go-quietly-into-the-ai-night/",
+      "score": 66,
+      "hn_url": "https://news.ycombinator.com/item?id=48874182",
+      "time": 1783792953
+    },
+    {
+      "title": "Apple sues OpenAI, accuses ex-employees of stealing trade secrets",
+      "url": "https://9to5mac.com/2026/07/10/apple-sues-openai-trade-secret-theft/",
+      "score": 1558,
+      "hn_url": "https://news.ycombinator.com/item?id=48865019",
+      "time": 1783716429
+    },
+    {
+      "title": "GPT-5.6 Sol Ultra produces proof of the Cycle Double Cover Conjecture [pdf]",
+      "url": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf",
+      "score": 509,
+      "hn_url": "https://news.ycombinator.com/item?id=48863490",
+      "time": 1783708159
+    },
+    {
+      "title": "GPT-5.6",
+      "url": "https://openai.com/index/gpt-5-6/",
+      "score": 1540,
+      "hn_url": "https://news.ycombinator.com/item?id=48849066",
+      "time": 1783616654
+    },
+    {
+      "title": "Show HN: Reverse-engineering web apps into agent tools",
+      "url": "https://news.ycombinator.com/item?id=48847834",
+      "score": 89,
+      "hn_url": "https://news.ycombinator.com/item?id=48847834",
+      "time": 1783611917
+    },
+    {
+      "title": "Apple Silicon Exec Explains Mac Mini AI Demand and On-Device Future",
+      "url": "https://www.macrumors.com/2026/07/06/apple-silicon-exec-explains-mac-mini-ai-demand/",
+      "score": 214,
+      "hn_url": "https://news.ycombinator.com/item?id=48805598",
+      "time": 1783349961
+    },
+    {
+      "title": "Show HN: Frugon – Find which LLM calls a cheaper model could handle (local, MIT)",
+      "url": "https://github.com/Rodiun/frugon",
+      "score": 64,
+      "hn_url": "https://news.ycombinator.com/item?id=48816724",
+      "time": 1783426854
+    },
+    {
+      "title": "Information Foraging: A Theory of How People Navigate on the Web",
+      "url": "https://www.nngroup.com/articles/information-foraging/",
+      "score": 6,
+      "hn_url": "https://news.ycombinator.com/item?id=48875025",
+      "time": 1783798348
+    }
+  ],
+  "arxiv_recent": [
+    {
+      "title": "Score Accuracy Along the Forward Diffusion Does Not Certify Numerical Stability in Diffusion Sampling",
+      "url": "https://arxiv.org/abs/2607.08757v1",
+      "summary": "Score matching controls average error under the forward marginals, but a discretized reverse-time sampler evaluates the learned score along its own trajectory. We show that small forward-marginal error does not guarantee numerical stability. We construct a single smooth score field with arbitrarily small forward-marginal $L^2$ error. The learned reverse-time process is nonexplosive, has moments of every order, and can be arbitrarily close to the exact reverse-time process in path-space total variation. Yet its Euler--Maruyama discretizations converge in probability while every positive moment",
+      "published": "2026-07-09T17:55:52Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "MulTTiPop: A Multitrack Transcription Dataset for Pop Music",
+      "url": "https://arxiv.org/abs/2607.08756v1",
+      "summary": "We present MulTTiPop, a dataset of pop music segments and their associated multitrack MIDI recordings for the evaluation of automatic music transcription models. MulTTiPop contains 572 segments of popular music totaling 3.5 hours of audio, and contains songs from diverse genres and decades from the 1930s to 2000s. To collect this dataset, we perform metadata-based matching on song segments from the Lakh MIDI and TheoryTab datasets, manually identify an anchor beat between the audio and MIDI, then use beat tracking on the audio and warp the MIDI to match its tempo and timing. We evaluate state-",
+      "published": "2026-07-09T17:55:33Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "SLORR: Simple and Efficient In-Training Low-Rank Regularization",
+      "url": "https://arxiv.org/abs/2607.08754v1",
+      "summary": "Low-rank factorization is widely used to compress neural networks, but modern models are often not naturally amenable to aggressive factorization without significant accuracy loss. Existing training-time low-rank regularizers can improve compressibility, but they often require SVDs of large weight matrices, modify the model architecture (introducing additional trainable parameters), or rely on stateful cached quantities. To address these limitations, we introduce SLORR, a simple, stateless, and architecture-preserving framework for in-training low-rank regularization, instantiated with two mai",
+      "published": "2026-07-09T17:51:50Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Dimensionality Reduction Meets Network Science: Sensemaking on UMAP's kNN Graph",
+      "url": "https://arxiv.org/abs/2607.08746v1",
+      "summary": "While UMAP is widely used for exploring high-dimensional data, typical workflows focus on its lower-dimensional embedding, largely overlooking the rich k-nearest-neighbor (kNN) graph that UMAP constructs internally. This graph encodes the data manifold in its original high-dimensional space, before the distortion that UMAP's 2D projection introduces. We demonstrate the untapped potential of this internal representation, showing how standard graph algorithms applied to this graph enhance data sensemaking: (1) PageRank identifies representative data points, (2) k-core decomposition reveals dense",
+      "published": "2026-07-09T17:47:08Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "ARDY: Autoregressive Diffusion with Hybrid Representation for Interactive Human Motion Generation",
+      "url": "https://arxiv.org/abs/2607.08741v1",
+      "summary": "Generating realistic 3D human motions in real-time within interactive applications is key for animation, simulation, and humanoid robotics. While recent offline motion generation approaches offer precise control via text and kinematic constraints, they lack the inference speed required for interactive settings. Conversely, existing online methods enable real-time synthesis but often sacrifice controllability or struggle with complex text semantics and long-horizon goals due to limited context windows. In this work, we introduce ARDY, a streaming generation framework that bridges this gap by en",
+      "published": "2026-07-09T17:41:49Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Super Weights in LLMs and the Failure of Selective Training",
+      "url": "https://arxiv.org/abs/2607.08733v1",
+      "summary": "Recent work identified Super Weights, individual parameters whose removal degrades model performance by orders of magnitude. We show that this degradation due to pruning Super Weights does not universally apply to all LLMs. Furthermore, if these parameters are so important, Super Weight-aware training should be effective. We show the opposite. Training Super Weights in isolation (100 to 8,192 parameters) drops accuracy to random-guessing levels on both OLMo-1B and OLMo-7B, and expanding to local neighborhoods of up to 36K parameters provides no improvement. The failure is specific to Super Wei",
+      "published": "2026-07-09T17:35:00Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Pose-to-Biomechanics: Bridging 3D Human Pose Estimation and Biomechanical Attribute Prediction",
+      "url": "https://arxiv.org/abs/2607.08725v1",
+      "summary": "Recent progress in 3D human pose estimation has made markerless recovery of skeletal motion increasingly accurate and scalable. However, most pose estimators remain optimized for geometric keypoint accuracy, while many real-world applications in rehabilitation, sports science, ergonomics, and clinical movement analysis require biomechanical quantities that describe how the body moves, loads, and activates. In this work, we propose BioModule, a lightweight plug-in temporal transformer that attaches downstream of any 3D pose estimator and predicts biomechanical attributes from standard 17-joint",
+      "published": "2026-07-09T17:31:16Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Latent Memory Palace: Reasoning for Control as Autoregressive Variational Inference",
+      "url": "https://arxiv.org/abs/2607.08724v1",
+      "summary": "Human decision-making is highly flexible -- some actions are taken immediately; others require longer deliberation. Language models have exhibited a similar capacity for adaptive \"reasoning.\" However, transferring this capability to continuous control policies has been challenging, as directly reasoning in language space may lack the granularity for spatial understanding and precise motions. In this work, we show that reasoning for control policies can emerge by organizing information in an autoregressive latent space reminiscent of a memory palace, where retrieval is iterative and adaptive. O",
+      "published": "2026-07-09T17:30:49Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Deep Learning for Joint Narrowband Interference Cancellation and Soft Demodulation in OFDM Systems",
+      "url": "https://arxiv.org/abs/2607.08717v1",
+      "summary": "Narrowband interference (NBI) severely degrades orthogonal frequency-division multiplexing (OFDM) systems by corrupting subcarriers and rendering classical soft demodulation ineffective. Conventional compressed-sensing (CS) mitigation exhibits high sequential latency and leaves structured, non-Gaussian residuals that cause log-likelihood ratio (LLR) unreliability, decoder saturation, and severe error floors when employing classical Gaussian demappers. We resolve this pipeline mismatch using a unified deep learning framework for joint NBI cancellation and robust soft demodulation. First, NBI-CN",
+      "published": "2026-07-09T17:26:43Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "LTM: Large-scale Terrain Model for Wildfire-prone Landscapes",
+      "url": "https://arxiv.org/abs/2607.08711v1",
+      "summary": "Accurate 3D terrain maps are essential for emergency response when assessing wildfire hazards. However, wildfire-prone regions often span vast areas where conventional reconstruction methods underperform. Airborne LiDAR systems provide high-resolution terrain data, but they are expensive and infrequently updated. Image-based methods offer a lower-cost alternative, but struggle due to sparse visual features and limited image overlap. We propose a multi-modal reconstruction framework leveraging outdated Digital Elevation Models (DEMs) as geometric priors for image-based 3D reconstruction. Our ke",
+      "published": "2026-07-09T17:22:35Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "UniClawBench: A Universal Benchmark for Proactive Agents on Real-World Tasks",
+      "url": "https://arxiv.org/abs/2607.08768v1",
+      "summary": "The rapid development of large language models and multimodal large language models has accelerated the emergence of proactive agents capable of operating everyday tools and assisting users in real-world environments. However, existing benchmarks struggle to evaluate such agents effectively, as they often rely on sandboxed environments and single-turn evaluation paradigms. Moreover, their scenario-based task taxonomies mix multiple model capabilities within the same task category, making it difficult to identify the root causes of agent failures. To address these limitations, we introduce UniC",
+      "published": "2026-07-09T17:59:32Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Validity of LLMs as data annotators: AMALIA on authority",
+      "url": "https://arxiv.org/abs/2607.08731v1",
+      "summary": "A national language model offers a linguistic community its own instrument for measuring what its citizens say and value. Portugal's AMALIA, a publicly funded 9B-parameter model for European Portuguese, appears competitive on agreement alone: asked to code the moral foundation of authority, it agrees with trained human coders to within six F1 points of open models eight to thirteen times its size. Yet agreement is reliability, not validity. For theoretical constructs that must be inferred rather than read from surface features, the question is whether the model follows the construct's theory o",
+      "published": "2026-07-09T17:34:25Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Remember When It Matters: Proactive Memory Agent for Long-Horizon Agents",
+      "url": "https://arxiv.org/abs/2607.08716v1",
+      "summary": "In long-horizon tasks, decision-relevant state is often scattered across an expanding trajectory, while the action agent must surface it and act. As trajectories grow, task requirements, environment facts, prior attempts, diagnoses, and open subgoals can be buried in the context window or pushed beyond it, failing to influence decisions when needed. We call this failure mode \"behavioral state decay\". We study memory as an active intervention mechanism rather than passive retrieval. A separate memory agent runs alongside an unmodified action agent, updating a structured memory bank from the rec",
+      "published": "2026-07-09T17:26:28Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Do You Need a Frontier Model as a Citation Verifier? Benchmarking Rubric LLMs for Deep-Research Source Attribution",
+      "url": "https://arxiv.org/abs/2607.08700v1",
+      "summary": "Reinforcement learning increasingly relies on an LLM judge to score each rubric criterion, and that judge acts as the reward model during training. Before such a signal can be trusted, we need to know how capable the judge must be and how biased it is. We study this calibration question for citation quality in deep-research systems, where a search-grounded LLM must support each claim it writes with a cited source. Citation quality is a structured rubric task in which each attribution-citation pair is judged along two dimensions that require an LLM, source relevance and factual support. On an a",
+      "published": "2026-07-09T17:01:40Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "WebSwarm: Recursive Multi-Agent Orchestration for Deep-and-Wide Web Search",
+      "url": "https://arxiv.org/abs/2607.08662v1",
+      "summary": "Large language model (LLM)-based web search agents are transforming information seeking from simple factoid question answering into complex, deep-and-wide search and research-oriented tasks. A single ReAct-style agent is constrained by one long trajectory and limited context, making it difficult to handle depth and coverage simultaneously. Existing multi-agent systems improve search coverage through parallel execution and aggregation, but still exhibit clear limitations in recursive depth, collaboration adaptability, and evidence-grounded expansion. We propose WebSwarm, a progressive recursive",
+      "published": "2026-07-09T16:28:49Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "UltraX: Refining Pre-Training Data at Scale with Adaptive Programmatic Editing",
+      "url": "https://arxiv.org/abs/2607.08646v1",
+      "summary": "As available training data approaches its physical limit, gains from Scaling Laws have begun to diminish. Consequently, improving Large Language Models (LLMs) now depends less on data expansion and more on higher-quality data utilization. However, in the context of large-scale corpora, existing refinement methodologies face significant limitations in quality, efficiency, and reliability: Rule-based approaches are constrained by fixed heuristics and struggle with instance-level variations; LLM-based approaches improve quality but fail to meet the efficiency and reliability requirements of large",
+      "published": "2026-07-09T16:18:07Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "DominoTree: Conditional Tree-Structured Drafting with Domino for Speculative Decoding",
+      "url": "https://arxiv.org/abs/2607.08642v1",
+      "summary": "Speculative decoding accelerates LLM inference by drafting several tokens and verifying them in parallel. Block-diffusion drafters such as DFlash produce   a draft block in one pass but model only per-position marginals; best-first tree methods such as DDTree expand candidate trees from those marginals. The   released Domino drafter adds a GRU-based causal correction that makes each draft token's distribution path-dependent, a structure DDTree's factorized   formulation cannot represent. We introduce DominoTree, a training-free best-first draft tree scored by Domino's conditional, non-factoriz",
+      "published": "2026-07-09T16:16:35Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "The complexities of patient-centred conversational artificial intelligence",
+      "url": "https://arxiv.org/abs/2607.08625v1",
+      "summary": "Consumer-facing health chatbots powered by large language models (LLMs) are increasingly used for symptom assessment. However, chatbot development and evaluation often rely on cooperative, articulate, simulated patients. We analysed 2,053 real patient-chatbot conversations and found that communication patterns and expression of emotions vary widely across users. We developed a patient simulator that separately models clinical content, emotional state, conversational strategy, and communication style. In a Turing-inspired evaluation of realism with 15 human graders, simulated conversations were",
+      "published": "2026-07-09T15:56:55Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "It Takes a MAESTRO To Prune Bad Experts",
+      "url": "https://arxiv.org/abs/2607.08601v1",
+      "summary": "Sparsely-activated Mixture-of-Experts (MoE) language models achieve remarkable inference efficiency by activating only a small fraction of parameters per token, yet their full expert banks reside in memory at all times, creating a prohibitive deployment bottleneck. Existing structured pruning methods, largely designed for dense transformers, assess expert importance using locally derived heuristics that are blind to the interdependent nature of MoE routing. We introduce MAESTRO (Markov-chain Approximated Expert Sparsification via Transition-based ROuting), a structured pruning framework design",
+      "published": "2026-07-09T15:32:54Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Improving Ad-hoc Search Effectiveness for Conversational Information Retrieval via Model Merging",
+      "url": "https://arxiv.org/abs/2607.08540v1",
+      "summary": "Conversational information retrieval is challenging since it requires the consideration of the conversation history which potentially gives rise to topic shifts and coreference resolution across previous turns. To address these challenges, previous work mainly rely on traditional fine-tuning of ad-hoc retrievers on conversational datasets or extrapolates their generalizability through multi-tasking. However, this mainstream approach is costly - since it requires model re-training - and exhibits catastrophic forgetting, where the model loses its foundational ad-hoc retrieval performance. In thi",
+      "published": "2026-07-09T14:35:14Z",
+      "category": "cs.CL"
+    }
+  ]
+}
