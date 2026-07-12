@@ -1,0 +1,26 @@
+{
+  "date": "2026-07-13",
+  "news": [
+    {
+      "title": "Old and new apps, via modern coding agents",
+      "summary": "필즈상 수상자 테렌스 타오가 최신 코딩 에이전트를 이용해 1999년에 만든 낡은 Java 애플릿 수십 개를 몇 시간 만에 JavaScript로 이전하고, 특수상대성 시공간 다이어그램 등 새로운 수학 시각화 도구도 제작한 경험을 공유했다. 이 과정에서 에이전트가 원본 코드의 버그 2개를 스스로 발견하는 등 결과물의 완성도가 예상보다 높았다고 평가했다. 다만 상위 수준의 아키텍처 설계에는 여전히 인간의 전문성이 필요하다고 강조했다.",
+      "url": "https://terrytao.wordpress.com/2026/07/11/old-and-new-apps-via-modern-coding-agents/"
+    },
+    {
+      "title": "Claude Code sends 33k tokens before reading the prompt; OpenCode sends 7k",
+      "summary": "코딩 에이전트 Claude Code가 사용자 프롬프트를 받기도 전에 시스템 프롬프트·툴 스키마·스캐폴딩으로 약 33,000토큰을 소비하는 반면, 경쟁 도구 OpenCode는 약 7,000토큰만 사용해 4.7배 차이가 난다는 분석이 HN에서 화제가 됐다. 원인으로는 방대한 시스템 프롬프트, 27개에 달하는 툴 정의, 세션 중 프롬프트 캐시가 자주 재작성되는 구조가 지목됐다. 저자는 이런 오버헤드가 200k 컨텍스트 윈도우의 상당 부분을 코드 입력 전에 소모시켜 비용과 지연시간에 영향을 준다고 지적했다.",
+      "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead"
+    },
+    {
+      "title": "Mesh LLM: distributed AI computing on iroh",
+      "summary": "Mesh LLM은 여러 컴퓨터에 흩어진 GPU와 메모리를 하나의 OpenAI 호환 API로 통합하는 분산 추론 플랫폼으로, P2P 네트워킹 라이브러리 iroh를 이용해 노드 간 NAT 통과와 인증된 QUIC 연결을 자동 구성한다. 'Skippy' 기능으로 대형 모델을 레이어 단위로 여러 평범한 머신에 분할 배치해, 한 대로는 불가능한 모델도 여러 대가 힘을 합쳐 실행할 수 있게 한다. 중앙 서버 없이 사내 유휴 GPU를 모아 사설 추론 클러스터를 구성할 수 있다는 점이 특징이다.",
+      "url": "https://www.iroh.computer/blog/mesh-llm"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
