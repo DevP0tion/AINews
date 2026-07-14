@@ -1,0 +1,383 @@
+{
+  "date": "2026-07-15",
+  "collected_at": "2026-07-14T22:58:53Z",
+  "anthropic_news": [],
+  "claude_release_notes_md": "",
+  "github_releases": {
+    "claude_code": [
+      {
+        "title": "v2.1.209",
+        "tag": "v2.1.209",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.209",
+        "body": "## What's changed\n\n- Fixed /model and other dialogs being blocked in `claude agents` background sessions (reverts an overly broad guard)\n",
+        "published": "2026-07-14T06:36:28Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.208",
+        "tag": "v2.1.208",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.208",
+        "body": "## What's changed\n\n- Added screen reader mode: opt-in plain-text rendering for screen reader users. Run `claude --ax-screen-reader`, set CLAUDE_AX_SCREEN_READER=1, or add \"axScreenReader\": true to settings.\n- Added `vimInsertModeRemaps` setting: map two-key insert-mode sequences like `jj` to Escape in vim mode\n- Added `CLAUDE_CODE_PROCESS_WRAPPER`: agent view and the background service now honor a corporate launcher by running every Claude Code self-spawn through a required wrapper executable\n- Added mouse-click support for multi-select menus and \"Other\" input rows in fullscreen mode\n- Fixed fast mode staying off after switching back to a model that supports it — it now restores automatically when enabled in settings\n- Fixed replies typed to a background agent being lost when delivery fails — the text is now saved and delivered when the session restarts\n- Fixed background-session attach failing permanently (\"Couldn't start the background daemon\") after an update replaced the binary a running `claude agents` process was launched from\n- Fixed the context window (and auto-compact indicator) briefly resetting to 200k after the CLI auto-updates, causing a false \"100% context used\" when resuming long-context sessions\n- Fixed supervised and background sessions crashing when a server closed an HTTP/2 connection with a GOAWAY while requests were in flight\n- Fixed truncated stream-json/JSON output and missing result message when piping large responses from `claude -p`\n- Fixed `CLAUDE_CODE_MAX_OUTPUT_TOKENS` and similar env vars silently using the mantissa of scientific-notation values (`1e6` became `1`)\n- Fixed very large markdown tables stalling rendering or using excessive memory; tables over 200 rows show the first 200 with a \"… N more rows\" notice\n- Fixed the Edit tool failing on files modified after reading when the target text still matches uniquely\n- Fixed Read reporting empty files as \"shorter than offset\", Grep silently returning \"No files found\" for invalid regex pa",
+        "published": "2026-07-14T01:10:42Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.207",
+        "tag": "v2.1.207",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.207",
+        "body": "## What's changed\n\n- Auto mode is now available without `CLAUDE_CODE_ENABLE_AUTO_MODE` opt-in on Bedrock, Vertex AI, and Foundry; disable via `disableAutoMode` in settings\n- Fixed the terminal freezing and keystrokes lagging while streaming responses containing very long lists, tables, paragraphs, or code blocks\n- Fixed remote managed settings from a non-interactive run (`claude -p`, the SDK) being permanently recorded as consented without ever showing the security consent dialog\n- Fixed spurious prompt-injection warnings triggered by benign system-generated conversation updates\n- Fixed the auto-updater overwriting a custom launcher script or symlink at `~/.local/bin/claude` on every release; `/doctor` now reports an externally managed launcher\n- Fixed compound commands with `cd` prompting for permission when the only output redirect was to `/dev/null`\n- Fixed the transcript jumping above the start of the answer when a response finishes streaming\n- Fixed `extensions.worktreeConfig` being left in the repo's `.git/config` (breaking go-git tools like `tea`) after the last `worktree.sparsePaths` worktree was removed\n- Fixed malformed bracket patterns in rules globs, skill paths, `.ignore`, and `.worktreeinclude` breaking file reads, file suggestions, and worktree creation\n- Fixed a crash loop in agent teams where a malformed teammate mailbox message caused repeated errors every second until the mailbox file was manually deleted\n- Fixed background sessions auto-named by accepting a plan not showing that name on their agent-view row\n- Fixed background sessions that entered a git worktree resuming blank after a cold reopen from the agent list\n- Fixed Remote Control task status updates being lost when the connection recovered from a network interruption or credential refresh\n- Fixed Remote Control sessions hosted by the desktop app not showing background agent and workflow progress on mobile and web\n- Fixed Deep research runs labeling every Fetch-phase agent \"unknown\" — chi",
+        "published": "2026-07-11T00:52:10Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.206",
+        "tag": "v2.1.206",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.206",
+        "body": "## What's changed\n\n- Added directory path suggestions to `/cd`, matching `/add-dir` behavior\n- Added a `/doctor` check that proposes trimming checked-in `CLAUDE.md` files by cutting content Claude could derive from the codebase\n- `/commit-push-pr` now auto-allows `git push` to the repo's configured push remote (`remote.pushDefault`, or the sole remote when only one is configured) in addition to `origin`\n- Gateway: `/login` now supports Anthropic-operated public gateway endpoints\n- `EnterWorktree` now asks for confirmation before entering a git worktree outside the project's `.claude/worktrees/` directory\n- Background agents now upgrade to a new version in the background right after a Claude Code update, instead of paying a slow stale-session upgrade when you attach\n- Fixed an expired login failing every model with a misleading \"There's an issue with the selected model\" error instead of prompting to run `/login`\n- Fixed `claude --resume` and `--continue` not responding to keyboard input on startup\n- Fixed MCP servers configured via `--mcp-config` or `.mcp.json` ignoring a per-server `request_timeout_ms`, which caused long-running MCP tool calls to time out at the 60s default in fresh sessions\n- Fixed `CLAUDE_CODE_EXTRA_BODY` being silently ignored by `claude agents` / `--bg` background workers; the shell-exported override now follows the dispatching session\n- Fixed OAuth MCP servers requiring manual re-authentication after a single failed token refresh\n- Fixed `--permission-prompt-tool` pointing at an MCP server crashing with \"MCP tool not found\" on cold start before the server finishes connecting\n- Fixed `/model` picker rows printing a price for a different model than the row named, and stopped quoting first-party list prices on providers that don't bill them\n- Fixed server-provided model rows being misplaced in the `/model` picker when an entitlement or allowlist restriction drops the row they were positioned against\n- Fixed desktop sessions getting stuck showing \"",
+        "published": "2026-07-10T01:45:26Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.205",
+        "tag": "v2.1.205",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.205",
+        "body": "## What's changed\n\n- Added an auto mode rule that blocks tampering with session transcript files\n- Fixed `--json-schema` silently producing unstructured output when the schema was invalid, and schemas using the `format` keyword being rejected\n- Fixed a message sent while Claude was working being silently lost when the turn ended at the `--max-turns` limit\n- Fixed Windows worktree removal deleting files outside the worktree when an NTFS junction or directory symlink existed inside it\n- Fixed background agents staying shown as \"failed\" or \"completed\" in the agent list after being resumed with `SendMessage`\n- Fixed background jobs flipping from \"needs input\" back to \"working\" in the agent list when the agent's turn contained no readable text\n- Fixed `claude attach` erroring when a background agent was mid-upgrade restart instead of waiting for it to come back\n- Fixed session-to-PR linking missing a PR created in a Bash call whose output exceeded the 30K inline limit\n- Fixed `claude mcp add-from-claude-desktop` getting stuck when a server name contains unsupported characters; invalid names are now reported and remaining servers still import\n- Fixed a plugin LSP server that fails to initialize preventing a valid LSP server from another plugin handling the same file extension\n- Fixed a Windows crash when the directory Claude was launched from is deleted, locked, or unmounted while a command is running\n- Fixed a crash when a file watcher was closed while a directory scan was still in flight\n- Fixed project verify skills being rewritten on every session instead of only when a documented command changed\n- Fixed the agent view rendering one line too high and clipping its header when the job list slightly overflowed the screen\n- Fixed background tasks in the web and mobile Remote Control panels showing stale \"Running\" status by forwarding full task state on every membership change\n- Improved auto mode to ask before running `rm -rf` on a variable it can't resolve from context\n-",
+        "published": "2026-07-08T21:22:06Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_python": [
+      {
+        "title": "v0.116.0",
+        "tag": "v0.116.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.116.0",
+        "body": "## 0.116.0 (2026-07-02)\n\nFull Changelog: [v0.115.1...v0.116.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.115.1...v0.116.0)\n\n### Features\n\n* **api:** add agent-memory-2026-07-22 beta header ([e181d5c](https://github.com/anthropics/anthropic-sdk-python/commit/e181d5c1b233d5b0b313c78b27cf1dd27f620e74))",
+        "published": "2026-07-02T19:07:55Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.115.1",
+        "tag": "v0.115.1",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.115.1",
+        "body": "## 0.115.1 (2026-07-01)\n\nFull Changelog: [v0.115.0...v0.115.1](https://github.com/anthropics/anthropic-sdk-python/compare/v0.115.0...v0.115.1)\n\n### Chores\n\n* **api:** remove some nonfunctional types from the SDKs ([5e7c431](https://github.com/anthropics/anthropic-sdk-python/commit/5e7c431ef31b72b3f1f59902e678316fea14d983))",
+        "published": "2026-07-01T21:54:06Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.115.0",
+        "tag": "v0.115.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.115.0",
+        "body": "## 0.115.0 (2026-06-30)\n\nFull Changelog: [v0.114.0...v0.115.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.114.0...v0.115.0)\n\n### Features\n\n* **api:** add support for Managed Agents event delta streaming, agent overrides, reverse pagination, vault credential injection scoping, and agent and deployment webhook events ([8c23f7e](https://github.com/anthropics/anthropic-sdk-python/commit/8c23f7ef103c287362364c12503de85eb31f07fb))",
+        "published": "2026-06-30T19:47:18Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.114.0",
+        "tag": "v0.114.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.114.0",
+        "body": "## 0.114.0 (2026-06-30)\n\nFull Changelog: [v0.113.0...v0.114.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.113.0...v0.114.0)\n\n### Features\n\n* **api:** add support for claude-sonnet-5 ([b893033](https://github.com/anthropics/anthropic-sdk-python/commit/b893033b32951e0e2e04afa36a3a7eb016ae4b99))\n\n\n### Bug Fixes\n\n* **agent_toolset:** allow absolute paths that resolve inside workdir ([#121](https://github.com/anthropics/anthropic-sdk-python/issues/121)) ([0105529](https://github.com/anthropics/anthropic-sdk-python/commit/0105529fe15b1f80bbf9c56f4ae684fdfa10e2b3))",
+        "published": "2026-06-30T17:48:39Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.113.0",
+        "tag": "v0.113.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.113.0",
+        "body": "## 0.113.0 (2026-06-29)\n\nFull Changelog: [v0.112.0...v0.113.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.112.0...v0.113.0)\n\n### Features\n\n* **api:** add support for 20260318 web fetch and support tools ([88dbfb1](https://github.com/anthropics/anthropic-sdk-python/commit/88dbfb14a2a838eda889469ad7fe07a47618e85f))\n\n\n### Bug Fixes\n\n* async count_tokens missing output_format/output_config merge block ([#162](https://github.com/anthropics/anthropic-sdk-python/issues/162)) ([122c958](https://github.com/anthropics/anthropic-sdk-python/commit/122c95811566bf6f5cbc682ae0a74972ae75a223))\n\n\n### Chores\n\n* **api:** accept user profile ID's when counting tokens ([0b4d17a](https://github.com/anthropics/anthropic-sdk-python/commit/0b4d17a49d39e8224adbee6a97be0e8b1b7ebff5))\n* **docs:** updates to descriptions and example values ([f3ab694](https://github.com/anthropics/anthropic-sdk-python/commit/f3ab694453326a2765623b9aafeb7588ea296325))",
+        "published": "2026-06-29T14:57:11Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_typescript": [
+      {
+        "title": "sdk: v0.111.0",
+        "tag": "sdk-v0.111.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.111.0",
+        "body": "## 0.111.0 (2026-07-10)\n\nFull Changelog: [sdk-v0.110.0...sdk-v0.111.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.110.0...sdk-v0.111.0)\n\n### Features\n\n* **api:** add support for dreaming ([77b28a6](https://github.com/anthropics/anthropic-sdk-typescript/commit/77b28a647239fd66d3a31b04fca4a58ebc86e493))\n* **tools:** gate session tool calls on evaluated_permission; bound idle by server stop_reason ([68a6d7b](https://github.com/anthropics/anthropic-sdk-typescript/commit/68a6d7b92aaea4d3eaf3a7567db18e3bf6d695ef))\n\n\n### Chores\n\n* **docs:** small updates to field descriptions ([e25b885](https://github.com/anthropics/anthropic-sdk-typescript/commit/e25b885eacbf26332e6133abff2ea7d72fef2b30))\n* **docs:** update model example ([a33f3f0](https://github.com/anthropics/anthropic-sdk-typescript/commit/a33f3f0b7cee244f2dc894900e9fa07cf686228b))\n* **docs:** updates to descriptions and examples ([eac4bac](https://github.com/anthropics/anthropic-sdk-typescript/commit/eac4bace325ae901465edf7a503183f669c3c2d8))",
+        "published": "2026-07-10T17:12:15Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.110.0",
+        "tag": "sdk-v0.110.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.110.0",
+        "body": "## 0.110.0 (2026-07-02)\n\nFull Changelog: [sdk-v0.109.1...sdk-v0.110.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.109.1...sdk-v0.110.0)\n\n### Features\n\n* **api:** add agent-memory-2026-07-22 beta header ([a470e10](https://github.com/anthropics/anthropic-sdk-typescript/commit/a470e10aaad12078e3e5f2bb9adf6c2652ea9ca0))",
+        "published": "2026-07-02T19:19:40Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.109.1",
+        "tag": "sdk-v0.109.1",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.109.1",
+        "body": "## 0.109.1 (2026-07-01)\n\nFull Changelog: [sdk-v0.109.0...sdk-v0.109.1](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.109.0...sdk-v0.109.1)\n\n### Chores\n\n* **api:** remove some nonfunctional types from the SDKs ([cc4dd4e](https://github.com/anthropics/anthropic-sdk-typescript/commit/cc4dd4e257cc3354f14e263b0d2441ddae71759e))",
+        "published": "2026-07-01T21:55:39Z",
+        "prerelease": false
+      },
+      {
+        "title": "vertex-sdk: v0.19.0",
+        "tag": "vertex-sdk-v0.19.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/vertex-sdk-v0.19.0",
+        "body": "## 0.19.0 (2026-06-30)\n\nFull Changelog: [vertex-sdk-v0.18.0...vertex-sdk-v0.19.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/vertex-sdk-v0.18.0...vertex-sdk-v0.19.0)\n\n### Features\n\n* **vertex:** bump google-auth-library to ^10.2.0 (SDK-91) ([#30](https://github.com/anthropics/anthropic-sdk-typescript/issues/30)) ([eb2d25c](https://github.com/anthropics/anthropic-sdk-typescript/commit/eb2d25cb868c74d0106d460f85f48465e35f83dd))",
+        "published": "2026-06-30T17:57:56Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.109.0",
+        "tag": "sdk-v0.109.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.109.0",
+        "body": "## 0.109.0 (2026-06-30)\n\nFull Changelog: [sdk-v0.108.0...sdk-v0.109.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.108.0...sdk-v0.109.0)\n\n### Features\n\n* **api:** add support for Managed Agents event delta streaming, agent overrides, reverse pagination, vault credential injection scoping, and agent and deployment webhook events ([7f3211b](https://github.com/anthropics/anthropic-sdk-typescript/commit/7f3211b4886053d25e98b91edc90fedc199ef186))",
+        "published": "2026-06-30T19:47:11Z",
+        "prerelease": false
+      }
+    ]
+  },
+  "hn_ai_stories": [
+    {
+      "title": "Bonsai 27B: A 27B-Class model that runs on a phone",
+      "url": "https://prismml.com/news/bonsai-27b",
+      "score": 334,
+      "hn_url": "https://news.ycombinator.com/item?id=48910545",
+      "time": 1784051448
+    },
+    {
+      "title": "Financing the AI boom: from cash flows to debt [pdf]",
+      "url": "https://www.bis.org/publ/bisbull120.pdf",
+      "score": 26,
+      "hn_url": "https://news.ycombinator.com/item?id=48913443",
+      "time": 1784066316
+    },
+    {
+      "title": "Guardian Angels: LLM Personalization for Productivity and Security",
+      "url": "https://gwern.net/guardian-angel",
+      "score": 46,
+      "hn_url": "https://news.ycombinator.com/item?id=48906041",
+      "time": 1784033429
+    },
+    {
+      "title": "How to stop Claude from saying load-bearing",
+      "url": "https://jola.dev/posts/how-to-stop-claude-from-saying-load-bearing",
+      "score": 395,
+      "hn_url": "https://news.ycombinator.com/item?id=48905248",
+      "time": 1784029562
+    },
+    {
+      "title": "The zero-cost fallacy: open-source software in the agentic era",
+      "url": "https://www.thoughtworks.com/insights/blog/open-source/zero-cost-fallacy-open-source-agentic-era",
+      "score": 88,
+      "hn_url": "https://news.ycombinator.com/item?id=48865001",
+      "time": 1783716343
+    },
+    {
+      "title": "Launch HN: Agnost AI (YC S26) – Extract user feedback from agent conversations",
+      "url": "https://agnost.ai",
+      "score": 37,
+      "hn_url": "https://news.ycombinator.com/item?id=48908950",
+      "time": 1784045178
+    },
+    {
+      "title": "Show HN: Juggler – an open-source GUI coding agent, by the creator of JUCE",
+      "url": "https://github.com/juggler-ai/juggler",
+      "score": 153,
+      "hn_url": "https://news.ycombinator.com/item?id=48883305",
+      "time": 1783880895
+    },
+    {
+      "title": "Demis Hassabis has a plan to harness AI safely",
+      "url": "https://twitter.com/demishassabis/status/2076957440109625718",
+      "score": 129,
+      "hn_url": "https://news.ycombinator.com/item?id=48904095",
+      "time": 1784020807
+    },
+    {
+      "title": "The Agentic Loop: Three loops in a trench coat",
+      "url": "https://www.bobbytables.io/p/the-agentic-loop-three-loops-in-a",
+      "score": 65,
+      "hn_url": "https://news.ycombinator.com/item?id=48907672",
+      "time": 1784039996
+    },
+    {
+      "title": "Show HN: I RL-trained an agent that trains models with RL (for ~$1.3k)",
+      "url": "https://github.com/Danau5tin/ai-trains-ai",
+      "score": 92,
+      "hn_url": "https://news.ycombinator.com/item?id=48905919",
+      "time": 1784032885
+    },
+    {
+      "title": "Show HN: Self-hosted voice AI agent for Asterisk/FreePBX",
+      "url": "https://github.com/hkjarral/AVA-AI-Voice-Agent-for-Asterisk",
+      "score": 23,
+      "hn_url": "https://news.ycombinator.com/item?id=48887276",
+      "time": 1783911094
+    },
+    {
+      "title": "Codex starts encrypting sub-agent prompts",
+      "url": "https://github.com/openai/codex/issues/28058",
+      "score": 405,
+      "hn_url": "https://news.ycombinator.com/item?id=48905028",
+      "time": 1784028092
+    },
+    {
+      "title": "Show HN: Clawk – Give coding agents a disposable Linux VM, not your laptop",
+      "url": "https://github.com/clawkwork/clawk",
+      "score": 215,
+      "hn_url": "https://news.ycombinator.com/item?id=48892859",
+      "time": 1783951323
+    },
+    {
+      "title": "Coding agents think ahead of time",
+      "url": "https://arxiv.org/abs/2607.05188",
+      "score": 86,
+      "hn_url": "https://news.ycombinator.com/item?id=48905764",
+      "time": 1784032089
+    },
+    {
+      "title": "Show HN: I implemented a neural network in SQL",
+      "url": "https://github.com/xqlsystems/xarray-sql/blob/claude/xarray-sql-mnist-demo/benchmarks/nn.py",
+      "score": 111,
+      "hn_url": "https://news.ycombinator.com/item?id=48897975",
+      "time": 1783972810
+    }
+  ],
+  "arxiv_recent": [
+    {
+      "title": "Requential Coding: Pushing the Limits of Model Compression with Self-Generated Training Data",
+      "url": "https://arxiv.org/abs/2607.11883v1",
+      "summary": "Compression is fundamental to intelligence. A model that can represent its training data as a short code has discovered regularities that enable generalization. Large neural networks may learn functions far simpler than their parameter counts suggest, but it is challenging to construct codes that realize this simplicity. Parameter-based methods such as quantization produce code lengths that scale with model size, insensitive to how much information the parameters store. Prequential coding bypasses this issue by compressing the training trajectory, but codes the exact data sequence regardless o",
+      "published": "2026-07-13T17:58:50Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Invariant Learning Dynamics of Transformers in Inductive Reasoning Tasks",
+      "url": "https://arxiv.org/abs/2607.11875v1",
+      "summary": "We present a theoretical framework to explain the emergence of inductive reasoning abilities in Transformer language models. While previous works on Transformer learning dynamics have so far been mostly tied to specific tasks, we study a generalized class of inductive tasks that unifies several synthetic tasks known in the literature, including in-context n-grams and multi-hop reasoning. In this class, we theoretically prove that the training dynamics of attention models can be confined to a highly interpretable, low-dimensional invariant manifold. On this manifold, the learning dynamics are c",
+      "published": "2026-07-13T17:56:11Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "A Minimalist Retargeting-Guided Reinforcement Learning Recipe for Dexterous Manipulation",
+      "url": "https://arxiv.org/abs/2607.11874v1",
+      "summary": "Recent work in humanoid whole-body control has found success with a simple recipe: retarget human motion to robot kinematic references, then train policies via reinforcement learning (RL) to track them. But how does this recipe transfer to dexterous manipulation? The answer is not obvious, as manipulation involves complex, contact-rich dynamics and requires delicate regulation of contact modes and forces. We present REGRIND, a minimalist retargeting-guided RL pipeline that learns dexterous manipulation policies from a single human demonstration. REGRIND retargets human hand-object motion to a",
+      "published": "2026-07-13T17:56:08Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "A Durability and Cross-Language Transfer Benchmark for a Validated Teaching-Feedback Classification Protocol",
+      "url": "https://arxiv.org/abs/2607.11873v1",
+      "summary": "Institutions collect far more open-ended teaching-evaluation feedback than they read. A prior study introduced a validated protocol for classifying such comments by thematic category and sentiment, built from a documented annotation guide, an intra-annotator reliability measurement, stratified cross-validation, and a held-out evaluation on a Spanish institutional corpus with a frozen-encoder design. Two questions limit its reuse: whether a protocol fixed to 2019-era frozen embeddings stays competitive as representation methods advance, and whether it transfers to a second language. We re-run i",
+      "published": "2026-07-13T17:56:05Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Inside the Unfair Judge: A Mechanistic Interpretability Account of LLM-as-Judge Bias",
+      "url": "https://arxiv.org/abs/2607.11871v1",
+      "summary": "Existing studies of LLM-as-judge scoring bias work predominantly at the input-output level: they perturb inputs, measure score deltas, and propose prompt-level mitigations. We argue that the same biases admit a representation-level account in the judge's hidden state, complementary to the input-output view and operationally useful in ways it does not afford. We report three findings, across seven judges, seven bias types, and nine benchmarks. Geometry: baseline judging inputs occupy a tight activation manifold while biased inputs are displaced along a low-dimensional, type-specific subspace th",
+      "published": "2026-07-13T17:55:19Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Input-Aware Dynamic Backdoor Attack Against Quantum Neural Networks",
+      "url": "https://arxiv.org/abs/2607.11843v1",
+      "summary": "Quantum Neural Networks (QNNs) are a promising framework for quantum machine learning on near-term quantum devices, but their security risks remain insufficiently understood. Studies have shown that QNNs are vulnerable to backdoor attacks, yet existing quantum backdoors mostly rely on a fixed trigger shared by all poisoned inputs. This fixed-trigger design is a major weakness because many defenses detect or weaken the repeated patterns such triggers leave in data representations. Although input-aware dynamic backdoors have been studied in classical neural networks, transferring them to QNNs is",
+      "published": "2026-07-13T17:34:17Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Transformer-Guided Swarm Intelligence for Frugal Neural Architecture Search",
+      "url": "https://arxiv.org/abs/2607.11826v1",
+      "summary": "Neural Architecture Search (NAS) has automated the design of deep learning models but traditionally requires massive computational resources, often measured in thousands of GPU-days. In this paper, we propose a frugal and memetic NAS framework designed to democratize architecture design on consumer-grade hardware. Our approach combines the global macro-search capabilities of an autoregressive Transformer controller, trained via Reinforcement Learning (RL), with the local micro-exploitation of an Artificial Bee Colony (ABC) algorithm. To prevent premature convergence during the RL phase, we int",
+      "published": "2026-07-13T17:18:24Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Relaxing Faithfulness with Intervention-Only Causal Discovery",
+      "url": "https://arxiv.org/abs/2607.11816v1",
+      "summary": "Causal discovery algorithms learn a network that describes the causal dependencies among random variables. A common workflow involves first utilizing conditional independence properties on observational data to determine partially directed causal relationships, then applying interventions to orient the unknown causal directions. A critical assumption for the first step is faithfulness: a requirement that causally linked variables exhibit statistical dependence. Many natural systems include buffering and stabilizing pathways that cancel out to achieve systemic robustness. This cancellation of p",
+      "published": "2026-07-13T17:12:12Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "An Exact Instrument for State Usage in Selective State-Space Models, and the Input-Driven Migration It Reveals",
+      "url": "https://arxiv.org/abs/2607.11796v1",
+      "summary": "Selective state-space models such as Mamba route information through a bank of first-order modes whose input coupling is set by a learned selection mechanism. We give an exact instrument for measuring how a trained model uses these modes. Because the state matrix is diagonal, each channel's output decomposes exactly into per-mode contributions, and a per-(layer, channel, window) Gram tensor yields the exact output error of dropping any subset of modes, offline, at any budget. Validated against the reference implementation to a relative error of $2.3\\times10^{-7}$ on the Mamba-1 family where it",
+      "published": "2026-07-13T16:48:03Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "From Expressivity to Sample Complexity: Narrow Teachers for Transformers via C-RASP",
+      "url": "https://arxiv.org/abs/2607.11760v1",
+      "summary": "A theoretical understanding of Transformers is crucial to better understand the capacities and limitations of large language models (LLMs). There is much work analyzing the expressivity of attention-based models. By proposing handcrafted weights or using computational complexity arguments, a large amount of past theoretical works have sought to characterize which tasks are and which are not in the hypothesis class of Transformer models. However, little work investigates the learnability of such solutions. In this work, we make progress towards this goal. Inspired by recent loss landscape analy",
+      "published": "2026-07-13T16:22:36Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Metacognition in LLMs: Foundations, Progress, and Opportunities",
+      "url": "https://arxiv.org/abs/2607.11881v1",
+      "summary": "Metacognition is a foundational component of intelligence critical to effective learning, problem solving, decision-making, communication, and more. In recent years, it has become increasingly recognized as a cornerstone of capable, transparent AI systems. Yet while LLMs have made significant progress across diverse real-world tasks, it is not yet clear when, how, or to what extent they can exhibit or be endowed with effective metacognitive abilities, nor how such abilities can be adapted to advance the fundamental capabilities, reliability, and intelligence of AI systems. This paper bridges t",
+      "published": "2026-07-13T17:58:37Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "A Durability and Cross-Language Transfer Benchmark for a Validated Teaching-Feedback Classification Protocol",
+      "url": "https://arxiv.org/abs/2607.11873v1",
+      "summary": "Institutions collect far more open-ended teaching-evaluation feedback than they read. A prior study introduced a validated protocol for classifying such comments by thematic category and sentiment, built from a documented annotation guide, an intra-annotator reliability measurement, stratified cross-validation, and a held-out evaluation on a Spanish institutional corpus with a frozen-encoder design. Two questions limit its reuse: whether a protocol fixed to 2019-era frozen embeddings stays competitive as representation methods advance, and whether it transfers to a second language. We re-run i",
+      "published": "2026-07-13T17:56:05Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Inside the Unfair Judge: A Mechanistic Interpretability Account of LLM-as-Judge Bias",
+      "url": "https://arxiv.org/abs/2607.11871v1",
+      "summary": "Existing studies of LLM-as-judge scoring bias work predominantly at the input-output level: they perturb inputs, measure score deltas, and propose prompt-level mitigations. We argue that the same biases admit a representation-level account in the judge's hidden state, complementary to the input-output view and operationally useful in ways it does not afford. We report three findings, across seven judges, seven bias types, and nine benchmarks. Geometry: baseline judging inputs occupy a tight activation manifold while biased inputs are displaced along a low-dimensional, type-specific subspace th",
+      "published": "2026-07-13T17:55:19Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "AdvancedMathBench: A Benchmark Suite for Advanced Mathematical Proof Generation and Verification",
+      "url": "https://arxiv.org/abs/2607.11849v1",
+      "summary": "Large language models (LLMs) have achieved remarkable performance on high-school and olympiad-style mathematics, yet their capabilities on advanced mathematics remain poorly understood. Existing benchmarks, however, fall short in both scope and evaluation granularity: they provide limited disciplinary coverage and often rely on final-answer correctness or coarse judgments, leaving the validity of the reasoning process inadequately assessed. To bridge this gap, we introduce AdvancedMathBench, a benchmark suite designed to evaluate advanced mathematical reasoning capabilities. Its core proof-gen",
+      "published": "2026-07-13T17:38:22Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Introducing Human-Centeredness in AI-Assisted Lexicography",
+      "url": "https://arxiv.org/abs/2607.11808v1",
+      "summary": "This paper proposes a human-centered artificial intelligence (HCAI) framework for AI-assisted lexicography. While generative AI offers significant opportunities to enhance lexicographic work, it also raises concerns regarding the future role of lexicographers and the preservation of linguistic and cultural diversity. Drawing on HCAI principles and previous applications in other language professions, the paper identifies four interrelated dimensions through which AI integration in lexicography can be understood and critically examined: the augmented lexicographer, the sociotechnical context of",
+      "published": "2026-07-13T17:00:39Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Forgetting Our Way to Shared Meaning: Effects of Forgetting on Conceptual Alignment in a Non-Partnership Coordination Game",
+      "url": "https://arxiv.org/abs/2607.11787v1",
+      "summary": "Shared meaning in language requires people to learn and agree on categories. We ask how characteristics of agents' memories change the emergence and evolution of shared meaning. Without a coordination game, models of conceptual semantics cannot explain how shared meaning emerges and changes in groups of people; however, existing games assume that players share payoffs in a partnership setting. We model conceptual alignment as a non-partnership game and illustrate differences in actual and perceived conceptual convergence from counterfactual simulations using agents with varying levels of adapt",
+      "published": "2026-07-13T16:37:17Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "How Temperature Shapes Ideological Discourse in Retrieval-Augmented Generation?",
+      "url": "https://arxiv.org/abs/2607.11783v1",
+      "summary": "Retrieval-Augmented Generation (RAG) has been increasingly adopted to reduce hallucinations and strengthen the factual grounding of large language models (LLMs). While robustness to errors in the retrieval process has been explored, the impact of ideological bias on LLM outputs has been overlooked. For instance, if the retrieved material contains ideological positions, the RAG may transmit, amplify, or suppress such ideological discourses in its outputs. In this study, we address this issue by examining the influence of the RAG framework, comprising ideological discourses, in LLM-generated ans",
+      "published": "2026-07-13T16:36:59Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "From Expressivity to Sample Complexity: Narrow Teachers for Transformers via C-RASP",
+      "url": "https://arxiv.org/abs/2607.11760v1",
+      "summary": "A theoretical understanding of Transformers is crucial to better understand the capacities and limitations of large language models (LLMs). There is much work analyzing the expressivity of attention-based models. By proposing handcrafted weights or using computational complexity arguments, a large amount of past theoretical works have sought to characterize which tasks are and which are not in the hypothesis class of Transformer models. However, little work investigates the learnability of such solutions. In this work, we make progress towards this goal. Inspired by recent loss landscape analy",
+      "published": "2026-07-13T16:22:36Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "MET: Theory-Grounded and Culture-Aware Multilingual Moral Reasoning",
+      "url": "https://arxiv.org/abs/2607.11736v1",
+      "summary": "Language models are increasingly used for moral decision-making across diverse linguistic and cultural contexts, yet existing work overlooks multilinguality on three aspects: 1) multilingual evaluation benchmarks use direct translation, failing to adapt culture-specific items; 2) inference-time methods for moral reasoning rely on static, English-centric scaffolds and lack grounding in moral theory; 3) training methods for moral decision-making typically require expensive supervision from stronger models or human annotators. We address these gaps with three contributions. First, we introduce MC",
+      "published": "2026-07-13T15:59:25Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "STEP: Career-Path Recommendation via Temporal and Educational Trajectory Modeling",
+      "url": "https://arxiv.org/abs/2607.11722v1",
+      "summary": "Career paths encode decades of skill acquisition, role transitions, and educational investment, and understanding them at scale underpins workforce planning, labor market policy, and job recommendation. Resumes are a rich source of information about career paths: they contain detailed descriptions of work experience, education, and skills. Yet their unstructured, heterogeneous, and multilingual nature has long prevented large-scale systematic analysis. With the advent of large language models (LLMs), it is now possible to source rich career trajectory data containing temporal and educational s",
+      "published": "2026-07-13T15:48:01Z",
+      "category": "cs.CL"
+    }
+  ]
+}
