@@ -1,0 +1,48 @@
+{
+  "date": "2026-07-17",
+  "news": [
+    {
+      "title": "NotebookLM, Gemini Notebook으로 리브랜딩",
+      "summary": "Google이 NotebookLM을 Gemini Notebook으로 이름을 바꾸고 Gemini 생태계에 통합했다. 보안 클라우드 환경에서 코드를 직접 실행하는 기능이 추가됐고 Gemini 앱과 Google Search에서도 접근할 수 있게 됐다. 2023년 Project Tailwind로 출시된 이후 3천만 명 이상이 사용해온 제품의 확장판이다.",
+      "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/"
+    },
+    {
+      "title": "독일 AI 컨소시엄, 완전 개방형 모델 Soofi S 30B 공개",
+      "summary": "KI Bundesverband 주도로 프라운호퍼, DFKI, 뮌헨공대 등이 참여한 독일 컨소시엄이 개방형 언어모델 Soofi S 30B-A3B를 공개했다. 총 300억 개 매개변수 중 약 30억 개만 활성화하는 MoE 구조로, 영어·독일어 벤치마크에서 OLMo 3 32B, Apertus 70B 등 기존 완전 개방형 모델들을 능가했다. 가중치와 학습 코드뿐 아니라 학습 데이터의 약 99%를 재구성 가능한 상세 데이터 인벤토리까지 함께 공개했다.",
+      "url": "https://the-decoder.com/german-ai-consortium-releases-soofi-s-an-open-30b-model-that-tops-benchmarks-in-both-english-and-german/"
+    },
+    {
+      "title": "LM Studio, 오픈 모델 기반 AI 에이전트 'Bionic' 공개",
+      "summary": "LM Studio가 오픈소스 모델을 활용하는 AI 에이전트 Bionic을 발표했다. 코딩, 문서·스프레드시트 작업, 음성 입력 등을 지원하며 로컬 실행과 'Zero Data Retention'을 내세운 클라우드 실행 중 선택할 수 있다. GLM 5.2, Kimi K2.7 Code 등 최신 오픈 모델을 기반으로 로컬 우선 워크플로우를 지향한다.",
+      "url": "https://lmstudio.ai/blog/introducing-lm-studio-bionic"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.211 릴리스",
+      "content": "subagent 텍스트/thinking을 stream-json에 포함하는 플래그가 추가됐고, 권한 미리보기 위조 방지·세션 로그아웃 및 MCP 재연결 등 다수 버그가 수정됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.211",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic Python SDK v0.117.0 릴리스",
+      "content": "dreaming 및 MCP Tunnels API 지원이 추가됐고, 자격증명이 traceback에 노출되지 않도록 하는 보안 수정이 포함됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.117.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic TypeScript SDK v0.112.0 릴리스",
+      "content": "MCP Tunnels API 지원이 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.0",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
