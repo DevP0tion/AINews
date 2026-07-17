@@ -1,0 +1,38 @@
+{
+  "date": "2026-07-18",
+  "news": [
+    {
+      "title": "$100 뮤직비디오 제작 대결: Claude Fable 5 vs GPT-5.6 Sol",
+      "summary": "두 프론티어 모델에게 웹 검색, 영상 생성 API, ffmpeg 등 동일한 툴셋을 주고 'Uptown Funk' 뮤직비디오를 자율 제작하도록 한 실험이다. Claude Fable 5는 토큰 비용이 GPT-5.6 Sol보다 훨씬 높았지만($17~25 대 $3~4) $100 예산 결과물은 근소하게 더 선호됐고, 두 모델 모두 캐릭터 일관성 유지와 결과물 자체 검토에서는 한계를 보였다.",
+      "url": "https://www.tryai.dev/blog/ai-music-video-arena-claude-vs-gpt-5.6"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.212 릴리즈",
+      "content": "/fork가 별도 백그라운드 세션으로 전환되고 WebSearch·서브에이전트 호출에 세션당 한도가 추가되는 등 폭주 방지 기능이 강화됐다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.212",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic Python SDK v0.117.0",
+      "content": "dreaming 및 MCP Tunnels 기능 지원이 추가되고 자격 증명이 트레이스백에 노출되지 않도록 보안이 개선됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.117.0",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic TypeScript SDK v0.112.0",
+      "content": "MCP Tunnels 기능 지원이 추가됐다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.0",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 0
+  }
+}
