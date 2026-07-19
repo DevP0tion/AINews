@@ -1,0 +1,383 @@
+{
+  "date": "2026-07-20",
+  "collected_at": "2026-07-19T22:56:00Z",
+  "anthropic_news": [],
+  "claude_release_notes_md": "",
+  "github_releases": {
+    "claude_code": [
+      {
+        "title": "v2.1.215",
+        "tag": "v2.1.215",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.215",
+        "body": "## What's changed\n\n- Claude no longer runs the `/verify` and `/code-review` skills on its own; invoke them with `/verify` or `/code-review` when you want them\n",
+        "published": "2026-07-19T02:56:01Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.214",
+        "tag": "v2.1.214",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.214",
+        "body": "## What's changed\n\n- Fixed single-segment `dir/**` allow rules like `Edit(src/**)` auto-approving writes to nested `dir/` directories anywhere in the tree instead of only `<cwd>/dir`\n- Fixed a permission-check bypass affecting commands run in Windows PowerShell 5.1 sessions\n- Fixed Bash permission checks to fail closed on file-descriptor redirect forms that bash parses differently than the permission analyzer\n- Fixed Bash permission checks misjudging very long commands — commands over 10,000 characters now always prompt instead of running automatically\n- Fixed Bash permission checks treating zsh variable subscripts and modifiers in `[[ ]]` comparisons as inert text — these commands now prompt for approval\n- Fixed Bash permission checks to no longer auto-approve certain `help` and `man` commands that could run unsafe options, command substitutions, or backslash paths\n- Fixed permission prompts on remote sessions that could proceed before the local confirmation dialog\n- Added the EndConversation tool: Claude can end sessions with highly abusive users or jailbreak attempts, as on claude.ai since 2025 — see https://www.anthropic.com/research/end-subset-conversations\n- Added a periodic progress heartbeat for long-running tool calls that previously went silent\n- Added an ISO `modified` timestamp to memory file frontmatter\n- Added `message.uuid`, `client_request_id`, and `tool_source` attributes to OpenTelemetry log events for message-level correlation and tool provenance\n- Added `CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH` to configure the 60 KB truncation limit on OpenTelemetry content attributes\n- Added reasoning effort to the `subagentStatusLine` payload, so custom agent rows can render model and effort\n- Added permission prompts for `docker` commands (including the Podman `docker` shim) carrying daemon-redirect flags (`--url`, `--connection`, `--identity`, and Podman's remote mode) that previously ran without one\n- Fixed a crash when a GrowthBook feature evaluates to null, a",
+        "published": "2026-07-18T01:20:30Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.212",
+        "tag": "v2.1.212",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.212",
+        "body": "## What's changed\n\n- `/fork` now copies your conversation into a new background session (its own row in `claude agents`) while you keep working; the in-session subagent it used to launch is now `/subtask`\n- Added `claude auto-mode reset` to restore the default auto-mode configuration, with a confirmation prompt (pass `--yes` to skip)\n- Added a session-wide limit on WebSearch tool calls (default 200, tunable via `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION`) to stop runaway search loops\n- Added a per-session cap on subagent spawns (default 200, override with `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION`) to stop runaway delegation loops; `/clear` resets the budget\n- MCP tool calls running longer than 2 minutes now move to the background automatically so the session stays usable; configure the threshold or disable with `CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS`\n- Typing `/resume` in the agent view now opens a picker of past sessions — including sessions deleted from the list — and resumes your pick as a background session\n- Fixed plan mode auto-running file-modifying Bash commands (e.g. `touch`, `rm`) without a permission prompt or SDK `canUseTool` callback\n- Fixed worktree creation following a repository-committed symlink at `.claude/worktrees`, which could create files outside the repository\n- Fixed a `continue:false` hook's halt being dropped when the tool fails or completes mid-stream, and hook infrastructure errors being misreported as user rejections\n- Fixed SIGTERM during a running Bash tool orphaning the command's process tree in print/SDK mode; the CLI now aborts the turn, kills the tree, and exits 143\n- Fixed `/background` and `claude --bg` failing with \"EUNKNOWN: unknown error, uv_spawn\" on Windows when Group Policy blocks PowerShell 5.1; the daemon now prefers PowerShell 7\n- Fixed shell mode (`!`) not executing commands containing file paths while the path autocomplete popup was open\n- Fixed auto-mode denial notifications rendering broken characters when a long denial re",
+        "published": "2026-07-17T00:26:27Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.211",
+        "tag": "v2.1.211",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.211",
+        "body": "## What's changed\n\n- Added `--forward-subagent-text` flag and `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` environment variable to include subagent text and thinking in stream-json output\n- Fixed permission previews relayed to chat channels not neutralizing bidirectional-override, zero-width, and look-alike quote characters, so tool inputs cannot visually alter the approval message\n- Fixed auto mode overriding a PreToolUse hook's `ask` decision for unsandboxed Bash — a hook `ask` now floors the decision at a prompt\n- Fixed parallel Claude Code sessions all logging out simultaneously after wake-from-sleep when many sessions share one credential store\n- Fixed plugin MCP servers not reconnecting after an idle web session woke, leaving MCP calls failing until the next message\n- Fixed Claude Code on Vertex and Bedrock attempting the default Opus model at startup and printing a spurious fallback notice when a model is explicitly configured\n- Fixed subagents spawned with an explicit model override reverting to the parent's model when resumed or sent a follow-up message\n- Fixed nested `.claude/rules/*.md` files loading even when setting sources exclude project settings\n- Fixed file upload validation: filenames ending in a DOS device suffix (`.prn`) or trailing dot are now accepted, and files with multiple hard links are refused\n- Fixed file uploads to Claude in Chrome from remote and CLI sessions\n- Fixed edits that leave the input as \"?\" being silently swallowed and toggling the shortcuts panel\n- Fixed a startup hang when the Claude in Chrome extension is enabled but Chrome is not running\n- Fixed a 300ms delay revealing async content (Settings tabs, Stats, diff views, and other loading states)\n- Fixed reopening a just-stopped background session from the agents view starting a blank conversation under the same session id\n- Fixed `/loop` hiding the session from `/resume` after a single use\n- Fixed screen reader users losing the audible terminal bell after `/terminal-setup` or onboardi",
+        "published": "2026-07-15T23:02:35Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.210",
+        "tag": "v2.1.210",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.210",
+        "body": "## What's changed\n\n- Added a live elapsed-time counter to the collapsed tool summary line so long-running tool calls visibly tick instead of looking stuck\n- Added a startup warning for `Write(path)`, `NotebookEdit(path)`, and `Glob(path)` permission rules — use `Edit(path)` or `Read(path)` instead\n- Fixed `isolation: 'worktree'` subagents being able to run git-mutating commands against the main repo checkout instead of their own isolated worktree\n- Fixed the `ultracode` keyword opt-in firing on non-human-originated input such as webhook payloads and relayed PR comments\n- Fixed a rendered text fragment leaking into crash telemetry when a UI component returned content outside a styled text element\n- Fixed paste markers leaking into external editors opened from Claude Code, which could appear as stray È/É characters around pasted text\n- Fixed `claude attach` sometimes failing with \"job not found\" or \"agent is still starting\" errors during session transitions — attach now waits for the daemon to settle, and terminal resizes during a slow attach are applied once it completes\n- Fixed a session crash when a tool's result renderer returned a numeric bigint value or plain text instead of a UI element\n- Fixed a hook callback timeout being misreported to the model as a user rejection, which made unattended sessions stop and wait\n- Fixed Claude assuming a `cd` took effect after its command was moved to the background; the tool result now states the working directory is unchanged\n- Fixed plugin-provided MCP servers being torn down when MCP servers are re-synced mid-session\n- Fixed plan approvals without edits being labeled \"(edited by user)\" and overwriting the plan file with a stale snapshot\n- Fixed `/doctor` skipping its auto-mode-default proposal on Bedrock, Vertex, and Foundry, where auto mode no longer needs an opt-in\n- Fixed Grep content mode claiming \"No matches found\" when paginating past the end of results\n- Fixed unmatched `$1`/`$2` positional placeholders in skills an",
+        "published": "2026-07-14T23:45:25Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_python": [
+      {
+        "title": "v0.117.0",
+        "tag": "v0.117.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.117.0",
+        "body": "## 0.117.0 (2026-07-16)\n\nFull Changelog: [v0.116.0...v0.117.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.116.0...v0.117.0)\n\n### Features\n\n* **api:** add support for dreaming ([642eee7](https://github.com/anthropics/anthropic-sdk-python/commit/642eee707b0fe3c35c21917f60b06846b2a3b291))\n* **api:** add support for MCP Tunnels ([d716df6](https://github.com/anthropics/anthropic-sdk-python/commit/d716df6edb1df7de25f1b5e14dcab33b9aafc2ff))\n\n\n### Bug Fixes\n\n* **credentials:** keep credential material out of traceback frame locals via SecretStr ([aa93a4d](https://github.com/anthropics/anthropic-sdk-python/commit/aa93a4dbf383f7fdab1404c136e86d4679d644c1))\n\n\n### Chores\n\n* **docs:** small updates to field descriptions ([75d8dcc](https://github.com/anthropics/anthropic-sdk-python/commit/75d8dcc0ac8cb381fa327a61a9ac84022b3a1677))\n* **docs:** update model example ([a57e30a](https://github.com/anthropics/anthropic-sdk-python/commit/a57e30ac1bafb54387bf631be2081bfdb3782911))\n* **docs:** updates to descriptions and examples ([e1535b6](https://github.com/anthropics/anthropic-sdk-python/commit/e1535b6919441448dddf00e2636cb8c60a721a43))",
+        "published": "2026-07-16T19:36:01Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.116.0",
+        "tag": "v0.116.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.116.0",
+        "body": "## 0.116.0 (2026-07-02)\n\nFull Changelog: [v0.115.1...v0.116.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.115.1...v0.116.0)\n\n### Features\n\n* **api:** add agent-memory-2026-07-22 beta header ([e181d5c](https://github.com/anthropics/anthropic-sdk-python/commit/e181d5c1b233d5b0b313c78b27cf1dd27f620e74))",
+        "published": "2026-07-02T19:07:55Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.115.1",
+        "tag": "v0.115.1",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.115.1",
+        "body": "## 0.115.1 (2026-07-01)\n\nFull Changelog: [v0.115.0...v0.115.1](https://github.com/anthropics/anthropic-sdk-python/compare/v0.115.0...v0.115.1)\n\n### Chores\n\n* **api:** remove some nonfunctional types from the SDKs ([5e7c431](https://github.com/anthropics/anthropic-sdk-python/commit/5e7c431ef31b72b3f1f59902e678316fea14d983))",
+        "published": "2026-07-01T21:54:06Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.115.0",
+        "tag": "v0.115.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.115.0",
+        "body": "## 0.115.0 (2026-06-30)\n\nFull Changelog: [v0.114.0...v0.115.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.114.0...v0.115.0)\n\n### Features\n\n* **api:** add support for Managed Agents event delta streaming, agent overrides, reverse pagination, vault credential injection scoping, and agent and deployment webhook events ([8c23f7e](https://github.com/anthropics/anthropic-sdk-python/commit/8c23f7ef103c287362364c12503de85eb31f07fb))",
+        "published": "2026-06-30T19:47:18Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.114.0",
+        "tag": "v0.114.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.114.0",
+        "body": "## 0.114.0 (2026-06-30)\n\nFull Changelog: [v0.113.0...v0.114.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.113.0...v0.114.0)\n\n### Features\n\n* **api:** add support for claude-sonnet-5 ([b893033](https://github.com/anthropics/anthropic-sdk-python/commit/b893033b32951e0e2e04afa36a3a7eb016ae4b99))\n\n\n### Bug Fixes\n\n* **agent_toolset:** allow absolute paths that resolve inside workdir ([#121](https://github.com/anthropics/anthropic-sdk-python/issues/121)) ([0105529](https://github.com/anthropics/anthropic-sdk-python/commit/0105529fe15b1f80bbf9c56f4ae684fdfa10e2b3))",
+        "published": "2026-06-30T17:48:39Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_typescript": [
+      {
+        "title": "sdk: v0.112.3",
+        "tag": "sdk-v0.112.3",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.3",
+        "body": "## 0.112.3 (2026-07-17)\n\nFull Changelog: [sdk-v0.112.2...sdk-v0.112.3](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.2...sdk-v0.112.3)\n\n### Chores\n\n* **docs:** small updates ([79fd6c7](https://github.com/anthropics/anthropic-sdk-typescript/commit/79fd6c7dd046e066965aa7ab9897695c174f88bb))",
+        "published": "2026-07-17T20:05:52Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.112.2",
+        "tag": "sdk-v0.112.2",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.2",
+        "body": "## 0.112.2 (2026-07-17)\n\nFull Changelog: [sdk-v0.112.1...sdk-v0.112.2](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.1...sdk-v0.112.2)\n\n### Chores\n\n* **client:** docs updates ([fdb3a65](https://github.com/anthropics/anthropic-sdk-typescript/commit/fdb3a65501a809b4e949131f2097dc0d84e01cc7))",
+        "published": "2026-07-17T16:36:12Z",
+        "prerelease": false
+      },
+      {
+        "title": "google-cloud-sdk: v0.0.6",
+        "tag": "google-cloud-sdk-v0.0.6",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/google-cloud-sdk-v0.0.6",
+        "body": "## 0.0.6 (2026-07-17)\n\nFull Changelog: [google-cloud-sdk-v0.0.5...google-cloud-sdk-v0.0.6](https://github.com/anthropics/anthropic-sdk-typescript/compare/google-cloud-sdk-v0.0.5...google-cloud-sdk-v0.0.6)\n\n### Bug Fixes\n\n* **google-cloud:** bump google-auth-library to ^10.2.0 ([#230](https://github.com/anthropics/anthropic-sdk-typescript/issues/230)) ([01e74ee](https://github.com/anthropics/anthropic-sdk-typescript/commit/01e74ee298c6f25376ba2b4ed986cd28fb6752cb))\n\n\n### Chores\n\n* **internal:** tidy changelog ([4d3022d](https://github.com/anthropics/anthropic-sdk-typescript/commit/4d3022d92c27dd35ecfb38e85fc5146f0280f0d4))\n* **internal:** version bump ([eb97e85](https://github.com/anthropics/anthropic-sdk-typescript/commit/eb97e8577279fb150582297d2a0924a297185c3c))",
+        "published": "2026-07-17T20:06:00Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.112.1",
+        "tag": "sdk-v0.112.1",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.1",
+        "body": "## 0.112.1 (2026-07-16)\n\nFull Changelog: [sdk-v0.112.0...sdk-v0.112.1](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.0...sdk-v0.112.1)",
+        "published": "2026-07-16T21:06:55Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.112.0",
+        "tag": "sdk-v0.112.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.0",
+        "body": "## 0.112.0 (2026-07-16)\n\nFull Changelog: [sdk-v0.111.0...sdk-v0.112.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.111.0...sdk-v0.112.0)\n\n### Features\n\n* **api:** add support for MCP Tunnels ([597ac41](https://github.com/anthropics/anthropic-sdk-typescript/commit/597ac4181f318e46fb974e716467648587e95362))",
+        "published": "2026-07-16T19:36:15Z",
+        "prerelease": false
+      }
+    ]
+  },
+  "hn_ai_stories": [
+    {
+      "title": "AI advice made people 3x less accurate but 2x confident, researchers found",
+      "url": "https://thenextweb.com/news/ai-advice-suppresses-critical-thinking-wrong-answers-study",
+      "score": 95,
+      "hn_url": "https://news.ycombinator.com/item?id=48971738",
+      "time": 1784495890
+    },
+    {
+      "title": "Claude Code uses Bun written in Rust now",
+      "url": "https://simonwillison.net/2026/Jul/19/claude-code-in-bun-in-rust/",
+      "score": 359,
+      "hn_url": "https://news.ycombinator.com/item?id=48966569",
+      "time": 1784455403
+    },
+    {
+      "title": "OpenAI reduces Codex Model Context Size from 372k to 272k",
+      "url": "https://github.com/openai/codex/pull/33972/files",
+      "score": 282,
+      "hn_url": "https://news.ycombinator.com/item?id=48965850",
+      "time": 1784447679
+    },
+    {
+      "title": "Moonshot AI suspends new subscriptions due to Kimi K3 demand",
+      "url": "https://twitter.com/kimi_moonshot/status/2078855608565207130",
+      "score": 170,
+      "hn_url": "https://news.ycombinator.com/item?id=48969291",
+      "time": 1784476945
+    },
+    {
+      "title": "NYC may require landlords and realtors to disclose the use of AI in listings",
+      "url": "https://petapixel.com/2026/07/16/mayor-mamdani-says-landlords-cant-secretly-use-ai-images-to-advertise-properties/",
+      "score": 560,
+      "hn_url": "https://news.ycombinator.com/item?id=48962983",
+      "time": 1784412819
+    },
+    {
+      "title": "Anthropic runs large-scale code migrations with Claude Code",
+      "url": "https://claude.com/blog/ai-code-migration",
+      "score": 23,
+      "hn_url": "https://news.ycombinator.com/item?id=48966044",
+      "time": 1784449875
+    },
+    {
+      "title": "What's the deal with all the random weekly quota resets for agents lately?",
+      "url": "https://minimaxir.com/2026/07/agent-quota-reset/",
+      "score": 75,
+      "hn_url": "https://news.ycombinator.com/item?id=48961157",
+      "time": 1784401583
+    },
+    {
+      "title": "GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
+      "url": "https://old.reddit.com/r/math/comments/1uxj3cy/after_openais_cdc_proof_announcement_gpt56_used_a/",
+      "score": 582,
+      "hn_url": "https://news.ycombinator.com/item?id=48957779",
+      "time": 1784379652
+    },
+    {
+      "title": "I argued with the father of open source for 2 years Now the AI fight is the same",
+      "url": "https://fortune.com/2026/07/03/open-source-ai-same-fight-as-software-fight-1980s-david-siegel-two-sigma/",
+      "score": 8,
+      "hn_url": "https://news.ycombinator.com/item?id=48970814",
+      "time": 1784487751
+    },
+    {
+      "title": "AI Mania Is Eviscerating Global Decision-Making",
+      "url": "https://ludic.mataroa.blog/blog/ai-mania-is-eviscerating-global-decision-making/#fnref:3",
+      "score": 375,
+      "hn_url": "https://news.ycombinator.com/item?id=48964185",
+      "time": 1784424559
+    },
+    {
+      "title": "Claude Code skill for searching royalty-free stock photos via the Pexels API",
+      "url": "https://github.com/amalshehu/pexels-skill",
+      "score": 8,
+      "hn_url": "https://news.ycombinator.com/item?id=48967807",
+      "time": 1784465711
+    },
+    {
+      "title": "What AI did to stackoverflow in a graph",
+      "url": "https://data.stackexchange.com/stackoverflow/query/1953768#graph",
+      "score": 440,
+      "hn_url": "https://news.ycombinator.com/item?id=48956949",
+      "time": 1784373166
+    },
+    {
+      "title": "Show HN: LoopGain – Stop agent loops with control theory, not max_iterations",
+      "url": "https://github.com/loopgain-ai/loopgain",
+      "score": 25,
+      "hn_url": "https://news.ycombinator.com/item?id=48919562",
+      "time": 1784117268
+    },
+    {
+      "title": "Setting up your spare Mac for Claude Code to control, a step-by-step guide",
+      "url": "https://ykdojo.github.io/claude-controls-mac/",
+      "score": 242,
+      "hn_url": "https://news.ycombinator.com/item?id=48959392",
+      "time": 1784391128
+    },
+    {
+      "title": "OpenAI is breaking Silicon Valley unwritten code. That's why Apple is so angry",
+      "url": "https://www.businessinsider.com/openai-breaking-silicon-valley-unspoken-rule-apple-talent-2026-7",
+      "score": 10,
+      "hn_url": "https://news.ycombinator.com/item?id=48969975",
+      "time": 1784481837
+    }
+  ],
+  "arxiv_recent": [
+    {
+      "title": "RoboTTT: Context Scaling for Robot Policies",
+      "url": "https://arxiv.org/abs/2607.15275v1",
+      "summary": "Recent robot foundation models operate with single-step or short-history visuomotor context. We introduce Test-Time-Training Robot Policies (RoboTTT), a robot model and training recipe that scale visuomotor context to 8K timesteps, three orders of magnitude beyond state-of-the-art policies, without growing inference latency. At this context length, we unlock new robot capabilities: one-shot in-context imitation from human video demonstrations, on-the-fly policy improvement, robustness to perturbations, and stronger performance on multi-stage, long-horizon tasks. We also observe, for the first",
+      "published": "2026-07-16T17:59:06Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "MeanFlowNFT: Bringing Forward-Process RL to Average-Velocity Generators",
+      "url": "https://arxiv.org/abs/2607.15273v1",
+      "summary": "MeanFlow generators achieve fast few-step sampling by predicting average velocities over time intervals, making them attractive for efficient generation. Reinforcement learning (RL) has become a powerful way to align diffusion and flow models with human preferences and task-specific objectives. In particular, DiffusionNFT offers an efficient forward-process RL framework that does not require reverse-process trajectories or likelihood estimation. However, applying such RL methods to MeanFlow remains underexplored. DiffusionNFT optimizes instantaneous velocities, whereas MeanFlow samples with av",
+      "published": "2026-07-16T17:59:02Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Online Neural Space Time Memory for Dynamic Novel View Synthesis",
+      "url": "https://arxiv.org/abs/2607.15271v1",
+      "summary": "Online novel view synthesis from multi-view streaming videos faces a fundamental trade-off: maintaining a persistent, long-horizon memory to reconstruct temporarily occluded regions while operating under strict real-time constraints. While Test-Time Training (TTT) offers a powerful memory mechanism, standard models mandate gradient-based memory updates at every frame to adapt to the changing motion in dynamic scenes. The computational cost of heavy memory updates precludes real-time application and can lead to instability over long contexts. Given that memory updates are more demanding than me",
+      "published": "2026-07-16T17:58:18Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Decoding Market Emotion from Blockchain Activity: A Data-Driven Sentiment Classifier",
+      "url": "https://arxiv.org/abs/2607.15258v1",
+      "summary": "The growing use of Bitcoin as a decentralized digital asset and investment tool has sparked strong interest in understanding its market behavior. This study presents a new approach to analyze Bitcoin market sentiment by combining on-chain and financial data with social media posts. Unlike models that aim to predict prices, this work focuses on explaining market sentiment using blockchain transactions, historical price data of Bitcoin, and daily Twitter sentiment classifications. The method merges sentiment trends with on-chain and financial metrics, normalized into a dataset for detailed marke",
+      "published": "2026-07-16T17:52:26Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Mutable Low-Rank Sketches for Retrain-Free Recommendation",
+      "url": "https://arxiv.org/abs/2607.15242v1",
+      "summary": "A common bottleneck in two-stage recommendation is embedding staleness: when a user rates a new item, their embedding remains fixed until the next retrain cycle. We propose mutable sketches, which store each user's preferences in a KP-tree (a sparse segment tree with sum aggregation), fit a low-rank projection once, and recompute embeddings on-the-fly as ratings arrive. We prove that each new observation monotonically tightens the prediction error envelope (Theorem 1), a guarantee that FunkSVD and eALS lack. On KuaiRec, the mutable sketch achieves 0.810 RMSE at 1.8% data read vs. ALS 0.822 at",
+      "published": "2026-07-16T17:39:38Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "In-Place Tokenizer Expansion for Pre-trained LLMs",
+      "url": "https://arxiv.org/abs/2607.15232v1",
+      "summary": "A tokenizer fixed at the start of pre-training allocates vocabulary in proportion to the pre-training corpus, reflecting the deployment priorities at that time. When those priorities shift, languages added later are split into many more tokens per word, which can raise latency, compute, and energy consumption for users of those languages. Cloud models can afford a broad vocabulary because the embedding and LM-head matrices are a small fraction of their parameters. On a compact model those matrices are a material share of per-token decode bandwidth, so on-device models ship small vocabularies a",
+      "published": "2026-07-16T17:32:38Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Data Driven Block Replacement Scheduling",
+      "url": "https://arxiv.org/abs/2607.15229v1",
+      "summary": "We develop data-driven algorithms for maintaining $N$ independent identical machines under a \\textit{block replacement policy}, in which each machine is replaced upon failure and all machines are jointly replaced at regular intervals of length $k$. The goal is to learn the cost-minimizing interval $k^*$ from operational data when the lifetime distribution is unknown. At each decision epoch, the operator selects $k \\in \\{1, 2, \\ldots, K\\}$, observes the resulting failure history (a mixture of complete and right-censored lifetimes) and incurs a per-unit-time cost governed by the renewal function",
+      "published": "2026-07-16T17:31:15Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "NeuronSoup: Evolving Asynchronous, Shared-Neuron Temporal Graphs without Backpropagation",
+      "url": "https://arxiv.org/abs/2607.15217v1",
+      "summary": "We present NeuronSoup, a neural computation architecture that replaces synchronous layer-by-layer processing with asynchronous, delay-mediated signal propagation through a pool of shared neurons. Each path in the network routes a continuous-valued signal from one input neuron to one output neuron through a variable number of intermediate hidden neurons. Hidden neurons are physically shared across paths: when two paths pass through the same neuron, the second arrival encounters the accumulated state left by the first, producing constructive or destructive interference that depends on signal pol",
+      "published": "2026-07-16T17:18:59Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Delocalization of bias in unadjusted Hamiltonian Monte Carlo and underdamped Langevin",
+      "url": "https://arxiv.org/abs/2607.15208v1",
+      "summary": "Unadjusted samplers such as unadjusted Hamiltonian Monte Carlo and underdamped Langevin are well-known to be biased. Metropolis--Hastings adjustment has been conventionally incorporated into Hamiltonian Monte Carlo to eliminate the bias. However, this adjustment can significantly increase the iteration complexity due to the small step size required for reasonable Metropolis acceptance rates. In this work, we extend the \\emph{delocalization of bias} phenomenon, previously established for the overdamped Langevin algorithm, to these two unadjusted algorithms. We show that to control the $W_2$ bia",
+      "published": "2026-07-16T17:07:42Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "BadWAM: When World-Action Models Dream Right but Act Wrong",
+      "url": "https://arxiv.org/abs/2607.15207v1",
+      "summary": "World-action models (WAMs) are emerging as a promising foundation for embodied control: rather than predicting actions alone, they learn representations that couple action generation with future world prediction. This coupling is often viewed as a source of robustness, interpretability, and safety, as a robot's action can in principle be checked against its imagined future. In this paper, we show that this assumption is fragile. We introduce BadWAM, a unified framework for modeling and evaluating World-Action Drift Attacks: a new class of WAM-specific adversarial attacks that use small visual",
+      "published": "2026-07-16T17:04:15Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Partition, Prompt, Aggregate: Statistical Self-Consistency in Language Models",
+      "url": "https://arxiv.org/abs/2607.15277v1",
+      "summary": "In-context learning is commonly interpreted as a form of conditional inference, in which the prompt specifies a context and the model's output is treated as an estimate of the corresponding conditional distribution. If this interpretation holds, then LLM estimates should satisfy basic probabilistic identities. In particular, the law of total probability asserts that prior-weighted conditional distributions aggregate into population-level marginals over any valid partition of the population. In this work, we investigate to what extent LLM estimates adhere to this self-consistency principle. We",
+      "published": "2026-07-16T17:59:31Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "SciDiagramEdit: Learning to Edit Scientific Diagrams from Paper Revisions",
+      "url": "https://arxiv.org/abs/2607.15272v1",
+      "summary": "Editing the figures in a research paper is a routine and time-consuming part of everyday research practice: authors relabel components, rearrange panels, and restyle visuals as they revise their manuscripts. Automating this editing workflow under a natural-language instruction, however, is challenging, because a scientific figure is a dense infographic in which heterogeneous visual elements such as schematics, plots, photos, captions, and arrows are composed under a tight visual grammar to advance a specific argument. To address this, we present SciDiagramEdit, a benchmark and skill-evolution",
+      "published": "2026-07-16T17:58:36Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Pretraining Data Can Be Poisoned through Computational Propaganda",
+      "url": "https://arxiv.org/abs/2607.15267v1",
+      "summary": "Poisoning pretraining data can introduce harmful behaviors to LMs that are difficult to detect and mitigate. Prior work on poisoning pretraining data has largely exploited established data sources such as Wikipedia, which do not represent the large scale and heterogeneity typical of pretraining corpora, and has ignored the interaction between poisoned data and data curation pipelines. We demonstrate that poisoning attacks on pretraining data are feasible beyond this limited setting through an existing web-scale content injection mechanism: public discussion interfaces. Additionally, to measure",
+      "published": "2026-07-16T17:56:05Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Bridge Evidence: Static Retrieval Utility Does Not Predict Causal Utility in Multi-Step Agentic Search",
+      "url": "https://arxiv.org/abs/2607.15253v1",
+      "summary": "Retrieval systems are trained and evaluated on a static idea of usefulness: hand a document and a question to a reader model, see whether the answer improves, and score the document accordingly. The idea holds up when a document is read on its own. It breaks when a language model works as a search agent, issuing several queries and reasoning across turns, because a document can matter for what it lets the agent do next rather than for what it says about the current question.   We measure that gap rather than argue it. Using a ReAct style agent over HotpotQA, we replay 1000 development question",
+      "published": "2026-07-16T17:48:29Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Beyond the Leaderboard: Design Lessons for Trustworthy Multimodal VQA",
+      "url": "https://arxiv.org/abs/2607.15241v1",
+      "summary": "Healthcare multimodal AI must combine visual and textual evidence while remaining reliable and interpretable. Using MediaEval Medico 2025 as a retrospective GI endoscopy case study, we analyze design choices across nine documented systems for question answering and explanation quality. Parameter-efficient adaptation of pretrained backbones provides strong challenge performance, but answer-level gains do not consistently translate into faithful and complete clinical reasoning. Methods enforcing structured reasoning and explicit grounding show more reliable behavior across heterogeneous question",
+      "published": "2026-07-16T17:38:19Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "TikStance: A Multimodal and Hierarchical Dataset for Multi-target Stance Analysis in TikTok Political Conversations",
+      "url": "https://arxiv.org/abs/2607.15240v1",
+      "summary": "Political discourse has increasingly moved to short-video platforms, yet computational analysis of such content remains constrained by the scarcity of datasets that jointly preserve audiovisual information and hierarchical conversations. Here we present TikStance, a multimodal and context-aware dataset comprising 161 videos and 13,876 comments from TikTok, designed for stance detection in political discussions. The dataset covers three major political figures in the 2024 U.S. election cycle--Donald Trump, Joe Biden, and Kamala Harris--with content collected between September 2023 and January 2",
+      "published": "2026-07-16T17:37:19Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Language Identification via Compositional Data Analysis: A Linear-Time Classifier Based on Log-Ratio Geometry",
+      "url": "https://arxiv.org/abs/2607.15238v1",
+      "summary": "Language identification is commonly addressed using either neural architectures or statistical n-gram models. Neural approaches typically require substantial computational resources, whereas classical frequency-based methods offer efficient linear-time performance, but rely on distance metrics that are not always appropriate for compositional data.   This work models character and bigram frequency distributions as compositional vectors constrained to the simplex and mapped via the centered log-ratio (CLR) transformation bijectively onto the $(D-1)$-dimensional zero-sum subspace of $\\mathbb{R}^",
+      "published": "2026-07-16T17:35:23Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "In-Place Tokenizer Expansion for Pre-trained LLMs",
+      "url": "https://arxiv.org/abs/2607.15232v1",
+      "summary": "A tokenizer fixed at the start of pre-training allocates vocabulary in proportion to the pre-training corpus, reflecting the deployment priorities at that time. When those priorities shift, languages added later are split into many more tokens per word, which can raise latency, compute, and energy consumption for users of those languages. Cloud models can afford a broad vocabulary because the embedding and LM-head matrices are a small fraction of their parameters. On a compact model those matrices are a material share of per-token decode bandwidth, so on-device models ship small vocabularies a",
+      "published": "2026-07-16T17:32:38Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Expanding the Lexicon of Ge'ez Based African Languages: A Comparative Study of Amharic and Tigrinya",
+      "url": "https://arxiv.org/abs/2607.15209v1",
+      "summary": "Multilingual pre-trained language models (PLMs) exhibit degraded performance on low-resource, non-Latin-script languages, driven by high out-of-vocabulary (OOV) rates and excessive subword fragmentation that result from Latin-script-centric tokenizer training. We introduce VEXMLM, a vocabulary-extended variant of XLM-R targeting the two highest-resource Ge'ez-script languages, Amharic and Tigrinya, and further evaluated on 17 additional low-resource African languages (19 total). We train a language-specific SentencePiece tokenizer on curated Amharic and Tigrinya monolingual corpora, extend XLM",
+      "published": "2026-07-16T17:08:28Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Mask-Aware Policy Gradients for Diffusion Language Models",
+      "url": "https://arxiv.org/abs/2607.15200v1",
+      "summary": "Reinforcement learning has proven effective for improving reasoning in large language models, but extending it to Masked Diffusion Language Models (MDLMs) remains challenging due to the intractability of the log-likelihood estimation. Existing approaches approximate this log-likelihood by modeling only the token predictions, ignoring the order in which positions are unmasked during generation. We observe that MDLM generation involves two decisions at each step: what tokens to place at each masked position and which positions to remask. We formalize this as a two-stage action MDP, showing that",
+      "published": "2026-07-16T16:57:34Z",
+      "category": "cs.CL"
+    }
+  ]
+}
