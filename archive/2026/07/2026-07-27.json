@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-27",
+  "news": [
+    {
+      "title": "Claude 5 세대 모델을 위한 새로운 컨텍스트 엔지니어링 원칙",
+      "summary": "Anthropic이 Claude Code 시스템 프롬프트에서 세부 규칙의 80% 이상을 제거했다고 밝히며, Claude 5 세대 모델은 명시적 지시보다 자체 판단력으로 올바른 결정을 내릴 수 있다고 설명했다. 과거처럼 상세한 규칙과 반복적 예시를 나열하기보다 도구 설계 개선, 점진적 정보 공개, 간결한 설명에 집중하는 방향으로 프롬프트 엔지니어링 관행이 바뀌고 있다. 개발자들에게는 과도한 제약을 걷어내고 인터페이스와 참고자료 품질에 집중할 것을 권장한다.",
+      "url": "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models"
+    },
+    {
+      "title": "$8짜리 마이크로컨트롤러에서 2,890만 파라미터 LLM 구동",
+      "summary": "한 개발자가 Google의 Per-Layer Embeddings 기법을 활용해 2,890만 파라미터 언어모델을 ESP32-S3 마이크로컨트롤러에서 실행하는 프로젝트를 공개했다. 대부분의 파라미터를 플래시 메모리에 저장하고 필요한 부분만 SRAM으로 불러오는 방식으로 512KB의 제한된 메모리에서도 동작하도록 설계했다. TinyStories 데이터셋으로 학습된 모델은 초당 약 9.5개 토큰 속도로 짧은 이야기를 생성할 수 있다.",
+      "url": "https://github.com/slvDev/esp32-ai"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.219 – Claude Opus 5 출시",
+      "content": "Claude Code가 1M 컨텍스트를 지원하는 새 기본 Opus 모델인 Claude Opus 5(fast mode 기준 $10/$50 per Mtok)를 추가했다.",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.219",
+      "special": true
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.120.0 – claude-opus-5 모델 추가",
+      "content": "Python SDK에 claude-opus-5 모델과 tool addition/removal 블록, tool_change 이벤트, 서버사이드 fallback 옵션이 추가되었다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.0",
+      "special": true
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.115.0 – claude-opus-5 모델 추가",
+      "content": "TypeScript SDK에도 동일하게 claude-opus-5 모델과 tool_change 이벤트, 서버사이드 fallback 옵션이 추가되었고 abort listener 누수 버그가 수정되었다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.115.0",
+      "special": true
+    }
+  ],
+  "specials": [
+    "Claude Code v2.1.219 – Claude Opus 5 출시",
+    "anthropic-sdk-python v0.120.0 – claude-opus-5 모델 추가",
+    "anthropic-sdk-typescript v0.115.0 – claude-opus-5 모델 추가"
+  ],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
