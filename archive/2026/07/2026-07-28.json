@@ -1,0 +1,16 @@
+{
+  "date": "2026-07-28",
+  "news": [
+    {
+      "title": "Skill Self-Play: Pushing the Frontier of LLM Capability with Co-Evolving Skills",
+      "summary": "새 논문은 LLM 자기진화 학습에서 환경 기반 방법(영역이 좁아짐)과 개방형 자동생성(검증 신뢰성 저하) 사이의 딜레마를 절충하기 위해 '에이전트 기술(agent skill)'을 매개로 한 방식을 제안한다. 제안자·해결자·동적 기술 제어기 세 요소가 강화학습 루프로 협력해 도전적 과제를 생성·해결하며 기술 라이브러리를 확장하는 구조다. 도구 사용 및 추론 벤치마크에서 성능 향상을 확인했다고 밝혔다.",
+      "url": "https://arxiv.org/abs/2607.22529v1"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 0
+  }
+}
