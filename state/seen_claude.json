@@ -40,6 +40,8 @@
     "SDK::anthropic-sdk-python v0.117.1",
     "SDK::anthropic-sdk-python v0.118.0",
     "SDK::anthropic-sdk-python v0.120.0 – claude-opus-5 모델 추가",
+    "SDK::anthropic-sdk-python v0.120.1",
+    "SDK::anthropic-sdk-python v0.120.2",
     "SDK::anthropic-sdk-python v0.97.0 — cma memory 퍼블릭 베타",
     "SDK::anthropic-sdk-python v0.98.0",
     "SDK::anthropic-sdk-python v0.99.0: oidc federation 워크스페이스 타겟팅 지원",

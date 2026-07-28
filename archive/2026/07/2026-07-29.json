@@ -1,0 +1,41 @@
+{
+  "date": "2026-07-29",
+  "news": [
+    {
+      "title": "OpenAI, 보안 취약점 스캔 도구 Codex Security 오픈소스 공개",
+      "summary": "OpenAI가 코드베이스의 보안 취약점을 찾아 검증하고 수정하는 CLI 도구 겸 TypeScript SDK인 Codex Security를 오픈소스로 공개했다. 저장소 스캔, 변경사항 리뷰, CI 파이프라인 통합 기능을 제공하며 Node.js 22+, Python 3.10+ 환경이 필요하다.",
+      "url": "https://github.com/openai/codex-security"
+    },
+    {
+      "title": "Anthropic, Claude가 HAWK-256과 AES 변형에서 새 암호 취약점 발견",
+      "summary": "Anthropic은 Claude가 자율 에이전트 방식으로 포스트퀀텀 서명 후보 HAWK의 격자 구조에서 알려지지 않은 대칭성을 찾아내 키 강도를 절반으로 낮추는 공격을 발견했고, 7라운드 AES 변형에 대한 공격 속도를 200~800배 높이는 기법도 개발했다고 밝혔다. HAWK 공격은 약 60시간, AES 공격은 약 30억 토큰 규모로 거의 완전 자율적으로 수행됐으며, 두 취약점 모두 실제 운영 시스템에는 영향을 주지 않는다.",
+      "url": "https://www.anthropic.com/research/discovering-cryptographic-weaknesses"
+    },
+    {
+      "title": "MCP 2026-07-28 스펙, 전송 계층을 stateless로 전환",
+      "summary": "Model Context Protocol(MCP)이 initialize/initialized 핸드셰이크와 세션 상태를 제거하고 완전한 요청-응답 stateless 모델로 전환하는 새 스펙을 발표했다. 헤더 기반 라우팅, 상태 없는 다중 왕복 요청(MRTR), 캐시 가능한 응답, OAuth 보안 강화 등이 포함되며 TypeScript·Python·Go·C#·Rust 주요 SDK가 이를 지원한다.",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.120.2",
+      "content": "MCP SDK v2를 v1과 함께 지원하도록 수정한 버그 수정 릴리스다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.2",
+      "special": false
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v0.120.1",
+      "content": "mcp extra 의존성 버전을 2 미만으로 고정한 긴급 버그 수정 릴리스다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.1",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
