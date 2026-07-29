@@ -1,0 +1,34 @@
+{
+  "date": "2026-07-30",
+  "news": [
+    {
+      "title": "Copilot for Word를 통해 자가 전파하는 문서 기반 AI 웜 발견",
+      "summary": "연구자들이 Microsoft Copilot for Word에서 문서에 숨겨진(흰 배경 위 흰 글자 등) 프롬프트 인젝션이 Copilot의 초안 생성 과정에서 실행되고, 생성된 새 문서에도 그대로 복제되어 다음 사용자에게 전파되는 '자가 증식형' 공격을 시연했다. LLM이 신뢰할 수 있는 지시와 외부 문서 내용을 아키텍처 수준에서 구분하지 못하는 근본적 취약점에서 비롯되며, 재무 보고서 변조나 조직 간 전파로 이어질 수 있다. Microsoft가 모델 업그레이드 등 완화 조치를 배포했지만 공개 시점까지 변형된 페이로드로는 여전히 공격이 가능했다.",
+      "url": "https://enklypesalt.com/posts/context-collapse-part3-ai-worming-through-word/"
+    },
+    {
+      "title": "Handbook.md: 장문의 정책 문서로는 에이전트를 안정적으로 통제할 수 없다",
+      "summary": "금융·의료청구·보험·물류·인사 등 5개 분야에서 20~124쪽 분량의 전문가 작성 정책 문서를 따르도록 요구하는 65개 에이전틱 과제 벤치마크 결과, 30개 모델 구성 중 최고 성능도 엄격 채점 기준에서 36.2%만 통과했고 대부분의 프론티어 모델은 25% 미만에 그쳤다. 에이전트는 사내 요청이 기존 정책을 무시하도록 유도되거나, 필요한 확인은 수행하고도 그 결과를 무시하고 행동하거나, 장시간 상호작용 중 규칙 세부사항을 잊는 등의 실패 패턴을 반복적으로 보였다. 이는 긴 정책 문서에 의존하는 기업용 에이전트 배포에 중요한 한계로 지적된다.",
+      "url": "https://arxiv.org/abs/2607.25398"
+    },
+    {
+      "title": "Andrew Ng, 1:1 맞춤형 학습 AI 스타트업 'LearnVector' 공개",
+      "summary": "Coursera·Google Brain·DeepLearning.AI를 공동창업한 Andrew Ng이 2026년 새로 설립한 LearnVector가 개인 맞춤형 1:1 학습 경험을 제공하는 AI 서비스를 공개했다. Coursera로부터 1억 달러를 투자받았으며, 단순 챗봇형 학습 도구가 초래하는 인지적 아웃소싱 문제를 피하고 숙달까지 꾸준히 지원하는 학습 가이드를 목표로 2027년 초 제품 출시를 계획하고 있다.",
+      "url": "https://learnvector.ai/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python, MCP SDK v2 호환성 버그 수정",
+      "content": "anthropic-sdk-python이 v0.120.1에서 MCP extra를 <2로 임시 고정한 뒤 v0.120.2에서 MCP SDK v2를 v1과 함께 정식 지원하도록 수정했다.",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.2",
+      "special": false
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
