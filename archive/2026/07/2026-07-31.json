@@ -1,0 +1,26 @@
+{
+  "date": "2026-07-31",
+  "news": [
+    {
+      "title": "OpenAI, GPT-5.6 라인업 가격 대폭 인하 및 속도 개선",
+      "summary": "OpenAI가 GPT-5.6 Luna 가격을 80%, Terra 가격을 20% 인하하고 Sol 모델에는 기존보다 최대 2.5배 빠른 'Fast mode'를 추가했다. Sol 모델이 자체적으로 서빙용 커널 코드를 재작성해 서빙 비용을 20% 절감하는 등 효율화가 가격 인하의 배경이 됐다. 이는 코딩·지식노동·과학 분야에서 토큰당 성능을 높여 가격 대비 성능 경쟁을 심화시키는 행보로 풀이된다.",
+      "url": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/"
+    },
+    {
+      "title": "Google DeepMind, 전신 제어 가능한 'Gemini Robotics 2' 공개",
+      "summary": "Google DeepMind가 로봇의 손끝 조작뿐 아니라 걷기, 몸 굽히기 등 전신 동작을 함께 조율하는 'Gemini Robotics 2' 모델군을 발표했다. VLA 제어 모델, 다중 로봇 협업을 지원하는 추론 모델(ER 2), 인터넷 연결 없이 몇 시간 학습만으로 새 로봇에 적응하는 온디바이스 모델로 구성된다. 물체를 집어 선반 아래에 넣는 등 다단계 작업을 로봇이 스스로 계획하고 수행할 수 있다는 점이 특징이다.",
+      "url": "https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/"
+    },
+    {
+      "title": "GCC 운영위원회, LLM 생성 코드 기여 금지 정책 발표",
+      "summary": "GCC 스티어링 커미티가 저작권·라이선스 리스크를 이유로 약 15줄 이상 '법적으로 중요한' 기여물에 LLM이 생성하거나 파생한 코드·텍스트를 포함하는 것을 금지하기로 했다. 다만 연구, 버그 발견, 패치 리뷰 등 보조적 용도의 LLM 활용은 허용되며, LLM이 생성한 테스트 케이스는 유지보수자 판단에 따라 수용될 수 있다. 위원회는 정책을 계속 재검토할 계획이라고 밝혔다.",
+      "url": "https://lwn.net/Articles/1086041/"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
