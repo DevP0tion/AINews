@@ -1,0 +1,21 @@
+{
+  "date": "2026-08-01",
+  "news": [
+    {
+      "title": "MixFrag: ViT를 위한 취약도 기반 혼합 정밀도 양자화",
+      "summary": "기존 post-training quantization은 Vision Transformer의 모든 구성 요소에 동일한 비트폭을 적용해 비효율적이었다. MixFrag는 KL divergence로 계층별 양자화 취약도(fragility)를 측정하고 이를 다중선택 배낭 문제로 공식화해 비트를 적응적으로 할당하며, COCO 객체 탐지·분할에서 기존 방법 대비 최대 9.6 AP 향상을 보였다.",
+      "url": "https://arxiv.org/abs/2607.28589v1"
+    },
+    {
+      "title": "\"우리는 LLM 라우터를 폐기했다\" — Manifest의 교훈",
+      "summary": "Manifest는 비용 절감을 위해 요청 복잡도에 따라 모델을 자동 선택하는 LLM 라우터를 운영했으나, 4개월간 7천 명의 사용 데이터를 분석한 뒤 폐기했다. 프롬프트만으로는 도구 호출 등 후속 작업의 복잡도를 예측할 수 없고, 캐시 히트가 라우팅보다 훨씬 저렴하며 모델 전환이 동작 일관성을 해친다는 점을 이유로 들며, 단일 모델 고정과 엔지니어의 직접 선택이 더 효과적이라는 결론을 내렸다.",
+      "url": "https://manifest.build/blog/why-we-deprecated-our-llm-router/"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
