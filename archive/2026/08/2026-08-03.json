@@ -1,0 +1,16 @@
+{
+  "date": "2026-08-03",
+  "news": [
+    {
+      "title": "EU AI Act, 범용 AI 모델 규제 본격 시행",
+      "summary": "2026년 8월 2일부로 EU AI Act의 대형 언어모델·범용 AI 모델 관련 규정이 시행에 들어갔다. 기업은 모델 개발 과정의 투명성 확보, 저작권 보호 학습데이터 공개, 다운스트림 사용자를 위한 충분한 정보 제공 의무를 지게 되며, 최상위 '프론티어' 모델 개발사는 사회적 리스크를 식별·완화해야 한다. 이로 인해 신규 AI 모델의 EU 출시가 다른 시장보다 수 주 지연될 수 있다.",
+      "url": "https://www.euronews.com/my-europe/2026/08/02/eu-rules-on-ai-models-become-enforceable-whats-going-to-change"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 0
+  }
+}
