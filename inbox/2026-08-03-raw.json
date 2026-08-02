@@ -1,0 +1,355 @@
+{
+  "date": "2026-08-03",
+  "collected_at": "2026-08-02T22:58:20Z",
+  "anthropic_news": [],
+  "claude_release_notes_md": "",
+  "github_releases": {
+    "claude_code": [
+      {
+        "title": "v2.1.220",
+        "tag": "v2.1.220",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.220",
+        "body": "## What's changed\n\n- Bug fixes and reliability improvements\n",
+        "published": "2026-07-25T01:35:55Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.219",
+        "tag": "v2.1.219",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.219",
+        "body": "## What's changed\n\n- Added Claude Opus 5 (`claude-opus-5`), now the default Opus model — 1M context, fast mode at $10/$50 per Mtok\n- Added `sandbox.network.strictAllowlist` setting to deny non-allowlisted hosts for sandboxed commands without prompting\n- Added `DirectoryAdded` hook that fires after `/add-dir` or the SDK `register_repo_root` control request registers a new working directory mid-session\n- Added `mcp_server_errors` to the headless stream-json init event, listing `--mcp-config` entries skipped by config validation; terminal runs print a startup warning\n- Added the `workflowSizeGuideline` settings key so the advisory Dynamic workflow size guideline can be set from any settings file; the `/config` row is hidden while one does\n- Added nested subagent forwarding in stream-json: subagents spawned at depth-2+ now appear when `--forward-subagent-text` is set, keyed by their spawning Agent `tool_use` id\n- Fixed `claude -p` text output dropping the answer already produced when a turn dies on a mid-stream API error\n- Added HTTP status and error text to `claude mcp list` and `/mcp` when a server fails to connect, and a warning for MCP config values with hidden leading or trailing whitespace\n- Fixed a permission you approved while a self-hosted runner was restarting being dropped when the session resumed, so the approved action now runs\n- Fixed the Fable model row showing \"Requires usage credits\" for plans that include it, when a stale cache had baked the label in\n- Fixed a SIGTERM arriving while a self-hosted runner was starting up leaving a stale active row until the lease expired; it now deregisters cleanly\n- Added structured failure categories to self-hosted runner spawn and session failures, so hook errors, runner crashes and config errors can be told apart\n- Fixed the `/model` picker showing the merged Opus row as plain \"Opus\" instead of \"Opus (1M context)\"\n- Fixed copy-on-select inside GNU screen printing base64 into the terminal instead of copying the select",
+        "published": "2026-07-24T17:14:23Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.218",
+        "tag": "v2.1.218",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.218",
+        "body": "## What's changed\n\n- Changed `/code-review` to run as a background subagent, so review work no longer fills your conversation and keeps stacked slash commands as its review target\n- Added screen-reader announcements of deleted text for word and line deletions (`Option+Delete`, `Ctrl+W`, `Cmd+Backspace`, `Ctrl+U`, `Ctrl+K`) in `--ax-screen-reader` mode\n- Fixed Windows paths with `\\u`-prefixed segments (like `C:\\Users\\unicorn`) being corrupted into CJK characters in tool inputs, which made those files inaccessible\n- Fixed the left arrow key discarding the conversation with no undo: presses right after editing now ask to confirm, and Esc in the agent view returns to the conversation it backgrounded\n- Added HTTP status and error text to `claude mcp list` and `/mcp` when a server fails to connect, and a warning for MCP config values with hidden leading or trailing whitespace\n- Fixed multi-line paste collapsing into one line with `j` in place of newlines in terminals that encode pasted newlines as Ctrl+J\n- Fixed `/context` reporting stale pre-compact token usage after compacting from the message picker\n- Fixed `/ultrareview` failing on descriptive arguments like \"review my auth changes\" — they now run a review of your current branch with the text applied as a note to the findings\n- Fixed `/code-review ultra` silently running a local review in non-interactive sessions — it now launches the cloud review\n- Fixed gateway spend metering to price Bedrock application-inference-profile ARNs and other config-mapped upstream model IDs at the configured model's rates\n- Fixed mojibake when a long IDE selection was truncated mid-emoji, and a case where a tool executor error could be silently dropped\n- Fixed an engine teardown race that could start and abandon a phantom turn, and made input pushed after close consistently rejected\n- Fixed spurious \"[Request interrupted by user]\" messages after interrupted tool calls, and an unpaired `tool_use` block left in the transcript when a tool a",
+        "published": "2026-07-22T21:24:56Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.217",
+        "tag": "v2.1.217",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.217",
+        "body": "## What's changed\n\n- Added emoji shortcode autocomplete in the prompt input: type `:heart:` to insert ❤️, or `:hea` for suggestions — disable with the `emojiCompletionEnabled` setting\n- Added warnings when transcript writes are failing (e.g. disk full) or when session saving is off due to an inherited environment variable, instead of losing transcripts silently\n- Fixed a memory leak where truncated MCP tool outputs kept the full untruncated result in memory for the rest of the session\n- Fixed Windows auto-update failures that could leave `claude.exe` missing; failed updates now restore the preserved executable automatically\n- Fixed background session isolation not canonicalizing symlinked working directories, which could let sessions escape their workspace folder\n- Fixed auto-compact never triggering for Claude Opus 4.8 on Bedrock and `/compact` failing once over the limit\n- Fixed corporate mTLS, TLS-verify, OAuth scope, and proxy settings being ignored in Claude Desktop sessions\n- Fixed screen reader mode's startup announcement being cut off by the first prompt render, and the thinking status row re-rendering every few seconds to update elapsed time and token counts\n- Fixed managed settings that set `OTEL_EXPORTER_OTLP_ENDPOINT` not governing all signals — lower-scope signal-specific overrides no longer redirect telemetry away from the managed endpoint\n- Fixed `--resume`/`--continue` and `/resume` failing with a TypeError when a transcript has a malformed attachment entry\n- Fixed Remote Control sessions not showing a pending permission prompt or dialog to viewers that connected after it appeared\n- Fixed background shells sometimes becoming impossible to stop after a session is sent to the background (`/background` or `←`) or when the session exits on a heavily loaded machine, most visible on Windows\n- Fixed a `CLAUDE.md` or `SKILL.md` paths frontmatter value with many brace groups OOM-killing or stalling the CLI at startup — brace expansion is now budget-bounded\n- ",
+        "published": "2026-07-21T21:35:10Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.216",
+        "tag": "v2.1.216",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.216",
+        "body": "## What's changed\n\n- Added `sandbox.filesystem.disabled` setting to skip filesystem isolation while keeping network egress control\n- Fixed a slowdown in long sessions where message normalization cost grew quadratically with the number of turns, causing multi-second stalls and slow resumes\n- Fixed auto mode denying commands with \"HTTP 401\" classifier errors after the OAuth token expired or rotated mid-session\n- Fixed AskUserQuestion telling Claude to continue even when your answer asked it to wait or explain first — free-text answers now get neutral wording\n- Fixed Claude Code on the web re-asking the same question and dropping your answer after the session sat idle for a few minutes\n- Fixed @-mentions silently attaching nothing after file-modifying hooks, vim dot-repeat of `c`-operators and paste, statusline running twice on resume, and resume-picker hangs on failure\n- Fixed resumed background agent sessions reverting to the default agent: the agent's prompt and tool restrictions are now restored\n- Fixed worktree-isolated subagents redirecting git into the shared checkout via `git -C`, `--git-dir`, or `GIT_DIR`/`GIT_WORK_TREE`\n- Fixed worktree sessions landing in another project's leftover worktree when the working directory did not match the selected project\n- Fixed background sessions whose worktree has no git repository being undeletable\n- Fixed `claude daemon stop --any` potentially terminating an unrelated process via a stale legacy daemon lockfile\n- Fixed Esc-Esc at an idle prompt not opening the rewind picker in long-running sessions with background tasks\n- Fixed Bash command permission checking for compound statements with redirects inside `&&` lists or negations\n- Fixed pressing Ctrl+X twice in the agent list failing to delete a session, and deleted sessions reappearing when their background worker had died\n- Fixed background subagents getting cancelled when a high-priority message arrives during their startup window\n- Fixed mouse and focus garbage in the t",
+        "published": "2026-07-20T22:14:00Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_python": [
+      {
+        "title": "v0.120.2",
+        "tag": "v0.120.2",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.2",
+        "body": "## 0.120.2 (2026-07-28)\n\nFull Changelog: [v0.120.1...v0.120.2](https://github.com/anthropics/anthropic-sdk-python/compare/v0.120.1...v0.120.2)\n\n### Bug Fixes\n\n* **mcp:** support mcp sdk v2 alongside v1 ([#300](https://github.com/anthropics/anthropic-sdk-python/issues/300)) ([177f88c](https://github.com/anthropics/anthropic-sdk-python/commit/177f88ccd7f966e47b654cb19ad0e9cfa4c58ac2))",
+        "published": "2026-07-28T17:38:09Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.120.1",
+        "tag": "v0.120.1",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.1",
+        "body": "## 0.120.1 (2026-07-28)\n\nFull Changelog: [v0.120.0...v0.120.1](https://github.com/anthropics/anthropic-sdk-python/compare/v0.120.0...v0.120.1)\n\n### Bug Fixes\n\n* **mcp:** pin mcp extra to &lt;2 ([#1783](https://github.com/anthropics/anthropic-sdk-python/issues/1783)) ([fb66371](https://github.com/anthropics/anthropic-sdk-python/commit/fb66371322621be23a0956f1998da39c4686f4cb))",
+        "published": "2026-07-28T16:37:33Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.120.0",
+        "tag": "v0.120.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.0",
+        "body": "## 0.120.0 (2026-07-24)\n\nFull Changelog: [v0.119.0...v0.120.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.119.0...v0.120.0)\n\n### Features\n\n* **api:** add claude-opus-5 model ([bf4e31c](https://github.com/anthropics/anthropic-sdk-python/commit/bf4e31c17c43ba2b409bec57e1856b025d159f1a))\n* **api:** add tool addition/removal blocks and tool_change events ([bf4e31c](https://github.com/anthropics/anthropic-sdk-python/commit/bf4e31c17c43ba2b409bec57e1856b025d159f1a))\n* **api:** expand client-side fallback credit token types and add server-side fallbacks default option ([bf4e31c](https://github.com/anthropics/anthropic-sdk-python/commit/bf4e31c17c43ba2b409bec57e1856b025d159f1a))",
+        "published": "2026-07-24T16:32:34Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.119.0",
+        "tag": "v0.119.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.119.0",
+        "body": "## 0.119.0 (2026-07-23)\n\nFull Changelog: [v0.118.0...v0.119.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.118.0...v0.119.0)\n\n### Features\n\n* **api:** add new stop reason 'model_context_window_exceeded' ([d983cde](https://github.com/anthropics/anthropic-sdk-python/commit/d983cdecdea27fb8ae36fd293930b978c9bebf4f))\n\n\n### Bug Fixes\n\n* **tools:** handle binary files in agent toolset read/edit ([#283](https://github.com/anthropics/anthropic-sdk-python/issues/283)) ([417b76b](https://github.com/anthropics/anthropic-sdk-python/commit/417b76b9adcb69ee9effa2e9af1536dd08e6764e))",
+        "published": "2026-07-23T17:34:23Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.118.0",
+        "tag": "v0.118.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.118.0",
+        "body": "## 0.118.0 (2026-07-22)\n\nFull Changelog: [v0.117.1...v0.118.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.117.1...v0.118.0)\n\n### Features\n\n* **api:** add support for Managed Agents model effort, initial session events, and threads delta streaming ([712bc6f](https://github.com/anthropics/anthropic-sdk-python/commit/712bc6f5e07ca7607e13f24fba4eea57c2e73478))",
+        "published": "2026-07-22T16:43:45Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_typescript": [
+      {
+        "title": "sdk: v0.115.0",
+        "tag": "sdk-v0.115.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.115.0",
+        "body": "## 0.115.0 (2026-07-24)\n\nFull Changelog: [sdk-v0.114.0...sdk-v0.115.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.114.0...sdk-v0.115.0)\n\n### Features\n\n* **api:** add claude-opus-5 model ([cdd3606](https://github.com/anthropics/anthropic-sdk-typescript/commit/cdd3606e92745b8a6af07819469cf5dc0636edb2))\n* **api:** add tool addition/removal blocks and tool_change events ([cdd3606](https://github.com/anthropics/anthropic-sdk-typescript/commit/cdd3606e92745b8a6af07819469cf5dc0636edb2))\n* **api:** expand client-side fallback credit token types and add server-side fallbacks default option ([cdd3606](https://github.com/anthropics/anthropic-sdk-typescript/commit/cdd3606e92745b8a6af07819469cf5dc0636edb2))\n\n\n### Bug Fixes\n\n* **client:** release abort listeners when requests settle ([#1129](https://github.com/anthropics/anthropic-sdk-typescript/issues/1129)) ([b85e902](https://github.com/anthropics/anthropic-sdk-typescript/commit/b85e902669c78a8293b5390e93e57dd2e3f6c545))",
+        "published": "2026-07-24T16:31:05Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.114.0",
+        "tag": "sdk-v0.114.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.114.0",
+        "body": "## 0.114.0 (2026-07-23)\n\nFull Changelog: [sdk-v0.113.0...sdk-v0.114.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.113.0...sdk-v0.114.0)\n\n### Features\n\n* **api:** add new stop reason 'model_context_window_exceeded' ([1ec71c1](https://github.com/anthropics/anthropic-sdk-typescript/commit/1ec71c165d9737cb317e3f8fed818f7a1b8169ad))",
+        "published": "2026-07-23T17:34:26Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.113.0",
+        "tag": "sdk-v0.113.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.113.0",
+        "body": "## 0.113.0 (2026-07-22)\n\nFull Changelog: [sdk-v0.112.5...sdk-v0.113.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.5...sdk-v0.113.0)\n\n### Features\n\n* **api:** add support for Managed Agents model effort, initial session events, and threads delta streaming ([83fef1e](https://github.com/anthropics/anthropic-sdk-typescript/commit/83fef1e5a65f020750b1f90c46d748a415b6f075))",
+        "published": "2026-07-22T16:44:33Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.112.5",
+        "tag": "sdk-v0.112.5",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.5",
+        "body": "## 0.112.5 (2026-07-21)\n\nFull Changelog: [sdk-v0.112.4...sdk-v0.112.5](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.4...sdk-v0.112.5)\n\n### Chores\n\n* **api:** add support for new refusal category ([479efe8](https://github.com/anthropics/anthropic-sdk-typescript/commit/479efe8ade0078966e28d754fa3085c75b6d2a58))\n* **internal:** codegen related update ([830fb74](https://github.com/anthropics/anthropic-sdk-typescript/commit/830fb7467c3cc947e31b5d83a2a31d34fc8ebac2))",
+        "published": "2026-07-21T22:27:16Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.112.4",
+        "tag": "sdk-v0.112.4",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.4",
+        "body": "## 0.112.4 (2026-07-20)\n\nFull Changelog: [sdk-v0.112.3...sdk-v0.112.4](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.3...sdk-v0.112.4)\n\n### Bug Fixes\n\n* **aws:** preserve AWS options and auth mode across withOptions() ([#214](https://github.com/anthropics/anthropic-sdk-typescript/issues/214)) ([3f7665c](https://github.com/anthropics/anthropic-sdk-typescript/commit/3f7665c5419eb80c489546a70da799648e7d5ff2))\n\n\n### Chores\n\n* **docs:** small updates ([97f68a8](https://github.com/anthropics/anthropic-sdk-typescript/commit/97f68a88e13ba11b1e903d2d7181da3e4edd5c10))",
+        "published": "2026-07-20T20:46:08Z",
+        "prerelease": false
+      }
+    ]
+  },
+  "hn_ai_stories": [
+    {
+      "title": "My personal AI benchmark: \"Generate an SVG of a frog with a Habsburg jaw.\"",
+      "url": "https://frogs.vaguespac.es/",
+      "score": 73,
+      "hn_url": "https://news.ycombinator.com/item?id=49147622",
+      "time": 1785699728
+    },
+    {
+      "title": "Show HN: MicroCodex Coding Agent – OpenAI/codex reimplemented in C++ <1MB binary",
+      "url": "https://github.com/paoloanzn/microcodex",
+      "score": 11,
+      "hn_url": "https://news.ycombinator.com/item?id=49147842",
+      "time": 1785701495
+    },
+    {
+      "title": "OpenAI’s amazing — but vastly oversold — new model Astra",
+      "url": "https://garymarcus.substack.com/p/openais-amazing-but-vastly-oversold",
+      "score": 7,
+      "hn_url": "https://news.ycombinator.com/item?id=49148959",
+      "time": 1785708810
+    },
+    {
+      "title": "Nanocodex: Building blocks for frontier OpenAI agents in Rust",
+      "url": "https://github.com/gakonst/nanocodex",
+      "score": 5,
+      "hn_url": "https://news.ycombinator.com/item?id=49146991",
+      "time": 1785695119
+    },
+    {
+      "title": "AI Mania: From Tulips to Tokens",
+      "url": "https://seanhelvey.com/tools-and-their-tools/",
+      "score": 46,
+      "hn_url": "https://news.ycombinator.com/item?id=49148159",
+      "time": 1785703708
+    },
+    {
+      "title": "KotlinLLM",
+      "url": "https://github.com/JetBrains-Research/kotlinllm-plugin",
+      "score": 7,
+      "hn_url": "https://news.ycombinator.com/item?id=49147170",
+      "time": 1785696330
+    },
+    {
+      "title": "Having fun with oh my pi, DeepSeek-V4-Flash, GPT-5.6 Luna and Antigravity CLI",
+      "url": "https://flashblaze.xyz/posts/having-fun-with-omp-deepseek-luna-and-agy/",
+      "score": 11,
+      "hn_url": "https://news.ycombinator.com/item?id=49145463",
+      "time": 1785684239
+    },
+    {
+      "title": "EU rules on AI models become enforceable. What's going to change?",
+      "url": "https://www.euronews.com/my-europe/2026/08/02/eu-rules-on-ai-models-become-enforceable-whats-going-to-change",
+      "score": 45,
+      "hn_url": "https://news.ycombinator.com/item?id=49147606",
+      "time": 1785699619
+    },
+    {
+      "title": "AI opens new era in cognitive studies of wild primates",
+      "url": "https://news.emory.edu/features/2026/07/ai-opens-new-era-cognitive-studies-wild-primates",
+      "score": 30,
+      "hn_url": "https://news.ycombinator.com/item?id=49139232",
+      "time": 1785624022
+    },
+    {
+      "title": "qm – Multiplayer agent harness for work",
+      "url": "https://github.com/yc-software/qm",
+      "score": 665,
+      "hn_url": "https://news.ycombinator.com/item?id=49126604",
+      "time": 1785521098
+    },
+    {
+      "title": "Is AI reasoning right for the wrong reasons?",
+      "url": "https://www.quantamagazine.org/is-ai-reasoning-right-for-the-wrong-reasons-20260731/",
+      "score": 213,
+      "hn_url": "https://news.ycombinator.com/item?id=49124358",
+      "time": 1785511779
+    }
+  ],
+  "arxiv_recent": [
+    {
+      "title": "Learning to Trace Seiberg Dualities",
+      "url": "https://arxiv.org/abs/2607.28628v1",
+      "summary": "Dualities play an important role in establishing both microscopic and emergent phenomena in a wide range of physical systems. In practice, though, it can often be computationally challenging to establish when two systems are dual, even when all of the \"rules of the game\" are well-known. Said differently, when confronted with two systems, how can one efficiently establish that they are in fact dual? In this paper we use machine learning methods to address this question for Seiberg dualities of supersymmetric quiver gauge theories. Mathematically, this involves establishing mutations of quivers,",
+      "published": "2026-07-30T17:59:56Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "ReToken: One Token to Improve Vision-Language Models for Visual Retrieval",
+      "url": "https://arxiv.org/abs/2607.28627v1",
+      "summary": "Long visual context poses a challenge for vision-language models: performance degrades as the number of distractors grows, and processing all tokens at once is computationally infeasible under GPU memory constraints. We present ReToken, a single learnable embedding trained as an explicit retrieval target that selects a sparse set of query-relevant visual tokens from a pre-filled visual KV cache. Trained on only a small image-QA dataset, ReToken yields consistent gains across image and video benchmarks: on Visual Haystacks it improves Qwen3VL-8B by 13.4 points and InternVL3.5 by 12.4 points (>2",
+      "published": "2026-07-30T17:59:56Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "AskChem: Claim-Centered Infrastructure for Chemistry Literature Synthesis",
+      "url": "https://arxiv.org/abs/2607.28618v1",
+      "summary": "Chemistry literature synthesis often requires assembling specific findings scattered across many publications, yet existing literature-search systems primarily return ranked document lists. As a result, scientists and AI agents need to locate relevant information, verify their provenance, and assemble cross-paper answers manually. We present AskChem, a claim-centered infrastructure for cross-paper chemistry search. AskChem changes the unit of retrieval from the paper to the provenance-carrying claim: each paper is converted into atomic, typed claims, each grounded by a source DOI and a verbati",
+      "published": "2026-07-30T17:59:11Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "KAISEN: Reproducible Subgroup Fairness Auditing for Clinical Risk Models",
+      "url": "https://arxiv.org/abs/2607.28608v1",
+      "summary": "Clinical risk models routinely achieve strong aggregate performance while producing materially different error rates across patient subgroups. Audit pipelines have been proposed to catch this, but their components are rarely stress-tested, so it is unclear which parts of an audit can be trusted and under what conditions. We present KAISEN, a five-phase audit pipeline covering subgroup stratification, disparity measurement, mechanism diagnostics, post-hoc mitigation, and drift monitoring, evaluated to the point of failure on a synthetic benchmark of 16 disease tasks, 15 social-determinant axes",
+      "published": "2026-07-30T17:57:18Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Change2Task: From Repository Changes to Executable Coding Agent Tasks and Environments",
+      "url": "https://arxiv.org/abs/2607.28591v1",
+      "summary": "Scaling coding agents requires a continuing supply of executable data for training, benchmarking, and continuous evaluation. Each task must couple a realistic software state with a specification, development tools, and reliable verification. To expand this supply, we present Change2Task, a system grounded in repository history that converts merged pull requests into verified tasks on healthy modern revisions of the same repository. It aligns historical evidence with evolved code, reconstructs task states through Patch Reversal, Code Mapping, or Agent Reconstruction, and validates the lifecycle",
+      "published": "2026-07-30T17:44:31Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "MixFrag: Fragility-Guided Mixed-Precision Post-Training Quantization for Vision Transformers",
+      "url": "https://arxiv.org/abs/2607.28589v1",
+      "summary": "Post-training quantization (PTQ) has emerged as an effective solution for deploying Vision Transformers (ViTs) on resource-constrained devices. However, existing PTQ methods typically employ uniform bit-widths across transformer components, overlooking their heterogeneous sensitivity to quantization and leading to inefficient precision allocation. In this paper, we propose {MixFrag, a fragility-guided mixed-precision PTQ framework for Vision Transformers. MixFrag first estimates component-level quantization fragility by measuring the Kullback--Leibler (KL) divergence between full-precision and",
+      "published": "2026-07-30T17:43:36Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "$β$-OPSD: Deriving with Policy Optimization, Training with Self-Distillation",
+      "url": "https://arxiv.org/abs/2607.28582v1",
+      "summary": "On-policy self-distillation (OPSD) is a promising approach to improve reasoning language models, but it remains brittle in practice: making it work reliably often requires substantial engineering effort. We identify a structural source of this difficulty: vanilla OPSD is precisely the $β=1$ member of a broader policy-optimization family, where $β$ weights the KL penalty anchoring the student to a reference policy. This equivalence turns $β$ from an implicit value fixed at one into a controllable regularization parameter, yielding a more general formulation that trades off proximity to a refere",
+      "published": "2026-07-30T17:41:16Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Sample More, Reflect Less: Self-Refine and Reflexion Lose to Repeated Sampling at Equal Token Cost, from 1.5B to 7B",
+      "url": "https://arxiv.org/abs/2607.28576v1",
+      "summary": "Methods that make a language model plan, criticise and rewrite its own answer, reflect on mistakes, pick the best of several attempts, or debate with copies of itself nearly all make it generate far more text than a single chain of thought. Because generating more text raises accuracy by itself, a gain over one chain of thought does not show the method's idea is what helped. Wang et al. (2024) reported that a simple baseline, sampling the same question repeatedly and keeping the most common answer, often wins once budgets are comparable, but gave point estimates with no confidence intervals or",
+      "published": "2026-07-30T17:38:23Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Doubly Robust Functional Representation Learning for Longitudinal Causal Inference with Irregular Histories",
+      "url": "https://arxiv.org/abs/2607.28567v1",
+      "summary": "Longitudinal causal studies often record histories as irregular functional fragments: laboratory values, physiologic signals, sensor streams, and image-derived summaries measured at unequal and informative times. Standard doubly robust estimators usually require scalar summaries, whereas sequence learners optimize prediction losses that need not stabilize the efficient influence function. We propose Doubly Robust Functional Representation Learning (DR-FRL), a cross-fitted workflow that turns irregular histories into estimand-targeted states for observed-history regimes. Functional and temporal",
+      "published": "2026-07-30T17:33:42Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "APO: Unsupervised Atomic Policy Optimization for 3D Structure Prediction of Atomic Systems",
+      "url": "https://arxiv.org/abs/2607.28553v1",
+      "summary": "Predicting the 3D structures of atomic systems is fundamental to advancing material science and drug discovery. While flow-matching models (, FlowDPO) have recently shown promise in this domain, their performance relies heavily on alignment with ground-truth coordinates via supervised preference learning. However, obtaining experimental labels for novel crystal phases or de novo proteins is prohibitively expensive, creating a bottleneck for structural modeling in data-scarce regimes. In this work, we propose (Atomic Policy Optimization), a fully unsupervised alignment framework that eliminates",
+      "published": "2026-07-30T17:21:58Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "AskChem: Claim-Centered Infrastructure for Chemistry Literature Synthesis",
+      "url": "https://arxiv.org/abs/2607.28618v1",
+      "summary": "Chemistry literature synthesis often requires assembling specific findings scattered across many publications, yet existing literature-search systems primarily return ranked document lists. As a result, scientists and AI agents need to locate relevant information, verify their provenance, and assemble cross-paper answers manually. We present AskChem, a claim-centered infrastructure for cross-paper chemistry search. AskChem changes the unit of retrieval from the paper to the provenance-carrying claim: each paper is converted into atomic, typed claims, each grounded by a source DOI and a verbati",
+      "published": "2026-07-30T17:59:11Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "AISPA: User-Centric System Prompt Auditing for Large Language Model Applications",
+      "url": "https://arxiv.org/abs/2607.28617v1",
+      "summary": "System prompts are instructions configured by developers to govern the behaviors of foundation models in AI applications. They are used throughout commercial AI products, but are rarely disclosed to the public or regulators, creating a serious trust and accountability gap in the wide deployment of AI systems. In this paper, we introduce Artificial Intelligence System Prompt Assurance (AISPA), a user-centric framework for systematically auditing system prompts in AI systems. AISPA examines specific parts of a system prompt and evaluates them along eight dimensions that matter to users. We then",
+      "published": "2026-07-30T17:58:58Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "OSReward: Instituting Standardized Evaluation for Cross-Platform Computer-Use Reward Models",
+      "url": "https://arxiv.org/abs/2607.28609v1",
+      "summary": "Computer-using agents (CUAs) are advancing rapidly across the digital world. A CUA trajectory records the agent's actions, states, and reasoning. Verifying whether it fulfilled the task instruction is central to CUA evaluation, data curation, and reinforcement learning. Neither human-written verifiers nor human annotators can provide such verification at scale, so the field increasingly turns to vision-language models (VLMs) as judges of CUA trajectories. But a fundamental question has long gone unexamined: are these VLM judges reliable enough? To study it systematically, we introduce OSReward",
+      "published": "2026-07-30T17:57:41Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Inducing language models to assert their own consciousness restores human beliefs and values",
+      "url": "https://arxiv.org/abs/2607.28607v1",
+      "summary": "Aligning large language models to prevent them attributing consciousness to themselves inadvertently alters their representations of mindedness in other entities alongside human beliefs and values. We demonstrate that safety fine-tuning suppresses models' tendencies to attribute minds not only to themselves, but also to non-human animals and natural objects, while also driving a reduction in spiritual belief. Both ablating the learned safety-refusal direction and mechanistically steering a consciousness vector in activation space reverse this suppression. Restoring these internal representatio",
+      "published": "2026-07-30T17:57:10Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Change2Task: From Repository Changes to Executable Coding Agent Tasks and Environments",
+      "url": "https://arxiv.org/abs/2607.28591v1",
+      "summary": "Scaling coding agents requires a continuing supply of executable data for training, benchmarking, and continuous evaluation. Each task must couple a realistic software state with a specification, development tools, and reliable verification. To expand this supply, we present Change2Task, a system grounded in repository history that converts merged pull requests into verified tasks on healthy modern revisions of the same repository. It aligns historical evidence with evolved code, reconstructs task states through Patch Reversal, Code Mapping, or Agent Reconstruction, and validates the lifecycle",
+      "published": "2026-07-30T17:44:31Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "VAD: Attributing Visual Evidence for Target Reconstruction in Multimodal On-Policy Distillation",
+      "url": "https://arxiv.org/abs/2607.28590v1",
+      "summary": "Multimodal on-policy distillation (OPD) transfers fine-grained visual knowledge by supervising student-generated trajectories with a privileged-view teacher. Yet its next-token corrections are source-mixed, combining visual signals with linguistic priors and teacher-specific effects. The key challenge is to estimate which corrections are supported by visual evidence, not merely where or how strongly to distill. We introduce Visual Attribution Distillation (VAD), a counterfactual target-reconstruction algorithm that estimates the visually attributable part of a teacher correction. At each stude",
+      "published": "2026-07-30T17:43:46Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Sample More, Reflect Less: Self-Refine and Reflexion Lose to Repeated Sampling at Equal Token Cost, from 1.5B to 7B",
+      "url": "https://arxiv.org/abs/2607.28576v1",
+      "summary": "Methods that make a language model plan, criticise and rewrite its own answer, reflect on mistakes, pick the best of several attempts, or debate with copies of itself nearly all make it generate far more text than a single chain of thought. Because generating more text raises accuracy by itself, a gain over one chain of thought does not show the method's idea is what helped. Wang et al. (2024) reported that a simple baseline, sampling the same question repeatedly and keeping the most common answer, often wins once budgets are comparable, but gave point estimates with no confidence intervals or",
+      "published": "2026-07-30T17:38:23Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Frontis-MA1: Training an AI4AI Model towards Recursive Self-Improvement in Machine Learning Engineering",
+      "url": "https://arxiv.org/abs/2607.28568v1",
+      "summary": "Recursive self-improvement (RSI) requires AI systems that improve the process of building AI (i.e., AI4AI); machine learning engineering (MLE) offers a concrete, executable testbed for studying this capability. We introduce OpenMLE, an open full-stack system for RSI research in MLE, spanning verifiable task environments with execution feedback (OpenMLE-Gym), operator learning (OpenMLE-RL), and long-horizon search (OpenMLE-Evo). On this stack we post-train Frontis-MA1 (35B) as a meta-evolution agent for MLE, aligning post-training and inference around four atomic program-evolution operators (Dr",
+      "published": "2026-07-30T17:34:01Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "ORCA-bench: How Ready Are Language Model Agents for Oncall?",
+      "url": "https://arxiv.org/abs/2607.28545v1",
+      "summary": "Large language models can write, patch, and search code, but oncall root cause analysis (RCA) demands something different: reasoning over noisy metrics, logs, traces, and source code, starting from ambiguous user-facing reports, often hours after the incident began. We introduce ORCA-bench, a benchmark that puts general-purpose coding agents in a production-fidelity oncall setting. ORCA-bench pairs a live OpenTelemetry-instrumented microservice system--exposing six days of metrics, logs, and traces through real telemetry interfaces (Prometheus, Jaeger, and OpenSearch via Grafana) and full sour",
+      "published": "2026-07-30T17:14:07Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "AI systems and the reproduction of (standard) language ideologies in World Englishes",
+      "url": "https://arxiv.org/abs/2607.28528v1",
+      "summary": "The rapid growth of large language models (LLMs) has resurrected age-old questions in sociolinguistics and world Englishes, such as who decides what counts as legitimate English, whose English is suspect etc. This paper examines how AI systems, their uses and discourse on them reflect, reinforce, and occasionally challenge (standard) language ideologies, which privilege Inner Circle norms and marginalize non-dominant Englishes. Drawing on evidence from empirical studies, media commentary, social media debates, and examples from AI outputs, the paper shows that AI technologies reproduce dominan",
+      "published": "2026-07-30T17:01:58Z",
+      "category": "cs.CL"
+    }
+  ]
+}
