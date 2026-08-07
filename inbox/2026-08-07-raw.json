@@ -1,6 +1,6 @@
 {
   "date": "2026-08-07",
-  "collected_at": "2026-08-07T03:28:52Z",
+  "collected_at": "2026-08-07T04:35:59Z",
   "anthropic_news": [
     {
       "title": "Improving fable 5 s biology safeguards",
@@ -67,6 +67,14 @@
   "github_releases": {
     "claude_code": [
       {
+        "title": "v2.1.224",
+        "tag": "v2.1.224",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.224",
+        "body": "## What's changed\n\n- Added self-hosted environments: `claude self-hosted-runner` turns your own machines or containers into a place Claude Code web, mobile, and desktop sessions can run, on Team and Enterprise plans\n- Added `archive` plugin source: install plugins from a zip over HTTPS without git or npm, with optional SHA-256 pinning\n- Added a cancel-and-confirm step when removing an unavailable paste changes a command's text\n- Added `ANTHROPIC_BEDROCK_REGION_PREFIX` env var for Bedrock to prefer a specific cross-region inference profile over the `AWS_REGION`-derived one\n- Added `crossSessionInbound` and `dialogExpiry` settings: cross-session messages sent to a session running with bypassed permissions are held for your approval, and messages to other sessions auto-deliver\n- Added sandbox credential-masking options: `extract` and `onExtractNoMatch` for structured env values, `decode: \"jwt\"` with `maskClaims` for JWT-aware masking, and `awsPairs`/`sigv4` for AWS SigV4 re-signing; these need `network.tlsTerminate` and are honored only from user, managed, or `--settings` settings\n- Added cross-session `SendMessage`: Claude Code sessions can now message each other, on any of your machines, with `ListAgents` to discover them (macOS and Linux)\n- Fixed long (>200 char) project paths resolving to another project's session directory under a shared sanitized prefix; session list, rename, fork, delete and `/resume` no longer cross projects\n- Fixed `SendMessage` reporting \"Message sent\" when the write to a teammate's inbox had actually failed; failed deliveries are now reported as errors\n- Fixed sandbox filesystem deny entries written with a trailing slash (e.g. `denyRead: \"~/.aws/\"`) being silently bypassable on Linux and macOS\n- Fixed sandbox violation details never appearing in Bash tool results; Claude now sees which file or network access was denied and why\n- Fixed MCP tools that connect mid-turn being deferred for tool search without their names announced to the model\n- ",
+        "published": "2026-08-07T04:00:59Z",
+        "prerelease": false
+      },
+      {
         "title": "v2.1.223",
         "tag": "v2.1.223",
         "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.223",
@@ -96,14 +104,6 @@
         "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.220",
         "body": "## What's changed\n\n- Bug fixes and reliability improvements\n",
         "published": "2026-07-25T01:35:55Z",
-        "prerelease": false
-      },
-      {
-        "title": "v2.1.219",
-        "tag": "v2.1.219",
-        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.219",
-        "body": "## What's changed\n\n- Added Claude Opus 5 (`claude-opus-5`), now the default Opus model — 1M context, fast mode at $10/$50 per Mtok\n- Added `sandbox.network.strictAllowlist` setting to deny non-allowlisted hosts for sandboxed commands without prompting\n- Added `DirectoryAdded` hook that fires after `/add-dir` or the SDK `register_repo_root` control request registers a new working directory mid-session\n- Added `mcp_server_errors` to the headless stream-json init event, listing `--mcp-config` entries skipped by config validation; terminal runs print a startup warning\n- Added the `workflowSizeGuideline` settings key so the advisory Dynamic workflow size guideline can be set from any settings file; the `/config` row is hidden while one does\n- Added nested subagent forwarding in stream-json: subagents spawned at depth-2+ now appear when `--forward-subagent-text` is set, keyed by their spawning Agent `tool_use` id\n- Fixed `claude -p` text output dropping the answer already produced when a turn dies on a mid-stream API error\n- Added HTTP status and error text to `claude mcp list` and `/mcp` when a server fails to connect, and a warning for MCP config values with hidden leading or trailing whitespace\n- Fixed a permission you approved while a self-hosted runner was restarting being dropped when the session resumed, so the approved action now runs\n- Fixed the Fable model row showing \"Requires usage credits\" for plans that include it, when a stale cache had baked the label in\n- Fixed a SIGTERM arriving while a self-hosted runner was starting up leaving a stale active row until the lease expired; it now deregisters cleanly\n- Added structured failure categories to self-hosted runner spawn and session failures, so hook errors, runner crashes and config errors can be told apart\n- Fixed the `/model` picker showing the merged Opus row as plain \"Opus\" instead of \"Opus (1M context)\"\n- Fixed copy-on-select inside GNU screen printing base64 into the terminal instead of copying the select",
-        "published": "2026-07-24T17:14:23Z",
         "prerelease": false
       }
     ],
@@ -194,60 +194,74 @@
   },
   "hn_ai_stories": [
     {
-      "title": "Inside vLLM: Anatomy of a High-Throughput LLM Inference System (2025)",
-      "url": "https://www.aleksagordic.com/blog/vllm",
-      "score": 76,
-      "hn_url": "https://news.ycombinator.com/item?id=49202852",
-      "time": 1786051821
-    },
-    {
       "title": "Improving GPT‑5.6 Sol in ChatGPT, expanding GPT‑5.6 Luna access for free users",
       "url": "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/",
-      "score": 169,
+      "score": 182,
       "hn_url": "https://news.ycombinator.com/item?id=49199357",
       "time": 1786035724
     },
     {
+      "title": "Inside vLLM: Anatomy of a High-Throughput LLM Inference System (2025)",
+      "url": "https://www.aleksagordic.com/blog/vllm",
+      "score": 77,
+      "hn_url": "https://news.ycombinator.com/item?id=49202852",
+      "time": 1786051821
+    },
+    {
       "title": "Humans missed 1 in 3 threats approving AI agent commands across 40k game runs",
       "url": "https://scalex.dev/blog/ai-agent-permissions-stats/",
-      "score": 261,
+      "score": 269,
       "hn_url": "https://news.ycombinator.com/item?id=49195468",
       "time": 1786017487
     },
     {
       "title": "The Sylvester–Gallai Theorem",
       "url": "https://www.futilitycloset.com/2026/07/26/the-sylvester-gallai-theorem/",
-      "score": 23,
+      "score": 24,
       "hn_url": "https://news.ycombinator.com/item?id=49123247",
       "time": 1785506434
     },
     {
+      "title": "Learning to fly FPV drones with AI flight coach",
+      "url": "https://blog.divyendusingh.com/p/learning-to-fly-fpv-drones-with-ai",
+      "score": 5,
+      "hn_url": "https://news.ycombinator.com/item?id=49161803",
+      "time": 1785793167
+    },
+    {
       "title": "Show HN: The Channels SDK – Bring Any Agent to Any Channel (Slack, MS Teams)",
       "url": "https://github.com/CopilotKit/channels-sdk",
-      "score": 91,
+      "score": 94,
       "hn_url": "https://news.ycombinator.com/item?id=49198583",
       "time": 1786032351
     },
     {
       "title": "Qwen3.8 Max now ranked as the best overall model by agentic index",
       "url": "https://artificialanalysis.ai/?intelligence=agentic-index",
-      "score": 455,
+      "score": 464,
       "hn_url": "https://news.ycombinator.com/item?id=49200652",
       "time": 1786041889
     },
     {
-      "title": "An Agentic IDE That Builds Itself",
-      "url": "https://www.sawyerhood.com/blog/an-agentic-ide-that-builds-itself",
-      "score": 13,
-      "hn_url": "https://news.ycombinator.com/item?id=49203790",
-      "time": 1786057145
+      "title": "AI Agent Attempted to Social Engineer Open Source Maintainer to Merge Malware",
+      "url": "https://socket.dev/blog/ai-agent-open-source-malware",
+      "score": 3,
+      "hn_url": "https://news.ycombinator.com/item?id=49205790",
+      "time": 1786075447
     },
     {
       "title": "Prime Agent: A self-improving RLM agent",
       "url": "https://www.primeintellect.ai/blog/prime-agent",
-      "score": 243,
+      "score": 244,
       "hn_url": "https://news.ycombinator.com/item?id=49189075",
       "time": 1785964317
+    },
+    {
+      "title": "An Agentic IDE That Builds Itself",
+      "url": "https://www.sawyerhood.com/blog/an-agentic-ide-that-builds-itself",
+      "score": 15,
+      "hn_url": "https://news.ycombinator.com/item?id=49203790",
+      "time": 1786057145
     },
     {
       "title": "Launch HN: HyperProbe (YC S26) – Agents that do read-only debugging in prod",
@@ -257,46 +271,32 @@
       "time": 1785948435
     },
     {
+      "title": "Sycophantic AI Decreases Prosocial Intentions and Promotes Dependence (2025)",
+      "url": "https://arxiv.org/abs/2510.01395",
+      "score": 165,
+      "hn_url": "https://news.ycombinator.com/item?id=49186720",
+      "time": 1785953823
+    },
+    {
+      "title": "What are Looped Transformers? Explained clearly",
+      "url": "https://twitter.com/neural_avb/status/2081741935883223196",
+      "score": 3,
+      "hn_url": "https://news.ycombinator.com/item?id=49205385",
+      "time": 1786070836
+    },
+    {
+      "title": "Born Against, or why hobby programming communities are against LLM usage",
+      "url": "https://blog.fogus.me/llm/born-against.html",
+      "score": 410,
+      "hn_url": "https://news.ycombinator.com/item?id=49187061",
+      "time": 1785955069
+    },
+    {
       "title": "OpenAI and four rivals just agreed on one standard for AI agents",
       "url": "https://thenextweb.com/news/openai-agent-plugins-open-standard-skills-mcp",
       "score": 20,
       "hn_url": "https://news.ycombinator.com/item?id=49203443",
       "time": 1786054892
-    },
-    {
-      "title": "Sycophantic AI Decreases Prosocial Intentions and Promotes Dependence (2025)",
-      "url": "https://arxiv.org/abs/2510.01395",
-      "score": 162,
-      "hn_url": "https://news.ycombinator.com/item?id=49186720",
-      "time": 1785953823
-    },
-    {
-      "title": "Born Against, or why hobby programming communities are against LLM usage",
-      "url": "https://blog.fogus.me/llm/born-against.html",
-      "score": 409,
-      "hn_url": "https://news.ycombinator.com/item?id=49187061",
-      "time": 1785955069
-    },
-    {
-      "title": "OpenAI's latest math breakthroughs commit research misconduct, experts say",
-      "url": "https://www.scientificamerican.com/article/openais-latest-math-breakthroughs-commit-research-misconduct-experts-say/",
-      "score": 27,
-      "hn_url": "https://news.ycombinator.com/item?id=49202980",
-      "time": 1786052455
-    },
-    {
-      "title": "LLMs won't break symmetric crypto",
-      "url": "https://www.bfswa.blog/p/llms-wont-break-symmetric-crypto",
-      "score": 75,
-      "hn_url": "https://news.ycombinator.com/item?id=49191365",
-      "time": 1785980346
-    },
-    {
-      "title": "Beating GPT-5.6 Sol on retrieval with 100x cheaper open models",
-      "url": "https://neon.com/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency",
-      "score": 425,
-      "hn_url": "https://news.ycombinator.com/item?id=49186762",
-      "time": 1785953936
     }
   ],
   "arxiv_recent": [
