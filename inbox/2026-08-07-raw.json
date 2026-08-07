@@ -1,0 +1,383 @@
+{
+  "date": "2026-08-07",
+  "collected_at": "2026-08-07T01:30:13Z",
+  "anthropic_news": [],
+  "claude_release_notes_md": "",
+  "github_releases": {
+    "claude_code": [
+      {
+        "title": "v2.1.223",
+        "tag": "v2.1.223",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.223",
+        "body": "## What's changed\n\n- Added owner wildcard entries (`\"owner/*\"`) to the `strictKnownMarketplaces` and `blockedMarketplaces` managed settings for allowing or blocking all marketplace repos under a GitHub org\n- Added a warning when workflow agents, forked skills, slash commands, or resumed background agents' requested subagent model is restricted and the parent model runs instead\n- Added a `/teleport` hint in cloud sessions showing how to continue locally with `claude --teleport <session id>`\n- Fixed a Bash permission bypass where a crafted command could hide parts of itself from permission checks\n- Fixed permission prompts so commands padded with tabs or invisible Unicode can no longer hide part of the command from the approval dialog\n- Fixed workflow scripts being able to use dynamic `import()` to run code outside the workflow sandbox\n- Fixed a permission gap where an agent definition's `bypassPermissions` mode ignored the org bypass-permissions disable policy\n- Fixed resuming a session after a mid-session `/cd` coming back empty\n- Fixed gateway model discovery hiding Claude models registered under provider-prefixed IDs such as `vertex_ai/claude-*` or `bedrock/anthropic.claude-*`\n- Fixed `modelOverrides` keys that aren't Anthropic model IDs being treated as the session's canonical model ID; unknown keys are now ignored as documented\n- Fixed managed settings: server-delivered settings no longer disable the env block of a machine-local `managed-settings.json` or MDM profile; admin env now merges per key\n- Fixed sandboxed commands failing to start on Linux when `sandbox.filesystem.denyWrite` covers the working directory\n- Fixed forked background agents getting stuck \"already resuming\" for the rest of the session when rebuilding the fork's parent prompt failed during resume\n- Fixed a resumed session failing every turn, or leaving the interactive app on an unresponsive error screen, when its history held a malformed diagnostics attachment\n- Fixed a rare hang when parsing ",
+        "published": "2026-08-06T00:52:37Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.222",
+        "tag": "v2.1.222",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.222",
+        "body": "## What's changed\n\n- Fixed worktree-isolated sessions and their subagents being able to run destructive git commands against the main checkout; isolation now applies to file edits and Bash in every session type\n- Fixed PreToolUse auto-allow hooks bypassing tool restrictions in background agent tasks (summaries, compaction, renames)\n- Fixed `/usage-credits` on Team and Enterprise showing \"you've already sent a usage credit request\" for members whose earlier request was dismissed, blocking them from sending a new one\n- Fixed the startup connectivity check hanging and then failing behind an HTTPS proxy; it now uses the same proxy-aware transport as API requests and times out with a clear message\n- Fixed \"Connection closed mid-response\" errors being reported on responses that had actually completed\n- Fixed `/usage` overattributing usage to MCP servers: a server's share now reflects only the requests that actually consumed its tool results, instead of every turn after any call to it\n- Fixed sessions not linking to pull requests created after the branch was pushed, including through the GitHub REST API\n- Fixed org-restricted `model: opus`-style subagent and teammate family aliases dropping to the parent model instead of stepping down to the newest org-allowed model in the family\n- Fixed stream idle timeout firing on custom `ANTHROPIC_BASE_URL` gateways despite server keep-alive pings arriving on the wire\n- Fixed claude.ai connectors being falsely marked as needing authorization when the session token is invalid — they now show a `/login` hint instead\n- Fixed tool errors not being displayed for tools no longer available locally, for example after an MCP server is removed\n- Fixed `SendMessage` rejecting a long summary — it now truncates instead, so sends no longer fail on a character limit\n- Fixed the spinner's effort label in a subagent's transcript view showing the session's effort level instead of the subagent's own `effort:` setting\n- Fixed rare crashes when a file watc",
+        "published": "2026-08-04T22:39:55Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.221",
+        "tag": "v2.1.221",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.221",
+        "body": "## What's changed\n\n- [VSCode] Added Focus view: a chat-menu toggle that hides tool activity behind an expandable per-turn summary with a live running-tool indicator, toggled with `Ctrl+Alt+F` or the \"Claude Code: Toggle Focus view\" command\n- Added `mode: \"mask\"` for sandbox credential files on Linux and WSL — sandboxed commands read a sentinel copy (the whole file, or just the spans captured by an `extract` regex) while the sandbox proxy substitutes the real value on egress; on macOS file masking falls back to `deny`\n- Added warnings to `claude plugin validate` when a marketplace or plugin name would be rejected by Claude Desktop's managed marketplace sync\n- Added a `prompt-audit` subcommand to the `claude-api` skill for auditing prompts and tool descriptions for patterns written for older models\n- Fixed a Bash tool permission-check bypass where zsh could execute hidden commands in `[[ ]]` regex conditionals; affected commands now prompt for permission\n- Fixed PowerShell permission checks mishandling paths containing quote characters on Windows; such paths now prompt for approval\n- Fixed the thinking toggle having no effect for the rest of a session that started with thinking off; disabling an MCP server mid-connect no longer silently reverts\n- Fixed MCP servers from `--mcp-config` not being connected before the first turn in print mode (`-p`), which made the model emit tool calls as literal text\n- Fixed @-mentioned files being silently dropped when pressing Esc to retract a prompt and resubmitting it\n- Fixed a crash when preparing API requests for SDK MCP tools named after built-in object properties such as `constructor`\n- Fixed WebSearch failing with a 400 error at effort `xhigh`/`max` when thinking is disabled\n- Fixed sandboxed large uploads failing with TLS errors through the sandbox proxy\n- Fixed Team and Enterprise spend-limit message incorrectly blaming the org's monthly limit instead of your individual spend limit\n- Fixed Bedrock authentication with AWS SSO ",
+        "published": "2026-08-04T00:14:23Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.220",
+        "tag": "v2.1.220",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.220",
+        "body": "## What's changed\n\n- Bug fixes and reliability improvements\n",
+        "published": "2026-07-25T01:35:55Z",
+        "prerelease": false
+      },
+      {
+        "title": "v2.1.219",
+        "tag": "v2.1.219",
+        "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.219",
+        "body": "## What's changed\n\n- Added Claude Opus 5 (`claude-opus-5`), now the default Opus model — 1M context, fast mode at $10/$50 per Mtok\n- Added `sandbox.network.strictAllowlist` setting to deny non-allowlisted hosts for sandboxed commands without prompting\n- Added `DirectoryAdded` hook that fires after `/add-dir` or the SDK `register_repo_root` control request registers a new working directory mid-session\n- Added `mcp_server_errors` to the headless stream-json init event, listing `--mcp-config` entries skipped by config validation; terminal runs print a startup warning\n- Added the `workflowSizeGuideline` settings key so the advisory Dynamic workflow size guideline can be set from any settings file; the `/config` row is hidden while one does\n- Added nested subagent forwarding in stream-json: subagents spawned at depth-2+ now appear when `--forward-subagent-text` is set, keyed by their spawning Agent `tool_use` id\n- Fixed `claude -p` text output dropping the answer already produced when a turn dies on a mid-stream API error\n- Added HTTP status and error text to `claude mcp list` and `/mcp` when a server fails to connect, and a warning for MCP config values with hidden leading or trailing whitespace\n- Fixed a permission you approved while a self-hosted runner was restarting being dropped when the session resumed, so the approved action now runs\n- Fixed the Fable model row showing \"Requires usage credits\" for plans that include it, when a stale cache had baked the label in\n- Fixed a SIGTERM arriving while a self-hosted runner was starting up leaving a stale active row until the lease expired; it now deregisters cleanly\n- Added structured failure categories to self-hosted runner spawn and session failures, so hook errors, runner crashes and config errors can be told apart\n- Fixed the `/model` picker showing the merged Opus row as plain \"Opus\" instead of \"Opus (1M context)\"\n- Fixed copy-on-select inside GNU screen printing base64 into the terminal instead of copying the select",
+        "published": "2026-07-24T17:14:23Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_python": [
+      {
+        "title": "v0.120.2",
+        "tag": "v0.120.2",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.2",
+        "body": "## 0.120.2 (2026-07-28)\n\nFull Changelog: [v0.120.1...v0.120.2](https://github.com/anthropics/anthropic-sdk-python/compare/v0.120.1...v0.120.2)\n\n### Bug Fixes\n\n* **mcp:** support mcp sdk v2 alongside v1 ([#300](https://github.com/anthropics/anthropic-sdk-python/issues/300)) ([177f88c](https://github.com/anthropics/anthropic-sdk-python/commit/177f88ccd7f966e47b654cb19ad0e9cfa4c58ac2))",
+        "published": "2026-07-28T17:38:09Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.120.1",
+        "tag": "v0.120.1",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.1",
+        "body": "## 0.120.1 (2026-07-28)\n\nFull Changelog: [v0.120.0...v0.120.1](https://github.com/anthropics/anthropic-sdk-python/compare/v0.120.0...v0.120.1)\n\n### Bug Fixes\n\n* **mcp:** pin mcp extra to &lt;2 ([#1783](https://github.com/anthropics/anthropic-sdk-python/issues/1783)) ([fb66371](https://github.com/anthropics/anthropic-sdk-python/commit/fb66371322621be23a0956f1998da39c4686f4cb))",
+        "published": "2026-07-28T16:37:33Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.120.0",
+        "tag": "v0.120.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.120.0",
+        "body": "## 0.120.0 (2026-07-24)\n\nFull Changelog: [v0.119.0...v0.120.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.119.0...v0.120.0)\n\n### Features\n\n* **api:** add claude-opus-5 model ([bf4e31c](https://github.com/anthropics/anthropic-sdk-python/commit/bf4e31c17c43ba2b409bec57e1856b025d159f1a))\n* **api:** add tool addition/removal blocks and tool_change events ([bf4e31c](https://github.com/anthropics/anthropic-sdk-python/commit/bf4e31c17c43ba2b409bec57e1856b025d159f1a))\n* **api:** expand client-side fallback credit token types and add server-side fallbacks default option ([bf4e31c](https://github.com/anthropics/anthropic-sdk-python/commit/bf4e31c17c43ba2b409bec57e1856b025d159f1a))",
+        "published": "2026-07-24T16:32:34Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.119.0",
+        "tag": "v0.119.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.119.0",
+        "body": "## 0.119.0 (2026-07-23)\n\nFull Changelog: [v0.118.0...v0.119.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.118.0...v0.119.0)\n\n### Features\n\n* **api:** add new stop reason 'model_context_window_exceeded' ([d983cde](https://github.com/anthropics/anthropic-sdk-python/commit/d983cdecdea27fb8ae36fd293930b978c9bebf4f))\n\n\n### Bug Fixes\n\n* **tools:** handle binary files in agent toolset read/edit ([#283](https://github.com/anthropics/anthropic-sdk-python/issues/283)) ([417b76b](https://github.com/anthropics/anthropic-sdk-python/commit/417b76b9adcb69ee9effa2e9af1536dd08e6764e))",
+        "published": "2026-07-23T17:34:23Z",
+        "prerelease": false
+      },
+      {
+        "title": "v0.118.0",
+        "tag": "v0.118.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.118.0",
+        "body": "## 0.118.0 (2026-07-22)\n\nFull Changelog: [v0.117.1...v0.118.0](https://github.com/anthropics/anthropic-sdk-python/compare/v0.117.1...v0.118.0)\n\n### Features\n\n* **api:** add support for Managed Agents model effort, initial session events, and threads delta streaming ([712bc6f](https://github.com/anthropics/anthropic-sdk-python/commit/712bc6f5e07ca7607e13f24fba4eea57c2e73478))",
+        "published": "2026-07-22T16:43:45Z",
+        "prerelease": false
+      }
+    ],
+    "sdk_typescript": [
+      {
+        "title": "sdk: v0.115.0",
+        "tag": "sdk-v0.115.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.115.0",
+        "body": "## 0.115.0 (2026-07-24)\n\nFull Changelog: [sdk-v0.114.0...sdk-v0.115.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.114.0...sdk-v0.115.0)\n\n### Features\n\n* **api:** add claude-opus-5 model ([cdd3606](https://github.com/anthropics/anthropic-sdk-typescript/commit/cdd3606e92745b8a6af07819469cf5dc0636edb2))\n* **api:** add tool addition/removal blocks and tool_change events ([cdd3606](https://github.com/anthropics/anthropic-sdk-typescript/commit/cdd3606e92745b8a6af07819469cf5dc0636edb2))\n* **api:** expand client-side fallback credit token types and add server-side fallbacks default option ([cdd3606](https://github.com/anthropics/anthropic-sdk-typescript/commit/cdd3606e92745b8a6af07819469cf5dc0636edb2))\n\n\n### Bug Fixes\n\n* **client:** release abort listeners when requests settle ([#1129](https://github.com/anthropics/anthropic-sdk-typescript/issues/1129)) ([b85e902](https://github.com/anthropics/anthropic-sdk-typescript/commit/b85e902669c78a8293b5390e93e57dd2e3f6c545))",
+        "published": "2026-07-24T16:31:05Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.114.0",
+        "tag": "sdk-v0.114.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.114.0",
+        "body": "## 0.114.0 (2026-07-23)\n\nFull Changelog: [sdk-v0.113.0...sdk-v0.114.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.113.0...sdk-v0.114.0)\n\n### Features\n\n* **api:** add new stop reason 'model_context_window_exceeded' ([1ec71c1](https://github.com/anthropics/anthropic-sdk-typescript/commit/1ec71c165d9737cb317e3f8fed818f7a1b8169ad))",
+        "published": "2026-07-23T17:34:26Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.113.0",
+        "tag": "sdk-v0.113.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.113.0",
+        "body": "## 0.113.0 (2026-07-22)\n\nFull Changelog: [sdk-v0.112.5...sdk-v0.113.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.5...sdk-v0.113.0)\n\n### Features\n\n* **api:** add support for Managed Agents model effort, initial session events, and threads delta streaming ([83fef1e](https://github.com/anthropics/anthropic-sdk-typescript/commit/83fef1e5a65f020750b1f90c46d748a415b6f075))",
+        "published": "2026-07-22T16:44:33Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.112.5",
+        "tag": "sdk-v0.112.5",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.5",
+        "body": "## 0.112.5 (2026-07-21)\n\nFull Changelog: [sdk-v0.112.4...sdk-v0.112.5](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.4...sdk-v0.112.5)\n\n### Chores\n\n* **api:** add support for new refusal category ([479efe8](https://github.com/anthropics/anthropic-sdk-typescript/commit/479efe8ade0078966e28d754fa3085c75b6d2a58))\n* **internal:** codegen related update ([830fb74](https://github.com/anthropics/anthropic-sdk-typescript/commit/830fb7467c3cc947e31b5d83a2a31d34fc8ebac2))",
+        "published": "2026-07-21T22:27:16Z",
+        "prerelease": false
+      },
+      {
+        "title": "sdk: v0.112.4",
+        "tag": "sdk-v0.112.4",
+        "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.112.4",
+        "body": "## 0.112.4 (2026-07-20)\n\nFull Changelog: [sdk-v0.112.3...sdk-v0.112.4](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.3...sdk-v0.112.4)\n\n### Bug Fixes\n\n* **aws:** preserve AWS options and auth mode across withOptions() ([#214](https://github.com/anthropics/anthropic-sdk-typescript/issues/214)) ([3f7665c](https://github.com/anthropics/anthropic-sdk-typescript/commit/3f7665c5419eb80c489546a70da799648e7d5ff2))\n\n\n### Chores\n\n* **docs:** small updates ([97f68a8](https://github.com/anthropics/anthropic-sdk-typescript/commit/97f68a88e13ba11b1e903d2d7181da3e4edd5c10))",
+        "published": "2026-07-20T20:46:08Z",
+        "prerelease": false
+      }
+    ]
+  },
+  "hn_ai_stories": [
+    {
+      "title": "New Orleans will use AI to answer 911 calls instead of a human",
+      "url": "https://www.shreveporttimes.com/story/news/local/louisiana/2026/07/28/is-new-orleans-using-ai-to-answer-911-calls-instead-of-human-dispatchers-impacts-emergencies-crime/91065014007/",
+      "score": 25,
+      "hn_url": "https://news.ycombinator.com/item?id=49204546",
+      "time": 1786063050
+    },
+    {
+      "title": "Inside vLLM: Anatomy of a High-Throughput LLM Inference System (2025)",
+      "url": "https://www.aleksagordic.com/blog/vllm",
+      "score": 54,
+      "hn_url": "https://news.ycombinator.com/item?id=49202852",
+      "time": 1786051821
+    },
+    {
+      "title": "Improving GPT‑5.6 Sol in ChatGPT, expanding GPT‑5.6 Luna access for free users",
+      "url": "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/",
+      "score": 143,
+      "hn_url": "https://news.ycombinator.com/item?id=49199357",
+      "time": 1786035724
+    },
+    {
+      "title": "The Sylvester–Gallai Theorem",
+      "url": "https://www.futilitycloset.com/2026/07/26/the-sylvester-gallai-theorem/",
+      "score": 9,
+      "hn_url": "https://news.ycombinator.com/item?id=49123247",
+      "time": 1785506434
+    },
+    {
+      "title": "Humans missed 1 in 3 threats approving AI agent commands across 40k game runs",
+      "url": "https://scalex.dev/blog/ai-agent-permissions-stats/",
+      "score": 251,
+      "hn_url": "https://news.ycombinator.com/item?id=49195468",
+      "time": 1786017487
+    },
+    {
+      "title": "Show HN: The Channels SDK – Bring Any Agent to Any Channel (Slack, MS Teams)",
+      "url": "https://github.com/CopilotKit/channels-sdk",
+      "score": 84,
+      "hn_url": "https://news.ycombinator.com/item?id=49198583",
+      "time": 1786032351
+    },
+    {
+      "title": "Qwen3.8 Max now ranked as the best overall model by agentic index",
+      "url": "https://artificialanalysis.ai/?intelligence=agentic-index",
+      "score": 423,
+      "hn_url": "https://news.ycombinator.com/item?id=49200652",
+      "time": 1786041889
+    },
+    {
+      "title": "OpenAI and four rivals just agreed on one standard for AI agents",
+      "url": "https://thenextweb.com/news/openai-agent-plugins-open-standard-skills-mcp",
+      "score": 15,
+      "hn_url": "https://news.ycombinator.com/item?id=49203443",
+      "time": 1786054892
+    },
+    {
+      "title": "OpenAI's latest math breakthroughs commit research misconduct, experts say",
+      "url": "https://www.scientificamerican.com/article/openais-latest-math-breakthroughs-commit-research-misconduct-experts-say/",
+      "score": 22,
+      "hn_url": "https://news.ycombinator.com/item?id=49202980",
+      "time": 1786052455
+    },
+    {
+      "title": "Prime Agent: A self-improving RLM agent",
+      "url": "https://www.primeintellect.ai/blog/prime-agent",
+      "score": 240,
+      "hn_url": "https://news.ycombinator.com/item?id=49189075",
+      "time": 1785964317
+    },
+    {
+      "title": "Blasting the Air in Front of Hypersonic Vehicles with Lasers Reduces Drag",
+      "url": "https://www.twz.com/33859/blasting-the-air-in-front-of-hypersonic-vehicles-with-lasers-could-unlock-unprecedented-speeds",
+      "score": 10,
+      "hn_url": "https://news.ycombinator.com/item?id=49203507",
+      "time": 1786055324
+    },
+    {
+      "title": "Launch HN: HyperProbe (YC S26) – Agents that do read-only debugging in prod",
+      "url": "https://www.hyperprobe.co",
+      "score": 67,
+      "hn_url": "https://news.ycombinator.com/item?id=49185389",
+      "time": 1785948435
+    },
+    {
+      "title": "Sycophantic AI Decreases Prosocial Intentions and Promotes Dependence (2025)",
+      "url": "https://arxiv.org/abs/2510.01395",
+      "score": 162,
+      "hn_url": "https://news.ycombinator.com/item?id=49186720",
+      "time": 1785953823
+    },
+    {
+      "title": "Born Against, or why hobby programming communities are against LLM usage",
+      "url": "https://blog.fogus.me/llm/born-against.html",
+      "score": 408,
+      "hn_url": "https://news.ycombinator.com/item?id=49187061",
+      "time": 1785955069
+    },
+    {
+      "title": "LLMs won't break symmetric crypto",
+      "url": "https://www.bfswa.blog/p/llms-wont-break-symmetric-crypto",
+      "score": 73,
+      "hn_url": "https://news.ycombinator.com/item?id=49191365",
+      "time": 1785980346
+    }
+  ],
+  "arxiv_recent": [
+    {
+      "title": "Stochastic Dynamics on Persistence Diagram Space via Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2608.06276v1",
+      "summary": "Persistence diagrams (PDs) provide stable and interpretable summaries of multiscale topological structure. While substantial progress has been made in the statistical analysis of PDs, existing literature often treats diagrams as static objects and provide limited frameworks for probabilistic modeling and stochastic evolution on PD space. We introduce a reinforcement learning framework for stochastic dynamics on PD space, where diagrams evolve through topology aware local edit operations. The dynamics define controlled Markov processes on spaces of finite PDs with variable cardinality. We estab",
+      "published": "2026-08-06T17:05:19Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Improving the Realism of Synthetic Clinical Benchmarks Under Utility Constraints",
+      "url": "https://arxiv.org/abs/2608.06265v1",
+      "summary": "Synthetic clinical benchmarks for enterprise AI agents can pass existing utility checks and still remain structurally unrealistic, especially in privacy-sensitive healthcare settings where operational data are hard to access. We study how to improve such benchmarks without breaking the downstream utility checks already used in practice.   We formulate benchmark revision as utility-constrained realism improvement: dataset changes should increase realism while staying above an operational utility floor. We instantiate this idea on a care-gap benchmark derived from Synthea-generated patients exer",
+      "published": "2026-08-06T16:56:44Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "OTLesMix: Wasserstein Barycenter and Optimal Transport Map for Synthetic Lesion Generation with Diverse Shapes and Locations",
+      "url": "https://arxiv.org/abs/2608.06264v1",
+      "summary": "The development of deep learning over the past decade has revolutionized medical imaging segmentation, allowing the extraction of precise descriptors from large volumes to characterize pathologies. Data augmentation is a technique widely regarded as a way to improve model training. It includes simple transformations like spatial operations or intensity modifications, but also more advanced synthesis techniques. Their goal is to generate new realistic samples from an existing dataset to diversify the images used during training. Among them, several propose different mixing strategies to combine",
+      "published": "2026-08-06T16:54:15Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Hypothesis Testing with Conditional Queries: Learnability and the Value of Interaction",
+      "url": "https://arxiv.org/abs/2608.06262v1",
+      "summary": "Model evaluations may fix all tests before observing any responses or select later tests using earlier responses. We study this choice in a conditional-query model on a finite outcome space $\\mathcal{X}$ with $|\\mathcal{X}|=N$. We first ask which pairs of distribution classes can be reliably distinguished. We then ask how many additional queries are required to match an adaptive tester when all queried events must be fixed in advance. We show that learnability holds if and only if the two classes have positive separation in their pairwise conditional probabilities. When this separation is zero",
+      "published": "2026-08-06T16:54:10Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "RxnCLF: Contrastive Transformation-Aware Reaction Foundation Model for Improved Reactivity Prediction",
+      "url": "https://arxiv.org/abs/2608.06259v1",
+      "summary": "Reaction yield prediction remains challenging because labeled data are scarce and reaction space is both combinatorially large and sparsely populated, limiting the generalization of existing reaction representations. String-, fingerprint-, and graph-based reaction encodings only partially capture chemical transformations, making accurate prediction difficult for reactions with complex substrates. We propose reaction contrastive learning foundation (RxnCLF), a self-supervised contrastive framework for reaction representation learning. RxnCLF is built on a condensed reaction graph (CRG) that uni",
+      "published": "2026-08-06T16:51:23Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "MetaboLLM: a metabolomics-specialized large language model for biochemical knowledge integration and predictive metabolite graph construction",
+      "url": "https://arxiv.org/abs/2608.06253v1",
+      "summary": "Metabolomics knowledge is distributed across heterogeneous resources and remains difficult to translate into predictive representations. We developed MetaboLLM, a metabolomics-specialized large language model adapted through continual pretraining, supervised fine-tuning, and structured retrieval, together with MetaboLLM-GIN, which converts generated biochemical descriptions into metabolite graphs for patient-level prediction using a graph isomorphism network. Across four backbone families, MetaboLLM outperformed corresponding base and medically adapted models on metabolomics knowledge, relatio",
+      "published": "2026-08-06T16:42:34Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Minimax Optimal Early-Stopped Gradient Descent for Gaussian Mixture Classification",
+      "url": "https://arxiv.org/abs/2608.06250v1",
+      "summary": "In overparameterised classification, training data can be linearly separable even when the underlying distribution is not. In this setting, gradient descent (GD) on the logistic loss diverges in norm while converging in direction to a max-margin interpolating classifier, whose implicit bias can be statistically suboptimal. In this work, we show that early stopping can overcome this suboptimality: in a Gaussian mixture model with label-flipping noise, GD stopped at an appropriate oracle time achieves minimax-optimal excess zero-one risk for covariance spectra with fast and continuous decay, inc",
+      "published": "2026-08-06T16:41:00Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "A Six-Dimensional Taxonomy of Post-Training Adaptation Techniques with Applications in AI Governance",
+      "url": "https://arxiv.org/abs/2608.06246v1",
+      "summary": "Post-training adaptation has become central to modern machine learning practice and includes techniques such as retraining, fine-tuning, parameter-efficient adaptation, alignment, retrieval augmentation, model editing, unlearning, calibration, and Multimodal Instruction Tuning. However, the literature remains fragmented across technique families, model classes, and deployment contexts, making it difficult to compare methods or describe how a trained model has been modified. This survey synthesizes the post-training adaptation literature and introduces a six-dimensional taxonomy organized by me",
+      "published": "2026-08-06T16:32:26Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Timestep-Conditioned Transformers for Global Weather Forecasting",
+      "url": "https://arxiv.org/abs/2608.06241v1",
+      "summary": "Existing machine-learning weather forecasting models rely on predetermined and fixed autoregressive timesteps. The choice of model timestep involves a fundamental trade-off: shorter timesteps (e.g. 1 to 6 hours) finely resolve atmospheric dynamics within the diurnal cycle but increase error accumulation for a given forecast horizon, while longer timesteps (e.g. 24 hours) reduce error accumulation but limit the usability of short-range forecasts where sub-daily predictability is high. In this work, we present GEM-3, a probabilistic global weather model that addresses this trade-off through expl",
+      "published": "2026-08-06T16:27:54Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "TS-RAG: Retrieval Augmented Generation for Time Series Forecasting",
+      "url": "https://arxiv.org/abs/2608.06223v1",
+      "summary": "While deep learning models, particularly transformer-based architectures, have shown impressive performance in time series forecasting, the application of retrieval-augmented generation (RAG) in this domain remains limited. Since RAG has proven effective in enhancing the capabilities of large language models by incorporating relevant external information, retrieving similar time series sequences as references might also improve accuracy in time series forecasting tasks. However, most time series models are constrained by limited training data, smaller parameter scales, and a lack of the extens",
+      "published": "2026-08-06T16:12:57Z",
+      "category": "cs.LG"
+    },
+    {
+      "title": "Routing Is Least Learnable Where It Is Most Valuable: Bounds on Representation Routing for Web Agents",
+      "url": "https://arxiv.org/abs/2608.06171v1",
+      "summary": "Web agents observe a browser through text, pixels, or both, and the choice is usually fixed once for all tasks. We measure six observation modes across eight site-model combinations (cells) on VisualWebArena and WebArena and ask what choosing per task would buy. The modes are complementary: each solves tasks the others miss, they fail in structurally different ways, and the best choice reverses between task sets. The obvious prize, an oracle that picks a winning mode for every task, looks large but is inflated by run-to-run noise: rerunning the same mode on the same tasks changes 12-14% of out",
+      "published": "2026-08-06T15:37:04Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Schema-Guided Hierarchical Information Extraction and Semantic Evaluation Using Generative AI",
+      "url": "https://arxiv.org/abs/2608.06167v1",
+      "summary": "We present a schema-based framework for extracting complex, structured information from unstructured text documents using generative AI, followed by automated semantic evaluation of the extracted information against a gold standard. The schema, serving as an information model encoding domain knowledge, provides a unified, systematic, and consistent framework for extraction of hierarchical, nested information, with attributes of variable cardinality, and subsequent evaluation of the results. Information extraction from a document is performed in a single call to the model, in zero-shot mode.",
+      "published": "2026-08-06T15:33:30Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Decolonizing Linguistic Policies in Automated Speech Recognition: A Framework for Cross-Culturally Competent Speech AI",
+      "url": "https://arxiv.org/abs/2608.06141v1",
+      "summary": "This paper focuses on automatic speech recognition (ASR) and ASR-mediated voice interfaces that shape access to public services, healthcare, and education. We argue that persistent failures for low-resource, Indigenous, and non-standard language varieties are not only technical errors, but also implicit linguistic policies that reproduce colonial language hierarchies. Drawing on linguistic capital, raciolinguistic ideology, language policy research, and decolonial computing, we show how data, metrics, and model priors determine whose voices become machine-legible. We introduce the Three Harms",
+      "published": "2026-08-06T15:10:29Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Poli-Bias: Understanding and Measuring Large Language Model Biases in International Political Conflicts",
+      "url": "https://arxiv.org/abs/2608.06123v1",
+      "summary": "Measuring political bias in large language models (LLMs) remains challenging as it can manifest through subtle differences in framing, argumentation, and legal reasoning that are difficult to capture with a single metric. In this work, we introduce Poli-Bias, a counterfactual framework for measuring whether LLMs treat legally equivalent conflict scenarios differently depending on the countries involved. Poli-Bias compares responses to paired prompts in which country identities are systematically swapped across diverse geopolitical relationships, legal violations, and reasoning tasks. Rather th",
+      "published": "2026-08-06T14:54:30Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Beyond Sequence Order: Syntax-Informed Positional Embeddings for Transformers",
+      "url": "https://arxiv.org/abs/2608.06111v1",
+      "summary": "Positional embeddings (PE) in Transformers encode token distance and order but are largely agnostic to \\textit{syntactic structure}. We introduce \\textbf{S}yntax-\\textbf{i}nformed \\textbf{P}ositional \\textbf{E}mbeddings (\\textbf{SiPE}), which learns a lightweight syntactic prior from dependency parses during pretraining and injects it across all three dominant PE families (absolute, relative, rotary), for both encoders and decoders, leaving self-attention and the rest of the architecture untouched. We isolate \\emph{where} and \\emph{how} the prior should enter the model, and find it depends on",
+      "published": "2026-08-06T14:44:31Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "From Siloed Algorithms to Compliance-First Agentic Platforms: A Multi-Layered Architecture for Hospital AI Systems",
+      "url": "https://arxiv.org/abs/2608.06112v1",
+      "summary": "Hospitals are rapidly adopting artificial intelligence for triage, imaging, scheduling etc., yet most deployments remain isolated point solutions locked inside departmental silos, resulting in duplicated effort, hidden risks, and unrealized enterprise value. Despite explosive growth of AI in healthcare market and accelerating investment, an estimated 70-80% of healthcare AI pilots fail to scale, largely due to governance gaps, fragmented data, and missing integration blueprints. This research proposes a hospital-specific, compliance-first, Agentic AI architecture with multiple interoperable la",
+      "published": "2026-08-06T14:44:31Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "ECHO: A Locally-Deployable Agentic Health Assistant with Temporal Memory, Safety Guardrails, and Speech Assessment",
+      "url": "https://arxiv.org/abs/2608.06110v1",
+      "summary": "This paper presents ECHO (Enhanced Care \\& Health Observer), a locally-deployable conversational health assistant for long-term chronic care management. ECHO integrates three complementary software modules developed under shared supervision as a unified system. The core module is an agentic chatbot built on a ReAct loop orchestrated via LangGraph, equipped with 17 clinical tools and a temporal knowledge graph for persistent cross-session memory; it achieves a 94.9\\% tool-execution pass rate across a 59-scenario benchmark with GPT-5 Mini. A two-stage hybrid safety layer intercepts all incoming",
+      "published": "2026-08-06T14:44:12Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "Training-Free Token-Level Steering for LLM Personalized Co-Writing",
+      "url": "https://arxiv.org/abs/2608.06069v1",
+      "summary": "While Large Language Models (LLMs) show great promise for personalization, they often lack specialized domain knowledge. Conventional solutions like fine-tuning struggle with high computational costs and rapid data updates, while Retrieval-Augmented Generation fails to provide fine-grained, token-level steering. Furthermore, chat-based interfaces remain dominant, whereas productive co-writing paradigms have not yet been well exploited beyond the coding domain. To this end, we introduce SteerWrite, a training-free framework designed for personalized co-writing. Our method effectively adapts the",
+      "published": "2026-08-06T14:13:02Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "LangChoiceBench: Measuring and Explaining Programming-Language Choice in LLMs",
+      "url": "https://arxiv.org/abs/2608.06041v1",
+      "summary": "Large language models (LLMs) have been shown to exhibit strong Python preferences when generating project-level code, but there is currently no systematic way to measure this behaviour across new models. To bridge this gap, we introduce LangChoiceBench, a project-level code-generation benchmark for measuring Python preference, recommendation-implementation consistency, and language diversity. LangChoiceBench covers 28 projects across seven software areas where Python is often a poor default. We evaluate 25 diverse LLMs and find that Python remains heavily over-selected, recommendation-implemen",
+      "published": "2026-08-06T13:52:16Z",
+      "category": "cs.CL"
+    },
+    {
+      "title": "FormBharo: Designing and Evaluating a Voice Agent for Conversational Form Filling in Rural India",
+      "url": "https://arxiv.org/abs/2608.06027v1",
+      "summary": "In India, almost every social benefit starts with a form, yet the people who need these benefits most are often unable to read or write. Reaching them requires a spoken conversation. Today that work falls to frontline health workers who enroll beneficiaries one at a time, a poor use of stretched capacity. We built FormBharo (\"fill the form\" in Hindi), a voice agent that fills a structured form over a phone call under tight latency and cost budgets by pairing Large Language Models (LLMs) with deterministic, rule-based validation and flow control. It is being piloted with ARMMAN, an NGO running",
+      "published": "2026-08-06T13:34:22Z",
+      "category": "cs.CL"
+    }
+  ]
+}
