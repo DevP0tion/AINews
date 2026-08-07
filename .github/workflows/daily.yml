@@ -18,7 +18,6 @@ concurrency:
 permissions:
   contents: write
   id-token: write    # claude-code-action이 OIDC 토큰을 요구
-  pull-requests: write  # Claude가 필요시 PR/이슈 조작할 때 사용
 
 jobs:
   # ---------------------------------------------------------------------------
@@ -80,7 +79,8 @@ jobs:
           git push origin main
 
   # ---------------------------------------------------------------------------
-  # 2. Claude가 inbox 읽어서 AI 처리 → archive/state 커밋 (main에 직접)
+  # 2. Claude가 inbox 읽어서 /tmp/processed.json 생성
+  #    → 이후 스크립트 실행·커밋은 결정론적 스텝이 담당 (Claude는 토큰에 도달 불가)
   # ---------------------------------------------------------------------------
   curate:
     needs: collect
@@ -88,7 +88,6 @@ jobs:
     permissions:
       contents: write
       id-token: write
-      pull-requests: write
     env:
       TARGET_DATE: ${{ needs.collect.outputs.target_date }}
       INBOX_PATH: ${{ needs.collect.outputs.inbox_path }}
@@ -97,6 +96,8 @@ jobs:
         with:
           ref: main
           fetch-depth: 1
+          # Claude가 읽을 수 있는 워크스페이스에 git 자격증명을 남기지 않는다
+          persist-credentials: false
 
       - name: Load prompt
         id: prompt
@@ -117,8 +118,38 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: ${{ steps.prompt.outputs.prompt }}
+          # --allowedTools는 가산형(base 도구는 항상 포함)이라 실제 차단은 전부
+          # --disallowedTools가 담당한다. bare 이름은 도구 자체를 컨텍스트에서 제거,
+          # Tool(pattern)은 해당 경로만 거부 (deny가 allow보다 우선).
           claude_args: |
-            --allowedTools Bash,Read,Write,Edit,WebFetch,WebSearch
+            --allowedTools "Read,Write,WebFetch"
+            --disallowedTools "Bash,Edit,WebSearch,mcp__*,Read(./.git/**),Read(~/.claude/**),Write(./**)"
+            --add-dir /tmp
+
+      # 아래 두 스텝은 Claude 종료 후 실행된다. 토큰은 여기서만 등장한다.
+      - name: Process report
+        run: |
+          if [ ! -f /tmp/processed.json ]; then
+            echo "::error::/tmp/processed.json 이 없습니다 — curate 단계가 출력을 생성하지 못했습니다"
+            exit 1
+          fi
+          python3 scripts/daily_report.py --date "${TARGET_DATE}" /tmp/processed.json
+
+      - name: Commit & push
+        env:
+          # step 단위 env — 앞선 claude-code-action 스텝에는 노출되지 않는다
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add archive/ state/
+          if git diff --cached --quiet; then
+            echo "변경 없음 — commit skip"
+            exit 0
+          fi
+          git commit -m "chore: ${TARGET_DATE} report"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          git push origin main
 
   # ---------------------------------------------------------------------------
   # 3. Discord 전송 — archive/*.json을 읽어서 webhook으로

@@ -13,11 +13,16 @@ AI/IT 뉴스 + Claude/Anthropic 업데이트를 Discord로 전송한다.
    · Anthropic 뉴스 sitemap / Claude 릴리즈 노트 / GitHub Releases / HN AI / arxiv
    · inbox/YYYY-MM-DD-raw.json 커밋
    ↓
-[Job 2: curate] ── Claude Code Action (anthropics/claude-code-action@v1)
-   · CLAUDE_CODE_OAUTH_TOKEN 인증 (Pro/Max 구독 사용, 별도 결제 없음)
-   · inbox 읽어서 한국어 요약·top 선정·specials 판정
-   · scripts/daily_report.py 실행 → archive/state 갱신
-   · main에 직접 커밋/푸시
+[Job 2: curate]
+   ├ (a) Claude Code Action (anthropics/claude-code-action@v1)
+   │    · CLAUDE_CODE_OAUTH_TOKEN 인증 (Pro/Max 구독 사용, 별도 결제 없음)
+   │    · inbox 읽어서 한국어 요약·top 선정·specials 판정
+   │    · 산출물은 /tmp/processed.json 하나. 여기서 Claude의 역할 종료
+   │    · 도구는 Read/Write/WebFetch만 — Bash 없음, git 자격증명 없음
+   ├ (b) Process report (결정론적 스텝)
+   │    · scripts/daily_report.py 실행 → 스키마 검증 → 중복 제거 → archive/state 갱신
+   └ (c) Commit & push (결정론적 스텝, 이 스텝에만 토큰 주입)
+        · archive/ state/ 커밋 후 main에 푸시
    ↓
 [Job 3: publish] ── Discord 전송
    · archive/YYYY/MM/YYYY-MM-DD.json 읽어서 webhook POST
@@ -41,7 +46,7 @@ AINews/
 │       └── daily.yml                 # 통합 워크플로 (collect → curate → publish)
 ├── scripts/
 │   ├── collect_data.py               # Job 1: 공식/공개 소스 fetching
-│   ├── daily_report.py               # Job 2에서 Claude가 실행 — 필터/archive/state
+│   ├── daily_report.py               # Job 2(b): 스키마 검증/필터/archive/state
 │   └── send_discord.py               # Job 3: Discord 전송
 ├── state/
 │   ├── seen_urls.json                # 영구 누적 URL 인덱스
@@ -108,7 +113,9 @@ Actions 탭 → **Daily Report** → **Run workflow** (manual trigger):
 
 성공 체크리스트:
 - [ ] `collect` job: `inbox/YYYY-MM-DD-raw.json` 커밋됨
-- [ ] `curate` job: Claude가 `archive/YYYY/MM/YYYY-MM-DD.json` 생성 + state 갱신 + 커밋
+- [ ] `curate` job — Claude 스텝: Bash 도구 사용 흔적 없이 `/tmp/processed.json` 생성
+- [ ] `curate` job — Process report 스텝: 요약 JSON 출력, `archive/YYYY/MM/YYYY-MM-DD.json` 생성
+- [ ] `curate` job — Commit & push 스텝: `chore: YYYY-MM-DD report` 커밋 반영
 - [ ] `publish` job: Discord 채널에 2개 embed 수신
 
 ## 로컬 개발
@@ -141,8 +148,10 @@ python3 scripts/send_discord.py
 | 상황 | 동작 |
 |---|---|
 | collect 실패 | 후속 job 자동 스킵 (`needs` 의존성). Actions 탭에서 수동 재실행. |
-| curate 실패 (Claude 오류) | publish는 여전히 실행되지만 `needs` 실패로 스킵됨. 수동 재실행. |
-| curate가 commit skip (신규 없음) | publish가 빈 리포트 정상 전송. archive 없어도 "금일 업데이트 없음" embed. |
+| Claude 출력 실패 (`/tmp/processed.json` 없음) | Process report 스텝이 명시적 에러로 즉시 실패. Actions 로그에서 Claude 스텝 원인 확인 후 수동 재실행. |
+| Process report 실패 (daily_report.py 오류) | job 실패 → publish 스킵. 입력 스키마 위반은 에러가 아니라 WARN + drop이므로, 여기서 실패하면 스크립트/파일시스템 문제. |
+| push 실패 (권한·충돌) | archive/state는 생성됐지만 저장소에 반영 안 됨. 재실행하면 같은 날짜로 다시 생성된다. |
+| Commit & push가 commit skip (신규 없음) | publish가 빈 리포트 정상 전송. archive 없어도 "금일 업데이트 없음" embed. |
 | publish 실패 (webhook 오류) | Actions 로그에서 HTTP 코드 확인. webhook URL 유효성 점검. |
 
 ## 토큰 갱신

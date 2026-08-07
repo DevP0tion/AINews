@@ -17,11 +17,14 @@ daily_report.py — Routine 환경에서 실행되는 처리 스크립트.
     함께 등록·대조한다. rn:: 항목은 여러 건이 같은 overview URL을 공유하므로 제외.
 
 동작:
+  0. 입력 스키마 검증 (validate_input) — 입력은 신뢰할 수 없는 텍스트를 읽은
+     LLM이 만든 것이므로, 타입·길이·URL 스킴·category 화이트리스트를 강제하고
+     위반 항목은 WARN 로그와 함께 drop한다.
   1. state/seen_urls.json, state/seen_claude.json 로드
   2. URL 정규화 + 중복 필터
   3. archive/YYYY/MM/YYYY-MM-DD.{json,md} 생성
   4. state 갱신
-  5. 파일 변경을 로컬 디스크에 기록 (git commit/push는 Routine이 Bash로 직접 수행)
+  5. 파일 변경을 로컬 디스크에 기록 (git commit/push는 워크플로 스텝이 수행)
 
 이 스크립트는 git/Discord/네트워크를 만지지 않는다. 순수한 파일 처리.
 """
@@ -88,6 +91,107 @@ def claude_item_keys(c: dict) -> list[str]:
     if url and item_id.startswith(URL_KEY_PREFIXES):
         keys.append(f"url::{normalize_url(url)}")
     return keys
+
+
+# --- 입력 스키마 검증 -------------------------------------------------------
+# curate 단계의 Claude는 제3자가 쓴 텍스트(HN 제목, arxiv abstract, release body)를
+# 읽는다. 주입이 성공해도 피해가 여기서 멈추도록 결정론적으로 거른다.
+NEWS_MAX = 10
+CLAUDE_MAX = 30
+TITLE_MAX = 300
+SUMMARY_MAX = 1500
+CONTENT_MAX = 1000
+ID_MAX = 200
+VALID_CATEGORIES = {"모델/API", "제품", "SDK", "문서", "생태계"}
+
+
+def clean_text(value, limit: int) -> str | None:
+    """str이 아니거나 비어 있으면 None, 아니면 앞뒤 공백 제거 후 limit자로 절단."""
+    if not isinstance(value, str):
+        return None
+    s = value.strip()
+    return s[:limit] if s else None
+
+
+def clean_http_url(value) -> str | None:
+    """http/https URL만 통과. javascript:·data:·프로토콜 상대 URL은 None."""
+    if not isinstance(value, str):
+        return None
+    u = value.strip()
+    p = urlparse(u)
+    return u if p.scheme in ("http", "https") and p.netloc else None
+
+
+def validate_input(collected) -> dict:
+    if not isinstance(collected, dict):
+        log("WARN: 입력이 JSON object가 아님 — 전량 drop")
+        return {"news": [], "claude_updates": []}
+
+    news = []
+    raw_news = collected.get("news") or []
+    if not isinstance(raw_news, list):
+        log("WARN: news가 배열이 아님 — 전량 drop")
+        raw_news = []
+    for a in raw_news:
+        if not isinstance(a, dict):
+            log("WARN: news 항목이 object가 아님 — drop")
+            continue
+        title = clean_text(a.get("title"), TITLE_MAX)
+        if not title:
+            log(f"WARN: news title 누락/비문자열 — drop: {a.get('url')!r}")
+            continue
+        url = clean_http_url(a.get("url"))
+        if not url:
+            log(f"WARN: news url이 http(s)가 아님 — drop: {title!r} / {a.get('url')!r}")
+            continue
+        if len(news) >= NEWS_MAX:
+            log(f"WARN: news 최대 {NEWS_MAX}건 초과 — drop: {title!r}")
+            continue
+        news.append({
+            "title": title,
+            "summary": clean_text(a.get("summary"), SUMMARY_MAX) or "",
+            "url": url,
+        })
+
+    updates = []
+    raw_updates = collected.get("claude_updates") or []
+    if not isinstance(raw_updates, list):
+        log("WARN: claude_updates가 배열이 아님 — 전량 drop")
+        raw_updates = []
+    for c in raw_updates:
+        if not isinstance(c, dict):
+            log("WARN: claude_updates 항목이 object가 아님 — drop")
+            continue
+        category = c.get("category")
+        if not isinstance(category, str) or category.strip() not in VALID_CATEGORIES:
+            log(f"WARN: 허용되지 않은 category {category!r} — drop")
+            continue
+        title = clean_text(c.get("title"), TITLE_MAX)
+        if not title:
+            log("WARN: claude_updates title 누락/비문자열 — drop")
+            continue
+        if len(updates) >= CLAUDE_MAX:
+            log(f"WARN: claude_updates 최대 {CLAUDE_MAX}건 초과 — drop: {title!r}")
+            continue
+        item = {
+            "category": category.strip(),
+            "title": title,
+            "content": clean_text(c.get("content"), CONTENT_MAX) or "",
+            "special": bool(c.get("special")),
+        }
+        item_id = clean_text(c.get("id"), ID_MAX)
+        if item_id:
+            item["id"] = item_id
+        if c.get("url") is not None:
+            url = clean_http_url(c.get("url"))
+            if url:
+                item["url"] = url
+            else:
+                log(f"WARN: claude_updates url이 http(s)가 아님 — url 제거: "
+                    f"{title!r} / {c.get('url')!r}")
+        updates.append(item)
+
+    return {"news": news, "claude_updates": updates}
 
 
 def load_json(path: pathlib.Path, default):
@@ -219,10 +323,10 @@ def main() -> None:
     log(f"대상 날짜 (KST): {today}")
     log(f"Repo: {REPO_DIR}")
 
-    collected = load_collected(args.input)
+    collected = validate_input(load_collected(args.input))
     log(
-        f"입력: 뉴스 {len(collected.get('news', []))}건, "
-        f"Claude {len(collected.get('claude_updates', []))}건"
+        f"입력(검증 후): 뉴스 {len(collected['news'])}건, "
+        f"Claude {len(collected['claude_updates'])}건"
     )
 
     seen_urls = set(load_json(SEEN_URLS_PATH, {"urls": []}).get("urls", []))
