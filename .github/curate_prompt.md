@@ -14,7 +14,7 @@ AI 판단이 필요한 부분만 담당한다:
 2. **한국어 요약** 작성
 3. Claude 릴리즈 노트/GitHub Releases에서 **오늘~어제 분량만** 정리
 4. 판정 기준에 맞는 항목에 **`special: true`** 플래그
-5. 중복 체크·archive·state 갱신·commit·push는 `scripts/daily_report.py`가 처리하므로 직접 만지지 말 것
+5. 중복 체크·archive·state 갱신은 `scripts/daily_report.py`가 처리한다. state/archive 파일을 직접 편집하지 말고, commit/push는 6단계 절차로만 수행할 것
 
 ## 작업 순서
 
@@ -25,7 +25,7 @@ cat {{INBOX_PATH}}
 ```
 
 필드:
-- `anthropic_news` — Anthropic 공식 블로그 RSS
+- `anthropic_news` — Anthropic 공식 블로그(sitemap.xml의 `/news/` URL + lastmod). title은 slug 추정값, summary는 비어 있음
 - `claude_release_notes_md` — docs.claude.com 릴리즈 노트 원본 markdown
 - `github_releases.{claude_code, sdk_python, sdk_typescript}` — GitHub Releases
 - `hn_ai_stories` — Hacker News top 스토리 중 AI 관련
@@ -51,6 +51,7 @@ cat {{INBOX_PATH}}
 
 소스별 파싱 기준:
 - `anthropic_news` → 오늘~어제 published만, 카테고리는 내용 기반 판정 (제품 / 모델/API)
+  - **주의**: `published`는 sitemap `lastmod`(페이지 수정 시각)라서 과거 글을 수정해도 최신으로 잡힐 수 있다. 제목·발행일은 `WebFetch`로 원문을 확인해 판정하고, 단순 페이지 수정으로 재등장한 과거 글은 제외할 것. `title`도 URL slug에서 유도한 근사값이므로 원문 제목으로 교체할 것
 - `claude_release_notes_md` → **오늘~어제 날짜 섹션만** 추출. 긴 본문 전체 파싱 금지
 - `github_releases.*` → `published_at`이 오늘~어제인 것만. sdk_python/sdk_typescript는 카테고리 "SDK", claude_code는 "제품"
 
@@ -73,10 +74,30 @@ cat {{INBOX_PATH}}
     {"title": "...", "summary": "한국어 2~3문장", "url": "..."}
   ],
   "claude_updates": [
-    {"category": "...", "title": "...", "content": "한국어 1문장", "url": "...", "special": false}
+    {"id": "...", "category": "...", "title": "...", "content": "한국어 1문장", "url": "...", "special": false}
   ]
 }
 ```
+
+**`id` 작성 규칙 (중복 판정 키 — 반드시 채울 것)**
+
+`title`은 매일 다르게 재작성되는 자유 문구라 중복 판정에 쓸 수 없다. `id`는 **원본 데이터에서 그대로 따온 안정적인 값**이어야 하며, 같은 릴리즈는 며칠에 걸쳐 다시 입력돼도 항상 같은 `id`가 나와야 한다. 재작성한 문구를 넣지 말 것.
+
+| 소스 | 형식 | 예시 |
+|---|---|---|
+| `github_releases.*` | `gh::{repo}::{tag}` | `gh::anthropic-sdk-python::v0.121.0` |
+| `anthropic_news` | `news::{url}` | `news::https://www.anthropic.com/news/...` |
+| `claude_release_notes_md` | `rn::{날짜 섹션}::{항목 핵심 키워드}` | `rn::2026-08-06::opus-5-ga` |
+
+- `repo`: 아래 표대로만 매핑한다. **추론·축약 금지** (owner 접두사 `anthropics/`는 붙이지 않는다).
+  | 인박스 키 | `repo` 값 |
+  |---|---|
+  | `github_releases.claude_code` | `claude-code` |
+  | `github_releases.sdk_python` | `anthropic-sdk-python` |
+  | `github_releases.sdk_typescript` | `anthropic-sdk-typescript` |
+- `tag`: 원본 JSON의 `tag` 필드 값 그대로 (`v` 접두사 포함, 가공 금지).
+- `news::`의 `url`: 원본 JSON의 `url` 값 그대로.
+- `rn::`의 날짜 섹션: 릴리즈 노트 원문의 날짜 헤딩 그대로 (`YYYY-MM-DD`). 키워드는 원문에서 따온 **영문 소문자 + 하이픈** (예: `opus-5-ga`, `mcp-oauth`). 번역·의역 금지.
 
 전혀 선정할 것이 없어도 에러 아님. 빈 배열로:
 ```json

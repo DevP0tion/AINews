@@ -10,7 +10,7 @@ AI/IT 뉴스 + Claude/Anthropic 업데이트를 Discord로 전송한다.
 [매일 07:00 KST cron]
    ↓
 [Job 1: collect] ── 결정론적 fetching (Python)
-   · Anthropic 뉴스 RSS / Claude 릴리즈 노트 / GitHub Releases / HN AI / arxiv
+   · Anthropic 뉴스 sitemap / Claude 릴리즈 노트 / GitHub Releases / HN AI / arxiv
    · inbox/YYYY-MM-DD-raw.json 커밋
    ↓
 [Job 2: curate] ── Claude Code Action (anthropics/claude-code-action@v1)
@@ -54,7 +54,7 @@ AINews/
 
 ## 수집 소스 (collect_data.py)
 
-- **Anthropic News RSS** — https://www.anthropic.com/news/rss.xml
+- **Anthropic News** — https://www.anthropic.com/sitemap.xml 의 `/news/` 항목을 `lastmod` 내림차순 10건 (anthropic.com은 RSS 미제공)
 - **Claude 릴리즈 노트** — https://docs.claude.com/en/release_notes/overview.md (raw markdown)
 - **GitHub Releases API** — `anthropics/claude-code`, `anthropics/anthropic-sdk-python`, `anthropics/anthropic-sdk-typescript`
 - **Hacker News** top stories 중 AI 키워드 매치
@@ -63,7 +63,12 @@ AINews/
 ## 중복 판정
 
 - **뉴스**: URL 정규화 (scheme/host 소문자화, trailing slash 제거, tracking param 제거, fragment 제거) 후 완전 일치
-- **Claude 업데이트**: `{category}::{title_normalized}` 키 완전 일치
+- **Claude 업데이트**: curate 단계가 부여한 `id` 완전 일치.
+  `id`는 원본에서 따온 안정적 값 — `gh::{repo}::{tag}` / `news::{url}` / `rn::{날짜}::{키워드}`.
+  (title은 매일 재작성되는 자유 문구라 키로 쓰지 않는다.)
+  - `id`가 없는 레거시 항목은 `{category}::{title_normalized}` 키로 fallback
+  - `gh::`·`news::` 항목은 `url::{normalized_url}`도 보조 키로 함께 대조
+    (릴리즈 노트는 여러 항목이 같은 overview URL을 공유하므로 제외)
 - **윈도우**: 영구 (state/seen_*.json 누적)
 
 ## 셋업

@@ -21,6 +21,10 @@ UTC = ZoneInfo("UTC")
 REPO_DIR = pathlib.Path(__file__).resolve().parent.parent
 MAX_FIELD = 1024
 MAX_FIELDS_PER_EMBED = 25
+# Discord: 한 메시지의 모든 embed에 걸친 title+description+field name/value+footer 합계
+MAX_TOTAL_CHARS = 6000
+# 생략 안내 field가 차지할 자리를 넉넉히 예약 (실제 길이는 이보다 짧다)
+NOTICE_BUDGET = 64
 
 COLOR_NEWS = 5765618
 COLOR_CLAUDE = 14271596
@@ -49,6 +53,44 @@ def chunk_field(name: str, value: str) -> list[dict]:
         i = end
         n += 1
     return parts
+
+
+def embed_len(embed: dict) -> int:
+    return (
+        len(embed.get("title", ""))
+        + len(embed.get("description", ""))
+        + len(embed.get("footer", {}).get("text", ""))
+        + sum(len(f["name"]) + len(f["value"]) for f in embed["fields"])
+    )
+
+
+def enforce_total_limit(embeds: list[dict]) -> None:
+    """합계 6000자를 넘으면 뒤쪽 embed의 뒤쪽 field부터 드랍 (in-place)."""
+    total = sum(embed_len(e) for e in embeds)
+    if total <= MAX_TOTAL_CHARS:
+        return
+
+    dropped_all = 0
+    for embed in reversed(embeds):
+        if total <= MAX_TOTAL_CHARS or not embed["fields"]:
+            continue
+        dropped = 0
+        total += NOTICE_BUDGET  # 생략 안내 field 자리 선반영
+        while total > MAX_TOTAL_CHARS and embed["fields"]:
+            f = embed["fields"].pop()
+            total -= len(f["name"]) + len(f["value"])
+            dropped += 1
+        if dropped:
+            embed["fields"].append({
+                "name": "…",
+                "value": f"이하 {dropped}건 생략 — archive 참고",
+                "inline": False,
+            })
+            dropped_all += dropped
+        else:
+            total -= NOTICE_BUDGET
+
+    log(f"WARN: embed 총량 {MAX_TOTAL_CHARS}자 초과 — field {dropped_all}건 드랍")
 
 
 def build_payload(date: str, report: dict) -> dict:
@@ -96,29 +138,29 @@ def build_payload(date: str, report: dict) -> dict:
             "\n".join(f"• {s}" for s in specials),
         ))
 
-    return {
-        "embeds": [
-            {
-                "title": f"AI/IT Daily News — {date}",
-                "description": "오늘의 AI/IT 주요 소식입니다.",
-                "color": COLOR_NEWS,
-                "fields": news_fields[:MAX_FIELDS_PER_EMBED],
-                "footer": {"text": "PotionBot News · 자동 수집"},
-                "timestamp": ts,
-            },
-            {
-                "title": f"Claude/Anthropic Update Report — {date}",
-                "description": (
-                    "오늘의 Claude/Anthropic 업데이트 현황입니다."
-                    if claude_fields else "금일 확인된 Claude/Anthropic 업데이트 없음."
-                ),
-                "color": COLOR_CLAUDE,
-                "fields": claude_fields[:MAX_FIELDS_PER_EMBED],
-                "footer": {"text": "PotionBot News · Claude Watch"},
-                "timestamp": ts,
-            },
-        ]
-    }
+    embeds = [
+        {
+            "title": f"AI/IT Daily News — {date}",
+            "description": "오늘의 AI/IT 주요 소식입니다.",
+            "color": COLOR_NEWS,
+            "fields": news_fields[:MAX_FIELDS_PER_EMBED],
+            "footer": {"text": "PotionBot News · 자동 수집"},
+            "timestamp": ts,
+        },
+        {
+            "title": f"Claude/Anthropic Update Report — {date}",
+            "description": (
+                "오늘의 Claude/Anthropic 업데이트 현황입니다."
+                if claude_fields else "금일 확인된 Claude/Anthropic 업데이트 없음."
+            ),
+            "color": COLOR_CLAUDE,
+            "fields": claude_fields[:MAX_FIELDS_PER_EMBED],
+            "footer": {"text": "PotionBot News · Claude Watch"},
+            "timestamp": ts,
+        },
+    ]
+    enforce_total_limit(embeds)
+    return {"embeds": embeds}
 
 
 def post_discord(webhook: str, payload: dict) -> None:

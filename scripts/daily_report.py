@@ -5,8 +5,16 @@ daily_report.py — Routine 환경에서 실행되는 처리 스크립트.
 입력: Routine이 생성한 처리 결과 JSON (stdin 또는 첫 인자)
   {
     "news": [{"title", "summary", "url"}],
-    "claude_updates": [{"category", "title", "content", "url", "special"}]
+    "claude_updates": [{"id", "category", "title", "content", "url", "special"}]
   }
+
+중복 판정 (Claude 업데이트):
+  - `id`가 있으면 그 값이 대표 키. curate 단계가 원본에서 따온 안정적 값
+    (gh::{repo}::{tag} / news::{url} / rn::{date}::{slug})을 넣으므로,
+    매일 재작성되는 title 문구가 달라져도 같은 릴리즈는 같은 키가 된다.
+  - `id`가 없으면 기존 `{category}::{title.lower()}`로 fallback (하위 호환).
+  - id가 gh::/news:: 프리픽스인 항목은 `url::{normalize_url(url)}`을 보조 키로
+    함께 등록·대조한다. rn:: 항목은 여러 건이 같은 overview URL을 공유하므로 제외.
 
 동작:
   1. state/seen_urls.json, state/seen_claude.json 로드
@@ -69,6 +77,19 @@ def claude_item_key(category: str, title: str) -> str:
     return f"{category.strip()}::{title.strip().lower()}"
 
 
+URL_KEY_PREFIXES = ("gh::", "news::")
+
+
+def claude_item_keys(c: dict) -> list[str]:
+    """항목의 중복 판정 키 목록. [0]이 대표 키."""
+    item_id = (c.get("id") or "").strip()
+    keys = [item_id] if item_id else [claude_item_key(c["category"], c["title"])]
+    url = (c.get("url") or "").strip()
+    if url and item_id.startswith(URL_KEY_PREFIXES):
+        keys.append(f"url::{normalize_url(url)}")
+    return keys
+
+
 def load_json(path: pathlib.Path, default):
     if path.exists():
         try:
@@ -105,9 +126,10 @@ def filter_new(collected: dict, seen_urls: set, seen_claude: set):
         if not c.get("category") or not c.get("title"):
             log(f"WARN: category/title 누락 Claude 항목 skip: {c}")
             continue
-        key = claude_item_key(c["category"], c["title"])
-        c["_key"] = key
-        (claude_dup if key in seen_claude else claude_new).append(c)
+        keys = claude_item_keys(c)
+        c["_keys"] = keys
+        is_dup = any(k in seen_claude for k in keys)
+        (claude_dup if is_dup else claude_new).append(c)
 
     specials = [c["title"] for c in claude_new if c.get("special")]
     return news_new, news_dup, claude_new, claude_dup, specials
@@ -242,7 +264,7 @@ def main() -> None:
     for a in news_new:
         seen_urls.add(a["_normalized_url"])
     for c in claude_new:
-        seen_claude.add(c["_key"])
+        seen_claude.update(c["_keys"])
     save_json(SEEN_URLS_PATH, {"urls": sorted(seen_urls)})
     save_json(SEEN_CLAUDE_PATH, {"items": sorted(seen_claude)})
 

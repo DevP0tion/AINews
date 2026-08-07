@@ -27,6 +27,7 @@ import json
 import os
 import pathlib
 import sys
+from xml.etree import ElementTree
 
 import feedparser
 import requests
@@ -70,32 +71,74 @@ def safe(label: str, fn, default):
 # ---------------------------------------------------------------------------
 
 
-def fetch_anthropic_news():
-    """Anthropic 뉴스. RSS 우선, 실패 시 빈 배열."""
-    feed = feedparser.parse("https://www.anthropic.com/news/rss.xml")
-    if not feed.entries:
+def fetch_anthropic_news(limit: int = 10):
+    """Anthropic 뉴스. sitemap.xml에서 /news/ 항목을 lastmod 내림차순으로 최근 limit개.
+
+    anthropic.com은 RSS를 제공하지 않는다(/news/rss.xml, /rss.xml 모두 404).
+    sitemap.xml(HTTP 200)의 <loc>+<lastmod> 쌍이 유일하게 안정적인 소스다.
+    title은 slug에서 유도한 근사값이고 summary는 비어 있다 — 정확한 제목·발행일은
+    curate 단계에서 Claude가 WebFetch로 원문을 확인한다.
+    실패하거나 결과가 0건이면 WARN 로그 후 빈 배열 (job은 실패시키지 않음).
+    """
+    ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    prefix = "https://www.anthropic.com/news/"
+
+    try:
+        xml = http_get_text("https://www.anthropic.com/sitemap.xml")
+    except Exception as e:
+        log(f"WARN anthropic_news: sitemap fetch 실패: {e}")
         return []
-    out = []
-    for e in feed.entries[:10]:
-        out.append({
-            "title": getattr(e, "title", ""),
-            "url": getattr(e, "link", ""),
-            "summary": getattr(e, "summary", ""),
-            "published": getattr(e, "published", ""),
+
+    try:
+        root = ElementTree.fromstring(xml)
+    except ElementTree.ParseError as e:
+        log(f"WARN anthropic_news: sitemap 파싱 실패: {e}")
+        return []
+
+    items = []
+    for url_el in root.findall("sm:url", ns):
+        loc = (url_el.findtext("sm:loc", "", ns) or "").strip()
+        if not loc.startswith(prefix):
+            continue
+        lastmod = (url_el.findtext("sm:lastmod", "", ns) or "").strip()
+        slug = loc[len(prefix):].strip("/").replace("-", " ")
+        if not slug:
+            continue  # /news/ 인덱스 페이지 자체 — 항상 최신 lastmod라 1위를 먹는다
+        items.append({
+            "title": slug[:1].upper() + slug[1:],
+            "url": loc,
+            "summary": "",
+            "published": lastmod,
         })
-    return out
+
+    if not items:
+        log("WARN anthropic_news: sitemap에 /news/ 항목 0건 — 소스 URL 점검 필요")
+        return []
+
+    items.sort(key=lambda it: it["published"], reverse=True)
+    return items[:limit]
 
 
 def fetch_claude_release_notes() -> str:
-    """docs.claude.com 릴리즈 노트 원본 markdown."""
-    try:
-        return http_get_text("https://docs.claude.com/en/release_notes/overview.md")
-    except Exception:
-        # fallback: HTML 페이지 raw
+    """docs.claude.com 릴리즈 노트 원본 markdown. 주 URL 실패 시 HTML 페이지 raw."""
+    urls = [
+        "https://docs.claude.com/en/release-notes/overview.md",
+        "https://docs.claude.com/en/release-notes/overview",  # fallback: HTML
+    ]
+    for url in urls:
         try:
-            return http_get_text("https://docs.claude.com/en/release_notes/overview")
-        except Exception:
-            return ""
+            text = http_get_text(url)
+        except Exception as e:
+            # requests 의 HTTPError 문자열에 status code 가 포함된다
+            log(f"WARN release_notes {url}: {e}")
+            continue
+        if len(text) < 500:
+            # 404 페이지가 200 으로 위장하는 경우 대비
+            log(f"WARN release_notes {url}: 응답이 비정상적으로 짧음 ({len(text)}자)")
+            continue
+        return text
+    log("ERROR: release notes 전체 실패 — 소스 URL 점검 필요")
+    return ""
 
 
 def fetch_github_releases(repo: str, limit: int = 5):
@@ -161,7 +204,9 @@ def fetch_arxiv_recent(categories=("cs.LG", "cs.CL"), limit: int = 10):
             f"?search_query=cat:{cat}&start=0&max_results={limit}"
             f"&sortBy=submittedDate&sortOrder=descending"
         )
-        feed = feedparser.parse(url)
+        # feedparser.parse(url)은 timeout이 없어 원격이 응답을 끌면 job이 hang된다.
+        # requests로 TIMEOUT 걸어 받은 뒤 본문만 파싱 — HTTP 실패는 safe()가 WARN 처리.
+        feed = feedparser.parse(http_get_text(url))
         for e in feed.entries[:limit]:
             out.append({
                 "title": getattr(e, "title", "").strip().replace("\n", " "),
