@@ -1,0 +1,46 @@
+{
+  "date": "2026-08-12",
+  "news": [
+    {
+      "title": "14MB 초경량 에이전트 LLM 'Needle2', 라즈베리파이·저가폰서 구동",
+      "summary": "Cactus Compute가 공개한 오픈소스 모델 Needle2는 4500만 파라미터를 14MB 바이너리, 28MB RAM만으로 구동하며 도구 호출과 기기 제어, 구조화 데이터 추출에 특화됐다. 고정 월시-아다마르 변환 기반 어텐션, 2비트 양자화, n-그램 해시 기억 모듈을 결합해 연산량을 토큰당 70MFLOPs까지 낮췄다. 라즈베리파이5에서 초당 500토큰의 디코딩 속도를 내며 마이크로컨트롤러·웨어러블 등 극단적 엣지 기기를 겨냥한다.",
+      "url": "https://cactuscompute.com/needle"
+    },
+    {
+      "title": "Anthropic·OpenAI·Google 추론 과정 암호화, 취약점으로 평문 복구 가능했다",
+      "summary": "연구진이 프런티어 모델의 암호화된 사고사슬(chain-of-thought) 블록이 세션·모델 간에 재생 가능한 공통 키를 사용한다는 취약점을 발견해, 이를 더 약한 형제 모델에 주입하고 탈옥시켜 상위 모델의 숨겨진 추론 과정을 평문으로 복구하는 데 성공했다. Anthropic, OpenAI, Google 모두 취약점을 인지하고 패치를 완료했다.",
+      "url": "https://stolen-thoughts.com/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Compliance API, 로컬 세션 트랜스크립트 조회 기능 베타 추가",
+      "content": "Claude Enterprise 조직 대상 베타로 Compliance API에 Cowork·Claude Code 로컬 세션 목록과 메타데이터, 트랜스크립트를 조회하는 엔드포인트(`GET /v1/compliance/apps/sessions/local` 등)가 추가됐다.",
+      "special": false,
+      "id": "rn::2026-08-11::compliance-local-sessions",
+      "url": "https://docs.claude.com/en/release-notes/api"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.228 릴리스",
+      "content": "세션 화면이 멈추는 렌더링 오류, Windows에서 git 인식 실패, Remote Control `/resume` 시 세션 정보 유출 등 다수 버그를 수정한 패치 릴리스가 나왔다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.228",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.228"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.227 릴리스",
+      "content": "만료된 로그인 토큰으로 세션 시작 시 구독 등급이 잘못 평가되던 문제와 `claude-code-action`에서 Bash 명령이 전부 실패하던 문제를 수정한 패치 릴리스가 나왔다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.227",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.227"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
