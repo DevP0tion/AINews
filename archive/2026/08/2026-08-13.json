@@ -1,0 +1,35 @@
+{
+  "date": "2026-08-13",
+  "news": [
+    {
+      "title": "암호화된 LLM 추론 흔적, 세션 간 재사용 취약점으로 탈취 가능",
+      "summary": "연구진이 Anthropic, OpenAI, Google 등 주요 LLM 제공사가 지적재산권 보호를 위해 암호화하는 chain-of-thought 추론 블록이 서로 다른 세션 간에도 호환·상호교환된다는 아키텍처 결함을 발견했다. 더 강력한 모델의 암호화된 추론 블록을 약한 모델에 주입해 복호화·평문 출력을 강제하는 공격으로, 공개 저장소에서 수집한 31만여 개 암호화 블록에서 PII와 자격증명을 대량 복구했으며, 최종 답변이 거부된 경우에도 추론 과정에서 위험 정보가 노출될 수 있음을 보였다.",
+      "url": "https://arxiv.org/abs/2608.09867"
+    },
+    {
+      "title": "텐센트, 완전 에이전트 기반 3D 오픈월드 생성 프레임워크 WorldClaw 공개",
+      "summary": "Tencent Hunyuan이 텍스트 프롬프트만으로 대규모 탐색 가능한 3D 오픈월드를 생성하는 에이전트 기반 프레임워크 WorldClaw를 공개했다. 계획(지역·지형·자산 설계)→기반 구축→상세 정제로 이어지는 3단계 파이프라인을 통해 전역적 공간 일관성과 국소적 콘텐츠 디테일을 함께 확보하며, 결과물은 편집 가능한 개별 자산 단위로 생성된다.",
+      "url": "https://tencent-hunyuan.github.io/Hunyuan3D-WorldClaw/"
+    },
+    {
+      "title": "수학자 고워스, LLM이 잘하는 수학과 못하는 수학을 분석하다",
+      "summary": "필즈상 수상자 Timothy Gowers는 최근 LLM이 반례 발견이나 존재증명처럼 폭넓은 탐색이 유리한 조합론적 문제에서는 강점을 보이지만, 유망한 방향을 직관적으로 판단하고 증명 탐색 트리를 가지치기하는 능력에서는 여전히 인간에게 뒤처진다고 분석했다. 비소픽 군 구성, 다중색 램지 수 하한 등 AI가 최근 기여한 사례들을 근거로 들었다.",
+      "url": "https://gowers.wordpress.com/2026/08/12/what-sort-of-maths-are-llms-good-at/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.229 릴리스",
+      "content": "Remote Control 세션 재개(`--continue`) 및 플러그인 마켓플레이스 command 소스 지원을 추가하고, 스트리밍 중복 출력·좁은 터미널 크래시·Windows 확장 경로 크래시 등 다수 버그를 수정한 유지보수 릴리스다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.229",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.229"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
