@@ -1,0 +1,59 @@
+{
+  "date": "2026-08-14",
+  "news": [
+    {
+      "title": "Google, 코딩·에이전트 특화 신모델 Gemini 3.7 Flash 공개",
+      "summary": "Google이 코딩과 에이전트 작업에 특화된 경량 모델 Gemini 3.7 Flash를 공개했다. FrontierCode(34.4%→43.6%), DeepSWE(49.0%→65.3%) 등 주요 벤치마크에서 전작 3.6 Flash 대비 큰 폭으로 향상됐으며, 2026년 말까지 입력 100만 토큰당 $0.75·출력 $3.75의 도입가로 제공된다.",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/"
+    },
+    {
+      "title": "Cerebras·OpenAI, GPT-5.6 Sol용 초고속 추론 'Ultrafast Mode' 공개",
+      "summary": "Cerebras와 OpenAI가 Wafer-Scale Engine 기반의 신규 추론 티어 'Ultrafast Mode'를 발표했다. 가중치를 칩 위 SRAM에 상주시켜 GPU 방식의 데이터 이동 병목을 없앰으로써 GPT-5.6 Sol 기준 초당 최대 750토큰, 품질 저하 없이 GDP-Val 벤치마크에서 5.6배 종단 간 속도 향상을 달성했다고 밝혔다. 현재는 제한적 프리뷰로 제공된다.",
+      "url": "https://www.cerebras.ai/blog/accelerating-gpt-5-6-sol-ultrafast-with-openai"
+    },
+    {
+      "title": "OpenAI, Linux용 ChatGPT 데스크톱 앱에 Codex 통합 프리뷰 출시",
+      "summary": "OpenAI가 Codex 기능을 포함한 ChatGPT 데스크톱 앱의 Linux 프리뷰 버전을 공개했다. Ubuntu·Debian·Fedora 등 주요 배포판용 .deb/.rpm 패키지를 지원하며 Windows 버전과 기능 동등성을 갖췄지만, KDE/Wayland IME 문제 등 초기 호환성 이슈가 커뮤니티에서 다수 보고됐다.",
+      "url": "https://community.openai.com/t/codex-in-chatgpt-desktop-app-for-linux-is-now-in-preview/1390027"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.231 릴리스",
+      "content": "Slack처럼 사전 등록된 OAuth 클라이언트를 쓰는 MCP 서버에서 리다이렉트 URI 불일치로 로그인이 실패하던 버그를 수정했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.231",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.231"
+    },
+    {
+      "category": "SDK",
+      "title": "Python SDK v0.122.0 릴리스",
+      "content": "dream 생성 API에 신규 메모리 스토어 생성 또는 기존 스토어 갱신을 선택하는 output_behavior 옵션을 추가했고, Bedrock 비동기 클라이언트의 SigV4 서명을 이벤트 루프 밖에서 처리하도록 수정했다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v0.122.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.122.0"
+    },
+    {
+      "category": "SDK",
+      "title": "TypeScript SDK v0.117.0 릴리스",
+      "content": "Python SDK와 동일하게 dream 생성 API에 output_behavior 옵션이 추가됐고, 스트리밍 메시지 누적 시 message_delta 필드를 모두 반영하도록 수정하는 등 여러 버그를 고쳤다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.117.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.117.0"
+    },
+    {
+      "category": "SDK",
+      "title": "Vertex SDK v0.19.2 릴리스",
+      "content": "Vertex·Bedrock 사용 시 앰비언트 1차 자격증명이 실수로 제공자 엔드포인트로 전송되지 않도록 막는 보안 관련 수정이 포함됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::vertex-sdk-v0.19.2",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/vertex-sdk-v0.19.2"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 1
+  }
+}
