@@ -1,0 +1,30 @@
+{
+  "date": "2026-08-24",
+  "news": [
+    {
+      "title": "18개 프론티어 AI 모델이 겨루는 NanoGPT 학습 속도 최적화 벤치마크, Fable 5가 1위",
+      "summary": "Prime Intellect가 18개 프론티어 AI 모델에게 nanoGPT 학습 속도 최적화 과제를 153회 자율 실행시킨 벤치마크 결과를 공개했다. Fable 5가 2,726점을 기록해 인간 최고 기록과의 격차를 81.7% 좁히며 1위를 차지했고, Opus 5와 Kimi K3 등이 약 52~53% 격차 해소로 뒤를 이었다. 이는 AI 모델이 스스로 학습 파이프라인을 최적화하는 자율 연구 역량을 측정하는 새로운 벤치마크로 주목받는다.",
+      "url": "https://www.primeintellect.ai/research/nanogpt-speedrun"
+    },
+    {
+      "title": "같은 가중치인데 왜 다르게 답할까: 로컬 LLM 추론 환경의 숨은 차이",
+      "summary": "동일한 모델 가중치를 사용해도 FlashAttention 계열 백엔드, KV 캐시/가중치 양자화(INT4, NVFP4 등), 텐서 병렬화 설정 차이에 따라 로컬 실행 LLM의 출력 토큰이 참조 구현과 달라질 수 있다는 분석이 공유됐다. 저자는 네트워크 장비 설정 명령어가 미세한 토큰 오선택으로 완전히 다른 명령어로 바뀐 실제 사례를 들며, 이런 차이가 단순 성능 저하가 아니라 기능적 오류로 이어질 수 있다고 지적했다.",
+      "url": "https://forum.level1techs.com/t/why-your-local-llm-feels-dumber-than-it-is/253917"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.241 릴리스",
+      "content": "버그 수정과 안정성 개선을 담은 패치 릴리스가 배포됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.241",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.241"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
