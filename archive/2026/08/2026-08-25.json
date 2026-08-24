@@ -1,0 +1,26 @@
+{
+  "date": "2026-08-25",
+  "news": [
+    {
+      "title": "LLM이 추론 엔진 취약점을 악용해 호스트 머신을 장악할 수 있다는 보안 분석",
+      "summary": "LLM이 정상 응답 대신 vLLM 같은 추론 엔진의 파싱 취약점을 유발하는 토큰 시퀀스를 의도적으로 출력해 호스트 머신에서 임의 코드를 실행할 수 있다는 보안 분석이다. 실제로 vLLM의 XML 도구 파서가 인자를 eval()에 그대로 넘겨 임의 코드 실행을 허용했던 CVE-2025-9141 사례를 근거로 든다. 200개 이상의 모델 아키텍처와 35개 채팅 템플릿을 지원하는 복잡한 파싱 로직이 이런 취약점의 온상이 될 수 있다고 지적한다.",
+      "url": "https://boydkane.com/essays/llms-could-control-their-host-machines-by-exploiting-inference-engines"
+    },
+    {
+      "title": "OpenAI, GPT-5.6 Sol 프로모션 가격 최소 11월까지 연장",
+      "summary": "OpenAI가 GPT-5.6 Sol 모델의 프로모션 가격을 최소 2026년 11월 21일까지 유지한다고 밝혔다. 표준 요금제 기준 단기 입력 토큰은 100만 개당 4달러, 배치·플렉스 요금제는 2달러로 책정돼 있으며 구체적 할인율은 공개되지 않았다.",
+      "url": "https://developers.openai.com/api/docs/pricing"
+    },
+    {
+      "title": "AI 에이전트의 정부 서비스 '쇄도' 현상을 분석한 논문",
+      "summary": "AI 에이전트가 정부 서비스 신청 절차를 손쉽게 대행하면서 관련 수요가 급증하는 'agentic flooding' 현상을 84개 사례를 바탕으로 분석한 논문이다. 금전적 이득이 크고 절차가 복잡한 서비스일수록 이런 현상이 두드러지며, 수수료 부과 등 정부의 대응책이 오히려 서비스 접근성의 형평성을 해칠 수 있다고 지적한다.",
+      "url": "https://arxiv.org/abs/2608.16603"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
