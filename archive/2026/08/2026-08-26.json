@@ -1,0 +1,43 @@
+{
+  "date": "2026-08-26",
+  "news": [
+    {
+      "title": "Anthropic 최상위 모델, 저렴한 경쟁 도구들에 밀려 사용자 확보 고전",
+      "summary": "파이낸셜타임스(FT) 보도에 따르면 Anthropic의 최상위 모델이 성능 우위에도 불구하고 신규 사용자 확보에 어려움을 겪고 있으며, 저렴한 경쟁 도구들이 빠르게 성장하고 있다. 관련 논의에서는 요금제와 사용량 제한 정책이 자주 바뀌는 점이 사용자 이탈을 부추긴다는 지적도 나왔다.",
+      "url": "https://www.ft.com/content/5ee49718-c258-4f01-aa32-7e5b76ae5245"
+    },
+    {
+      "title": "OpenAI 자체 추론 칩 'Jalapeño', 성능당 전력 효율에서 Nvidia Blackwell 앞서",
+      "summary": "OpenAI가 약 16개월 만에 하드웨어·소프트웨어 co-design으로 설계한 추론 전용 칩 'Jalapeño'가 성능당 전력(MW당 토큰 처리량) 지표에서 Nvidia Blackwell과 AMD 칩을 능가한다는 분석이 나왔다. 다만 메모리 규격이 유사한 Nvidia 차세대 칩 Vera Rubin과는 총소유비용(TCO) 면에서 비슷한 수준이며, 아직 양산이 아닌 엔지니어링 샘플 단계다.",
+      "url": "https://newsletter.semianalysis.com/p/openai-jalapeno-better-than-nvidia"
+    },
+    {
+      "title": "강화학습으로 코드를 그려 그림을 그리는 AI 훈련 사례",
+      "summary": "연구팀이 강화학습을 통해 AI가 p5.brush 코드를 작성해 시각 예술을 생성하도록 훈련한 실험을 공개했다. 절대 점수 대신 사람이 평가한 117개 참조 작품과의 상대 비교로 보상을 설계하고 GEPA로 시스템 프롬프트를 최적화한 것이 품질 향상의 핵심이었다.",
+      "url": "https://surya.website/rling-qwen-to-paint-with-code"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.245",
+      "content": "glibc 2.44를 탑재한 Linux 배포판(Arch Linux, CachyOS, Fedora Rawhide 등)에서 시작 시 발생하던 크래시를 수정했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.245",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.245"
+    },
+    {
+      "category": "생태계",
+      "title": "AI의 웰빙 영향 평가 연구에 500만 달러 지원",
+      "content": "Anthropic이 AI가 사용자 웰빙에 미치는 영향을 평가하는 독립 연구를 지원하기 위해 500만 달러 규모의 보조금 프로그램을 발표하고, 자금과 모델 접근권, 기술 지원을 제공한다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/wellbeing-research-grants",
+      "url": "https://www.anthropic.com/news/wellbeing-research-grants"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
