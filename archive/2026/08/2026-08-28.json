@@ -1,0 +1,80 @@
+{
+  "date": "2026-08-28",
+  "news": [
+    {
+      "title": "법원 \"트럼프 행정부의 앤스로픽 사용 금지 조치는 위법\"",
+      "summary": "미국 법원이 국방부의 클로드 사용을 금지한 '헤그세스 지침'과 공급망 지정 조치를 행정절차법 위반으로 보고 위법 판결을 내렸다. 이 조치는 앤스로픽이 살상 자율무기·대규모 감시 목적 사용을 제한한 데 대한 보복 성격이었으며, 그 여파로 정부 계약사들이 계약을 해지해 1억 8000만 달러 이상의 거래가 무산되는 등 앤스로픽이 큰 피해를 본 것으로 전해졌다.",
+      "url": "https://www.nytimes.com/2026/08/27/technology/anthropic-government-blacklisting-ruling.html"
+    },
+    {
+      "title": "구글, 신규 음성인식 모델 'Gemini 3.5 Transcribe' 공개",
+      "summary": "구글이 자사 최고 정밀도의 음성-텍스트 변환 모델이라고 소개하는 'Gemini 3.5 Transcribe'를 공개했다. 85개 이상 언어와 화자 구분, 맞춤 어휘 인식, 다른 Gemini 모델과 연동되는 함수 호출 기능을 지원하며, 현재 Gemini API와 AI Studio를 통해 퍼블릭 프리뷰로 제공된다.",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5-transcribe/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "베타 Files/Skills 네임스페이스가 GA 응답 형식으로 전환",
+      "content": "Python/TypeScript/Go/Java/Ruby/C# SDK 전반에서 client.beta.files·client.beta.skills가 더 이상 날짜가 붙은 베타 헤더를 보내지 않고 GA 응답 형식을 반환하도록 변경됐으며, BetaSkill 타입이 BetaContainerSkill로 이름이 바뀌는 등 마이그레이션이 필요하다.",
+      "special": true,
+      "id": "rn::2026-08-27::beta-files-skills-ga-shapes",
+      "url": "https://platform.claude.com/docs/en/release-notes/api"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.248 릴리스",
+      "content": "실행 도구를 제한하는 --restricted 플래그, 에이전트별 프롬프트 캐시 TTL 설정, 동일 머신 세션 간 크로스세션 메시징 등이 추가되고 장시간 세션에서 발생하던 프롬프트 캐시 미스 등 다수 버그가 수정되었다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.248",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.248"
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic Python SDK v1.2.0 릴리스",
+      "content": "베타 Files/Skills 네임스페이스가 GA 형식을 사용하도록 변경되고, AWS Bedrock 바이너리 업로드 서명 오류 등 여러 버그가 수정되었다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.2.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.2.0"
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic TypeScript SDK v0.122.0 릴리스",
+      "content": "베타 Files/Skills 네임스페이스가 GA 형식을 사용하도록 변경되고, SSE 파싱 오류 로깅 및 세션 이벤트 누적기 호환성 등 여러 버그가 수정되었다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.122.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.122.0"
+    },
+    {
+      "category": "모델/API",
+      "title": "모델-하드웨어 표준(Model Hardware Standard) 리서치 프리뷰 공개",
+      "content": "Anthropic이 AI 에이전트가 실험실·제조 장비를 안전하게 제어할 수 있도록 하는 공통 규격 'Model Hardware Standard'의 리서치 프리뷰를 공개했으며, Genentech·카네기멜런대·QuEra 등과의 초기 적용 사례를 함께 소개했다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/model-hardware-standard-research-preview",
+      "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview"
+    },
+    {
+      "category": "제품",
+      "title": "과학자 지원 확대: 학술 기관용 팀 플랜 및 AI for Science 프로그램 확장",
+      "content": "Anthropic이 학술·비영리 기관 연구자를 위한 무료·할인 팀 플랜(월 15달러 프리미엄 좌석 포함) 1만 개를 제공하고, AI for Science 프로그램을 생물학 외 여러 분야로 확장해 프로젝트당 최대 5만 달러 크레딧을 지원한다고 밝혔다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/expanding-support-for-scientists",
+      "url": "https://www.anthropic.com/news/expanding-support-for-scientists"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Console에 개인 키·서비스 계정 키 기능 추가",
+      "content": "Claude Console에서 사용자 또는 서비스 계정 권한으로 동작하며 조직에서 계정이 제거되면 함께 만료되는 개인 키와 서비스 계정 키를 생성할 수 있게 되어, 조직 관리자가 계정별 사용량을 더 쉽게 추적할 수 있다.",
+      "special": false,
+      "id": "rn::2026-08-27::personal-service-account-keys",
+      "url": "https://platform.claude.com/docs/en/release-notes/api"
+    }
+  ],
+  "specials": [
+    "베타 Files/Skills 네임스페이스가 GA 응답 형식으로 전환"
+  ],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
