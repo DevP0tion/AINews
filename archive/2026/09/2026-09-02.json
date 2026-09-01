@@ -1,0 +1,72 @@
+{
+  "date": "2026-09-02",
+  "news": [
+    {
+      "title": "1.5시간·67센트로 학습한 소형 트랜스포머가 다수 LLM보다 ARC-AGI 성능 우위",
+      "summary": "저자는 RTX 5090 GPU 한 대로 1.5시간, 67센트의 비용만 들여 소형 트랜스포머를 처음부터 학습시켜 ARC-AGI-1 벤치마크에서 44%를 달성했다. RMSNorm, SwiGLU 등 현대적 개선을 적용한 표준 트랜스포머로 입출력 격자 쌍을 토큰 시퀀스로 처리했으며, TRM·HRM 같은 특화 모델과 비슷한 성능을 내면서도 대규모 사전학습이나 합성 데이터 없이 다수의 대형 LLM보다 높은 추상 추론 성능을 보였다.",
+      "url": "https://mvakde.github.io/blog/44-on-arc-1/"
+    },
+    {
+      "title": "파일 포맷으로서의 에이전트 메모리 제안, 'memoryfields'",
+      "summary": "저자는 AI 에이전트 메모리를 복잡한 프로세스가 아니라 데이터로 다뤄야 한다며, Markdown 페이지에 선택적 YAML 메타데이터와 SQLite 벡터 인덱스를 결합한 이식 가능한 포맷 'memoryfields'를 제안한다. 그래프 순회 대신 의미 기반 검색과 최소한의 메커니즘을 사용해, 벤더 종속 없이 Bash·Markdown·SQLite 같은 익숙한 도구로 모델 발전에 따라 잘 확장되는 개방형 포맷을 지향한다.",
+      "url": "https://calpaterson.com/memoryfields.html"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Claude Fable 5.1 및 Claude Mythos 5.1 출시",
+      "content": "Claude Fable 5.1(`claude-fable-5-1`)과 Project Glasswing 참가자용 Claude Mythos 5.1(`claude-mythos-5-1`)이 출시되어 기본 100만 토큰 컨텍스트와 상시 적응형 사고를 지원하며, tool_choice `any`/`tool` 미지원 및 구형 모델로의 thinking block 재전송 시 400 에러 등 일부 API 동작에 breaking change가 포함됐다.",
+      "special": true,
+      "id": "rn::2026-09-01::fable-5-1-mythos-5-1",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+    },
+    {
+      "category": "제품",
+      "title": "Developing Enterprise Frontier Safeguards with our customers",
+      "content": "Anthropic이 제로 데이터 보존과 오용 탐지를 결합해 모니터링 데이터를 고객 자체 클라우드 인프라에 저장할 수 있는 Enterprise Frontier Safeguards를 발표했으며, 2026년 가을부터 단계적으로 제공될 예정이다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/enterprise-frontier-safeguards",
+      "url": "https://www.anthropic.com/news/enterprise-frontier-safeguards"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.257 릴리스",
+      "content": "Claude Code v2.1.257에서 Claude Fable 5.1을 기본 Fable 모델로 채택하고, 클라우드 자격 증명 탈취 등을 자동 차단하는 Containment Escape 규칙과 세션 단위 effort 전환(`/effort s`), 시간 형식 설정 등을 추가했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.257",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.257"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.258 릴리스",
+      "content": "Claude Code v2.1.258에서 macOS 12(Monterey) 실행 실패 회귀와 권한 재승인 후 원격/예약 세션이 실패하던 문제를 수정했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.258",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.258"
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic Python SDK v1.3.0 릴리스",
+      "content": "Python SDK v1.3.0에 베타 사용자 프로필(`external_user_onboarded_at` 추가 등), 조직 컴플라이언스 설정, 메모리 스토어/툴셋 스키마 업데이트와 다수 버그 수정이 반영됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.3.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.3.0"
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic TypeScript SDK v0.123.0 릴리스",
+      "content": "TypeScript SDK v0.123.0에도 Python SDK와 동일한 베타 사용자 프로필 및 조직 컴플라이언스 설정 API 업데이트가 반영됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.123.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.123.0"
+    }
+  ],
+  "specials": [
+    "Claude Fable 5.1 및 Claude Mythos 5.1 출시"
+  ],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
