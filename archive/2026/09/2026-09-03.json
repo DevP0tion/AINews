@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-03",
+  "news": [
+    {
+      "title": "Anthropic, 코딩·지식노동 특화 신모델 Claude Fable 5.1·Mythos 5.1 공개",
+      "summary": "Anthropic이 코딩과 지식노동에 특화된 신규 모델 Claude Fable 5.1과 Claude Mythos 5.1을 공개했다. 두 모델은 기반은 동일하지만 안전장치가 달라, Fable 5.1은 일반 공개(GA)되고 Mythos 5.1은 사이버보안·생명과학 분야의 검증된 전문가에게만 제한적으로 제공된다. 캐시 읽기 가격 인하로 일반 작업 비용은 약 25%, 에이전틱 작업은 최대 45%까지 절감되며 기본 가격(입력 $10/출력 $50, 백만 토큰당)은 이전과 동일하다.",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1"
+    },
+    {
+      "title": "구글, 추론·코딩 강화한 Gemini 3.8 Flash·Cyber 버전 출시",
+      "summary": "구글이 추론과 코딩 작업에 특화된 Gemini 3.8 Flash와 사이버보안 특화 버전인 3.8 Flash Cyber를 공개했다. 3.8 Flash는 이전 3.7 Flash 대비 소프트웨어 엔지니어링·에이전틱 작업 성능이 크게 향상됐으며 가격은 기존과 동일하게 유지된다. 3.8 Flash Cyber는 취약점 탐지와 자동 패치 기능을 갖춰 구글의 신뢰받는 방어자 대상 프로그램(Fairwind Program)을 통해 제공된다.",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
+    },
+    {
+      "title": "Multiverse Computing, 유럽 최고 성능 주장하는 추론 모델 Quasar 438B 발표",
+      "summary": "스페인의 Multiverse Computing이 유럽 최고 성능을 내세운 추론 모델 Quasar 438B를 공개했다. Artificial Analysis Intelligence Index에서 43점을 기록해 유럽 모델 중 최고치를 달성했고 응답 시간은 15.3초로 대형 모델치고 빠른 편이다. 영어와 스페인어를 지원하며 소프트웨어 개발 에이전트, 기술지원, 업무 자동화 등 기업용 활용을 겨냥한다.",
+      "url": "https://multiversecomputing.com/resources/introducing-quasar-438b-europe-s-leading-ai-model"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.259 릴리스",
+      "content": "Claude Code v2.1.259는 조직 단위 MCP 서버 설정(managedMcpServers)과 무인 헤드리스용 --permission-prompts none 옵션을 추가하고 동시 세션 간 설정 충돌 등 여러 버그를 수정했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.259",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.259"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 5
+  }
+}
