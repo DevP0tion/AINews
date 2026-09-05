@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-06",
+  "news": [
+    {
+      "title": "Spotify, Claude Code 토큰 사용량 90% 줄인 라우팅 기법 공개",
+      "summary": "Spotify 엔지니어링팀이 자사 에이전트 플랫폼 'Portal'의 bulk-reader·code-writer 모드를 활용해 대용량 파일 읽기나 반복적인 코드 생성 작업을 더 저렴한 모델로 위임하는 방식으로 Claude Code 토큰 사용량을 최대 90%까지 절감했다고 밝혔다. 일정 줄 수를 넘는 파일 읽기를 자동으로 차단·전환하는 Claude Code 훅 기반 플러그인 'shunt'가 핵심이다.",
+      "url": "https://engineering.atspotify.com/2026/9/portal-by-spotify-cut-my-claude-code-token-usage-by-90"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 3
+  }
+}
