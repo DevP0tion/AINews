@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-08",
+  "news": [
+    {
+      "title": "vLLM, AMD GPU 환경에서의 Speculative Decoding 최적화 기법 정리",
+      "summary": "vLLM 팀이 AMD GPU 환경에서 speculative decoding 기법을 정리한 블로그를 공개했다. 경량 초안(draft) 모델이 여러 토큰 후보를 제안하고 타깃 모델이 한 번의 순전파로 검증해 순차적 디코딩의 병목을 완화하는 방식으로, native MTP·Gemma 4 MTP·EAGLE-3·DFlash·DSpark 등 5가지 드래프팅 기법을 비교한 결과 구성에 따라 최대 2.8배 이상의 처리량 향상을 확인했다.",
+      "url": "https://vllm.ai/blog/2026-08-23-speculative-decoding-amd-gpus"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 0
+  }
+}
