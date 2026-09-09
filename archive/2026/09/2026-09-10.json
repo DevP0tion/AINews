@@ -1,0 +1,51 @@
+{
+  "date": "2026-09-10",
+  "news": [
+    {
+      "title": "Muse – Meta의 개인 AI 에이전트 공개",
+      "summary": "Meta가 웹 브라우징과 구매 결정을 대신 처리해주는 개인용 AI 에이전트 'Muse'를 선보였다. 로컬 설치 없이 클라우드에서 동작하며 '달러당 지능'을 극대화해 대중적으로 저렴한 서비스를 지향한다. 에이전트 기반 구매 흐름에 광고·전환 측정을 결합해 구글의 검색광고 시장에 도전하려는 전략으로 해석된다.",
+      "url": "https://ai.meta.com/muse/"
+    },
+    {
+      "title": "GPT-6 Astra와 looped transformer, '숨겨진 추론' 논쟁",
+      "summary": "OpenAI의 GPT-6 Astra는 코딩·수학·컴퓨터 사용 과제에서 강력한 성능을 보이며, 동일한 트랜스포머 블록을 반복 적용해 파라미터 증가 없이 연산 깊이를 확보하는 'looped transformer' 구조를 쓴 것으로 분석된다. 필자는 Astra의 짧아진 reasoning trace가 추론 과정을 의도적으로 숨긴 결과라기보다 모델 능력 향상에 따른 자연스러운 결과라고 주장한다.",
+      "url": "https://magazine.sebastianraschka.com/p/gpt-6-astra-looped-transformers-and"
+    },
+    {
+      "title": "Qwen 3.8, GPT-5.5 Pro 추론 프리필로 성능 급등 논란",
+      "summary": "한 실험에서 Qwen 3.8 A95B 모델에 GPT-5.5 Pro의 초기 추론 과정을 프리필로 제공하자 정답률이 18.18%p, STEM 문제에서는 26.99%p까지 급상승했다. 이는 Qwen 3.8이 GPT-5.5 Pro 계열 출력으로 학습됐을 가능성을 시사하며 타사 모델 출력을 이용한 학습 관행 논쟁으로 이어지고 있다.",
+      "url": "https://gist.github.com/wsxiaoys/e0286dc6bb624ff5fdf49e7f4c528ba3"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.267 릴리스",
+      "content": "maxEffortLevel 설정으로 모델의 reasoning effort 상한을 지정할 수 있게 됐고, Cowork 예약 작업 실패, 모바일 /context 출력 공백 등 다수 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.267",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.267"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.266 릴리스",
+      "content": "CLAUDE_CODE_USE_GATEWAY 환경변수가 API 키·커스텀 인증 설정에서 강제로 Cloud gateway 로그인을 요구하던 2.1.265의 회귀 버그를 긴급 수정했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.266",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.266"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.265 릴리스",
+      "content": "--plugin-dir로 플러그인 폴더를 지정하는 기능과 툴 결과 1GB 저장 캡이 추가됐고, 세션 재개 시 prompt-cache 재사용이 깨지는 등의 버그가 다수 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.265",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.265"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
