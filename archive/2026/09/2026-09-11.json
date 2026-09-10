@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-11",
+  "news": [
+    {
+      "title": "Cognition, 신형 코딩 모델 SWE-2 공개",
+      "summary": "코딩 에이전트 스타트업 Cognition이 2026년 9월 10일 신형 코딩 모델 SWE-2를 공개했다. Kimi K3(2.8조 파라미터) 기반에 강화학습을 적용해 FrontierCode 1.1 Main에서 50.0%를 기록했으며, Anthropic의 Fable 5.1과 동등한 성능을 64% 낮은 비용으로 제공한다고 주장한다. 이전 모델 SWE-1.7 대비 동일 작업에서 단계 수 58%, 비용 81% 감소를 내세우며 Devin Desktop·CLI·Web에서 제공된다.",
+      "url": "https://cognition.com/blog/swe-2"
+    },
+    {
+      "title": "998달러로 3.8B LLM을 학습시켜 GPT-2를 능가",
+      "summary": "엔지니어 Hugo Vergnes가 3.8B 파라미터 모델을 65B 토큰으로 학습시키는 데 998달러를 들여 GPT-2 1.5B(0.2565)를 능가하는 0.384 CORE 점수를 달성했다고 공개했다. 코사인 감쇠 대신 사다리꼴 학습률 스케줄과 Muon/AdamW 옵티마이저 조합을 쓰고, FineWeb-Edu 대신 ClimbMix 데이터셋으로 교체해 수렴 속도를 크게 높였다. FP8 학습과 텐서코어 최적화 등을 더해 저예산으로도 과거 대규모 연구실급 결과를 재현할 수 있음을 보여준다.",
+      "url": "https://hugovergnes.github.io/little-lm-3-8b/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Claude Managed Agents 권한 정책에 'auto' 모드 추가",
+      "content": "Managed Agents 권한 정책에 서버가 각 에이전트/MCP 도구 호출을 자동으로 평가해 실행·거부·승인 대기 처리하는 `auto` 모드가 추가되었다.",
+      "special": false,
+      "id": "rn::2026-09-10::managed-agents-auto-permission",
+      "url": "https://platform.claude.com/docs/en/managed-agents/permission-policies#let-the-server-evaluate-each-call-with-auto"
+    },
+    {
+      "category": "모델/API",
+      "title": "`ant` CLI에 Managed Agents 세션 연결 명령 추가",
+      "content": "`ant` CLI에 터미널에서 Managed Agents 세션을 실시간으로 팔로우하며 메시지를 보내거나 도구 호출을 승인/거부할 수 있는 `ant beta:sessions connect` 명령이 추가되었다.",
+      "special": false,
+      "id": "rn::2026-09-10::ant-cli-sessions-connect",
+      "url": "https://platform.claude.com/docs/en/cli-sdks-libraries/cli/sessions-connect"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.268 릴리즈",
+      "content": "Claude apps gateway pricing 연동과 게이트웨이 보안 경고 등이 추가되고, third-party Anthropic 호환 엔드포인트에서 발생하던 HTTP 400 오류를 비롯한 다수 버그가 수정되었다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.268",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.268"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v1.5.0 릴리즈",
+      "content": "Managed Agents용 auto 모드 도구 권한과 web_fetch의 content_too_large 오류 코드, Message.to_param() 헬퍼가 추가되고 자격증명 파일 권한 검증이 강화되었다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.5.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.5.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.125.0 릴리즈",
+      "content": "Managed Agents용 auto 모드 도구 권한과 web_fetch의 content_too_large 오류 코드가 추가되고, 공개 GitHub 저장소를 인증 토큰 없이 마운트하는 기능이 지원된다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.125.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.125.0"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 1
+  }
+}
