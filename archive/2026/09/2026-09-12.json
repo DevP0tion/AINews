@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-12",
+  "news": [
+    {
+      "title": "테렌스 타오 등 수학자들, AI 기업의 '밀레니엄 문제' 경쟁에 우려 표명",
+      "summary": "테렌스 타오를 포함한 저명 수학자들이 OpenAI·Anthropic 등 AI 기업이 밀레니엄 상금 문제 해결에 막대한 자원을 쏟아붓는 것에 우려하는 공개서한을 냈다. 이들은 AI가 생성한 증명이 형식적으로는 맞아도 인간의 수학적 통찰과 이해를 발전시키지 못하며, 마케팅 목적의 경쟁이 학계 건강성을 해칠 수 있다고 지적했다. 다만 일부는 모차즈키의 abc 추측 사례처럼 AI 증명도 커뮤니티 논의를 촉발할 수 있다는 낙관적 시각을 함께 제시했다.",
+      "url": "https://mathandai.org/"
+    },
+    {
+      "title": "OpenAI, Codex 엔진 기반 Agents API 공개",
+      "summary": "OpenAI가 자사의 Codex 엔진에 접근할 수 있는 관리형 API인 Agents API를 공개했다. 에이전트·실행 환경(샌드박스)·세션·이벤트라는 4가지 핵심 개념을 중심으로 코드 실행, 파일 편집, MCP 서버 연동, 서브에이전트 위임을 지원해 여러 턴에 걸친 지속적인 에이전트 작업을 가능하게 한다.",
+      "url": "https://developers.openai.com/api/docs/guides/agents-api/overview"
+    },
+    {
+      "title": "LiteLLM 경량 대체 라이브러리 'Litelm' 공개",
+      "summary": "개발자가 LiteLLM의 핵심 기능인 모델 라우팅과 메시지 변환만 남기고 프록시 서버·캐싱·비용 추적 등 부가 기능을 제거한 경량 라이브러리 Litelm을 공개했다. 약 2,900줄, 의존성 2개만으로 19개 LLM 공급자를 지원하며 OpenAI SDK와 동일한 인터페이스를 제공해 기존 코드를 간단히 마이그레이션할 수 있다.",
+      "url": "https://github.com/kennethwolters/litelm"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.269 릴리즈",
+      "content": "claude plugin eval 명령어, /output-style 전환, Bash 도구 파일 변경 diff 표시, Workflow 동시 에이전트 수 상한 설정 등 신규 기능과 프롬프트 캐시·터미널 입력 관련 다수 버그 수정이 포함됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.269",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
