@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-14",
+  "news": [
+    {
+      "title": "MoE 아키텍처, 데이터 반복 학습에 밀집 모델보다 더 취약",
+      "summary": "새로운 연구에 따르면 학습 데이터가 부족해 동일 데이터를 반복 사용할 때 Mixture-of-Experts(MoE) 모델이 밀집(dense) 모델보다 과적합에 더 취약한 것으로 나타났다. 80M 파라미터 밀집 모델은 데이터를 8배 반복해도 성능 저하가 미미했지만 MoE는 4배 반복부터 저하가 시작됐고, 32배 반복 시에는 밀집 모델보다 성능이 낮아졌다. 드롭아웃 같은 마스킹 기반 정규화로 완화는 가능하지만 고유 데이터 학습 수준에는 도달하지 못했다.",
+      "url": "https://arxiv.org/abs/2609.11917v1"
+    },
+    {
+      "title": "Real-SWE, 실제 기업 코드베이스로 AI 코딩 모델 8종 벤치마크",
+      "summary": "비공개 실제 기업 프로덕션 코드베이스를 기반으로 한 벤치마크 Real-SWE가 Fable 5.1, GPT-6 Astra, Gemini 3.8 Flash 등 8개 주요 모델을 테스트한 결과 해결률이 16.2%~38.8%에 그쳤다. 가장 흔한 실패 원인은 요구사항 누락이었으며, 더 비싼 모델이 반드시 더 나은 성능을 내는 것은 아니어서 Gemini 3.8 Flash는 최저 비용으로 31.2% 해결률을 기록했다.",
+      "url": "https://withspecific.com/benchmarks/real-swe"
+    },
+    {
+      "title": "Y Combinator 대표 \"미국 오픈웨이트 랩도 프론티어 모델 증류 허용해야\"",
+      "summary": "Y Combinator CEO Garry Tan은 미국의 소규모 오픈웨이트 AI 연구소들도 프론티어 모델을 증류(distillation)할 수 있도록 공식 체제를 마련해야 한다고 주장했다. 그는 프론티어 랩들이 저작권 자료를 무단 학습한 것과 대칭적으로 오픈소스 랩의 증류도 정당화된다며, 소수 기업이 AI 역량을 독점하는 상황을 막기 위한 조치라고 설명했다. Anthropic은 이미 중국 연구소들이 도난 인증정보 등으로 비공식 증류를 하고 있다고 보고한 바 있어 업계 내 입장이 엇갈린다.",
+      "url": "https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 1
+  }
+}
