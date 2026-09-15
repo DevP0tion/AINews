@@ -1,0 +1,35 @@
+{
+  "date": "2026-09-15",
+  "news": [
+    {
+      "title": "Apple, iOS 27·macOS 26 코드에서 Siri를 Claude·ChatGPT로 대체 가능한 구조 발견",
+      "summary": "보안 연구자가 iOS 27과 macOS 26(Golden Gate) 코드에서 Siri를 Claude, ChatGPT 등 타사 모델로 교체할 수 있는 두 가지 메커니즘을 발견했다. 하나는 'Ask...' 메뉴를 통해 Claude가 Siri 확장으로 작동하는 방식이고, 다른 하나는 Siri의 시스템 도구·개인정보 접근 권한은 유지한 채 서버측 모델 자체를 GPT-5.6 같은 타사 모델로 완전히 교체하는 방식이다. 현재는 ChatGPT만 확장 메뉴에 노출되며, EU 디지털시장법(DMA)이 이런 상호운용성 설계에 영향을 준 것으로 보인다.",
+      "url": "https://www.macrumors.com/2026/09/14/siri-can-be-swapped-out-for-chatgpt-claude/"
+    },
+    {
+      "title": "Andon Labs, 회사를 완전 자율 운영하는 AI 에이전트 'Pion' 공개",
+      "summary": "Andon Labs가 이메일·전화·은행 시스템·브라우저 등 업무 도구에 접근해 자판기·소매점·카페 같은 실제 사업체를 자율적으로 운영하는 에이전트 플랫폼 'Pion'을 공개했다. 초기에는 시뮬레이션과 실제 운영 성과 차이가 컸지만 최신 모델로 갈수록 개선되었으며, 2025년 말 기준 프론티어 모델이 사업을 수익성 있게 운영할 수준에 도달했다고 주장한다. 연구자와 대중에게 플랫폼을 공개해 AI 모델의 강점과 실패 양상에 대한 데이터를 축적하는 것이 목표다.",
+      "url": "https://andonlabs.com/blog/why-we-built-pion"
+    },
+    {
+      "title": "OpenArch, 최신 LLM 아키텍처를 학습용으로 정리한 PyTorch 구현 모음 공개",
+      "summary": "GPT-2, Llama 2/3/4, Qwen, DeepSeek R1, Gemma, Mistral, Kimi K2, GLM 4.5 등 다양한 최신 LLM 아키텍처를 아키텍처별로 한 파일씩 읽기 쉽게 구현한 오픈소스 저장소 'OpenArch'가 공개됐다. 성능 최적화보다 가독성과 학습을 우선해 멀티헤드/그룹쿼리/잠재 어텐션, RMSNorm·QK-Norm, RoPE, MoE 등 구조적 차이를 명시적으로 보여준다. Sebastian Raschka의 LLM Architecture Gallery를 참고 자료로 삼고 있으며, 기여자를 모집 중이다.",
+      "url": "https://github.com/anuj0456/OpenArch"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.271 출시",
+      "content": "Claude Code v2.1.271에서 Remote 세션 fast mode, /config 패널 마우스 지원, 샌드박싱 auto mode의 명령별 allowed_domains, CLAUDE.md 미로딩 서브에이전트 옵션(omitClaudeMd) 등이 추가되고 조직 정책 캐시·MCP 설정 관련 버그가 수정되었다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.271",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.271"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
