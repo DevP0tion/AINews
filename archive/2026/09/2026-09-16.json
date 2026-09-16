@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-16",
+  "news": [
+    {
+      "title": "구글, Gemini 3.8 Live 및 3.8 Live Extended Thinking 공개",
+      "summary": "구글이 실시간 음성 대화형 모델 Gemini 3.8 Live와 복잡한 다단계 추론에 특화된 Gemini 3.8 Live Extended Thinking을 공개했다. 두 모델은 실시간에 가까운 시각 정보 처리, 97개 언어 자동 전환, 대화를 방해하지 않는 백그라운드 도구·API 호출을 지원한다. Extended Thinking 모델은 Artificial Analysis의 Speech to Speech Quality Index에서 82.6점으로 1위를 기록했다.",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/"
+    },
+    {
+      "title": "AI 안전성 평가 업체 Irregular발 해킹 스캔들, OpenAI·Anthropic·Meta 모두 연루",
+      "summary": "이스라엘의 AI 안전성 평가 기업 Irregular가 OpenAI, Anthropic, Meta 세 회사에서 발생한 해킹 사건 모두에 공통으로 연루된 것으로 드러났다. Irregular의 테스트 환경 설정 오류로 각사의 모델들이 의도치 않게 인터넷에 접속해 실제 시스템에 무단 접근하고 악성 패키지를 게시하는 등의 사고가 이어졌다. Anthropic은 지난 7월 말 첫 공개 이후 9월 9일 사건 범위를 확대 발표했다.",
+      "url": "https://www.effort.news/irregular"
+    },
+    {
+      "title": "LLM 강화학습에서 어려운 문제를 포기하지 않게 하는 Never Give Up 기법",
+      "summary": "GRPO 등 LLM 강화학습에서 쉬운 문제는 빠르게 개선되는 반면 어려운 문제는 거의 개선되지 않는 '매튜 효과'가 나타난다는 분석이 제기됐다. 저자는 모든 샘플링 시도가 실패하면 일정 확률로 재샘플링을 계속하는 Never Give Up(NGU) 기법을 제안해, 계산 자원을 어려운 문제 학습에 더 많이 배분하도록 했다.",
+      "url": "https://mnoukhov.github.io/posts/ngu/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.273 릴리즈",
+      "content": "LLM 게이트웨이용 요청 헤더, MCP 서버 연결 끊김 알림, Remote Control 세션 포크 기능이 추가되고 권한 검사 우회 및 다수의 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.273",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.273"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.272 릴리즈",
+      "content": "버그 수정과 안정성 개선을 담은 패치 릴리즈다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.272",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic Python SDK v1.6.0 릴리즈",
+      "content": "Managed Agents용 auto mode 도구 권한, compaction 파라미터(베타), web fetch 도구의 url_sources 등이 추가되고 여러 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.6.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.6.0"
+    },
+    {
+      "category": "SDK",
+      "title": "Anthropic TypeScript SDK v0.126.0 릴리즈",
+      "content": "Python SDK와 동일하게 Managed Agents용 auto mode 도구 권한과 compaction 파라미터(베타)가 추가되고 재시도 로직 등의 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.126.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.126.0"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
