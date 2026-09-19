@@ -1,0 +1,102 @@
+{
+  "date": "2026-09-19",
+  "news": [
+    {
+      "title": "코딩 에이전트 하네스 설계 요소를 실증 분석한 연구 공개",
+      "summary": "이 연구는 실행 루프는 고정한 채 플래닝 전략, 액션 스페이스, 컨텍스트 관리 방식이 코딩 에이전트 성능에 미치는 영향을 비교 분석했다. 컨텍스트 관리는 컨텍스트 윈도우가 빠듯할수록 가치가 커지고, 규칙 기반 필터링과 LLM 요약을 결합하는 방식이 가장 효율적이었으며, 플래닝은 약한 모델은 보완하고 강한 모델은 주로 비용을 절감했다. 또한 bash 능숙도가 낮은 모델은 사전 정의된 도구가, 능숙한 모델은 bash 전용 인터페이스가 더 효율적이었다.",
+      "url": "https://arxiv.org/abs/2609.20804"
+    },
+    {
+      "title": "MS 임원 '역대 최대 노동 절도'... 뉴욕타임스 소송서 스크래핑 내부 문건 공개",
+      "summary": "뉴욕타임스가 OpenAI와 마이크로소프트를 상대로 제기한 저작권 소송의 봉인 해제 문건에서, 마이크로소프트 응용과학 담당 임원 Brent Hecht가 2023년 내부 메모에 AI 스크래핑을 \"역사상 가장 큰 노동 절도\"라고 표현한 사실이 드러났다. 문건에 따르면 두 회사는 페이월을 우회해 뉴욕타임스 기사 9만1000여 건을 학습 데이터로 수집하고 저작권 표시를 제거했으며, 사티아 나델라 CEO도 유료 콘텐츠 학습에는 라이선스가 필요하다고 증언해 기존 '공정 이용' 방어 논리와 배치된다는 점이 지적됐다.",
+      "url": "https://techcrunch.com/2026/09/17/microsoft-exec-called-ai-scraping-the-largest-theft-of-labor-in-human-history-new-unredacted-filings-reveal/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "Anthropic, Accenture와 임베디드 평가 파트너십 체결",
+      "content": "Anthropic이 Accenture(Faculty 부문)와 5년간 10억 달러 이상을 투입해 프런티어 모델에 대한 독립적 레드티밍·정합성 평가를 수행하는 임베디드 평가 파트너십을 발표했다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/accenture-embedded-evaluation",
+      "url": "https://www.anthropic.com/news/accenture-embedded-evaluation"
+    },
+    {
+      "category": "모델/API",
+      "title": "Compliance API, Claude in Chrome 세션 트랜스크립트 지원 추가",
+      "content": "Compliance API의 로컬 세션 엔드포인트가 Claude Enterprise 조직 대상 베타로 Claude in Chrome 세션의 트랜스크립트도 반환하도록 확장됐다.",
+      "special": false,
+      "id": "rn::2026-09-18::compliance-api-chrome-sessions",
+      "url": "https://platform.claude.com/docs/en/manage-claude/compliance-api"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.277 릴리스",
+      "content": "CLAUDE.md가 없는 프로젝트에서 AGENTS.md를 대신 읽도록 지원하는 기능과 게이트웨이 프록시·백그라운드 작업 알림 개선, 다수의 버그 수정이 포함됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.277",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.277"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.276 릴리스",
+      "content": "ANTHROPIC_BASE_URL로 프록시나 게이트웨이를 사용할 때 모든 요청이 400 오류로 실패하던 v2.1.275의 회귀 버그를 수정했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.276",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.276"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v1.7.0 릴리스",
+      "content": "rate limits 응답에 display_name을 가진 group 필드를 추가(group_type은 지원 중단)하고 tool runner에 compact_before_next_turn()을 추가했으며 Bedrock 이벤트스트림 오류 처리 등 버그를 수정했다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.7.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.7.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript v0.127.0 릴리스",
+      "content": "rate limits group 필드 추가와 tool runner의 compactBeforeNextTurn() 지원 등 Python SDK와 동일한 기능이 추가되고 스트리밍 관련 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.127.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.127.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript vertex-sdk v0.19.10 릴리스",
+      "content": "TypeScript 6.0.3 빌드 전환과 단위 테스트를 jest에서 vitest로 교체하는 내부 빌드 개선만 포함된 릴리스다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::vertex-sdk-v0.19.10",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/vertex-sdk-v0.19.10"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript google-cloud-sdk v0.0.13 릴리스",
+      "content": "TypeScript 6.0.3 빌드 전환과 jest에서 vitest로의 테스트 교체 등 vertex-sdk와 동일한 내부 빌드 개선이 적용됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::google-cloud-sdk-v0.0.13",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/google-cloud-sdk-v0.0.13"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript foundry-sdk v0.4.8 릴리스",
+      "content": "TypeScript 6.0.3 빌드 전환과 jest에서 vitest로의 테스트 교체 등 동일한 내부 빌드 개선이 적용된 릴리스다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::foundry-sdk-v0.4.8",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/foundry-sdk-v0.4.8"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript bedrock-sdk v0.33.7 릴리스",
+      "content": "Bedrock 미드스트림 예외·오류 프레임에 대해 APIError를 발생시키도록 수정하고 동일한 내부 빌드 개선을 적용했다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::bedrock-sdk-v0.33.7",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/bedrock-sdk-v0.33.7"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
