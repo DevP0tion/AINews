@@ -34,11 +34,15 @@ def esc(value) -> str:
     return html.escape(str(value), quote=True)
 
 
-def fmt_price(value, currency: str | None) -> str:
+def fmt_price(value, currency: str | None, *, is_stock: bool = False) -> str:
+    """원화 주가는 호가 단위가 1원이라 정수로, 지수·환율은 소수 2자리로 찍는다.
+
+    통화만으로는 구분할 수 없다 — 코스피·원달러도 currency가 KRW라서
+    통화로 판정하면 6,998.16이 6,998로 잘린다. 호출부가 종류를 알려준다.
+    """
     if value is None:
         return "—"
-    # 원화 종목가는 정수, 지수·환율은 소수 2자리가 관례
-    if currency == "KRW" and float(value) >= 1000:
+    if is_stock and currency == "KRW":
         return f"{float(value):,.0f}"
     return f"{float(value):,.2f}"
 
@@ -111,10 +115,10 @@ def render_stocks(quotes: list[dict], stock_news: dict) -> str:
             f'<header class="stock-head">'
             f'<div class="stock-id"><h3>{esc(name)}</h3>'
             f'<span class="ticker">{esc(q["symbol"])}</span></div>'
-            f'<div class="stock-num"><span class="price">{esc(fmt_price(q.get("price"), q.get("currency")))}</span>'
+            f'<div class="stock-num"><span class="price">{esc(fmt_price(q.get("price"), q.get("currency"), is_stock=True))}</span>'
             f'<span class="chg {cls}">{esc(text)}</span></div>'
             f'</header>'
-            f'<div class="meta">전일종가 {esc(fmt_price(q.get("prev_close"), q.get("currency")))}'
+            f'<div class="meta">전일종가 {esc(fmt_price(q.get("prev_close"), q.get("currency"), is_stock=True))}'
             f' · 거래량 {esc(fmt_volume(q.get("volume")))}</div>'
             f'{render_news_list(news, compact=True)}'
             f'</article>'
