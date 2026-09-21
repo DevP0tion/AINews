@@ -61,8 +61,9 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        # pykrx는 pandas를 끌고 와 설치가 가장 오래 걸린다 (투자자 수급 전용)
-        run: pip install requests feedparser pykrx
+        # pykrx는 pandas를 끌고 와 설치가 가장 오래 걸린다 (투자자 수급 전용).
+        # yfinance도 pandas를 쓰지만 pykrx가 이미 가져오므로 추가 비용은 거의 없다.
+        run: pip install requests feedparser pykrx yfinance
 
       - name: Collect raw data
         env:
@@ -83,6 +84,13 @@ jobs:
           KRX_ID: ${{ secrets.KRX_ID }}
           KRX_PW: ${{ secrets.KRX_PW }}
         run: python scripts/collect_investor.py
+
+      # 애널리스트 컨센서스(Yahoo) + 증권사 리포트 목록(한경 컨센서스).
+      # 스크립트가 모든 예외를 삼키지만(주식 리포트를 막지 않기 위해),
+      # 설치·인터프리터 단계의 실패까지 덮도록 continue-on-error를 함께 둔다.
+      - name: Collect research
+        continue-on-error: true
+        run: python scripts/collect_research.py
 
       - name: Commit raw data
         run: |

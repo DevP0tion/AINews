@@ -93,6 +93,7 @@ AINews/
 │   ├── collect_data.py               # Job 1: AI/IT 소스 fetching
 │   ├── collect_stock.py              # Job 1: 증시 RSS + Yahoo Finance 시세
 │   ├── collect_investor.py           # Job 1: KRX 투자자별 매매동향 (하루치 누적)
+│   ├── collect_research.py           # Job 1: 애널리스트 컨센서스 + 증권사 리포트
 │   ├── daily_report.py               # Job 2(b): AI/IT 검증·필터·archive/state
 │   ├── stock_report.py               # Job 2(c): 주식 검증·필터·archive/state
 │   ├── level_context.py              # 종가 시계열 → 기간 고저·박스권·주간 통계 (순수 함수)
@@ -105,11 +106,13 @@ AINews/
 │   ├── seen_urls.json                # AI/IT 뉴스 URL 인덱스 (영구 누적)
 │   ├── seen_claude.json              # Claude 업데이트 항목 키
 │   ├── seen_stock_urls.json          # 주식 뉴스 URL 인덱스 (AI/IT와 분리)
-│   └── investor_trend.json           # 투자자 순매수 일별 누적 (최근 40일 보관)
+│   ├── investor_trend.json           # 투자자 순매수 일별 누적 (최근 40일 보관)
+│   └── research_reports.json         # 증권사 리포트 누적 (최근 180일 보관)
 ├── inbox/                            # Job 1 출력
 │   ├── YYYY-MM-DD-raw.json
 │   ├── YYYY-MM-DD-stock-raw.json     # curate가 읽는 파일 (뉴스·시세)
-│   └── YYYY-MM-DD-stock-history.json # 종가 시계열 (후속 스텝 전용)
+│   ├── YYYY-MM-DD-stock-history.json # 종가 시계열 (후속 스텝 전용)
+│   └── YYYY-MM-DD-research.json      # 컨센서스·리포트 (후속 스텝 전용)
 ├── archive/                          # Job 2 출력
 │   ├── YYYY/MM/YYYY-MM-DD.{json,md}
 │   └── YYYY/MM/YYYY-MM-DD-stock.json
@@ -291,6 +294,50 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 계산한다. 같은 `history`면 언제 돌려도 같은 값이 나온다.
 
 요일 판정은 `strftime("%A")` 대신 고정 목록을 쓴다 — `%A`는 runner 로케일을 탄다.
+
+## 애널리스트 컨센서스·증권사 리포트 (collect_research.py)
+
+두 소스를 모아 관심종목 블록에 붙인다.
+
+```
+목표주가 평균 475,850 (괴리 +73.7%) · 매수 35 · 보유 1 · 매도 0
+  삼성전자(005930) 무시할 실적이 아니다   2026-07-31 · IBK투자증권 · 김운호  [매수] [목표 460,000]
+```
+
+### 1. 컨센서스 — Yahoo Finance (`yfinance`)
+
+| 값 | 내용 |
+|---|---|
+| `price_targets` | 목표주가 `current` / `high` / `low` / `mean` / `median` |
+| `recommendations` | 투자의견 분포 `strongBuy`·`buy`·`hold`·`sell`·`strongSell`, 최근 4개월 |
+
+`collect_stock.py`가 쓰는 chart API와 달리 **쿠키+crumb 인증이 필요해** 직접
+호출하면 401이 난다. `yfinance`가 그 과정을 대신하므로 이 부분만 라이브러리를 쓴다.
+`upgrades_downgrades`(개별 증권사 상향·하향 이력)는 국내 종목엔 404라 받지 않는다.
+
+### 2. 리포트 목록 — 한경 컨센서스
+
+`consensus.hankyung.com`의 기업 리포트(`report_type=CO`) 목록에서 관심종목 것만
+추린다. 종목코드는 제목의 `(005930)`이 아니라 **차트 링크의 `business_code`**에서
+꺼낸다 — 제목 표기가 매번 같다는 보장이 없다.
+
+**왜 누적 방식인가** — 관심종목 리포트는 실적 시즌에 몰려 나온다. 실측으로 60일
+600건 중 관심종목은 4건이었다. 매 실행 최근 7일만 긁어 `state/research_reports.json`에
+쌓고(`report_idx` 기준 중복 제거), 리포트는 거기서 종목당 최근 3건을 읽는다.
+누적분이 비어 있는 첫 실행만 180일을 거슬러 백필한다.
+
+| 항목 | 값 |
+|---|---|
+| 조회 범위 | 최근 7일 (`RESEARCH_LOOKBACK_DAYS`), 첫 실행은 180일 (`BACKFILL_DAYS`) |
+| 표시 | 종목당 3건 (`REPORTS_PER_STOCK`) |
+| 보관 | 180일 (`REPORT_KEEP_DAYS`). 그보다 오래됐어도 종목당 최소 3건은 남긴다 |
+| 요청 수 | 하루 1회 (7일치 ≈ 60건이 `pagenum=100` 한 페이지에 들어온다) |
+
+### 실패해도 리포트는 나간다
+
+`collect_investor.py`와 같이 모든 예외를 삼키고 종료 코드 0으로 끝난다.
+`stock_report.py`도 `inbox/YYYY-MM-DD-research.json`이 없으면 해당 섹션만 빼고
+넘어간다. 시세·뉴스 리포트는 영향받지 않는다.
 
 ## 투자자 수급 (collect_investor.py)
 

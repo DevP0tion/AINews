@@ -426,6 +426,71 @@ def render_weekly(weekly) -> str:
     )
 
 
+def fmt_consensus(consensus, currency: str | None, price) -> str:
+    """컨센서스 한 줄. 예: "목표주가 평균 475,850 (괴리 +73.7%) · 매수 35 · 보유 1 · 매도 0"
+
+    괴리율은 현재가가 있을 때만 붙인다. 목표가 평균이 없으면 의견 분포만 찍는다.
+    수집 단계가 받아온 값을 옮기기만 하고 여기서 새로 만들지 않는다.
+    """
+    if not isinstance(consensus, dict):
+        return ""
+    parts = []
+    targets = consensus.get("price_targets") or {}
+    mean = targets.get("mean")
+    if isinstance(mean, (int, float)) and not isinstance(mean, bool):
+        text = f"목표주가 평균 {fmt_price(mean, currency, is_stock=True)}"
+        if isinstance(price, (int, float)) and not isinstance(price, bool) and price > 0:
+            gap = (float(mean) - float(price)) / float(price) * 100
+            text += f" (괴리 {gap:+.1f}%)"
+        parts.append(text)
+
+    recs = consensus.get("recommendations") or []
+    latest = recs[0] if recs and isinstance(recs[0], dict) else None
+    if latest:
+        def n(key):
+            v = latest.get(key)
+            return int(v) if isinstance(v, (int, float)) and not isinstance(v, bool) else 0
+        buy = n("strongBuy") + n("buy")
+        sell = n("sell") + n("strongSell")
+        hold = n("hold")
+        if buy or hold or sell:
+            parts.append(f"매수 {buy} · 보유 {hold} · 매도 {sell}")
+    return " · ".join(parts)
+
+
+def render_reports(items) -> str:
+    """증권사 리포트 목록. 제목·목표가·투자의견·애널리스트·증권사·PDF 링크.
+
+    리포트가 없는 종목은 호출부가 아예 부르지 않는다 — 관심종목 리포트는
+    실적 시즌에만 나오므로 "없음"을 띄우는 것이 오히려 소음이다.
+    """
+    if not isinstance(items, list) or not items:
+        return ""
+    out = []
+    for r in items:
+        if not isinstance(r, dict):
+            continue
+        meta = [x for x in (r.get("broker"), r.get("analyst")) if x]
+        badge = ""
+        if r.get("opinion"):
+            badge = f'<span class="op">{esc(r["opinion"])}</span>'
+        target = ""
+        if r.get("target_price"):
+            target = f'<span class="tp">목표 {esc(r["target_price"])}</span>'
+        out.append(
+            f'<li>'
+            f'<a href="{esc(r["url"])}" target="_blank" rel="noopener noreferrer">'
+            f'{esc(r["title"])}</a>'
+            f'<span class="rmeta">{esc(r.get("date", ""))}'
+            f'{" · " + esc(" · ".join(meta)) if meta else ""}</span>'
+            f'{badge}{target}'
+            f'</li>'
+        )
+    if not out:
+        return ""
+    return f'<ul class="reports">{"".join(out)}</ul>'
+
+
 def render_news_list(items: list[dict], compact: bool = False) -> str:
     if not items:
         return '<p class="empty">신규 기사 없음</p>'
@@ -442,7 +507,7 @@ def render_news_list(items: list[dict], compact: bool = False) -> str:
     return f'<ul class="news">{"".join(out)}</ul>'
 
 
-def render_stocks(quotes: list[dict], stock_news: dict) -> str:
+def render_stocks(quotes: list[dict], stock_news: dict, reports: dict | None = None) -> str:
     if not quotes:
         return ""
     blocks = []
@@ -453,6 +518,9 @@ def render_stocks(quotes: list[dict], stock_news: dict) -> str:
         stale = render_stale(q.get("stale"))
         level = fmt_level_context(q.get("level_context"), q.get("currency"))
         level_row = f'<div class="meta level">{esc(level)}</div>' if level else ""
+        cons = fmt_consensus(q.get("consensus"), q.get("currency"), q.get("price"))
+        cons_row = f'<div class="meta level">{esc(cons)}</div>' if cons else ""
+        report_list = render_reports((reports or {}).get(name))
         blocks.append(
             f'<article class="stock">'
             f'<header class="stock-head">'
@@ -465,6 +533,8 @@ def render_stocks(quotes: list[dict], stock_news: dict) -> str:
             f'<div class="meta">전일종가 {esc(fmt_price(q.get("prev_close"), q.get("currency"), is_stock=True))}'
             f' · 거래량 {esc(fmt_volume(q.get("volume")))}</div>'
             f'{level_row}'
+            f'{cons_row}'
+            f'{report_list}'
             f'{render_news_list(news, compact=True)}'
             f'</article>'
         )
@@ -553,6 +623,16 @@ margin-right:6px}
 font-variant-numeric:tabular-nums}
 .meta.level{margin-top:-6px}
 .stale{margin-right:4px;font-size:.85rem;cursor:help}
+ul.reports{list-style:none;margin:8px 0 0;padding:8px 0 0;border-top:1px dashed var(--line)}
+ul.reports li{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;padding:4px 0;
+font-size:.82rem}
+ul.reports a{color:var(--link);text-decoration:none;font-weight:500;
+flex:1 1 100%;word-break:keep-all}
+ul.reports a:hover{text-decoration:underline}
+.rmeta{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.op{font-size:.7rem;padding:1px 5px;border-radius:4px;border:1px solid var(--line);
+color:var(--up)}
+.tp{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
 ul.cal-list{list-style:none;margin:0;padding:0}
 ul.cal-list li{display:flex;align-items:baseline;gap:8px;padding:6px 0;
 border-top:1px dashed var(--line);font-size:.88rem}
@@ -738,7 +818,7 @@ def render(date: str, report: dict, all_dates: list[str] | None = None,
 {render_calendar(report.get("calendar") or [])}
 {render_indices(quotes.get("indices") or [])}
 {render_investor(report.get("investor_trend") or {})}
-{render_stocks(quotes.get("stocks") or [], report.get("stock_news") or {})}
+{render_stocks(quotes.get("stocks") or [], report.get("stock_news") or {}, report.get("research_reports") or {})}
 {render_weekly(report.get("weekly"))}
 <section class="card">
 <h2>시장 주요 뉴스</h2>

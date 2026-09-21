@@ -6,15 +6,18 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import stock_report  # noqa: E402
 from stock_report import (  # noqa: E402
-    WEEKLY_DAY, build_weekly, filter_new, group_by_stock, is_weekly_day,
-    load_histories, normalize_url, past_events, upcoming_events, validate_input,
-    with_level_context,
+    WEEKLY_DAY, build_weekly, filter_new, group_by_stock, group_reports,
+    is_weekly_day, load_histories, normalize_url, past_events, upcoming_events,
+    validate_input, with_level_context,
+)
+from collect_research import (  # noqa: E402
+    merge_reports, parse_reports, prune_reports, ticker_of as research_ticker,
 )
 from render_stock_page import (  # noqa: E402
-    fmt_billion, fmt_change, fmt_daylabel, fmt_dday, fmt_level_context, fmt_pct,
-    fmt_price, fmt_volume, group_by_month, month_label, nice_bounds, render,
-    render_calendar, render_chart, render_drawer, render_investor, render_stale,
-    render_weekly,
+    fmt_billion, fmt_change, fmt_consensus, fmt_daylabel, fmt_dday,
+    fmt_level_context, fmt_pct, fmt_price, fmt_volume, group_by_month,
+    month_label, nice_bounds, render, render_calendar, render_chart,
+    render_drawer, render_investor, render_reports, render_stale, render_weekly,
 )
 from collect_stock import is_stale, quote_time_iso  # noqa: E402
 from collect_investor import (  # noqa: E402
@@ -350,6 +353,131 @@ old_page = render("2026-09-21", {
     "market_news": [], "stock_news": {},
 })
 assert "⚠️" not in old_page
+
+
+# --- 애널리스트 컨센서스 ----------------------------------------------------
+
+CONSENSUS = {
+    "price_targets": {"current": 274000.0, "high": 725000.0, "low": 290000.0,
+                      "mean": 475850.1, "median": 465000.0},
+    "recommendations": [
+        {"period": "0m", "strongBuy": 11, "buy": 24, "hold": 1, "sell": 0, "strongSell": 0},
+        {"period": "-1m", "strongBuy": 11, "buy": 25, "hold": 1, "sell": 0, "strongSell": 0},
+    ],
+}
+
+# 컨센서스는 수집 결과에서만 온다 — 시세 원본에 같은 이름이 있어도 버린다
+merged_c = with_level_context(
+    [{"symbol": "005930.KS", "name": "삼성전자", "consensus": {"fake": 1}}],
+    {}, {"005930.KS": CONSENSUS},
+)
+assert merged_c[0]["consensus"] == CONSENSUS, merged_c[0]
+# 컨센서스가 없는 종목은 키를 만들지 않는다
+assert "consensus" not in with_level_context([{"symbol": "X", "name": "X"}], {}, {})[0]
+assert "consensus" not in with_level_context([{"symbol": "X", "name": "X"}], {}, None)[0]
+
+# 표기: 목표가 평균 + 현재가 대비 괴리율 + 투자의견 분포 (매수 = strongBuy + buy)
+line_c = fmt_consensus(CONSENSUS, "KRW", 274000.0)
+assert line_c == "목표주가 평균 475,850 (괴리 +73.7%) · 매수 35 · 보유 1 · 매도 0", line_c
+# 현재가가 없으면 괴리율을 만들지 않는다
+assert "괴리" not in fmt_consensus(CONSENSUS, "KRW", None)
+assert "괴리" not in fmt_consensus(CONSENSUS, "KRW", 0)
+# 한쪽만 있어도 있는 것만 찍는다
+assert fmt_consensus({"recommendations": CONSENSUS["recommendations"]}, "KRW", 1) == \
+    "매수 35 · 보유 1 · 매도 0"
+assert fmt_consensus({"price_targets": {"mean": 100.0}}, "KRW", None) == "목표주가 평균 100"
+for bad in (None, {}, "x", {"price_targets": {}, "recommendations": []}):
+    assert fmt_consensus(bad, "KRW", 100) == "", bad
+
+
+# --- 증권사 리포트 ----------------------------------------------------------
+
+HK_ROW = (
+    '<tr>'
+    '<td class="first txt_number">2026-07-31</td>'
+    '<td class="text_l"><a href="/analysis/downpdf?report_idx=651325">'
+    '삼성전자(005930) 무시할 실적이 아니다 </a>'
+    '<div class="layerPop"><div id="content_651325">중복 제목</div></div></td>'
+    '<td class="text_r txt_number">460,000</td>'
+    '<td>\n매수      </td>'
+    '<td>김운호</td>'
+    '<td>IBK투자증권</td>'
+    '<td><a href="/chart/view_frame?report_type=CO&business_code=005930">차트</a></td>'
+    '</tr>'
+)
+
+parsed = parse_reports(HK_ROW)
+assert len(parsed) == 1, parsed
+r0 = parsed[0]
+assert r0["code"] == "005930" and r0["report_idx"] == "651325"
+# 제목 칸의 마우스오버 팝업(중복 제목)은 떨어져 나가야 한다
+assert r0["title"] == "삼성전자(005930) 무시할 실적이 아니다", r0["title"]
+assert r0["target_price"] == "460,000" and r0["opinion"] == "매수"
+assert r0["analyst"] == "김운호" and r0["broker"] == "IBK투자증권"
+assert r0["url"].endswith("report_idx=651325")
+
+# 헤더 행·종목코드 없는 행은 버린다
+assert parse_reports("<tr><th>작성일</th><th>제목</th></tr>") == []
+assert parse_reports("<tr><td>x</td></tr>") == []
+assert parse_reports('<tr><td class="first txt_number">2026-07-31</td><td>a</td>'
+                     '<td>b</td><td>c</td><td>d</td><td>e</td></tr>') == []
+
+# 누적 — 같은 report_idx는 두 번 들어가지 않는다
+st = {"reports": {}}
+assert merge_reports(st, parsed, {"005930"}) == 1
+assert merge_reports(st, parsed, {"005930"}) == 0
+assert len(st["reports"]["005930"]) == 1
+# code는 묶음 키가 되므로 항목에서 빠진다
+assert "code" not in st["reports"]["005930"][0]
+# watchlist에 없는 종목은 누적하지 않는다
+assert merge_reports(st, parsed, {"000660"}) == 0
+
+# 오래된 리포트는 잘라내되 종목당 최소 몇 건은 남긴다
+# (실적 시즌 사이에는 몇 달째 새 리포트가 없다)
+old_state = {"reports": {"005930": [{"date": "2020-01-01", "report_idx": str(i)}
+                                    for i in range(5)]}}
+prune_reports(old_state, "2026-09-21")
+assert 0 < len(old_state["reports"]["005930"]) <= 3, old_state
+
+assert research_ticker("005930.KS") == "005930"
+
+# symbol → 종목명 묶음. 리포트 없는 종목은 키를 만들지 않는다
+WL = [{"symbol": "005930.KS", "name": "삼성전자"}, {"symbol": "000660.KS", "name": "SK하이닉스"}]
+g = group_reports({"005930.KS": [dict(r0, url="http://x.test/1")]}, WL)
+assert list(g) == ["삼성전자"], g
+# http(s)가 아닌 URL·제목 없는 항목은 drop (뉴스와 같은 방어)
+assert group_reports({"005930.KS": [dict(r0, url="javascript:alert(1)")]}, WL) == {}
+assert group_reports({"005930.KS": [dict(r0, title="")]}, WL) == {}
+assert group_reports({"005930.KS": "not a list"}, WL) == {}
+assert group_reports({}, WL) == {}
+
+# 렌더 — 제목·목표가·투자의견·애널리스트·증권사·PDF 링크
+rep_html = render_reports(g["삼성전자"])
+assert "무시할 실적이 아니다" in rep_html and "IBK투자증권" in rep_html
+assert "김운호" in rep_html and "목표 460,000" in rep_html
+assert 'href="http://x.test/1"' in rep_html
+# 없으면 목록 자체를 만들지 않는다 ("없음"을 띄우는 것이 오히려 소음이다)
+assert render_reports([]) == "" and render_reports(None) == ""
+assert render_reports(["x", 1]) == ""
+# 제목도 이스케이프된다
+evil_rep = render_reports([{"title": "<img src=x>", "url": "http://x.test/1"}])
+assert "<img src=x>" not in evil_rep and "&lt;img src=x&gt;" in evil_rep
+
+# 페이지에 컨센서스 줄과 리포트가 함께 실린다
+res_page = render("2026-09-21", {
+    "quotes": {"indices": [], "stocks": [{
+        "symbol": "005930.KS", "name": "삼성전자", "price": 274000.0,
+        "change": 0, "change_pct": 0, "currency": "KRW", "consensus": CONSENSUS,
+    }]},
+    "research_reports": g, "market_news": [], "stock_news": {},
+})
+assert "목표주가 평균 475,850 (괴리 +73.7%)" in res_page
+assert "무시할 실적이 아니다" in res_page
+
+# research_reports 키가 없는 예전 archive도 그대로 렌더된다 (하위 호환)
+assert "목표주가" not in render(
+    "2026-09-21", {"quotes": {}, "market_news": [], "stock_news": {}},
+)
 
 
 # --- 이벤트 캘린더 ----------------------------------------------------------

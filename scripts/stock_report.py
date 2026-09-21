@@ -9,6 +9,8 @@ stock_report.py — curate 단계의 주식 산출물을 검증·중복제거해
   · inbox/YYYY-MM-DD-stock-raw.json — 시세 원본
   · inbox/YYYY-MM-DD-stock-history.json — 종가 시계열 (없으면 레벨 컨텍스트·
     주간 섹션만 빠지고 나머지는 그대로 나간다)
+  · inbox/YYYY-MM-DD-research.json — 애널리스트 컨센서스 + 증권사 리포트 목록
+    (없으면 해당 섹션만 빠진다)
 
 시세 숫자는 **inbox에서 직접** 읽는다. Claude 산출물의 숫자는 쓰지 않는다
 (LLM이 옮겨 적는 과정에서 값이 바뀌면 리포트가 조용히 틀리기 때문).
@@ -238,23 +240,83 @@ def load_histories(today: str) -> dict[str, list]:
     return {k: v for k, v in series.items() if isinstance(v, list)}
 
 
-def with_level_context(stocks: list[dict], histories: dict[str, list]) -> list[dict]:
-    """종가 시계열로 종목별 level_context를 계산해 붙인다.
+def load_research(today: str) -> dict:
+    """inbox의 컨센서스·리포트 파일. 없으면 빈 dict — 해당 섹션만 빠진다."""
+    path = REPO_DIR / "inbox" / f"{today}-research.json"
+    raw = load_json(path, None)
+    if raw is None:
+        log(f"컨센서스·리포트 없음: {path.name} — 해당 섹션 생략")
+        return {}
+    if not isinstance(raw, dict):
+        log(f"WARN: {path.name}이 object가 아님 — 무시")
+        return {}
+    consensus = raw.get("consensus")
+    reports = raw.get("reports")
+    return {
+        "consensus": consensus if isinstance(consensus, dict) else {},
+        "reports": reports if isinstance(reports, dict) else {},
+    }
+
+
+def group_reports(reports: dict, watchlist: list[dict]) -> dict[str, list]:
+    """symbol로 들어온 리포트를 watchlist 순서의 종목명 묶음으로 바꾼다.
+
+    stock_news와 같은 모양이라 렌더 쪽에서 똑같이 다룰 수 있다.
+    리포트가 없는 종목은 키를 만들지 않는다 (뉴스와 달리 빈 칸이 정상이다 —
+    관심종목 리포트는 실적 시즌에만 나온다).
+    """
+    out = {}
+    for s in watchlist:
+        items = reports.get(s["symbol"])
+        if not isinstance(items, list) or not items:
+            continue
+        cleaned = []
+        for r in items:
+            if not isinstance(r, dict):
+                continue
+            title = clean_text(r.get("title"), TITLE_MAX)
+            url = clean_http_url(r.get("url"))
+            if not title or not url:
+                continue
+            cleaned.append({
+                "date": clean_text(r.get("date"), 10) or "",
+                "title": title,
+                "url": url,
+                "target_price": clean_text(r.get("target_price"), 32),
+                "opinion": clean_text(r.get("opinion"), 32),
+                "analyst": clean_text(r.get("analyst"), SOURCE_MAX),
+                "broker": clean_text(r.get("broker"), SOURCE_MAX),
+            })
+        if cleaned:
+            out[s["name"]] = cleaned
+    return out
+
+
+def with_level_context(stocks: list[dict], histories: dict[str, list],
+                       consensus: dict | None = None) -> list[dict]:
+    """종가 시계열로 종목별 level_context를 계산하고, 컨센서스를 붙인다.
 
     history 자체는 archive에 싣지 않는다 (6개월 × 종목 수를 매일 커밋하면
     저장소만 불어난다). 계산 결과만 남기고 원본은 inbox에 그대로 둔다.
     """
+    consensus = consensus or {}
     out = []
     for q in stocks:
         if not isinstance(q, dict):
             continue
-        # level_context는 계산 결과로만 존재한다 — 원본에 같은 이름이 있어도 버린다
-        item = {k: v for k, v in q.items() if k not in ("history", "level_context")}
+        # 두 필드 모두 수집·계산 결과로만 존재한다 — 원본에 같은 이름이 있어도 버린다
+        item = {
+            k: v for k, v in q.items()
+            if k not in ("history", "level_context", "consensus")
+        }
         ctx = compute_level_context(closes_of(histories.get(q.get("symbol"))))
         if ctx:
             item["level_context"] = ctx
         else:
             log(f"WARN: {q.get('name', q.get('symbol'))} 종가 시계열 없음 — level_context 생략")
+        c = consensus.get(q.get("symbol"))
+        if isinstance(c, dict) and c:
+            item["consensus"] = c
         out.append(item)
     return out
 
@@ -471,10 +533,17 @@ def main() -> None:
     watchlist = inbox.get("watchlist") or []
     raw_quotes = inbox.get("quotes") or {"indices": [], "stocks": []}
     histories = load_histories(today)
+    research = load_research(today)
     quotes = {
         "indices": raw_quotes.get("indices") or [],
-        "stocks": with_level_context(raw_quotes.get("stocks") or [], histories),
+        "stocks": with_level_context(
+            raw_quotes.get("stocks") or [], histories, research.get("consensus"),
+        ),
     }
+    research_reports = group_reports(research.get("reports") or {}, watchlist)
+    if research_reports:
+        log(f"증권사 리포트: {sum(len(v) for v in research_reports.values())}건 "
+            f"({len(research_reports)}개 종목)")
     valid_names = {s["name"] for s in watchlist}
 
     collected = validate_input(load_input(args.input), valid_names)
@@ -518,6 +587,7 @@ def main() -> None:
         "generated_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "quotes": quotes,
         "calendar": calendar,
+        "research_reports": research_reports,
         "investor_trend": investor,
         "market_news": [strip_private(a) for a in market_new],
         "stock_news": {
