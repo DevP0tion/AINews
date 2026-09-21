@@ -94,6 +94,10 @@ jobs:
     permissions:
       contents: write
       id-token: write
+    outputs:
+      # 주식 처리 결과. 실패해도 job은 성공으로 끝나므로(AI/IT 전송을 막지 않기 위해)
+      # 후속 job은 이 값으로 진행 여부를 판단한다.
+      stock_outcome: ${{ steps.stock.outcome }}
     env:
       TARGET_DATE: ${{ needs.collect.outputs.target_date }}
       INBOX_PATH: ${{ needs.collect.outputs.inbox_path }}
@@ -134,7 +138,19 @@ jobs:
             --disallowedTools "Bash,Edit,WebSearch,mcp__*,Read(./.git/**),Read(~/.claude/**),Write(./**)"
             --add-dir /tmp
 
-      # 아래 두 스텝은 Claude 종료 후 실행된다. 토큰은 여기서만 등장한다.
+      # 아래 스텝들은 전부 Claude 종료 후 실행된다. 토큰은 여기서만 등장한다.
+      #
+      # 리포트별로 [처리 → 커밋]을 분리한다. 주식 처리가 깨져도 AI/IT 리포트는
+      # 이미 커밋·푸시를 마친 뒤이므로 그대로 전송된다.
+      - name: Configure git
+        env:
+          # step 단위 env — 앞선 claude-code-action 스텝에는 노출되지 않는다
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+
       - name: Process report
         run: |
           if [ ! -f /tmp/processed.json ]; then
@@ -143,7 +159,27 @@ jobs:
           fi
           python3 scripts/daily_report.py --date "${TARGET_DATE}" /tmp/processed.json
 
+      - name: Commit & push report
+        run: |
+          YEAR="${TARGET_DATE%%-*}"
+          MONTH=$(echo "${TARGET_DATE}" | cut -d- -f2)
+          # 경로를 명시해서 주식 산출물이 이 커밋에 섞이지 않게 한다
+          git add \
+            "archive/${YEAR}/${MONTH}/${TARGET_DATE}.json" \
+            "archive/${YEAR}/${MONTH}/${TARGET_DATE}.md" \
+            state/seen_urls.json state/seen_claude.json
+          if git diff --cached --quiet; then
+            echo "변경 없음 — commit skip"
+            exit 0
+          fi
+          git commit -m "chore: ${TARGET_DATE} report"
+          git push origin main
+
+      # 여기부터 실패해도 job은 계속된다 (AI/IT는 위에서 이미 푸시됐다).
+      # 실패는 continue-on-error로 삼켜지는 대신 stock_outcome 으로 후속 job에 전달된다.
       - name: Process stock report
+        id: stock
+        continue-on-error: true
         run: |
           if [ ! -f /tmp/processed_stock.json ]; then
             echo "::error::/tmp/processed_stock.json 이 없습니다 — curate 단계의 파트 2가 출력을 생성하지 못했습니다"
@@ -151,21 +187,25 @@ jobs:
           fi
           python3 scripts/stock_report.py --date "${TARGET_DATE}" /tmp/processed_stock.json
 
-      - name: Commit & push
-        env:
-          # step 단위 env — 앞선 claude-code-action 스텝에는 노출되지 않는다
-          GH_TOKEN: ${{ github.token }}
+      - name: Commit & push stock report
+        if: steps.stock.outcome == 'success'
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add archive/ state/
+          YEAR="${TARGET_DATE%%-*}"
+          MONTH=$(echo "${TARGET_DATE}" | cut -d- -f2)
+          git add \
+            "archive/${YEAR}/${MONTH}/${TARGET_DATE}-stock.json" \
+            state/seen_stock_urls.json
           if git diff --cached --quiet; then
             echo "변경 없음 — commit skip"
             exit 0
           fi
-          git commit -m "chore: ${TARGET_DATE} report"
-          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+          git commit -m "chore: ${TARGET_DATE} stock report"
           git push origin main
+
+      - name: Report stock failure
+        if: steps.stock.outcome != 'success'
+        run: |
+          echo "::warning::주식 리포트 처리 실패 — AI/IT 리포트는 정상 전송되고 주식 전송만 건너뜁니다"
 
   # ---------------------------------------------------------------------------
   # 3. Discord 전송 — archive/*.json을 읽어서 webhook으로
@@ -196,6 +236,8 @@ jobs:
   # ---------------------------------------------------------------------------
   pages:
     needs: [collect, curate]
+    # 주식 처리가 실패했으면 배포할 내용이 없다. AI/IT 전송(publish)은 영향받지 않는다.
+    if: needs.curate.outputs.stock_outcome == 'success'
     runs-on: ubuntu-latest
     permissions:
       contents: read

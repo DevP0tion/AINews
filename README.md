@@ -32,10 +32,9 @@ PotionBot News 일일 리포트 저장소.
    │    · 산출물은 이 두 파일뿐. 여기서 Claude의 역할 종료
    │    · 도구는 Read/Write/WebFetch만 — Bash 없음, git 자격증명 없음
    │    · 시세 숫자는 Claude를 거치지 않는다 (inbox에서 직접 읽어 씀)
-   ├ (b) Process report      : daily_report.py → 검증·중복 제거·archive/state 갱신
-   ├ (c) Process stock report: stock_report.py → 동일 (state는 별도 파일)
-   └ (d) Commit & push (이 스텝에만 토큰 주입)
-        · archive/ state/ 커밋 후 main에 푸시
+   ├ (b) Process report → Commit & push   : daily_report.py → 검증·중복 제거·archive/state
+   └ (c) Process stock report → Commit & push : stock_report.py → 동일 (state는 별도 파일)
+        · 리포트별로 [처리 → 커밋]이 분리돼 있고, 커밋 스텝에만 토큰이 주입된다
    ↓
 [Job 3: publish] ── AI/IT를 Discord embed로 전송
    · archive/YYYY/MM/YYYY-MM-DD.json 읽어서 webhook POST
@@ -46,7 +45,22 @@ PotionBot News 일일 리포트 저장소.
 [Job 5: publish_stock] ── 배포된 페이지 링크 한 줄만 주식 채널로 전송
 ```
 
-Job 3(AI/IT)과 Job 4~5(주식)는 Job 2 이후 서로 독립적으로 진행된다.
+### 실패 격리
+
+**주식 쪽이 깨져도 AI/IT 리포트는 정상 전송된다.**
+
+Job 2에서 AI/IT 처리·커밋이 먼저 끝난 뒤 주식 처리가 시작된다.
+주식 스텝은 `continue-on-error`라 실패해도 job 자체는 성공으로 끝나고,
+결과는 `curate.outputs.stock_outcome`으로 후속 job에 전달된다.
+
+| 상황 | Job 3 (AI/IT 전송) | Job 4~5 (주식 배포·전송) |
+|---|---|---|
+| 둘 다 정상 | 전송 | 배포 후 링크 전송 |
+| 주식만 실패 | **전송** | 스킵 (`::warning::` 로그) |
+| AI/IT 실패 | 스킵 | 스킵 (job이 거기서 중단) |
+
+반대 방향(AI/IT 실패 시 주식만 살리기)은 지원하지 않는다.
+AI/IT 처리가 실패하면 Claude 출력 자체가 잘못됐을 가능성이 높아 주식도 신뢰하기 어렵다.
 
 **장점**
 - Routine/로컬 PC 불필요 — 전부 GitHub 인프라에서 실행
@@ -197,8 +211,9 @@ Actions 탭 → **Daily Report** → **Run workflow** (manual trigger):
 - [ ] `collect` job: `inbox/YYYY-MM-DD-raw.json`, `inbox/YYYY-MM-DD-stock-raw.json` 커밋됨
 - [ ] `curate` job — Claude 스텝: Bash 도구 사용 흔적 없이 `/tmp/processed.json`과 `/tmp/processed_stock.json` 생성
 - [ ] `curate` job — Process report 스텝: 요약 JSON 출력, `archive/YYYY/MM/YYYY-MM-DD.json` 생성
+- [ ] `curate` job — Commit & push report 스텝: `chore: YYYY-MM-DD report` 커밋 반영
 - [ ] `curate` job — Process stock report 스텝: `archive/YYYY/MM/YYYY-MM-DD-stock.json` 생성
-- [ ] `curate` job — Commit & push 스텝: `chore: YYYY-MM-DD report` 커밋 반영
+- [ ] `curate` job — Commit & push stock report 스텝: `chore: YYYY-MM-DD stock report` 커밋 반영
 - [ ] `publish` job: AI/IT 채널에 2개 embed 수신
 - [ ] `pages` job: 배포 URL이 job 출력에 표시되고 브라우저에서 열림
 - [ ] `publish_stock` job: 주식 채널에 링크 한 줄 수신, 링크를 누르면 리포트가 열림
@@ -263,14 +278,15 @@ python3 scripts/test_stock_report.py
 |---|---|
 | collect 실패 | 후속 job 자동 스킵 (`needs` 의존성). Actions 탭에서 수동 재실행. |
 | Claude 출력 실패 (`/tmp/processed.json` 없음) | Process report 스텝이 명시적 에러로 즉시 실패. Actions 로그에서 Claude 스텝 원인 확인 후 수동 재실행. |
-| Claude 주식 출력 실패 (`/tmp/processed_stock.json` 없음) | Process stock report 스텝이 즉시 실패 → 커밋 안 됨 → publish/pages 모두 스킵. 수동 재실행. |
+| Claude 주식 출력 실패 (`/tmp/processed_stock.json` 없음) | 주식만 스킵되고 **AI/IT는 정상 전송**. Actions 로그에 `::warning::` 표시. 수동 재실행하면 둘 다 다시 만든다. |
+| stock_report.py 오류 | 위와 동일 — 주식만 스킵. |
 | Process report 실패 (daily_report.py 오류) | job 실패 → publish 스킵. 입력 스키마 위반은 에러가 아니라 WARN + drop이므로, 여기서 실패하면 스크립트/파일시스템 문제. |
 | push 실패 (권한·충돌) | archive/state는 생성됐지만 저장소에 반영 안 됨. 재실행하면 같은 날짜로 다시 생성된다. |
 | Commit & push가 commit skip (신규 없음) | publish가 빈 리포트 정상 전송. archive 없어도 "금일 업데이트 없음" embed. |
 | publish 실패 (webhook 오류) | Actions 로그에서 HTTP 코드 확인. webhook URL 유효성 점검. |
 | 증시 RSS 한 곳 실패 | `safe()`가 WARN 처리하고 나머지 피드로 계속 진행. 리포트 건수만 줄어든다. |
 | Yahoo 시세 조회 실패 | 해당 종목/지수만 시세 표에서 빠진다. 뉴스 섹션은 정상. |
-| pages job 실패 (Pages 미설정) | Settings → Pages → Source가 "GitHub Actions"인지 확인. `publish_stock`은 `needs: pages`라 함께 스킵된다. |
+| pages job 실패 (Pages 미설정) | Settings → Pages → Source가 "GitHub Actions"인지 확인. `publish_stock`은 `needs: pages`라 함께 스킵된다. AI/IT 전송은 영향 없음. |
 | 주식 archive 없음 | 빈 페이지를 배포하고 링크는 정상 전송한다 (링크가 404가 되는 것보다 낫다). |
 
 ## 토큰 갱신
