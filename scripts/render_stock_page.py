@@ -313,6 +313,16 @@ def render_indices(indices: list[dict]) -> str:
     return f'<section class="indices">{"".join(cells)}</section>'
 
 
+def render_stale(flag) -> str:
+    """시세 지연 표시. 수집 단계가 판정한 결과를 그대로 옮긴다."""
+    if not flag:
+        return ""
+    return (
+        '<span class="stale" role="img" aria-label="데이터 지연" '
+        'title="시세 시각이 수집 시각보다 오래됐습니다 (데이터 지연)">⚠️</span>'
+    )
+
+
 def render_news_list(items: list[dict], compact: bool = False) -> str:
     if not items:
         return '<p class="empty">신규 기사 없음</p>'
@@ -337,6 +347,7 @@ def render_stocks(quotes: list[dict], stock_news: dict) -> str:
         name = q.get("name", q["symbol"])
         text, cls = fmt_change(q.get("change"), q.get("change_pct"))
         news = stock_news.get(name, [])
+        stale = render_stale(q.get("stale"))
         level = fmt_level_context(q.get("level_context"), q.get("currency"))
         level_row = f'<div class="meta level">{esc(level)}</div>' if level else ""
         blocks.append(
@@ -345,6 +356,7 @@ def render_stocks(quotes: list[dict], stock_news: dict) -> str:
             f'<div class="stock-id"><h3>{esc(name)}</h3>'
             f'<span class="ticker">{esc(q["symbol"])}</span></div>'
             f'<div class="stock-num"><span class="price">{esc(fmt_price(q.get("price"), q.get("currency"), is_stock=True))}</span>'
+            f'{stale}'
             f'<span class="chg {cls}">{esc(text)}</span></div>'
             f'</header>'
             f'<div class="meta">전일종가 {esc(fmt_price(q.get("prev_close"), q.get("currency"), is_stock=True))}'
@@ -394,6 +406,7 @@ margin-right:6px}
 .meta{font-size:.76rem;color:var(--muted);margin:2px 0 8px;
 font-variant-numeric:tabular-nums}
 .meta.level{margin-top:-6px}
+.stale{margin-right:4px;font-size:.85rem;cursor:help}
 /* 카테고리 3색 — dataviz 검증 통과. 다크는 같은 hue를 어두운 면에 맞춰 다시 뽑은 값 */
 .viz{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .viz{

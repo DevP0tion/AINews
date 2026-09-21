@@ -15,7 +15,8 @@ AI 판단(선정·한국어 요약)은 curate 단계의 Claude가 담당한다.
     "watchlist": [{"symbol", "name", "aliases"}],
     "quotes": {
       "indices": [{"symbol","name","price","change","change_pct","prev_close",...}],
-      "stocks":  [{... 동일 + "volume", "history": [{"date","close"}]}]
+      "stocks":  [{... 동일 + "volume", "quote_time", "stale",
+                   "history": [{"date","close"}]}]
     },
     "market_news": [
       {"title","url","source","published","summary","matched": ["삼성전자", ...]}
@@ -29,10 +30,12 @@ import json
 import pathlib
 import os
 import sys
+import time
 from zoneinfo import ZoneInfo
 
-import feedparser
-import requests
+# feedparser·requests는 실제 수집에만 필요하다. 모듈 최상단에서 끌어오면
+# 순수 함수(is_stale 등)를 테스트하는 데까지 설치를 요구하게 되므로,
+# collect_investor.py의 pykrx와 같은 방식으로 호출 시점에 임포트한다.
 
 UA = "PotionBot-News/1.0 (+https://github.com/DevP0tion/AINews)"
 TIMEOUT = 15
@@ -60,6 +63,15 @@ QUOTE_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
 
 # 관심종목 종가 시계열 수집 기간. 레벨 컨텍스트(기간 고저·박스권) 계산에만 쓴다.
 HISTORY_RANGE = "6mo"   # adjustable
+
+# Yahoo 호출 재시도. runner에서 간헐적 DNS 실패가 실측된 적이 있어,
+# 한 번 실패했다고 그날 시세를 통째로 비우지 않게 한다.
+FETCH_RETRIES = 3       # adjustable — 최초 시도 뒤 재시도 횟수 (총 4회 시도)
+FETCH_BACKOFF = 1.0     # adjustable — 백오프 기준 초. 1 → 2 → 4초
+
+# 시세 시각이 수집 시각보다 이만큼 오래되면 "지연"으로 본다.
+# 판정만 하고 파이프라인은 세우지 않는다 — 지연된 값이라도 없는 것보다 낫다.
+STALE_THRESHOLD_HOURS = 24   # adjustable
 
 
 def log(msg: str) -> None:
@@ -98,20 +110,64 @@ def load_watchlist() -> dict:
 # ---------------------------------------------------------------------------
 
 
+def fetch_chart(label: str, symbol: str, params: dict) -> dict:
+    """Yahoo chart API 호출 + 지수 백오프 재시도. 전부 실패하면 마지막 예외를 올린다.
+
+    호출부는 safe()로 감싸져 있어 여기서 예외가 나가도 그 항목만 빠진다.
+    """
+    import requests
+
+    url = QUOTE_URL.format(symbol=symbol)
+    last: Exception | None = None
+    for attempt in range(FETCH_RETRIES + 1):
+        try:
+            r = requests.get(
+                url, headers={"User-Agent": UA}, params=params, timeout=TIMEOUT,
+            )
+            r.raise_for_status()
+            if attempt:
+                log(f"  {label} {symbol}: {attempt}회 재시도 후 성공")
+            return r.json()
+        except Exception as e:      # DNS·타임아웃·5xx·JSON 파싱 전부 재시도 대상
+            last = e
+            if attempt == FETCH_RETRIES:
+                break
+            delay = FETCH_BACKOFF * (2 ** attempt)
+            log(f"WARN {label} {symbol}: {e} — {delay:g}초 후 재시도 "
+                f"({attempt + 1}/{FETCH_RETRIES})")
+            time.sleep(delay)
+    raise last if last else RuntimeError(f"{label} {symbol}: 알 수 없는 실패")
+
+
+def quote_time_iso(epoch) -> str | None:
+    """regularMarketTime(epoch 초) → ISO UTC. 값이 없거나 숫자가 아니면 None."""
+    if isinstance(epoch, bool) or not isinstance(epoch, (int, float)):
+        return None
+    return (
+        datetime.datetime.fromtimestamp(float(epoch), datetime.timezone.utc)
+        .strftime("%Y-%m-%dT%H:%M:%SZ")
+    )
+
+
+def is_stale(epoch, collected_at: datetime.datetime) -> bool:
+    """시세 시각이 수집 시각보다 STALE_THRESHOLD_HOURS 넘게 오래됐는가.
+
+    시각을 못 받은 경우는 False — 모르는 것을 지연으로 단정하지 않는다.
+    """
+    if isinstance(epoch, bool) or not isinstance(epoch, (int, float)):
+        return False
+    market_at = datetime.datetime.fromtimestamp(float(epoch), datetime.timezone.utc)
+    return (collected_at - market_at).total_seconds() > STALE_THRESHOLD_HOURS * 3600
+
+
 def fetch_quote(symbol: str) -> dict | None:
     """Yahoo Finance chart API에서 현재가/전일종가/변동을 뽑는다.
 
     range=1d 일 때 meta.chartPreviousClose 가 직전 거래일 종가다.
     장중이면 regularMarketPrice 가 현재가, 장 마감 후면 당일 종가가 된다.
     """
-    r = requests.get(
-        QUOTE_URL.format(symbol=symbol),
-        headers={"User-Agent": UA},
-        params={"range": "1d", "interval": "1d"},
-        timeout=TIMEOUT,
-    )
-    r.raise_for_status()
-    result = (r.json().get("chart") or {}).get("result") or []
+    payload = fetch_chart("quote", symbol, {"range": "1d", "interval": "1d"})
+    result = (payload.get("chart") or {}).get("result") or []
     if not result:
         log(f"WARN quote {symbol}: 빈 result")
         return None
@@ -136,6 +192,8 @@ def fetch_quote(symbol: str) -> dict | None:
         "volume": m.get("regularMarketVolume"),
         "currency": m.get("currency"),
         "market_time": m.get("regularMarketTime"),
+        # market_time과 같은 값을 사람이 읽을 수 있게. 기존 필드는 그대로 둔다.
+        "quote_time": quote_time_iso(m.get("regularMarketTime")),
     }
 
 
@@ -148,14 +206,10 @@ def fetch_history(symbol: str) -> list[dict]:
 
     날짜는 거래소 타임존 기준. UTC로 찍으면 KRX 종가가 전날로 밀린다.
     """
-    r = requests.get(
-        QUOTE_URL.format(symbol=symbol),
-        headers={"User-Agent": UA},
-        params={"range": HISTORY_RANGE, "interval": "1d"},
-        timeout=TIMEOUT,
+    payload = fetch_chart(
+        "history", symbol, {"range": HISTORY_RANGE, "interval": "1d"},
     )
-    r.raise_for_status()
-    result = (r.json().get("chart") or {}).get("result") or []
+    result = (payload.get("chart") or {}).get("result") or []
     if not result:
         log(f"WARN history {symbol}: 빈 result")
         return []
@@ -180,12 +234,21 @@ def fetch_history(symbol: str) -> list[dict]:
     return out
 
 
-def fetch_quotes(entries: list[dict], *, with_history: bool = False) -> list[dict]:
+def fetch_quotes(
+    entries: list[dict],
+    collected_at: datetime.datetime,
+    *,
+    with_history: bool = False,
+    mark_stale: bool = False,
+) -> list[dict]:
     """watchlist 항목에 시세를 붙인다. 개별 실패는 해당 항목만 drop.
 
     with_history=True면 종가 시계열도 함께 받는다 (관심종목 전용 — 지수는
     레벨 컨텍스트를 표시하지 않으므로 호출 횟수를 늘리지 않는다).
     시계열 수집만 실패하면 시세는 그대로 살리고 history만 빈 배열로 둔다.
+
+    mark_stale=True면 지연 여부를 판정해 붙인다. 지수에는 붙이지 않는다 —
+    해외 지수는 주말·휴일이면 정상적으로 며칠 전 종가라 오탐만 난다.
     """
     out = []
     for e in entries:
@@ -194,6 +257,14 @@ def fetch_quotes(entries: list[dict], *, with_history: bool = False) -> list[dic
         if not q:
             continue
         item = {**q, "name": e["name"]}
+        if mark_stale:
+            stale = is_stale(q.get("market_time"), collected_at)
+            item["stale"] = stale
+            if stale:
+                log(f"WARN: {e['name']}({symbol}) 시세 지연 — "
+                    f"시세 {q.get('quote_time')} / 수집 "
+                    f"{collected_at.strftime('%Y-%m-%dT%H:%M:%SZ')} "
+                    f"(임계 {STALE_THRESHOLD_HOURS}시간)")
         if with_history:
             history = safe(f"history/{symbol}", lambda: fetch_history(symbol), [])
             log(f"  history {symbol}: {len(history)}일")
@@ -237,6 +308,9 @@ def match_symbols(text: str, stocks: list[dict]) -> list[str]:
 
 
 def fetch_feed(label: str, url: str, stocks: list[dict], cutoff) -> list[dict]:
+    import feedparser
+    import requests
+
     # feedparser.parse(url)은 timeout이 없어 원격이 응답을 끌면 job이 hang된다.
     r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT)
     r.raise_for_status()
@@ -276,6 +350,10 @@ def main() -> None:
     )
     log(f"대상 날짜: {target_date}")
 
+    # 시세 지연 판정의 기준 시각. 수집 시작 시점으로 고정해 둔다 —
+    # 종목마다 다른 시각과 비교하면 같은 응답이 실행 순서에 따라 갈린다.
+    collected_at = datetime.datetime.now(datetime.timezone.utc)
+
     watchlist = load_watchlist()
     stocks, indices = watchlist["stocks"], watchlist["indices"]
     log(f"watchlist: 종목 {len(stocks)}개, 지수 {len(indices)}개")
@@ -299,11 +377,13 @@ def main() -> None:
 
     data = {
         "date": target_date,
-        "collected_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "collected_at": collected_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "watchlist": stocks,
         "quotes": {
-            "indices": fetch_quotes(indices),
-            "stocks": fetch_quotes(stocks, with_history=True),
+            "indices": fetch_quotes(indices, collected_at),
+            "stocks": fetch_quotes(
+                stocks, collected_at, with_history=True, mark_stale=True,
+            ),
         },
         "market_news": deduped,
     }
@@ -314,6 +394,9 @@ def main() -> None:
         json.dumps(data, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    stale_count = sum(1 for q in data["quotes"]["stocks"] if q.get("stale"))
+    if stale_count:
+        log(f"WARN: 시세 지연 종목 {stale_count}건 — 리포트에 ⚠️로 표기된다")
     matched = sum(1 for it in deduped if it["matched"])
     log(f"저장 완료: {out_path.relative_to(REPO_DIR)}")
     log(
