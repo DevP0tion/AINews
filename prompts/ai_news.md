@@ -36,15 +36,24 @@
 - `anthropic_news`는 Claude 리포트(3단계)로 넘기고 여기선 제외
 - 같은 이벤트 중복 보도는 가장 권위있는 1개만
 
+**이 파트에서 `WebFetch`가 특히 필요한 경우**:
+- `hn_ai_stories`는 **제목과 URL뿐이다.** 최종 선정할 2~3건은 원문을 확인하고 요약한다
+- `arxiv_recent`의 `summary`는 600자에서 잘린다. 핵심 기여를 정확히 쓰려면 abstract 원문을 본다
+- HN 제목이 과장·축약된 경우가 잦다. 제목을 그대로 번역하지 말 것
+
 ## 3단계. Claude/Anthropic 업데이트 정리
 
 소스별 파싱 기준:
 - `anthropic_news` → 오늘~어제 published만, 카테고리는 내용 기반 판정 (제품 / 모델/API)
   - **주의**: `published`는 sitemap `lastmod`(페이지 수정 시각)라서 과거 글을 수정해도 최신으로 잡힐 수 있다. 제목·발행일은 `WebFetch`로 원문을 확인해 판정하고, 단순 페이지 수정으로 재등장한 과거 글은 제외할 것. `title`도 URL slug에서 유도한 근사값이므로 원문 제목으로 교체할 것
+  - 이 확인은 **`WebFetch`를 쓸 가치가 가장 높은 곳**이다. `anthropic_news` 후보가 여러 건이면 `published`가 최신인 것부터 확인한다
 - `claude_release_notes_md` → **오늘~어제 날짜 섹션만** 추출
 - `github_releases.*` → `published_at`이 오늘~어제인 것만. sdk_python/sdk_typescript는 카테고리 "SDK", claude_code는 "제품"
 
 **카테고리**: "모델/API" | "제품" | "SDK" | "문서" | "생태계" 중 하나
+
+`special` 판정이 애매하면(breaking change인지, 단순 개선인지) 릴리즈 본문이나 해당 릴리즈 페이지를 확인한다.
+`special`은 Discord에서 ⚠️로 강조되므로 오판정 비용이 크다.
 
 **`special: true` 기준** (하나라도 해당):
 - 메이저 모델 릴리즈 (Opus/Sonnet/Haiku의 주 버전 변경)
