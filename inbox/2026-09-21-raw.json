@@ -1,6 +1,6 @@
 {
   "date": "2026-09-21",
-  "collected_at": "2026-09-21T05:24:40Z",
+  "collected_at": "2026-09-21T08:47:52Z",
   "anthropic_news": [
     {
       "title": "Accenture embedded evaluation",
@@ -196,98 +196,98 @@
     {
       "title": "AX – Google’s Open Agentic Orchestrator",
       "url": "https://agentexecutor.io",
-      "score": 348,
+      "score": 468,
       "hn_url": "https://news.ycombinator.com/item?id=49780797",
       "time": 1789943563
     },
     {
-      "title": "Pirate Face Rescues LLM Models from Deletion",
-      "url": "https://pirateface.co/",
-      "score": 497,
-      "hn_url": "https://news.ycombinator.com/item?id=49776699",
-      "time": 1789917367
+      "title": "In September, AI generated code has made up 17.25% of all Linux Kernel patches",
+      "url": "https://twitter.com/LundukeJournal/status/2101841277432070210",
+      "score": 21,
+      "hn_url": "https://news.ycombinator.com/item?id=49784366",
+      "time": 1789977558
     },
     {
-      "title": "AI chatbots give wrong answers to financial queries 'most of the time'",
-      "url": "https://www.ft.com/content/c0cd359d-df84-4208-a789-ffa864b43666",
-      "score": 23,
-      "hn_url": "https://news.ycombinator.com/item?id=49783062",
-      "time": 1789964924
-    },
-    {
-      "title": "Why MCP Was Always a Bad Idea?",
+      "title": "MCP was always a bad idea?",
       "url": "https://maharship.com/blog/why-mcp-was-always-a-bad-idea/",
-      "score": 88,
+      "score": 155,
       "hn_url": "https://news.ycombinator.com/item?id=49779329",
       "time": 1789933480
     },
     {
       "title": "The LLMentalist Effect (2023)",
       "url": "https://softwarecrisis.dev/letters/llmentalist/",
-      "score": 169,
+      "score": 187,
       "hn_url": "https://news.ycombinator.com/item?id=49775104",
       "time": 1789906813
     },
     {
+      "title": "AI chatbots give wrong answers to financial queries 'most of the time'",
+      "url": "https://www.ft.com/content/c0cd359d-df84-4208-a789-ffa864b43666",
+      "score": 86,
+      "hn_url": "https://news.ycombinator.com/item?id=49783062",
+      "time": 1789964924
+    },
+    {
       "title": "Show HN: A competition for small neural networks that play strategy games",
       "url": "https://tinybrains.dev",
-      "score": 49,
+      "score": 66,
       "hn_url": "https://news.ycombinator.com/item?id=49776523",
       "time": 1789916350
     },
     {
-      "title": "Show HN: jevals – replacing LLM judges with typed Jev decisions",
-      "url": "https://github.com/openlayer-ai/jevals",
-      "score": 14,
-      "hn_url": "https://news.ycombinator.com/item?id=49780849",
-      "time": 1789943987
-    },
-    {
-      "title": "The president wanted to unleash AI. Then came Anthropic",
-      "url": "https://www.politico.com/news/magazine/2026/09/20/anthropic-white-house-ai-01085212",
-      "score": 9,
-      "hn_url": "https://news.ycombinator.com/item?id=49782916",
-      "time": 1789963291
-    },
-    {
-      "title": "If AI coding is lowering your code quality, you're not managing quality right",
-      "url": "https://www.i-kh.net/p/if-ai-coding-is-lowering-your-code",
-      "score": 79,
-      "hn_url": "https://news.ycombinator.com/item?id=49774795",
-      "time": 1789904230
-    },
-    {
       "title": "How to Write with an LLM",
       "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/",
-      "score": 724,
+      "score": 728,
       "hn_url": "https://news.ycombinator.com/item?id=49747070",
       "time": 1789681718
     },
     {
-      "title": "Flock Partnered with Nonprofit That Uses AI to Rally Public Support",
-      "url": "https://theintercept.com/2026/09/17/flock-cameras-ai-astroturf-support/",
-      "score": 8,
-      "hn_url": "https://news.ycombinator.com/item?id=49781977",
-      "time": 1789953833
+      "title": "If AI coding is lowering your code quality, you're not managing quality right",
+      "url": "https://www.i-kh.net/p/if-ai-coding-is-lowering-your-code",
+      "score": 89,
+      "hn_url": "https://news.ycombinator.com/item?id=49774795",
+      "time": 1789904230
+    },
+    {
+      "title": "Show HN: jevals – replacing LLM judges with typed Jev decisions",
+      "url": "https://github.com/openlayer-ai/jevals",
+      "score": 18,
+      "hn_url": "https://news.ycombinator.com/item?id=49780849",
+      "time": 1789943987
     },
     {
       "title": "Two parallel neural ectoderm progenitors contribute to the developing brain",
       "url": "https://med.stanford.edu/news/all-news/2026/09/two-separate-brains.html",
-      "score": 643,
+      "score": 644,
       "hn_url": "https://news.ycombinator.com/item?id=49763697",
       "time": 1789796930
     },
     {
       "title": "ChatGPT now knows what you do on other websites via ad collector",
       "url": "https://www.buchodi.com/chatgpt-now-knows-what-you-do-on-other-websites-via-ad-collector/",
-      "score": 698,
+      "score": 714,
       "hn_url": "https://news.ycombinator.com/item?id=49776729",
       "time": 1789917524
     },
     {
+      "title": "The president wanted to unleash AI. Then came Anthropic",
+      "url": "https://www.politico.com/news/magazine/2026/09/20/anthropic-white-house-ai-01085212",
+      "score": 10,
+      "hn_url": "https://news.ycombinator.com/item?id=49782916",
+      "time": 1789963291
+    },
+    {
+      "title": "Flock Partnered with Nonprofit That Uses AI to Rally Public Support",
+      "url": "https://theintercept.com/2026/09/17/flock-cameras-ai-astroturf-support/",
+      "score": 10,
+      "hn_url": "https://news.ycombinator.com/item?id=49781977",
+      "time": 1789953833
+    },
+    {
       "title": "I think you should almost never use AI to write",
       "url": "https://erichgrunewald.substack.com/p/why-you-should-almost-never-use-ai",
-      "score": 345,
+      "score": 348,
       "hn_url": "https://news.ycombinator.com/item?id=49767937",
       "time": 1789835724
     },
