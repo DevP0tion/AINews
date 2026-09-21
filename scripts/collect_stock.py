@@ -6,6 +6,10 @@ collect_stock.py — 주식 리포트용 결정론적 수집 스크립트.
 inbox/YYYY-MM-DD-stock-raw.json 으로 저장한다.
 AI 판단(선정·한국어 요약)은 curate 단계의 Claude가 담당한다.
 
+종가 시계열은 inbox/YYYY-MM-DD-stock-history.json 으로 **따로** 뺀다.
+curate 단계의 Claude가 raw 파일을 통째로 읽기 때문에, 뉴스 선정에 쓰지 않는
+6개월치 배열을 같은 파일에 두면 프롬프트만 수만 토큰 불어난다.
+
 관심종목은 config/watchlist.json 에서 읽는다.
 
 출력 스키마:
@@ -15,12 +19,19 @@ AI 판단(선정·한국어 요약)은 curate 단계의 Claude가 담당한다.
     "watchlist": [{"symbol", "name", "aliases"}],
     "quotes": {
       "indices": [{"symbol","name","price","change","change_pct","prev_close",...}],
-      "stocks":  [{... 동일 + "volume", "quote_time", "stale",
-                   "history": [{"date","close"}]}]
+      "stocks":  [{... 동일 + "volume", "quote_time", "stale"}]
     },
     "market_news": [
       {"title","url","source","published","summary","matched": ["삼성전자", ...]}
     ]
+  }
+
+종가 시계열 (별도 파일):
+  {
+    "date": "YYYY-MM-DD",
+    "collected_at": ISO UTC,
+    "range": "6mo",
+    "history": {"005930.KS": [{"date","close"}], ...}   # 관심종목만
   }
 """
 from __future__ import annotations
@@ -238,14 +249,9 @@ def fetch_quotes(
     entries: list[dict],
     collected_at: datetime.datetime,
     *,
-    with_history: bool = False,
     mark_stale: bool = False,
 ) -> list[dict]:
     """watchlist 항목에 시세를 붙인다. 개별 실패는 해당 항목만 drop.
-
-    with_history=True면 종가 시계열도 함께 받는다 (관심종목 전용 — 지수는
-    레벨 컨텍스트를 표시하지 않으므로 호출 횟수를 늘리지 않는다).
-    시계열 수집만 실패하면 시세는 그대로 살리고 history만 빈 배열로 둔다.
 
     mark_stale=True면 지연 여부를 판정해 붙인다. 지수에는 붙이지 않는다 —
     해외 지수는 주말·휴일이면 정상적으로 며칠 전 종가라 오탐만 난다.
@@ -265,11 +271,22 @@ def fetch_quotes(
                     f"시세 {q.get('quote_time')} / 수집 "
                     f"{collected_at.strftime('%Y-%m-%dT%H:%M:%SZ')} "
                     f"(임계 {STALE_THRESHOLD_HOURS}시간)")
-        if with_history:
-            history = safe(f"history/{symbol}", lambda: fetch_history(symbol), [])
-            log(f"  history {symbol}: {len(history)}일")
-            item["history"] = history
         out.append(item)
+    return out
+
+
+def fetch_histories(entries: list[dict]) -> dict[str, list]:
+    """관심종목의 종가 시계열을 {symbol: [{"date","close"}]}로.
+
+    지수는 받지 않는다 — 레벨 컨텍스트를 표시하지 않으므로 호출만 늘어난다.
+    개별 실패는 그 종목만 빈 배열로 남긴다 (시세·뉴스는 그대로 나간다).
+    """
+    out = {}
+    for e in entries:
+        symbol = e["symbol"]
+        history = safe(f"history/{symbol}", lambda: fetch_history(symbol), [])
+        log(f"  history {symbol}: {len(history)}일")
+        out[symbol] = history
     return out
 
 
@@ -381,28 +398,39 @@ def main() -> None:
         "watchlist": stocks,
         "quotes": {
             "indices": fetch_quotes(indices, collected_at),
-            "stocks": fetch_quotes(
-                stocks, collected_at, with_history=True, mark_stale=True,
-            ),
+            "stocks": fetch_quotes(stocks, collected_at, mark_stale=True),
         },
         "market_news": deduped,
     }
 
-    out_path = REPO_DIR / "inbox" / f"{target_date}-stock-raw.json"
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(
-        json.dumps(data, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
+    # 시계열은 별도 파일. curate가 읽는 raw 파일을 뉴스 선정에 필요한 것만으로 유지한다.
+    history = {
+        "date": target_date,
+        "collected_at": collected_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "range": HISTORY_RANGE,
+        "history": fetch_histories(stocks),
+    }
+
+    inbox_dir = REPO_DIR / "inbox"
+    inbox_dir.mkdir(parents=True, exist_ok=True)
+    out_path = inbox_dir / f"{target_date}-stock-raw.json"
+    history_path = inbox_dir / f"{target_date}-stock-history.json"
+    for path, payload in ((out_path, data), (history_path, history)):
+        path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
     stale_count = sum(1 for q in data["quotes"]["stocks"] if q.get("stale"))
     if stale_count:
         log(f"WARN: 시세 지연 종목 {stale_count}건 — 리포트에 ⚠️로 표기된다")
     matched = sum(1 for it in deduped if it["matched"])
-    log(f"저장 완료: {out_path.relative_to(REPO_DIR)}")
+    log(f"저장 완료: {out_path.relative_to(REPO_DIR)}, "
+        f"{history_path.relative_to(REPO_DIR)}")
     log(
         f"요약: news={len(deduped)} (종목 매칭 {matched}), "
         f"indices={len(data['quotes']['indices'])}, "
-        f"stocks={len(data['quotes']['stocks'])}"
+        f"stocks={len(data['quotes']['stocks'])}, "
+        f"history={sum(len(v) for v in history['history'].values())}일"
     )
 
 

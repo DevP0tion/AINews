@@ -7,6 +7,8 @@ stock_report.py — curate 단계의 주식 산출물을 검증·중복제거해
       {"market_news": [{"title","summary","url","source"}],
        "stock_news":  [{"stock","title","summary","url","source"}]}
   · inbox/YYYY-MM-DD-stock-raw.json — 시세 원본
+  · inbox/YYYY-MM-DD-stock-history.json — 종가 시계열 (없으면 레벨 컨텍스트·
+    주간 섹션만 빠지고 나머지는 그대로 나간다)
 
 시세 숫자는 **inbox에서 직접** 읽는다. Claude 산출물의 숫자는 쓰지 않는다
 (LLM이 옮겨 적는 과정에서 값이 바뀌면 리포트가 조용히 틀리기 때문).
@@ -218,8 +220,26 @@ def strip_private(d: dict) -> dict:
     return {k: v for k, v in d.items() if not k.startswith("_")}
 
 
-def with_level_context(stocks: list[dict]) -> list[dict]:
-    """inbox 종가 시계열로 종목별 level_context를 계산해 붙인다.
+def load_histories(today: str) -> dict[str, list]:
+    """inbox의 종가 시계열 파일을 {symbol: [{"date","close"}]}로 읽는다.
+
+    파일이 없어도 에러가 아니다 — 레벨 컨텍스트와 주간 섹션만 빠진다.
+    (시계열은 뉴스 선정에 쓰지 않으므로 curate가 읽는 raw 파일과 분리돼 있다.)
+    """
+    path = REPO_DIR / "inbox" / f"{today}-stock-history.json"
+    raw = load_json(path, None)
+    if raw is None:
+        log(f"종가 시계열 없음: {path.name} — 레벨 컨텍스트·주간 섹션 생략")
+        return {}
+    series = raw.get("history") if isinstance(raw, dict) else None
+    if not isinstance(series, dict):
+        log(f"WARN: {path.name}의 history가 object가 아님 — 무시")
+        return {}
+    return {k: v for k, v in series.items() if isinstance(v, list)}
+
+
+def with_level_context(stocks: list[dict], histories: dict[str, list]) -> list[dict]:
+    """종가 시계열로 종목별 level_context를 계산해 붙인다.
 
     history 자체는 archive에 싣지 않는다 (6개월 × 종목 수를 매일 커밋하면
     저장소만 불어난다). 계산 결과만 남기고 원본은 inbox에 그대로 둔다.
@@ -230,7 +250,7 @@ def with_level_context(stocks: list[dict]) -> list[dict]:
             continue
         # level_context는 계산 결과로만 존재한다 — 원본에 같은 이름이 있어도 버린다
         item = {k: v for k, v in q.items() if k not in ("history", "level_context")}
-        ctx = compute_level_context(closes_of(q.get("history")))
+        ctx = compute_level_context(closes_of(histories.get(q.get("symbol"))))
         if ctx:
             item["level_context"] = ctx
         else:
@@ -316,11 +336,11 @@ def is_weekly_day(today: str) -> bool:
     return WEEKDAY_NAMES[datetime.date.fromisoformat(today).weekday()] == WEEKLY_DAY
 
 
-def build_weekly(stocks: list[dict], today: str, events: list[dict]) -> dict | None:
+def build_weekly(stocks: list[dict], histories: dict[str, list],
+                 today: str, events: list[dict]) -> dict | None:
     """주간 변동률·고저와 레벨 컨텍스트의 전주 대비 변화. 전부 계산치다.
 
     WEEKLY_DAY가 아니면 None — 섹션 자체가 붙지 않는다.
-    `stocks`는 history가 아직 붙어 있는 **inbox 원본**이어야 한다.
     """
     if not is_weekly_day(today):
         return None
@@ -329,7 +349,7 @@ def build_weekly(stocks: list[dict], today: str, events: list[dict]) -> dict | N
     for q in stocks:
         if not isinstance(q, dict):
             continue
-        stats = compute_weekly_stats(q.get("history"), today)
+        stats = compute_weekly_stats(histories.get(q.get("symbol")), today)
         if not stats:
             continue
         rows.append({
@@ -450,9 +470,10 @@ def main() -> None:
 
     watchlist = inbox.get("watchlist") or []
     raw_quotes = inbox.get("quotes") or {"indices": [], "stocks": []}
+    histories = load_histories(today)
     quotes = {
         "indices": raw_quotes.get("indices") or [],
-        "stocks": with_level_context(raw_quotes.get("stocks") or []),
+        "stocks": with_level_context(raw_quotes.get("stocks") or [], histories),
     }
     valid_names = {s["name"] for s in watchlist}
 
@@ -480,8 +501,9 @@ def main() -> None:
     else:
         log("캘린더: 표시할 이벤트 없음 — 해당 섹션은 생략된다")
 
-    # history가 아직 붙어 있는 inbox 원본으로 계산한다 (quotes에서는 이미 떼어냈다)
-    weekly = build_weekly(raw_quotes.get("stocks") or [], today, calendar_all)
+    weekly = build_weekly(
+        raw_quotes.get("stocks") or [], histories, today, calendar_all,
+    )
 
     year, month = today[:4], today[5:7]
     out_path = ARCHIVE_DIR / year / month / f"{today}-stock.json"

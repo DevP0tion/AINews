@@ -107,7 +107,8 @@ AINews/
 │   └── investor_trend.json           # 투자자 순매수 일별 누적 (최근 40일 보관)
 ├── inbox/                            # Job 1 출력
 │   ├── YYYY-MM-DD-raw.json
-│   └── YYYY-MM-DD-stock-raw.json
+│   ├── YYYY-MM-DD-stock-raw.json     # curate가 읽는 파일 (뉴스·시세)
+│   └── YYYY-MM-DD-stock-history.json # 종가 시계열 (후속 스텝 전용)
 ├── archive/                          # Job 2 출력
 │   ├── YYYY/MM/YYYY-MM-DD.{json,md}
 │   └── YYYY/MM/YYYY-MM-DD-stock.json
@@ -188,10 +189,19 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 대상은 `config/watchlist.json`의 `indices`(코스피/코스닥/나스닥/원달러)와 `stocks`.
 
 **종가 시계열** — 관심종목에 한해 `range=6mo&interval=1d`로 일봉 종가도 받아
-inbox의 `quotes.stocks[].history`(`[{"date","close"}]`)에 담는다. 레벨 컨텍스트와
-주간 통계의 재료다. 지수는 받지 않는다 (표시하지 않으므로 호출만 늘어난다).
-휴장·거래정지로 `close`가 `null`인 날은 통째로 버린다 — 앞 값으로 메우면
-없던 거래일을 만들어내는 셈이다. 날짜는 거래소 타임존 기준이다.
+**별도 파일** `inbox/YYYY-MM-DD-stock-history.json`에 `{symbol: [{"date","close"}]}`
+형태로 담는다. 레벨 컨텍스트와 주간 통계의 재료다.
+
+`-stock-raw.json`과 분리한 이유 — curate 단계의 Claude는 raw 파일을 `Read`로
+통째로 읽는다. 뉴스 선정에 전혀 쓰지 않는 6개월치 배열(종목당 ~125일)이 같은
+파일에 있으면 프롬프트만 수만 토큰 불어난다. 시계열은 `stock_report.py`만 읽는다.
+
+지수는 받지 않는다 (표시하지 않으므로 호출만 늘어난다). 휴장·거래정지로
+`close`가 `null`인 날은 통째로 버린다 — 앞 값으로 메우면 없던 거래일을
+만들어내는 셈이다. 날짜는 거래소 타임존 기준이다.
+
+시계열 파일이 없어도 에러가 아니다. 레벨 컨텍스트와 주간 섹션만 빠지고
+시세·뉴스 리포트는 그대로 나간다.
 
 **재시도** — 모든 Yahoo 호출에 3회 재시도 + 1→2→4초 지수 백오프(`FETCH_RETRIES`,
 `FETCH_BACKOFF`). runner에서 간헐적 DNS 실패가 실측된 적이 있어, 한 번 실패했다고
@@ -222,7 +232,7 @@ inbox의 `quotes.stocks[].history`(`[{"date","close"}]`)에 담는다. 레벨 �
 | `box_high` / `box_low` | 최근 `BOX_WINDOW`(기본 20) 거래일 종가의 고·저 |
 | `box_window` | **실제로 쓴 표본 수**. 시계열이 짧으면 20보다 작고, 표기도 그 수를 따른다 |
 
-계산은 `stock_report.py`가 inbox의 `history`로 직접 한다. curated JSON에
+계산은 `stock_report.py`가 시계열 파일을 읽어 직접 한다. curated JSON에
 같은 이름의 필드가 있어도 읽지 않고 버린다 — 리포트의 숫자는 수집 원본과
 결정론적 계산에서만 나온다. `history` 자체는 archive에 싣지 않는다
 (매일 6개월치를 커밋하면 저장소만 불어난다).

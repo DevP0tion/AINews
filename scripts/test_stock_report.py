@@ -4,9 +4,10 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import stock_report  # noqa: E402
 from stock_report import (  # noqa: E402
     WEEKLY_DAY, build_weekly, filter_new, group_by_stock, is_weekly_day,
-    normalize_url, past_events, upcoming_events, validate_input,
+    load_histories, normalize_url, past_events, upcoming_events, validate_input,
     with_level_context,
 )
 from render_stock_page import (  # noqa: E402
@@ -106,23 +107,63 @@ assert fmt_volume(None) == "—"
 
 # --- 레벨 컨텍스트 ----------------------------------------------------------
 
-# inbox의 history로 계산해서 붙이고, history 자체는 archive에 싣지 않는다
+# 시계열은 별도 파일에서 symbol로 찾아 붙인다. history 자체는 archive에 싣지 않는다
+HISTORIES = {"005930.KS": [{"date": "2026-09-18", "close": 80.0},
+                           {"date": "2026-09-21", "close": 90.0}]}
+
 merged = with_level_context([{
     "symbol": "005930.KS", "name": "삼성전자", "price": 90.0, "currency": "KRW",
-    "history": [{"date": "2026-09-18", "close": 80.0},
-                {"date": "2026-09-21", "close": 90.0}],
-}])
+}], HISTORIES)
 assert "history" not in merged[0], merged[0]
 assert merged[0]["price"] == 90.0, "기존 시세 필드는 그대로 보존"
 assert merged[0]["level_context"]["period_high"] == 90.0, merged[0]
 
 # 시계열이 없으면 level_context 키 자체를 만들지 않는다 (빈 값으로 채우지 않는다)
-assert "level_context" not in with_level_context([{"symbol": "X", "name": "X"}])[0]
-assert with_level_context([None, "x"]) == []
+assert "level_context" not in with_level_context([{"symbol": "X", "name": "X"}], {})[0]
+assert "level_context" not in with_level_context(
+    [{"symbol": "005930.KS", "name": "삼성전자"}], {},
+)[0], "시계열 파일이 통째로 없어도 죽지 않는다"
+assert with_level_context([None, "x"], HISTORIES) == []
+
+# raw 파일에 history가 남아 있어도 읽지 않는다 (분리 이전 형식과의 혼동 방지)
+legacy = with_level_context(
+    [{"symbol": "X", "name": "X", "history": [{"date": "2026-09-21", "close": 1}]}], {},
+)
+assert "level_context" not in legacy[0] and "history" not in legacy[0], legacy[0]
 
 # curated JSON이 level_context를 흉내 내도 반영되지 않는다 — 계산값만 쓴다
-faked = with_level_context([{"symbol": "X", "name": "X", "level_context": {"period_high": 1}}])
+faked = with_level_context(
+    [{"symbol": "X", "name": "X", "level_context": {"period_high": 1}}], {},
+)
 assert "level_context" not in faked[0], faked[0]
+
+# 시계열 파일 읽기 — 없으면 빈 dict, 형식이 깨져도 죽지 않는다
+import json as _json  # noqa: E402
+import tempfile  # noqa: E402
+
+with tempfile.TemporaryDirectory() as _tmp:
+    _root = pathlib.Path(_tmp)
+    (_root / "inbox").mkdir()
+    _saved_repo = stock_report.REPO_DIR
+    stock_report.REPO_DIR = _root
+    try:
+        assert load_histories("2026-09-21") == {}, "파일이 없으면 빈 dict"
+
+        def _write(payload):
+            (_root / "inbox" / "2026-09-21-stock-history.json").write_text(
+                _json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+
+        _write({"date": "2026-09-21", "range": "6mo",
+                "history": {"005930.KS": [{"date": "2026-09-21", "close": 1.0}],
+                            "깨진값": "배열이 아님"}})
+        loaded = load_histories("2026-09-21")
+        assert list(loaded) == ["005930.KS"], loaded
+
+        for bad in ({"history": []}, {"history": "x"}, [], "nope"):
+            _write(bad)
+            assert load_histories("2026-09-21") == {}, bad
+    finally:
+        stock_report.REPO_DIR = _saved_repo
 
 # 표기 형식: "고점 -X.X% · 저점 +X.X% · N일 박스 A~B"
 line = fmt_level_context(
@@ -380,13 +421,13 @@ WK_HISTORY = [
     {"date": "2026-09-18", "close": 95.0},
     {"date": "2026-09-21", "close": 110.0},
 ]
-WK_STOCKS = [{"symbol": "005930.KS", "name": "삼성전자", "currency": "KRW",
-              "history": WK_HISTORY}]
+WK_STOCKS = [{"symbol": "005930.KS", "name": "삼성전자", "currency": "KRW"}]
+WK_HISTORIES = {"005930.KS": WK_HISTORY}
 
 # WEEKLY_DAY가 아니면 섹션 자체를 만들지 않는다
-assert build_weekly(WK_STOCKS, "2026-09-22", []) is None
+assert build_weekly(WK_STOCKS, WK_HISTORIES, "2026-09-22", []) is None
 
-wk = build_weekly(WK_STOCKS, "2026-09-21", EVENTS)
+wk = build_weekly(WK_STOCKS, WK_HISTORIES, "2026-09-21", EVENTS)
 assert wk["day"] == "Monday"
 row = wk["stocks"][0]
 assert row["name"] == "삼성전자" and row["symbol"] == "005930.KS"
@@ -396,11 +437,12 @@ assert round(row["recovery_delta"], 4) == 37.5      # 0% → 37.5%
 assert [e["label"] for e in wk["past_events"]] == ["어제 — 이미 지났다"]
 
 # 시계열이 없으면 그 종목만 빠진다 (섹션은 지난 이벤트로 유지)
-only_events = build_weekly([{"symbol": "X", "name": "X"}], "2026-09-21", EVENTS)
+only_events = build_weekly([{"symbol": "X", "name": "X"}], {}, "2026-09-21", EVENTS)
 assert only_events["stocks"] == [] and only_events["past_events"]
 
 # 실을 것이 하나도 없으면 None
-assert build_weekly([], "2026-09-21", []) is None
+assert build_weekly([], {}, "2026-09-21", []) is None
+assert build_weekly(WK_STOCKS, {}, "2026-09-21", []) is None
 
 # 포맷 — 부호를 항상 붙이고 없는 값은 —
 assert fmt_pct(3.456) == ("+3.46%", "up")
