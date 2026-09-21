@@ -5,11 +5,11 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from stock_report import (  # noqa: E402
-    filter_new, group_by_stock, normalize_url, validate_input,
+    filter_new, group_by_stock, normalize_url, validate_input, with_level_context,
 )
 from render_stock_page import (  # noqa: E402
-    fmt_billion, fmt_change, fmt_daylabel, fmt_price, fmt_volume,
-    nice_bounds, render, render_chart, render_investor,
+    fmt_billion, fmt_change, fmt_daylabel, fmt_level_context, fmt_price,
+    fmt_volume, nice_bounds, render, render_chart, render_investor,
 )
 from collect_investor import (  # noqa: E402
     merge_day, pick_investor_values, prune, ticker_of,
@@ -98,6 +98,58 @@ assert fmt_change(-100, -1.5)[1] == "down"
 assert fmt_change(0, 0)[1] == "flat"
 assert fmt_volume(140_210_400).endswith("억"), fmt_volume(140_210_400)
 assert fmt_volume(None) == "—"
+
+
+# --- 레벨 컨텍스트 ----------------------------------------------------------
+
+# inbox의 history로 계산해서 붙이고, history 자체는 archive에 싣지 않는다
+merged = with_level_context([{
+    "symbol": "005930.KS", "name": "삼성전자", "price": 90.0, "currency": "KRW",
+    "history": [{"date": "2026-09-18", "close": 80.0},
+                {"date": "2026-09-21", "close": 90.0}],
+}])
+assert "history" not in merged[0], merged[0]
+assert merged[0]["price"] == 90.0, "기존 시세 필드는 그대로 보존"
+assert merged[0]["level_context"]["period_high"] == 90.0, merged[0]
+
+# 시계열이 없으면 level_context 키 자체를 만들지 않는다 (빈 값으로 채우지 않는다)
+assert "level_context" not in with_level_context([{"symbol": "X", "name": "X"}])[0]
+assert with_level_context([None, "x"]) == []
+
+# curated JSON이 level_context를 흉내 내도 반영되지 않는다 — 계산값만 쓴다
+faked = with_level_context([{"symbol": "X", "name": "X", "level_context": {"period_high": 1}}])
+assert "level_context" not in faked[0], faked[0]
+
+# 표기 형식: "고점 -X.X% · 저점 +X.X% · N일 박스 A~B"
+line = fmt_level_context(
+    {"pct_from_high": -12.44, "pct_from_low": 31.0,
+     "box_low": 254000.0, "box_high": 273250.0, "box_window": 20},
+    "KRW",
+)
+assert line == "고점 -12.4% · 저점 +31.0% · 20일 박스 254,000~273,250", line
+
+# 박스 일수는 상수가 아니라 실제 표본 수를 찍는다 (시계열이 짧은 경우)
+short_line = fmt_level_context(
+    {"pct_from_high": 0.0, "pct_from_low": 0.0,
+     "box_low": 100.0, "box_high": 100.0, "box_window": 1}, "KRW",
+)
+assert short_line.endswith("1일 박스 100~100"), short_line
+
+# 값이 없으면 줄을 만들지 않는다
+assert fmt_level_context(None, "KRW") == ""
+assert fmt_level_context({}, "KRW") == ""
+
+# 페이지에도 그대로 실린다
+lvl_page = render("2026-09-21", {
+    "quotes": {"indices": [], "stocks": [{
+        "symbol": "005930.KS", "name": "삼성전자", "price": 273250.0,
+        "change": 0, "change_pct": 0, "currency": "KRW",
+        "level_context": {"pct_from_high": -12.44, "pct_from_low": 31.0,
+                          "box_low": 254000.0, "box_high": 273250.0, "box_window": 20},
+    }]},
+    "market_news": [], "stock_news": {},
+})
+assert "고점 -12.4% · 저점 +31.0%" in lvl_page, "레벨 컨텍스트가 페이지에 없다"
 
 
 # --- 렌더링 -----------------------------------------------------------------

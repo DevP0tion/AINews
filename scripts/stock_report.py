@@ -10,6 +10,8 @@ stock_report.py — curate 단계의 주식 산출물을 검증·중복제거해
 
 시세 숫자는 **inbox에서 직접** 읽는다. Claude 산출물의 숫자는 쓰지 않는다
 (LLM이 옮겨 적는 과정에서 값이 바뀌면 리포트가 조용히 틀리기 때문).
+레벨 컨텍스트(기간 고저 대비 위치·박스권)도 마찬가지로 inbox의 종가 시계열에서
+직접 계산한다 — curated JSON에 같은 이름의 필드가 있어도 읽지 않는다.
 
 출력:
   · archive/YYYY/MM/YYYY-MM-DD-stock.json
@@ -28,6 +30,9 @@ import re
 import sys
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 from zoneinfo import ZoneInfo
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from level_context import closes_of, compute_level_context  # noqa: E402
 
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 DEFAULT_REPO = SCRIPT_DIR.parent
@@ -198,6 +203,27 @@ def strip_private(d: dict) -> dict:
     return {k: v for k, v in d.items() if not k.startswith("_")}
 
 
+def with_level_context(stocks: list[dict]) -> list[dict]:
+    """inbox 종가 시계열로 종목별 level_context를 계산해 붙인다.
+
+    history 자체는 archive에 싣지 않는다 (6개월 × 종목 수를 매일 커밋하면
+    저장소만 불어난다). 계산 결과만 남기고 원본은 inbox에 그대로 둔다.
+    """
+    out = []
+    for q in stocks:
+        if not isinstance(q, dict):
+            continue
+        # level_context는 계산 결과로만 존재한다 — 원본에 같은 이름이 있어도 버린다
+        item = {k: v for k, v in q.items() if k not in ("history", "level_context")}
+        ctx = compute_level_context(closes_of(q.get("history")))
+        if ctx:
+            item["level_context"] = ctx
+        else:
+            log(f"WARN: {q.get('name', q.get('symbol'))} 종가 시계열 없음 — level_context 생략")
+        out.append(item)
+    return out
+
+
 def recent_investor_trend(days: int = INVESTOR_DAYS) -> dict:
     """누적 state에서 최근 N영업일을 잘라 리포트용 구조로 만든다.
 
@@ -294,7 +320,11 @@ def main() -> None:
         raise SystemExit(1)
 
     watchlist = inbox.get("watchlist") or []
-    quotes = inbox.get("quotes") or {"indices": [], "stocks": []}
+    raw_quotes = inbox.get("quotes") or {"indices": [], "stocks": []}
+    quotes = {
+        "indices": raw_quotes.get("indices") or [],
+        "stocks": with_level_context(raw_quotes.get("stocks") or []),
+    }
     valid_names = {s["name"] for s in watchlist}
 
     collected = validate_input(load_input(args.input), valid_names)

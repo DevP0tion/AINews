@@ -15,7 +15,7 @@ AI 판단(선정·한국어 요약)은 curate 단계의 Claude가 담당한다.
     "watchlist": [{"symbol", "name", "aliases"}],
     "quotes": {
       "indices": [{"symbol","name","price","change","change_pct","prev_close",...}],
-      "stocks":  [{... 동일 + "volume"}]
+      "stocks":  [{... 동일 + "volume", "history": [{"date","close"}]}]
     },
     "market_news": [
       {"title","url","source","published","summary","matched": ["삼성전자", ...]}
@@ -57,6 +57,9 @@ FRESH_HOURS = 30
 SUMMARY_MAX = 400
 
 QUOTE_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+
+# 관심종목 종가 시계열 수집 기간. 레벨 컨텍스트(기간 고저·박스권) 계산에만 쓴다.
+HISTORY_RANGE = "6mo"   # adjustable
 
 
 def log(msg: str) -> None:
@@ -136,13 +139,66 @@ def fetch_quote(symbol: str) -> dict | None:
     }
 
 
-def fetch_quotes(entries: list[dict]) -> list[dict]:
-    """watchlist 항목에 시세를 붙인다. 개별 실패는 해당 항목만 drop."""
+def fetch_history(symbol: str) -> list[dict]:
+    """일봉 종가 시계열 [{"date","close"}] (오래된 → 최신).
+
+    timestamp와 indicators.quote[0].close 는 같은 길이의 평행 배열이고,
+    휴장·거래정지 구간의 close 는 null로 온다. null은 날짜째로 버린다 —
+    앞 값으로 메우면 없던 거래일을 만들어내는 셈이다.
+
+    날짜는 거래소 타임존 기준. UTC로 찍으면 KRX 종가가 전날로 밀린다.
+    """
+    r = requests.get(
+        QUOTE_URL.format(symbol=symbol),
+        headers={"User-Agent": UA},
+        params={"range": HISTORY_RANGE, "interval": "1d"},
+        timeout=TIMEOUT,
+    )
+    r.raise_for_status()
+    result = (r.json().get("chart") or {}).get("result") or []
+    if not result:
+        log(f"WARN history {symbol}: 빈 result")
+        return []
+    res = result[0]
+    stamps = res.get("timestamp") or []
+    quote = ((res.get("indicators") or {}).get("quote") or [{}])[0] or {}
+    closes = quote.get("close") or []
+
+    tz_name = (res.get("meta") or {}).get("exchangeTimezoneName")
+    try:
+        tz = ZoneInfo(tz_name) if tz_name else datetime.timezone.utc
+    except Exception:
+        log(f"WARN history {symbol}: 알 수 없는 타임존 {tz_name!r} — UTC로 처리")
+        tz = datetime.timezone.utc
+
+    out = []
+    for ts, close in zip(stamps, closes):
+        if close is None or not isinstance(ts, (int, float)):
+            continue
+        date = datetime.datetime.fromtimestamp(float(ts), tz).strftime("%Y-%m-%d")
+        out.append({"date": date, "close": float(close)})
+    return out
+
+
+def fetch_quotes(entries: list[dict], *, with_history: bool = False) -> list[dict]:
+    """watchlist 항목에 시세를 붙인다. 개별 실패는 해당 항목만 drop.
+
+    with_history=True면 종가 시계열도 함께 받는다 (관심종목 전용 — 지수는
+    레벨 컨텍스트를 표시하지 않으므로 호출 횟수를 늘리지 않는다).
+    시계열 수집만 실패하면 시세는 그대로 살리고 history만 빈 배열로 둔다.
+    """
     out = []
     for e in entries:
-        q = safe(f"quote/{e['symbol']}", lambda: fetch_quote(e["symbol"]), None)
-        if q:
-            out.append({**q, "name": e["name"]})
+        symbol = e["symbol"]
+        q = safe(f"quote/{symbol}", lambda: fetch_quote(symbol), None)
+        if not q:
+            continue
+        item = {**q, "name": e["name"]}
+        if with_history:
+            history = safe(f"history/{symbol}", lambda: fetch_history(symbol), [])
+            log(f"  history {symbol}: {len(history)}일")
+            item["history"] = history
+        out.append(item)
     return out
 
 
@@ -247,7 +303,7 @@ def main() -> None:
         "watchlist": stocks,
         "quotes": {
             "indices": fetch_quotes(indices),
-            "stocks": fetch_quotes(stocks),
+            "stocks": fetch_quotes(stocks, with_history=True),
         },
         "market_news": deduped,
     }

@@ -61,6 +61,31 @@ def fmt_change(change, pct) -> tuple[str, str]:
     return " ".join(parts), cls
 
 
+def fmt_level_context(ctx, currency: str | None) -> str:
+    """레벨 컨텍스트 한 줄. 예: "고점 -12.4% · 저점 +31.0% · 20일 박스 254,000~273,250"
+
+    박스 일수는 상수가 아니라 실제로 쓴 표본 수(`box_window`)를 찍는다 —
+    상장 직후처럼 시계열이 짧으면 20일이 아니기 때문이다.
+    """
+    if not isinstance(ctx, dict):
+        return ""
+    parts = []
+    high = ctx.get("pct_from_high")
+    low = ctx.get("pct_from_low")
+    if isinstance(high, (int, float)):
+        parts.append(f"고점 {float(high):+.1f}%")
+    if isinstance(low, (int, float)):
+        parts.append(f"저점 {float(low):+.1f}%")
+    box_low, box_high, window = ctx.get("box_low"), ctx.get("box_high"), ctx.get("box_window")
+    if box_low is not None and box_high is not None and window:
+        parts.append(
+            f"{int(window)}일 박스 "
+            f"{fmt_price(box_low, currency, is_stock=True)}~"
+            f"{fmt_price(box_high, currency, is_stock=True)}"
+        )
+    return " · ".join(parts)
+
+
 def fmt_volume(value) -> str:
     if value is None:
         return "—"
@@ -312,6 +337,8 @@ def render_stocks(quotes: list[dict], stock_news: dict) -> str:
         name = q.get("name", q["symbol"])
         text, cls = fmt_change(q.get("change"), q.get("change_pct"))
         news = stock_news.get(name, [])
+        level = fmt_level_context(q.get("level_context"), q.get("currency"))
+        level_row = f'<div class="meta level">{esc(level)}</div>' if level else ""
         blocks.append(
             f'<article class="stock">'
             f'<header class="stock-head">'
@@ -322,6 +349,7 @@ def render_stocks(quotes: list[dict], stock_news: dict) -> str:
             f'</header>'
             f'<div class="meta">전일종가 {esc(fmt_price(q.get("prev_close"), q.get("currency"), is_stock=True))}'
             f' · 거래량 {esc(fmt_volume(q.get("volume")))}</div>'
+            f'{level_row}'
             f'{render_news_list(news, compact=True)}'
             f'</article>'
         )
@@ -365,6 +393,7 @@ letter-spacing:.02em;text-transform:uppercase}
 margin-right:6px}
 .meta{font-size:.76rem;color:var(--muted);margin:2px 0 8px;
 font-variant-numeric:tabular-nums}
+.meta.level{margin-top:-6px}
 /* 카테고리 3색 — dataviz 검증 통과. 다크는 같은 hue를 어두운 면에 맞춰 다시 뽑은 값 */
 .viz{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .viz{
