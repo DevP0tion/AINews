@@ -1,32 +1,52 @@
 # AINews
 
 PotionBot News 일일 리포트 저장소.
-**GitHub Actions + Claude Code Action**으로 매일 07:00 KST에 자동 실행되어
-AI/IT 뉴스 + Claude/Anthropic 업데이트를 Discord로 전송한다.
+**GitHub Actions + Claude Code Action**으로 매일 06:30 KST에 자동 실행되어
+두 가지 리포트를 Discord로 전송한다.
+
+| 리포트 | 내용 | 전송 형태 | 채널 |
+|---|---|---|---|
+| **AI/IT** | AI/IT 뉴스 + Claude/Anthropic 업데이트 | Discord embed 2개 | `DISCORD_WEBHOOK_POTIONBOT_NEWS` |
+| **주식** | 지수·관심종목 시세 + 증시 뉴스 | GitHub Pages 링크 한 줄 | `DISCORD_WEBHOOK_POTIONBOT_STOCK` |
+
+실행 시각이 06:30 KST인 이유: 미 증시 정규장 마감(06:00 KST, 서머타임 05:00)보다 뒤라
+전일 미국 지수 종가가 확정돼 있고, 국내 증시 개장(09:00)보다 앞선다.
 
 ## 아키텍처
 
 ```
-[매일 07:00 KST cron]
+[매일 06:30 KST cron]
    ↓
 [Job 1: collect] ── 결정론적 fetching (Python)
-   · Anthropic 뉴스 sitemap / Claude 릴리즈 노트 / GitHub Releases / HN AI / arxiv
-   · inbox/YYYY-MM-DD-raw.json 커밋
+   ├ collect_data.py  : Anthropic 뉴스 sitemap / Claude 릴리즈 노트 / GitHub Releases / HN AI / arxiv
+   │                    → inbox/YYYY-MM-DD-raw.json
+   └ collect_stock.py : 국내 증시·경제 RSS 5종 / Yahoo Finance 지수·관심종목 시세
+                        → inbox/YYYY-MM-DD-stock-raw.json
+   · 두 파일 커밋
    ↓
 [Job 2: curate]
    ├ (a) Claude Code Action (anthropics/claude-code-action@v1)
    │    · CLAUDE_CODE_OAUTH_TOKEN 인증 (Pro/Max 구독 사용, 별도 결제 없음)
-   │    · inbox 읽어서 한국어 요약·top 선정·specials 판정
-   │    · 산출물은 /tmp/processed.json 하나. 여기서 Claude의 역할 종료
+   │    · 파트 1: inbox 읽어서 한국어 요약·top 선정·specials 판정 → /tmp/processed.json
+   │    · 파트 2: 증시 뉴스 선정·요약·종목 매칭        → /tmp/processed_stock.json
+   │    · 산출물은 이 두 파일뿐. 여기서 Claude의 역할 종료
    │    · 도구는 Read/Write/WebFetch만 — Bash 없음, git 자격증명 없음
-   ├ (b) Process report (결정론적 스텝)
-   │    · scripts/daily_report.py 실행 → 스키마 검증 → 중복 제거 → archive/state 갱신
-   └ (c) Commit & push (결정론적 스텝, 이 스텝에만 토큰 주입)
+   │    · 시세 숫자는 Claude를 거치지 않는다 (inbox에서 직접 읽어 씀)
+   ├ (b) Process report      : daily_report.py → 검증·중복 제거·archive/state 갱신
+   ├ (c) Process stock report: stock_report.py → 동일 (state는 별도 파일)
+   └ (d) Commit & push (이 스텝에만 토큰 주입)
         · archive/ state/ 커밋 후 main에 푸시
    ↓
-[Job 3: publish] ── Discord 전송
+[Job 3: publish] ── AI/IT를 Discord embed로 전송
    · archive/YYYY/MM/YYYY-MM-DD.json 읽어서 webhook POST
+   ↓
+[Job 4: pages] ── 주식 리포트를 HTML 한 장으로 렌더링해서 GitHub Pages 배포
+   · render_stock_page.py → site/index.html → actions/deploy-pages
+   ↓
+[Job 5: publish_stock] ── 배포된 페이지 링크 한 줄만 주식 채널로 전송
 ```
+
+Job 3(AI/IT)과 Job 4~5(주식)는 Job 2 이후 서로 독립적으로 진행된다.
 
 **장점**
 - Routine/로컬 PC 불필요 — 전부 GitHub 인프라에서 실행
@@ -41,21 +61,49 @@ AI/IT 뉴스 + Claude/Anthropic 업데이트를 Discord로 전송한다.
 AINews/
 ├── README.md
 ├── .github/
-│   ├── curate_prompt.md              # Claude에 전달되는 프롬프트
+│   ├── curate_prompt.md              # Claude에 전달되는 프롬프트 (파트 1 AI/IT + 파트 2 주식)
 │   └── workflows/
-│       └── daily.yml                 # 통합 워크플로 (collect → curate → publish)
+│       └── daily.yml                 # 통합 워크플로 (collect → curate → publish/pages)
+├── config/
+│   └── watchlist.json                # 관심종목·지수 목록 (여기만 고치면 종목 추가됨)
 ├── scripts/
-│   ├── collect_data.py               # Job 1: 공식/공개 소스 fetching
-│   ├── daily_report.py               # Job 2(b): 스키마 검증/필터/archive/state
-│   └── send_discord.py               # Job 3: Discord 전송
+│   ├── collect_data.py               # Job 1: AI/IT 소스 fetching
+│   ├── collect_stock.py              # Job 1: 증시 RSS + Yahoo Finance 시세
+│   ├── daily_report.py               # Job 2(b): AI/IT 검증·필터·archive/state
+│   ├── stock_report.py               # Job 2(c): 주식 검증·필터·archive/state
+│   ├── render_stock_page.py          # Job 4: archive JSON → site/index.html
+│   ├── send_discord.py               # Job 3/5: Discord 전송 (--stock으로 링크 모드)
+│   ├── test_daily_report.py          # 중복 키 self-check
+│   └── test_stock_report.py          # 주식 검증·중복·렌더링 self-check
 ├── state/
-│   ├── seen_urls.json                # 영구 누적 URL 인덱스
-│   └── seen_claude.json              # Claude 업데이트 항목 키
+│   ├── seen_urls.json                # AI/IT 뉴스 URL 인덱스 (영구 누적)
+│   ├── seen_claude.json              # Claude 업데이트 항목 키
+│   └── seen_stock_urls.json          # 주식 뉴스 URL 인덱스 (AI/IT와 분리)
 ├── inbox/                            # Job 1 출력
-│   └── YYYY-MM-DD-raw.json
-└── archive/                          # Job 2 출력
-    └── YYYY/MM/YYYY-MM-DD.{json,md}
+│   ├── YYYY-MM-DD-raw.json
+│   └── YYYY-MM-DD-stock-raw.json
+├── archive/                          # Job 2 출력
+│   ├── YYYY/MM/YYYY-MM-DD.{json,md}
+│   └── YYYY/MM/YYYY-MM-DD-stock.json
+└── site/                             # Job 4 생성물 (gitignore — 매 실행마다 새로 만듦)
+    └── index.html
 ```
+
+### 관심종목 추가하기
+
+`config/watchlist.json`의 `stocks` 배열에 항목을 추가하면 된다. 코드 수정은 필요 없다.
+
+```json
+{
+  "symbol": "035420.KS",
+  "name": "NAVER",
+  "aliases": ["NAVER", "네이버"]
+}
+```
+
+- `symbol`: Yahoo Finance 티커. KOSPI는 `6자리.KS`, KOSDAQ은 `6자리.KQ`
+- `name`: 리포트에 표시되는 이름. Claude가 종목별 뉴스를 묶을 때 쓰는 키이기도 하다
+- `aliases`: RSS 헤드라인에서 이 종목을 찾을 때 쓰는 별칭. 약칭·영문명을 넣으면 매칭률이 오른다
 
 ## 수집 소스 (collect_data.py)
 
@@ -64,6 +112,27 @@ AINews/
 - **GitHub Releases API** — `anthropics/claude-code`, `anthropics/anthropic-sdk-python`, `anthropics/anthropic-sdk-typescript`
 - **Hacker News** top stories 중 AI 키워드 매치
 - **arxiv** cs.LG / cs.CL 최신 (참고용)
+
+## 수집 소스 (collect_stock.py)
+
+**뉴스** — 피드당 최근 25건, 발행 30시간 이내만 채택하고 URL 기준으로 합친다.
+
+| 출처 | URL |
+|---|---|
+| 매일경제 증권 | `https://www.mk.co.kr/rss/50200011/` |
+| 연합뉴스 경제 | `https://www.yna.co.kr/rss/economy.xml` |
+| 한국경제 금융 | `https://www.hankyung.com/feed/finance` |
+| 한국경제 경제 | `https://www.hankyung.com/feed/economy` |
+| 전자신문 증권 | `https://rss.etnews.com/Section902.xml` |
+
+한국경제는 증권 전용 피드(`/feed/stock`)가 404라 금융·경제로 대체했다.
+
+**시세** — Yahoo Finance chart API (`query1.finance.yahoo.com/v8/finance/chart/{symbol}`, API 키 불필요).
+`range=1d`의 `meta.chartPreviousClose`를 전일 종가로, `regularMarketPrice`를 현재가로 쓴다.
+대상은 `config/watchlist.json`의 `indices`(코스피/코스닥/나스닥/원달러)와 `stocks`.
+
+**종목 매칭** — 수집 단계에서 제목·요약에 `aliases`가 들어가면 `matched` 필드에 기계적으로 표시한다.
+오탐이 있을 수 있어 최종 판단은 curate 단계의 Claude가 한다.
 
 ## 중복 판정
 
@@ -74,6 +143,9 @@ AINews/
   - `id`가 없는 레거시 항목은 `{category}::{title_normalized}` 키로 fallback
   - `gh::`·`news::` 항목은 `url::{normalized_url}`도 보조 키로 함께 대조
     (릴리즈 노트는 여러 항목이 같은 overview URL을 공유하므로 제외)
+- **주식 뉴스**: URL 정규화 후 완전 일치. 인덱스는 `state/seen_stock_urls.json`으로
+  AI/IT 뉴스와 분리돼 있어 한쪽이 다른 쪽 기사를 가리지 않는다.
+  시장 전반 뉴스와 종목별 뉴스가 같은 실행 안에서 겹치는 것은 허용한다.
 - **윈도우**: 영구 (state/seen_*.json 누적)
 
 ## 셋업
@@ -87,7 +159,9 @@ Repo → Settings → Secrets and variables → Actions → New repository secre
   - 브라우저 OAuth 플로우 완료 후 출력되는 토큰 (유효기간 1년) 복사
   - ⚠️ Pro/Max/Team/Enterprise 구독 필요
 - **`DISCORD_WEBHOOK_POTIONBOT_NEWS`**
-  - Discord 채널 설정 → Integrations → Webhooks에서 발급한 URL
+  - AI/IT 리포트를 받을 채널. Discord 채널 설정 → Integrations → Webhooks에서 발급한 URL
+- **`DISCORD_WEBHOOK_POTIONBOT_STOCK`**
+  - 주식 리포트를 받을 채널. 같은 방식으로 **다른 채널에서** 발급한 URL
 
 ### 2. GitHub Actions 권한
 
@@ -95,7 +169,15 @@ Settings → Actions → General → Workflow permissions:
 
 - ✅ **Read and write permissions** (archive/state 커밋에 필요)
 
-### 3. (선택) Anthropic GitHub App 설치
+### 3. GitHub Pages 활성화
+
+Settings → Pages → Build and deployment → Source를 **GitHub Actions**로 변경한다.
+(기본값인 "Deploy from a branch"로 두면 `pages` job의 배포가 실패한다.)
+
+배포 주소는 `https://devp0tion.github.io/AINews/` 이고, **공개 저장소이므로 페이지도 공개**다.
+페이지는 매 실행마다 최신 리포트 한 장으로 덮어쓴다. 과거 리포트는 `archive/`에만 남는다.
+
+### 4. (선택) Anthropic GitHub App 설치
 
 로컬에서 한 번 실행:
 
@@ -106,17 +188,20 @@ claude              # Claude Code CLI
 
 안내 따라 DevP0tion/AINews에 앱 설치. 스케줄 자동화에 필수는 아니지만, curate job이 GitHub API를 호출할 때 권한 경고가 덜 뜬다.
 
-### 4. 첫 실행 검증
+### 5. 첫 실행 검증
 
 Actions 탭 → **Daily Report** → **Run workflow** (manual trigger):
 - `date`: 빈칸 (오늘 KST 자동) 또는 특정 날짜 입력
 
 성공 체크리스트:
-- [ ] `collect` job: `inbox/YYYY-MM-DD-raw.json` 커밋됨
-- [ ] `curate` job — Claude 스텝: Bash 도구 사용 흔적 없이 `/tmp/processed.json` 생성
+- [ ] `collect` job: `inbox/YYYY-MM-DD-raw.json`, `inbox/YYYY-MM-DD-stock-raw.json` 커밋됨
+- [ ] `curate` job — Claude 스텝: Bash 도구 사용 흔적 없이 `/tmp/processed.json`과 `/tmp/processed_stock.json` 생성
 - [ ] `curate` job — Process report 스텝: 요약 JSON 출력, `archive/YYYY/MM/YYYY-MM-DD.json` 생성
+- [ ] `curate` job — Process stock report 스텝: `archive/YYYY/MM/YYYY-MM-DD-stock.json` 생성
 - [ ] `curate` job — Commit & push 스텝: `chore: YYYY-MM-DD report` 커밋 반영
-- [ ] `publish` job: Discord 채널에 2개 embed 수신
+- [ ] `publish` job: AI/IT 채널에 2개 embed 수신
+- [ ] `pages` job: 배포 URL이 job 출력에 표시되고 브라우저에서 열림
+- [ ] `publish_stock` job: 주식 채널에 링크 한 줄 수신, 링크를 누르면 리포트가 열림
 
 ## 로컬 개발
 
@@ -126,6 +211,9 @@ Actions 탭 → **Daily Report** → **Run workflow** (manual trigger):
 pip install requests feedparser
 TARGET_DATE=2026-04-20 python3 scripts/collect_data.py
 cat inbox/2026-04-20-raw.json
+
+TARGET_DATE=2026-04-20 python3 scripts/collect_stock.py
+cat inbox/2026-04-20-stock-raw.json
 ```
 
 ### daily_report.py 단독 실행
@@ -135,12 +223,38 @@ export AINEWS_REPO=$(pwd)
 echo '{"news": [], "claude_updates": []}' | python3 scripts/daily_report.py --date 2026-04-20
 ```
 
+### 주식 리포트 처리 + 페이지 렌더링
+
+`inbox/YYYY-MM-DD-stock-raw.json`이 먼저 있어야 한다 (시세를 여기서 읽는다).
+
+```bash
+export AINEWS_REPO=$(pwd)
+echo '{"market_news": [], "stock_news": []}' | python3 scripts/stock_report.py --date 2026-04-20
+
+REPORT_DATE=2026-04-20 python3 scripts/render_stock_page.py
+open site/index.html        # Windows: start site\index.html
+```
+
 ### Discord 전송만 테스트
 
 ```bash
-export DISCORD_WEBHOOK_POTIONBOT_NEWS="https://discord.com/api/webhooks/..."
 export REPORT_DATE="2026-04-20"
+
+# AI/IT (embed)
+export DISCORD_WEBHOOK_POTIONBOT_NEWS="https://discord.com/api/webhooks/..."
 python3 scripts/send_discord.py
+
+# 주식 (링크 한 줄)
+export DISCORD_WEBHOOK_POTIONBOT_STOCK="https://discord.com/api/webhooks/..."
+export STOCK_PAGE_URL="https://devp0tion.github.io/AINews/"
+python3 scripts/send_discord.py --stock
+```
+
+### self-check 실행
+
+```bash
+python3 scripts/test_daily_report.py
+python3 scripts/test_stock_report.py
 ```
 
 ## 실패 처리
@@ -149,10 +263,15 @@ python3 scripts/send_discord.py
 |---|---|
 | collect 실패 | 후속 job 자동 스킵 (`needs` 의존성). Actions 탭에서 수동 재실행. |
 | Claude 출력 실패 (`/tmp/processed.json` 없음) | Process report 스텝이 명시적 에러로 즉시 실패. Actions 로그에서 Claude 스텝 원인 확인 후 수동 재실행. |
+| Claude 주식 출력 실패 (`/tmp/processed_stock.json` 없음) | Process stock report 스텝이 즉시 실패 → 커밋 안 됨 → publish/pages 모두 스킵. 수동 재실행. |
 | Process report 실패 (daily_report.py 오류) | job 실패 → publish 스킵. 입력 스키마 위반은 에러가 아니라 WARN + drop이므로, 여기서 실패하면 스크립트/파일시스템 문제. |
 | push 실패 (권한·충돌) | archive/state는 생성됐지만 저장소에 반영 안 됨. 재실행하면 같은 날짜로 다시 생성된다. |
 | Commit & push가 commit skip (신규 없음) | publish가 빈 리포트 정상 전송. archive 없어도 "금일 업데이트 없음" embed. |
 | publish 실패 (webhook 오류) | Actions 로그에서 HTTP 코드 확인. webhook URL 유효성 점검. |
+| 증시 RSS 한 곳 실패 | `safe()`가 WARN 처리하고 나머지 피드로 계속 진행. 리포트 건수만 줄어든다. |
+| Yahoo 시세 조회 실패 | 해당 종목/지수만 시세 표에서 빠진다. 뉴스 섹션은 정상. |
+| pages job 실패 (Pages 미설정) | Settings → Pages → Source가 "GitHub Actions"인지 확인. `publish_stock`은 `needs: pages`라 함께 스킵된다. |
+| 주식 archive 없음 | 빈 페이지를 배포하고 링크는 정상 전송한다 (링크가 404가 되는 것보다 낫다). |
 
 ## 토큰 갱신
 

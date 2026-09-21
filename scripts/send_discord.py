@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """
-send_discord.py — finalize Action에서 Discord webhook으로 리포트 전송.
+send_discord.py — Discord webhook으로 리포트 전송.
 
-입력: 환경변수 REPORT_DATE (YYYY-MM-DD), DISCORD_WEBHOOK_POTIONBOT_NEWS
-읽기: archive/YYYY/MM/YYYY-MM-DD.json
+두 가지 모드가 있다.
+
+  (기본) AI/IT 리포트 — archive/YYYY/MM/YYYY-MM-DD.json 을 embed 2개로 전송
+      필요: REPORT_DATE, DISCORD_WEBHOOK_POTIONBOT_NEWS
+
+  --stock  주식 리포트 — GitHub Pages 링크 한 줄만 전송 (본문은 페이지에 있다)
+      필요: REPORT_DATE, DISCORD_WEBHOOK_POTIONBOT_STOCK, STOCK_PAGE_URL
 """
 from __future__ import annotations
 
+import argparse
 import datetime
 import json
 import os
@@ -185,16 +191,51 @@ def post_discord(webhook: str, payload: dict) -> None:
         raise SystemExit(2)
 
 
-def main() -> None:
-    webhook = os.environ.get("DISCORD_WEBHOOK_POTIONBOT_NEWS")
+def send_stock(date: str) -> None:
+    """주식 리포트는 Pages 링크 한 줄만 보낸다. 본문·시세·요약은 전부 페이지에 있다."""
+    webhook = os.environ.get("DISCORD_WEBHOOK_POTIONBOT_STOCK")
     if not webhook:
-        log("ERROR: secrets.DISCORD_WEBHOOK_POTIONBOT_NEWS 미설정")
+        log("ERROR: secrets.DISCORD_WEBHOOK_POTIONBOT_STOCK 미설정")
         raise SystemExit(3)
+
+    page_url = (os.environ.get("STOCK_PAGE_URL") or "").strip()
+    if not page_url:
+        log("ERROR: STOCK_PAGE_URL 입력 없음 — Pages 배포 스텝의 출력을 확인하라")
+        raise SystemExit(5)
+
+    # 페이지는 매일 같은 URL을 덮어쓴다. 쿼리로 날짜를 붙여 Discord가 전날 링크의
+    # OG 캐시를 재사용하지 않게 한다. (deploy-pages의 page_url은 쿼리 없는 형태)
+    link = f"{page_url.rstrip('/')}/?d={date}"
+
+    post_discord(webhook, {
+        "content": f"📈 **주식 리포트 — {date}**\n{link}",
+    })
+    log(f"Discord 전송 완료 (주식): {link}")
+
+
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="Discord webhook으로 리포트 전송")
+    p.add_argument("--stock", action="store_true",
+                   help="주식 리포트 모드 (Pages 링크 한 줄만 전송)")
+    return p.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
 
     date = os.environ.get("REPORT_DATE")
     if not date:
         log("ERROR: REPORT_DATE 입력 없음")
         raise SystemExit(4)
+
+    if args.stock:
+        send_stock(date)
+        return
+
+    webhook = os.environ.get("DISCORD_WEBHOOK_POTIONBOT_NEWS")
+    if not webhook:
+        log("ERROR: secrets.DISCORD_WEBHOOK_POTIONBOT_NEWS 미설정")
+        raise SystemExit(3)
 
     year, month = date[:4], date[5:7]
     report_path = REPO_DIR / "archive" / year / month / f"{date}.json"
@@ -211,7 +252,7 @@ def main() -> None:
 
     payload = build_payload(date, report)
     post_discord(webhook, payload)
-    log("Discord 전송 완료")
+    log("Discord 전송 완료 (AI/IT)")
 
 
 if __name__ == "__main__":
