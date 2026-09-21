@@ -28,6 +28,7 @@ PotionBot News 일일 리포트 저장소.
    ├ (a) Claude Code Action (anthropics/claude-code-action@v1)
    │    · CLAUDE_CODE_OAUTH_TOKEN 인증 (Pro/Max 구독 사용, 별도 결제 없음)
    │    · 모델은 daily.yml의 claude_args에서 --model로 지정한다 (미지정 시 액션 기본값)
+   │    · 프롬프트는 prompts/{common,ai_news,stock}.md 를 이어붙여 전달 (Claude 실행은 1회)
    │    · 파트 1: inbox 읽어서 한국어 요약·top 선정·specials 판정 → /tmp/processed.json
    │    · 파트 2: 증시 뉴스 선정·요약·종목 매칭        → /tmp/processed_stock.json
    │    · 산출물은 이 두 파일뿐. 여기서 Claude의 역할 종료
@@ -76,9 +77,12 @@ AI/IT 처리가 실패하면 Claude 출력 자체가 잘못됐을 가능성이 �
 AINews/
 ├── README.md
 ├── .github/
-│   ├── curate_prompt.md              # Claude에 전달되는 프롬프트 (파트 1 AI/IT + 파트 2 주식)
 │   └── workflows/
 │       └── daily.yml                 # 통합 워크플로 (collect → curate → publish/pages)
+├── prompts/                          # Claude에 전달되는 프롬프트 (이 순서로 조립됨)
+│   ├── common.md                     # 공통 — 환경·산출물·보안/작성 원칙
+│   ├── ai_news.md                    # 파트 1 — AI/IT 리포트
+│   └── stock.md                      # 파트 2 — 주식 리포트
 ├── config/
 │   └── watchlist.json                # 관심종목·지수 목록 (여기만 고치면 종목 추가됨)
 ├── scripts/
@@ -103,6 +107,23 @@ AINews/
 └── site/                             # Job 4 생성물 (gitignore — 매 실행마다 새로 만듦)
     └── index.html
 ```
+
+### 프롬프트 수정하기
+
+Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 있고,
+워크플로의 `Load prompt` 스텝이 **이 순서대로 이어붙여** 한 번에 전달한다.
+
+| 파일 | 고칠 때 |
+|---|---|
+| `common.md` | 양쪽에 걸리는 규칙 — 언어, 보안(프롬프트 주입 방어), 저장소 파일 수정 금지, 요약 원칙 |
+| `ai_news.md` | AI/IT 뉴스 선정 기준, Claude 업데이트 카테고리, `special` 판정, `id` 규칙 |
+| `stock.md` | 증시 뉴스 선정 기준, 종목별 뉴스 건수, 출력 스키마 |
+
+- 조립 순서는 `daily.yml`의 `PROMPT_FILES` 환경변수에서 바꾼다
+- 런타임 값은 `{{TARGET_DATE}}` `{{INBOX_PATH}}` `{{STOCK_INBOX_PATH}}` 세 개뿐이고,
+  `sed`로 치환된다. 치환되지 않은 `{{...}}`가 남으면 스텝이 에러로 멈춘다
+- 출력 스키마(`/tmp/processed*.json`)를 고치면 `daily_report.py` / `stock_report.py`의
+  검증 로직도 같이 고쳐야 한다. 스키마를 벗어난 항목은 조용히 drop된다
 
 ### 관심종목 추가하기
 
