@@ -69,13 +69,17 @@ def fmt_level_context(ctx, currency: str | None) -> str:
     """
     if not isinstance(ctx, dict):
         return ""
+    def signed(value: float) -> str:
+        # 고점 대비는 항상 0 이하다. 0에 "+"를 붙이면 고점을 넘은 것처럼 읽힌다.
+        return "0.0%" if round(value, 1) == 0 else f"{value:+.1f}%"
+
     parts = []
     high = ctx.get("pct_from_high")
     low = ctx.get("pct_from_low")
-    if isinstance(high, (int, float)):
-        parts.append(f"고점 {float(high):+.1f}%")
-    if isinstance(low, (int, float)):
-        parts.append(f"저점 {float(low):+.1f}%")
+    if isinstance(high, (int, float)) and not isinstance(high, bool):
+        parts.append(f"고점 {signed(float(high))}")
+    if isinstance(low, (int, float)) and not isinstance(low, bool):
+        parts.append(f"저점 {signed(float(low))}")
     box_low, box_high, window = ctx.get("box_low"), ctx.get("box_high"), ctx.get("box_window")
     if box_low is not None and box_high is not None and window:
         parts.append(

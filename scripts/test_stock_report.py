@@ -139,6 +139,15 @@ short_line = fmt_level_context(
 )
 assert short_line.endswith("1일 박스 100~100"), short_line
 
+# 0은 부호를 붙이지 않는다 — "고점 +0.0%"는 고점을 넘은 것처럼 읽힌다
+zero_line = fmt_level_context(
+    {"pct_from_high": 0.0, "pct_from_low": 0.0,
+     "box_low": 1.0, "box_high": 1.0, "box_window": 1}, "KRW",
+)
+assert zero_line.startswith("고점 0.0% · 저점 0.0%"), zero_line
+# 반올림해서 0이 되는 값도 마찬가지
+assert fmt_level_context({"pct_from_high": -0.02}, "KRW") == "고점 0.0%"
+
 # 값이 없으면 줄을 만들지 않는다
 assert fmt_level_context(None, "KRW") == ""
 assert fmt_level_context({}, "KRW") == ""

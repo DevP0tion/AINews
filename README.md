@@ -86,17 +86,20 @@ AINews/
 │   ├── ai_news.md                    # 파트 1 — AI/IT 리포트
 │   └── stock.md                      # 파트 2 — 주식 리포트
 ├── config/
-│   └── watchlist.json                # 관심종목·지수 목록 (여기만 고치면 종목 추가됨)
+│   ├── watchlist.json                # 관심종목·지수 목록 (여기만 고치면 종목 추가됨)
+│   └── calendar.json                 # 이벤트 캘린더 (날짜는 직접 기입, "TBD"는 미표시)
 ├── scripts/
 │   ├── collect_data.py               # Job 1: AI/IT 소스 fetching
 │   ├── collect_stock.py              # Job 1: 증시 RSS + Yahoo Finance 시세
 │   ├── collect_investor.py           # Job 1: KRX 투자자별 매매동향 (하루치 누적)
 │   ├── daily_report.py               # Job 2(b): AI/IT 검증·필터·archive/state
 │   ├── stock_report.py               # Job 2(c): 주식 검증·필터·archive/state
+│   ├── level_context.py              # 종가 시계열 → 기간 고저·박스권·주간 통계 (순수 함수)
 │   ├── render_stock_page.py          # Job 4: archive JSON → site/index.html
 │   ├── send_discord.py               # Job 3/5: Discord 전송 (--stock으로 링크 모드)
 │   ├── test_daily_report.py          # 중복 키 self-check
-│   └── test_stock_report.py          # 주식 검증·중복·렌더링 self-check
+│   ├── test_stock_report.py          # 주식 검증·중복·재시도·렌더링 self-check
+│   └── test_level_context.py         # 레벨 컨텍스트·주간 통계 self-check
 ├── state/
 │   ├── seen_urls.json                # AI/IT 뉴스 URL 인덱스 (영구 누적)
 │   ├── seen_claude.json              # Claude 업데이트 항목 키
@@ -184,8 +187,81 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 `range=1d`의 `meta.chartPreviousClose`를 전일 종가로, `regularMarketPrice`를 현재가로 쓴다.
 대상은 `config/watchlist.json`의 `indices`(코스피/코스닥/나스닥/원달러)와 `stocks`.
 
+**종가 시계열** — 관심종목에 한해 `range=6mo&interval=1d`로 일봉 종가도 받아
+inbox의 `quotes.stocks[].history`(`[{"date","close"}]`)에 담는다. 레벨 컨텍스트와
+주간 통계의 재료다. 지수는 받지 않는다 (표시하지 않으므로 호출만 늘어난다).
+휴장·거래정지로 `close`가 `null`인 날은 통째로 버린다 — 앞 값으로 메우면
+없던 거래일을 만들어내는 셈이다. 날짜는 거래소 타임존 기준이다.
+
+**재시도** — 모든 Yahoo 호출에 3회 재시도 + 1→2→4초 지수 백오프(`FETCH_RETRIES`,
+`FETCH_BACKOFF`). runner에서 간헐적 DNS 실패가 실측된 적이 있어, 한 번 실패했다고
+그날 그 종목 시세를 통째로 비우지 않기 위한 것이다.
+
+**시세 신선도** — `meta.regularMarketTime`을 `quote_time`(ISO UTC)으로 저장하고,
+수집 시각과의 차이가 24시간(`STALE_THRESHOLD_HOURS`)을 넘으면 `stale: true`.
+페이지에서는 가격 옆에 ⚠️로 표시된다. **파이프라인은 세우지 않는다** — 지연된
+값이라도 없는 것보다 낫고, 경고만 남긴다. 지수에는 붙이지 않는다: 해외 지수는
+주말·휴일이면 정상적으로 며칠 전 종가라 오탐만 난다.
+
 **종목 매칭** — 수집 단계에서 제목·요약에 `aliases`가 들어가면 `matched` 필드에 기계적으로 표시한다.
 오탐이 있을 수 있어 최종 판단은 curate 단계의 Claude가 한다.
+
+## 레벨 컨텍스트 (level_context.py)
+
+등락률만으로는 지금이 고점 근처인지 저점에서 반등 중인지 알 수 없다.
+종목 줄에 한 줄을 더해 위치를 보여준다.
+
+```
+고점 -24.4% · 저점 +63.9% · 20일 박스 248,500~274,000
+```
+
+| 값 | 뜻 |
+|---|---|
+| `period_high` / `period_low` | 수집 기간(`HISTORY_RANGE`, 기본 6개월) 종가 고·저 |
+| `pct_from_high` / `pct_from_low` | 마지막 종가의 고점·저점 대비 변화율 (%) |
+| `box_high` / `box_low` | 최근 `BOX_WINDOW`(기본 20) 거래일 종가의 고·저 |
+| `box_window` | **실제로 쓴 표본 수**. 시계열이 짧으면 20보다 작고, 표기도 그 수를 따른다 |
+
+계산은 `stock_report.py`가 inbox의 `history`로 직접 한다. curated JSON에
+같은 이름의 필드가 있어도 읽지 않고 버린다 — 리포트의 숫자는 수집 원본과
+결정론적 계산에서만 나온다. `history` 자체는 archive에 싣지 않는다
+(매일 6개월치를 커밋하면 저장소만 불어난다).
+
+## 이벤트 캘린더 (config/calendar.json)
+
+실적 발표·FOMC처럼 미리 알면 뉴스 해석이 달라지는 일정을 페이지 최상단에
+`📅 D-n 라벨` 형태로, D-day 오름차순으로 띄운다. 범위는 오늘부터
+`CALENDAR_LOOKAHEAD_DAYS`(기본 14)일 이내다.
+
+```json
+[
+  {"date": "2026-10-08", "label": "삼성전자 3분기 잠정실적 발표", "ticker": "005930.KS"},
+  {"date": "TBD", "label": "다음 FOMC 정례회의 결과 발표"}
+]
+```
+
+- `date`: `YYYY-MM-DD`, 또는 아직 모르면 `"TBD"`. **`"TBD"` 항목은 표시되지 않는다** —
+  날짜는 직접 확인해서 기입한다. 틀린 D-day는 아예 없느니만 못하다
+- `label`: 표시 문구 (필수)
+- `ticker`: 선택. `watchlist`의 `symbol`
+- `_comment`만 있는 원소는 무시된다 (JSON 배열에는 주석을 못 쓰므로)
+
+## 주간 심화 섹션
+
+리포트 대상 날짜가 **KST 월요일**(`WEEKLY_DAY`)일 때만 붙는다.
+내용은 전부 종가 시계열에서 계산한 값이다.
+
+| 값 | 계산 |
+|---|---|
+| 주간 변동률 | 한 주 경계(7일 전) 직전 종가 대비 마지막 종가 |
+| 주간 고·저 | 경계 이후 종가의 최대·최소 |
+| 저점 대비 회복률 증감 | 기간 저점 대비 상승률의 주간 증감 (%p) |
+| 지난 이벤트 | `calendar.json`에서 지난 7일 안에 지나간 항목 |
+
+전주 값은 **과거 archive를 읽지 않고** 시계열을 경계 이전까지 잘라 다시
+계산한다. 같은 `history`면 언제 돌려도 같은 값이 나온다.
+
+요일 판정은 `strftime("%A")` 대신 고정 목록을 쓴다 — `%A`는 runner 로케일을 탄다.
 
 ## 투자자 수급 (collect_investor.py)
 
@@ -356,7 +432,11 @@ python3 scripts/send_discord.py --stock
 ```bash
 python3 scripts/test_daily_report.py
 python3 scripts/test_stock_report.py
+python3 scripts/test_level_context.py
 ```
+
+셋 다 외부 의존성 없이 돈다 — `requests`·`feedparser`·`pykrx`는 수집 함수 안에서
+임포트하므로 순수 함수만 테스트할 때는 설치가 필요 없다.
 
 ## 실패 처리
 
