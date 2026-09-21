@@ -79,8 +79,12 @@ assert "stock" not in grouped["삼성전자"][0], grouped["삼성전자"][0]
 
 # --- 포맷 -------------------------------------------------------------------
 
-assert fmt_price(273250.0, "KRW") == "273,250"      # 원화 종목가는 정수
-assert fmt_price(7016.69, None) == "7,016.69"       # 지수는 소수 2자리
+# 원화 주가는 정수, 지수·환율은 소수 2자리 — 둘 다 currency가 KRW라 통화로는 못 가린다
+assert fmt_price(273250.0, "KRW", is_stock=True) == "273,250"
+assert fmt_price(6998.16, "KRW") == "6,998.16"      # 코스피
+assert fmt_price(1383.46, "KRW") == "1,383.46"      # 원/달러
+assert fmt_price(833.76, "KRW") == "833.76"         # 코스닥
+assert fmt_price(26522.545, "USD") == "26,522.54"   # 나스닥
 assert fmt_price(None, "KRW") == "—"
 assert fmt_change(None, None) == ("—", "flat")
 assert fmt_change(100, 1.5)[1] == "up"

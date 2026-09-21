@@ -112,13 +112,30 @@ jobs:
 
       - name: Load prompt
         id: prompt
+        env:
+          # 이어붙이는 순서가 곧 프롬프트 순서다 — 공통 규칙 → 파트 1(AI/IT) → 파트 2(주식)
+          PROMPT_FILES: "prompts/common.md prompts/ai_news.md prompts/stock.md"
         run: |
-          # curate_prompt.md에 런타임 변수 치환 후 env로 전달
-          PROMPT=$(sed \
+          for f in ${PROMPT_FILES}; do
+            if [ ! -f "$f" ]; then
+              echo "::error::프롬프트 파일이 없습니다: $f"
+              exit 1
+            fi
+          done
+
+          PROMPT=$(cat ${PROMPT_FILES} | sed \
             -e "s|{{TARGET_DATE}}|${TARGET_DATE}|g" \
             -e "s|{{INBOX_PATH}}|${INBOX_PATH}|g" \
-            -e "s|{{STOCK_INBOX_PATH}}|${STOCK_INBOX_PATH}|g" \
-            .github/curate_prompt.md)
+            -e "s|{{STOCK_INBOX_PATH}}|${STOCK_INBOX_PATH}|g")
+
+          # 오타로 플레이스홀더가 남으면 Claude에게 의미 없는 문자열이 그대로 간다.
+          # 조용히 넘어가면 원인 파악이 어려우므로 여기서 멈춘다.
+          if echo "${PROMPT}" | grep -q "{{"; then
+            echo "::error::치환되지 않은 플레이스홀더가 남아 있습니다"
+            echo "${PROMPT}" | grep -n "{{" >&2
+            exit 1
+          fi
+
           {
             echo "prompt<<CURATE_PROMPT_EOF"
             echo "$PROMPT"
@@ -134,6 +151,7 @@ jobs:
           # --disallowedTools가 담당한다. bare 이름은 도구 자체를 컨텍스트에서 제거,
           # Tool(pattern)은 해당 경로만 거부 (deny가 allow보다 우선).
           claude_args: |
+            --model claude-opus-5
             --allowedTools "Read,Write,WebFetch"
             --disallowedTools "Bash,Edit,WebSearch,mcp__*,Read(./.git/**),Read(~/.claude/**),Write(./**)"
             --add-dir /tmp
