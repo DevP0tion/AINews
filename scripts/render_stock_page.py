@@ -16,6 +16,7 @@ import html
 import json
 import os
 import pathlib
+import re
 import sys
 from zoneinfo import ZoneInfo
 
@@ -24,6 +25,7 @@ REPO_DIR = pathlib.Path(__file__).resolve().parent.parent
 OUT_DIR = REPO_DIR / "site"
 
 SITE_TITLE = "PotionBot 주식 리포트"
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
 def log(msg: str) -> None:
@@ -479,6 +481,49 @@ body{margin:0;padding:16px;background:var(--bg);color:var(--fg);
 font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",
 "Malgun Gothic","Noto Sans KR",system-ui,sans-serif;line-height:1.55;
 -webkit-text-size-adjust:100%}
+/* ── 좌측 드로어 (JS 없이 checkbox로 토글) ─────────────────── */
+.topbar{display:flex;align-items:center;gap:10px;margin:-4px 0 12px}
+.topttl{font-size:.8rem;color:var(--muted)}
+.burger{display:inline-flex;align-items:center;justify-content:center;
+width:34px;height:34px;border:1px solid var(--line);border-radius:8px;
+background:var(--card);cursor:pointer;flex:none}
+.burger span,.burger span::before,.burger span::after{content:"";display:block;
+width:15px;height:2px;background:var(--fg);border-radius:1px;position:relative}
+.burger span::before{position:absolute;top:-5px}
+.burger span::after{position:absolute;top:5px}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:8;
+opacity:0;pointer-events:none;transition:opacity .18s}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:250px;z-index:9;
+background:var(--card);border-right:1px solid var(--line);
+transform:translateX(-100%);transition:transform .2s ease;
+display:flex;flex-direction:column;overscroll-behavior:contain}
+#navt:checked~.drawer{transform:none}
+#navt:checked~.scrim{opacity:1;pointer-events:auto}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;
+padding:14px 16px;border-bottom:1px solid var(--line);font-size:.82rem;
+font-weight:600;flex:none}
+.close{cursor:pointer;color:var(--muted);padding:2px 6px;line-height:1}
+.drawer-body{overflow-y:auto;padding:8px 0 20px;flex:1}
+.drawer details{border-bottom:1px solid var(--line)}
+.drawer summary{padding:10px 16px;font-size:.8rem;cursor:pointer;
+display:flex;justify-content:space-between;align-items:center;gap:8px}
+.drawer .cnt{color:var(--muted);font-size:.7rem;font-variant-numeric:tabular-nums}
+.drawer ul{list-style:none;margin:0;padding:0 0 6px}
+.drawer li a{display:block;padding:7px 16px 7px 24px;font-size:.8rem;
+color:var(--link);text-decoration:none;font-variant-numeric:tabular-nums}
+.drawer li a:hover{background:var(--bg)}
+.drawer li a.on{font-weight:600;color:var(--fg);
+box-shadow:inset 3px 0 0 var(--link);background:var(--bg)}
+.pager{display:flex;gap:10px;margin-top:8px}
+.pg{font-size:.76rem;color:var(--link);text-decoration:none}
+.pg:hover{text-decoration:underline}
+/* 넓은 화면에서는 드로어를 늘 펼쳐 두고 본문을 밀어낸다 */
+@media(min-width:1040px){
+.drawer{transform:none;box-shadow:none}
+.scrim,.burger,.close{display:none}
+.topbar{margin-left:0}
+body{padding-left:266px}
+}
 .wrap{max-width:720px;margin:0 auto}
 header.top{margin:8px 0 20px}
 h1{font-size:1.35rem;margin:0 0 4px}
@@ -574,7 +619,73 @@ footer a{color:var(--muted)}
 """.strip()
 
 
-def render(date: str, report: dict) -> str:
+MONTH_NAMES = ("1월", "2월", "3월", "4월", "5월", "6월",
+               "7월", "8월", "9월", "10월", "11월", "12월")
+
+
+def group_by_month(dates: list[str]) -> list[tuple[str, list[str]]]:
+    """['2026-09-21', '2026-08-30', ...] → [('2026-09', [...]), ...] 최신 월 먼저.
+
+    월 안의 날짜도 최신 먼저다.
+    """
+    groups: dict[str, list[str]] = {}
+    for d in dates:
+        groups.setdefault(d[:7], []).append(d)
+    return [
+        (ym, sorted(groups[ym], reverse=True))
+        for ym in sorted(groups, reverse=True)
+    ]
+
+
+def month_label(ym: str) -> str:
+    """2026-09 → 2026년 9월"""
+    try:
+        year, month = ym.split("-")
+        return f"{year}년 {MONTH_NAMES[int(month) - 1]}"
+    except (ValueError, IndexError):
+        return ym
+
+
+def render_drawer(current: str, dates: list[str], prefix: str) -> str:
+    """좌측 드로어. 월별로 접히는 날짜 목록.
+
+    Pages는 /AINews/ 하위에 배포되므로 링크는 전부 상대경로다.
+    prefix는 현재 문서에서 사이트 루트까지의 거리("" 또는 "../").
+    """
+    blocks = []
+    # 현재 보고 있는 날짜가 속한 달만 펼쳐 둔다
+    for ym, days in group_by_month(dates):
+        cells = []
+        for d in days:
+            mark = ' aria-current="page" class="on"' if d == current else ""
+            cells.append(
+                f'<li><a href="{esc(prefix)}{esc(d)}/"{mark}>{esc(d)}</a></li>'
+            )
+        items = "".join(cells)
+        open_attr = " open" if ym == current[:7] else ""
+        blocks.append(
+            f'<details{open_attr}><summary>{esc(month_label(ym))} '
+            f'<span class="cnt">{len(days)}</span></summary>'
+            f'<ul>{items}</ul></details>'
+        )
+
+    return (
+        '<input type="checkbox" id="navt" hidden>'
+        '<header class="topbar">'
+        '<label for="navt" class="burger" role="button" tabindex="0" '
+        'aria-label="리포트 목록 열기"><span></span></label>'
+        f'<span class="topttl">{esc(SITE_TITLE)}</span></header>'
+        '<label for="navt" class="scrim" aria-hidden="true"></label>'
+        '<nav class="drawer" aria-label="리포트 목록">'
+        '<div class="drawer-head"><span>리포트 목록</span>'
+        '<label for="navt" class="close" aria-label="닫기">✕</label></div>'
+        f'<div class="drawer-body">{"".join(blocks)}</div>'
+        '</nav>'
+    )
+
+
+def render(date: str, report: dict, all_dates: list[str] | None = None,
+           prefix: str = "") -> str:
     quotes = report.get("quotes") or {}
     generated = report.get("generated_at", "")
     try:
@@ -586,6 +697,23 @@ def render(date: str, report: dict) -> str:
         )
     except ValueError:
         stamp = date
+
+    # 하루씩 넘기는 링크 — 드로어를 열지 않고도 앞뒤로 이동한다
+    ordered = sorted(all_dates or [date])
+    nav_links = ""
+    if len(ordered) > 1 and date in ordered:
+        i = ordered.index(date)
+        parts = []
+        if i > 0:
+            parts.append(
+                f'<a class="pg" href="{esc(prefix)}{esc(ordered[i - 1])}/">‹ 이전</a>'
+            )
+        if i < len(ordered) - 1:
+            parts.append(
+                f'<a class="pg" href="{esc(prefix)}{esc(ordered[i + 1])}/">다음 ›</a>'
+            )
+        if parts:
+            nav_links = f'<div class="pager">{"".join(parts)}</div>'
 
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -600,10 +728,12 @@ def render(date: str, report: dict) -> str:
 <style>{CSS}</style>
 </head>
 <body>
+{render_drawer(date, all_dates or [date], prefix)}
 <div class="wrap">
 <header class="top">
 <h1>{esc(SITE_TITLE)}</h1>
 <div class="stamp">{esc(date)} · 생성 {esc(stamp)}</div>
+{nav_links}
 </header>
 {render_calendar(report.get("calendar") or [])}
 {render_indices(quotes.get("indices") or [])}
@@ -624,29 +754,63 @@ PotionBot News · 자동 수집 ·
 """
 
 
+def load_report(date: str) -> dict:
+    path = REPO_DIR / "archive" / date[:4] / date[5:7] / f"{date}-stock.json"
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        log(f"WARN: {path.name} 파싱 실패: {e} — 건너뜁니다")
+        return {}
+
+
+def archived_dates() -> list[str]:
+    """archive에 있는 주식 리포트 날짜 전부 (오름차순)."""
+    out = []
+    for path in (REPO_DIR / "archive").glob("*/*/*-stock.json"):
+        stem = path.name[: -len("-stock.json")]
+        if DATE_RE.match(stem):
+            out.append(stem)
+    return sorted(out)
+
+
 def main() -> None:
     date = os.environ.get("REPORT_DATE")
     if not date:
         log("ERROR: REPORT_DATE 입력 없음")
         raise SystemExit(4)
 
-    year, month = date[:4], date[5:7]
-    report_path = REPO_DIR / "archive" / year / month / f"{date}-stock.json"
-    if report_path.exists():
-        report = json.loads(report_path.read_text(encoding="utf-8"))
-        log(
-            f"리포트 로드: 시장 {len(report.get('market_news', []))}건, "
-            f"종목 {sum(len(v) for v in (report.get('stock_news') or {}).values())}건"
-        )
-    else:
-        # 빈 페이지라도 배포한다 — 링크가 404가 되는 것보다 낫다
-        log(f"리포트 파일 없음 — 빈 페이지 생성: {report_path}")
-        report = {"quotes": {}, "market_news": [], "stock_news": {}}
+    dates = archived_dates()
+    if date not in dates:
+        # 오늘 리포트가 아직 없어도 링크가 404가 되면 안 된다 — 빈 페이지로 넣는다
+        dates = sorted(dates + [date])
+        log(f"archive에 {date} 리포트 없음 — 빈 페이지로 생성")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    out = OUT_DIR / "index.html"
-    out.write_text(render(date, report), encoding="utf-8")
-    log(f"생성 완료: {out.relative_to(REPO_DIR)} ({out.stat().st_size:,} bytes)")
+    written = 0
+    for d in dates:
+        report = load_report(d) or {"quotes": {}, "market_news": [], "stock_news": {}}
+        day_dir = OUT_DIR / d
+        day_dir.mkdir(parents=True, exist_ok=True)
+        (day_dir / "index.html").write_text(
+            render(d, report, dates, prefix="../"), encoding="utf-8",
+        )
+        written += 1
+
+    # 루트는 최신 리포트. Discord는 날짜 URL을 보내지만, 루트로 들어온
+    # 사람에게도 최신이 보여야 한다.
+    latest = dates[-1]
+    root = OUT_DIR / "index.html"
+    root.write_text(
+        render(latest, load_report(latest) or
+               {"quotes": {}, "market_news": [], "stock_news": {}},
+               dates, prefix=""),
+        encoding="utf-8",
+    )
+
+    total = sum(f.stat().st_size for f in OUT_DIR.rglob("*.html"))
+    log(f"생성 완료: {written}개 날짜 + 루트 (최신 {latest}), 합계 {total:,} bytes")
 
 
 if __name__ == "__main__":

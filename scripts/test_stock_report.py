@@ -11,9 +11,10 @@ from stock_report import (  # noqa: E402
     with_level_context,
 )
 from render_stock_page import (  # noqa: E402
-    fmt_billion, fmt_change, fmt_daylabel, fmt_dday, fmt_level_context, fmt_price,
-    fmt_pct, fmt_volume, nice_bounds, render, render_calendar, render_chart,
-    render_investor, render_stale, render_weekly,
+    fmt_billion, fmt_change, fmt_daylabel, fmt_dday, fmt_level_context, fmt_pct,
+    fmt_price, fmt_volume, group_by_month, month_label, nice_bounds, render,
+    render_calendar, render_chart, render_drawer, render_investor, render_stale,
+    render_weekly,
 )
 from collect_stock import is_stale, quote_time_iso  # noqa: E402
 from collect_investor import (  # noqa: E402
@@ -635,5 +636,58 @@ page = render("2026-09-21", {
 # meta description에도 "관심종목"이 들어가므로 본문 헤딩으로 앵커를 잡는다
 assert page.index("<h2>투자자 수급") < page.index("<h2>관심종목"), "배치 순서가 틀렸다"
 assert page.index("idx-price") < page.index("<h2>투자자 수급"), "지수가 먼저 와야 한다"
+
+# --- 드로어 / 날짜 탐색 -----------------------------------------------------
+
+# 월별 묶음은 최신 달이 먼저, 달 안에서도 최신 날짜가 먼저
+groups = group_by_month(["2026-08-28", "2026-09-21", "2026-09-18", "2026-07-01"])
+assert [ym for ym, _ in groups] == ["2026-09", "2026-08", "2026-07"], groups
+assert groups[0][1] == ["2026-09-21", "2026-09-18"], groups[0]
+
+assert month_label("2026-09") == "2026년 9월"
+assert month_label("2026-01") == "2026년 1월"
+assert month_label("이상한값") == "이상한값"     # 형식이 깨져도 죽지 않는다
+
+DRAWER_DATES = ["2026-08-28", "2026-09-18", "2026-09-21"]
+
+# 루트 문서는 prefix 없이, 날짜 문서는 ../ 로 링크한다
+# (Pages가 /AINews/ 하위에 배포되므로 절대경로를 쓰면 깨진다)
+root_drawer = render_drawer("2026-09-21", DRAWER_DATES, "")
+assert 'href="2026-08-28/"' in root_drawer
+assert "../" not in root_drawer
+
+day_drawer = render_drawer("2026-09-18", DRAWER_DATES, "../")
+assert 'href="../2026-08-28/"' in day_drawer
+
+# 보고 있는 날짜만 현재로 표시된다
+assert day_drawer.count('aria-current="page"') == 1
+assert '<a href="../2026-09-18/" aria-current="page"' in day_drawer
+
+# 현재 날짜가 속한 달만 펼쳐 둔다
+assert day_drawer.count("<details open>") == 1, "펼쳐진 달은 하나여야 한다"
+assert "<details open><summary>2026년 9월" in day_drawer
+
+# 날짜가 하나뿐이어도 드로어는 만들어진다
+solo = render_drawer("2026-09-21", ["2026-09-21"], "")
+assert "2026년 9월" in solo
+
+
+# --- 이전/다음 -------------------------------------------------------------
+
+def page_for(date, dates):
+    return render(date, {"quotes": {}, "market_news": [], "stock_news": {}},
+                  dates, prefix="../")
+
+# 가운데 날짜는 양쪽 다, 양 끝은 한쪽만
+mid = page_for("2026-09-18", DRAWER_DATES)
+assert 'href="../2026-08-28/">‹ 이전' in mid and 'href="../2026-09-21/">다음 ›' in mid
+first = page_for("2026-08-28", DRAWER_DATES)
+assert "‹ 이전" not in first and "다음 ›" in first
+last = page_for("2026-09-21", DRAWER_DATES)
+assert "‹ 이전" in last and "다음 ›" not in last
+# 날짜가 하나뿐이면 페이저 자체가 없다 (".pager" CSS 규칙은 늘 인라인되므로
+# 문자열이 아니라 실제 마크업으로 확인한다)
+assert '<div class="pager">' not in page_for("2026-09-21", ["2026-09-21"])
+assert '<div class="pager">' in mid
 
 print("ok")

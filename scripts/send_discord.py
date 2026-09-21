@@ -203,9 +203,9 @@ def send_stock(date: str) -> None:
         log("ERROR: STOCK_PAGE_URL 입력 없음 — Pages 배포 스텝의 출력을 확인하라")
         raise SystemExit(5)
 
-    # 페이지는 매일 같은 URL을 덮어쓴다. 쿼리로 날짜를 붙여 Discord가 전날 링크의
-    # OG 캐시를 재사용하지 않게 한다. (deploy-pages의 page_url은 쿼리 없는 형태)
-    link = f"{page_url.rstrip('/')}/?d={date}"
+    # 날짜별 페이지로 보낸다. 나중에 이 메시지를 다시 눌러도 그날 리포트가 나오고,
+    # URL이 날짜마다 달라 Discord가 전날 링크의 OG 캐시를 재사용하지도 않는다.
+    link = f"{page_url.rstrip('/')}/{date}/"
 
     post_discord(webhook, {
         "content": f"📈 **주식 리포트 — {date}**\n{link}",

@@ -43,10 +43,11 @@ PotionBot News 일일 리포트 저장소.
 [Job 3: publish] ── AI/IT를 Discord embed로 전송
    · archive/YYYY/MM/YYYY-MM-DD.json 읽어서 webhook POST
    ↓
-[Job 4: pages] ── 주식 리포트를 HTML 한 장으로 렌더링해서 GitHub Pages 배포
-   · render_stock_page.py → site/index.html → actions/deploy-pages
+[Job 4: pages] ── archive의 **모든 날짜**를 정적 HTML로 렌더링해서 GitHub Pages 배포
+   · render_stock_page.py → site/{날짜}/index.html + site/index.html(최신)
+   · actions/deploy-pages
    ↓
-[Job 5: publish_stock] ── 배포된 페이지 링크 한 줄만 주식 채널로 전송
+[Job 5: publish_stock] ── 그날 날짜 페이지 링크 한 줄만 주식 채널로 전송
 ```
 
 ### 실패 격리
@@ -113,8 +114,26 @@ AINews/
 │   ├── YYYY/MM/YYYY-MM-DD.{json,md}
 │   └── YYYY/MM/YYYY-MM-DD-stock.json
 └── site/                             # Job 4 생성물 (gitignore — 매 실행마다 새로 만듦)
-    └── index.html
+    ├── index.html                     # 최신 리포트
+    └── YYYY-MM-DD/index.html          # 날짜별 리포트
 ```
+
+### 사이트 구조
+
+매 배포마다 `archive/**/*-stock.json`을 전부 읽어 날짜별 페이지를 새로 만든다.
+
+- `/` — 최신 리포트. 루트로 들어온 사람에게 보이는 화면
+- `/YYYY-MM-DD/` — 그날 리포트. **Discord 링크는 이 주소로 나간다**.
+  나중에 지난 메시지를 눌러도 그날 내용이 그대로 나온다
+- 좌측 **드로어**에 전체 날짜 목록이 월별로 접혀 있고, 보고 있는 날짜는 표시된다.
+  헤더에는 하루씩 넘기는 `‹ 이전 / 다음 ›` 링크가 있다
+
+드로어는 **JS 없이 checkbox로** 토글한다. 화면이 1040px보다 넓으면 늘 펼쳐진 채
+본문을 밀어내고, 좁으면 ☰ 버튼으로 여닫는다.
+
+> Pages는 `/AINews/` 하위에 배포되므로 **페이지 안의 링크는 전부 상대경로**다.
+> 루트 문서는 `2026-09-21/`, 날짜 문서는 `../2026-09-21/`로 쓴다.
+> 절대경로(`/2026-09-21/`)로 바꾸면 전부 깨진다.
 
 ### 프롬프트 수정하기
 
@@ -356,7 +375,7 @@ Settings → Pages → Build and deployment → Source를 **GitHub Actions**로 
 (기본값인 "Deploy from a branch"로 두면 `pages` job의 배포가 실패한다.)
 
 배포 주소는 `https://devp0tion.github.io/AINews/` 이고, **공개 저장소이므로 페이지도 공개**다.
-페이지는 매 실행마다 최신 리포트 한 장으로 덮어쓴다. 과거 리포트는 `archive/`에만 남는다.
+날짜별 페이지가 함께 배포되므로 과거 리포트도 웹에서 볼 수 있다.
 
 ### 4. (선택) Anthropic GitHub App 설치
 
@@ -383,7 +402,9 @@ Actions 탭 → **Daily Report** → **Run workflow** (manual trigger):
 - [ ] `curate` job — Commit & push stock report 스텝: `chore: YYYY-MM-DD stock report` 커밋 반영
 - [ ] `publish` job: AI/IT 채널에 2개 embed 수신
 - [ ] `pages` job: 배포 URL이 job 출력에 표시되고 브라우저에서 열림
-- [ ] `publish_stock` job: 주식 채널에 링크 한 줄 수신, 링크를 누르면 리포트가 열림
+- [ ] `pages` job: 로그에 `N개 날짜 + 루트` 출력
+- [ ] `publish_stock` job: 주식 채널에 링크 한 줄 수신, 링크를 누르면 **그날** 리포트가 열림
+- [ ] 페이지 좌측 드로어에서 과거 날짜로 이동됨
 
 ## 로컬 개발
 
@@ -465,7 +486,8 @@ python3 scripts/test_level_context.py
 | KRX 로그인 실패 / 미설정 | 투자자 수급 섹션만 빠진다. 기존 누적분이 있으면 그 날짜만 비고 나머지는 표시된다. |
 | 투자자 수급 일부 결측 | 해당 칸이 `—`로 표시되고, 기간 합계는 수집된 날만 더한다. |
 | pages job 실패 (Pages 미설정) | Settings → Pages → Source가 "GitHub Actions"인지 확인. `publish_stock`은 `needs: pages`라 함께 스킵된다. AI/IT 전송은 영향 없음. |
-| 주식 archive 없음 | 빈 페이지를 배포하고 링크는 정상 전송한다 (링크가 404가 되는 것보다 낫다). |
+| 주식 archive 없음 | 그날은 빈 페이지를 만들어 배포하고 링크는 정상 전송한다 (404가 되는 것보다 낫다). |
+| archive JSON 손상 | 그 날짜만 빈 페이지가 되고 나머지 날짜는 정상 렌더링된다. |
 
 ## 토큰 갱신
 
