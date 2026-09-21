@@ -7,17 +7,19 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import stock_report  # noqa: E402
 from stock_report import (  # noqa: E402
     WEEKLY_DAY, build_weekly, filter_new, group_by_stock, group_reports,
-    is_weekly_day, load_histories, normalize_url, past_events, upcoming_events,
-    validate_input, with_level_context,
+    consensus_change, is_weekly_day, load_histories, normalize_url,
+    past_events, upcoming_events, validate_input, with_level_context,
 )
 from collect_research import (  # noqa: E402
-    merge_reports, parse_reports, prune_reports, ticker_of as research_ticker,
+    merge_reports, merge_trend, parse_reports, prune_reports, prune_trend,
+    ticker_of as research_ticker, trend_snapshot,
 )
 from render_stock_page import (  # noqa: E402
     fmt_billion, fmt_change, fmt_consensus, fmt_daylabel, fmt_dday,
     fmt_level_context, fmt_pct, fmt_price, fmt_volume, group_by_month,
     month_label, nice_bounds, render, render_calendar, render_chart,
-    render_drawer, render_investor, render_reports, render_stale, render_weekly,
+    render_drawer, render_investor, render_reports, render_stale,
+    render_target_change, render_weekly,
 )
 from collect_stock import is_stale, quote_time_iso  # noqa: E402
 from collect_investor import (  # noqa: E402
@@ -608,6 +610,85 @@ assert wk_page.index("<h2>관심종목") < wk_page.index("<h2>주간 심화") < 
 assert "주간 심화" not in render(
     "2026-09-22", {"quotes": {}, "market_news": [], "stock_news": {}},
 )
+
+
+# --- 목표주가 추이 ----------------------------------------------------------
+
+TREND = {"days": {
+    "2026-09-07": {"005930.KS": {"mean": 440000.0}},
+    "2026-09-11": {"005930.KS": {"mean": 460000.0}},   # 경계(09-14) 이전 마지막
+    "2026-09-18": {"005930.KS": {"mean": 470000.0}},
+    "2026-09-21": {"005930.KS": {"mean": 475850.1}},
+}}
+
+ch = consensus_change(TREND, "005930.KS", "2026-09-21")
+assert ch["from_date"] == "2026-09-11" and ch["to_date"] == "2026-09-21", ch
+assert ch["from_mean"] == 460000.0 and ch["to_mean"] == 475850.1
+assert round(ch["change_pct"], 4) == round((475850.1 - 460000) / 460000 * 100, 4)
+
+# 수집이 빠진 날이 있어도 경계 이전의 가장 최근 기록을 쓴다
+gap = {"days": {"2026-09-01": {"X": {"mean": 100.0}},
+                "2026-09-21": {"X": {"mean": 120.0}}}}
+assert round(consensus_change(gap, "X", "2026-09-21")["change_pct"], 4) == 20.0
+
+# 경계 이전 기록이 없으면 None — 비교 대상이 없는 것을 0%로 쓰면 거짓말이다
+assert consensus_change({"days": {"2026-09-21": {"X": {"mean": 1.0}}}}, "X", "2026-09-21") is None
+# 같은 날 하나뿐이어도 None
+assert consensus_change({"days": {"2026-09-01": {"X": {"mean": 1.0}}}}, "X", "2026-09-01") is None
+# 다른 종목·빈 state·깨진 입력에도 죽지 않는다
+assert consensus_change(TREND, "000660.KS", "2026-09-21") is None
+assert consensus_change({}, "X", "2026-09-21") is None
+assert consensus_change({"days": "nope"}, "X", "2026-09-21") is None
+assert consensus_change(None, "X", "2026-09-21") is None
+assert consensus_change(TREND, "005930.KS", "not-a-date") is None
+# mean이 숫자가 아니면 그 날짜는 없는 것으로 본다
+bad_mean = {"days": {"2026-09-01": {"X": {"mean": "N/A"}},
+                     "2026-09-21": {"X": {"mean": 120.0}}}}
+assert consensus_change(bad_mean, "X", "2026-09-21") is None
+# 미래 날짜 기록은 쓰지 않는다
+future = dict(TREND["days"]); future["2026-12-31"] = {"005930.KS": {"mean": 9.0}}
+assert consensus_change({"days": future}, "005930.KS", "2026-09-21")["to_mean"] == 475850.1
+
+# 수집 단계: 추이에 쌓는 것은 평균·중앙값과 의견 합계뿐
+snap = trend_snapshot(CONSENSUS)
+assert snap == {"mean": 475850.1, "median": 465000.0,
+                "buy": 35, "hold": 1, "sell": 0}, snap
+assert trend_snapshot({}) is None
+assert trend_snapshot({"price_targets": {"high": 1.0}}) is None   # mean/median 없음
+
+tr = {"days": {}}
+assert merge_trend(tr, "2026-09-21", {"005930.KS": CONSENSUS}) == 1
+# 같은 날 재실행은 덮어쓴다
+assert merge_trend(tr, "2026-09-21", {"005930.KS": CONSENSUS}) == 1
+assert len(tr["days"]["2026-09-21"]) == 1
+# 쌓을 것이 없는 날은 빈 날짜를 남기지 않는다
+assert merge_trend(tr, "2026-09-22", {"X": {}}) == 0
+assert "2026-09-22" not in tr["days"], tr
+
+old_tr = {"days": {"2020-01-01": {"X": {"mean": 1.0}}, "2026-09-21": {"X": {"mean": 2.0}}}}
+prune_trend(old_tr, "2026-09-21")
+assert list(old_tr["days"]) == ["2026-09-21"], old_tr
+
+# 주간 섹션에 실린다
+wk_t = build_weekly(WK_STOCKS, WK_HISTORIES, "2026-09-21", [], TREND)
+assert wk_t["stocks"][0]["target_change"]["to_mean"] == 475850.1
+# 추이가 없으면 키를 만들지 않는다
+assert "target_change" not in build_weekly(
+    WK_STOCKS, WK_HISTORIES, "2026-09-21", [], {})["stocks"][0]
+assert "target_change" not in build_weekly(
+    WK_STOCKS, WK_HISTORIES, "2026-09-21", [])["stocks"][0]
+
+tgt_html = render_target_change(ch, "KRW")
+assert "460,000 → 475,850" in tgt_html, tgt_html
+assert "+3.45%" in tgt_html, tgt_html
+assert render_target_change(None, "KRW") == ""
+assert render_target_change({"from_mean": "x", "to_mean": 1}, "KRW") == ""
+
+wk_page_t = render("2026-09-21", {
+    "quotes": {"indices": [], "stocks": []},
+    "weekly": wk_t, "market_news": [], "stock_news": {},
+})
+assert "목표주가 평균 460,000 → 475,850" in wk_page_t
 
 
 # --- 렌더링 -----------------------------------------------------------------

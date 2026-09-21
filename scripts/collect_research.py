@@ -14,9 +14,13 @@ collect_research.py — 애널리스트 컨센서스 + 증권사 리포트 목�
      state/research_reports.json 에 **누적**하고, 리포트는 거기서 읽는다.
      (collect_investor.py의 누적 방식과 같다.)
 
+컨센서스는 그날 스냅샷이라 "목표가가 올라갔는지"를 알 수 없다. 하루치씩
+state/consensus_trend.json 에 쌓아두고, 주간 섹션이 거기서 전주 값을 읽는다.
+
 출력:
   · inbox/YYYY-MM-DD-research.json
   · state/research_reports.json 갱신
+  · state/consensus_trend.json 갱신
 
 이 스크립트는 실패해도 종료 코드 0이다. 주식 리포트 전체를 막지 않는다 —
 컨센서스·리포트 섹션만 빠지고 시세·뉴스는 그대로 나간다.
@@ -36,6 +40,7 @@ KST = ZoneInfo("Asia/Seoul")
 REPO_DIR = pathlib.Path(__file__).resolve().parent.parent
 WATCHLIST_PATH = REPO_DIR / "config" / "watchlist.json"
 STATE_PATH = REPO_DIR / "state" / "research_reports.json"
+TREND_PATH = REPO_DIR / "state" / "consensus_trend.json"
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
@@ -46,7 +51,8 @@ RESEARCH_LOOKBACK_DAYS = 7    # adjustable — 매 실행 조회할 리포트 �
 BACKFILL_DAYS = 180           # adjustable — state가 비었을 때 1회만 거슬러 올라가는 기간
 MAX_PAGES = 20                # 백필 페이지 상한 (안전장치)
 REPORTS_PER_STOCK = 3         # adjustable — 리포트에 싣는 종목당 최근 건수
-REPORT_KEEP_DAYS = 180        # adjustable — state에 남겨두는 기간
+REPORT_KEEP_DAYS = 180        # adjustable — 리포트를 state에 남겨두는 기간
+TREND_KEEP_DAYS = 180         # adjustable — 컨센서스 추이를 남겨두는 기간
 PAGE_SIZE = 100               # 한 번에 받는 행 수. 7일치가 1요청에 들어온다.
 
 CONSENSUS_URL = "http://consensus.hankyung.com/analysis/list"
@@ -149,6 +155,55 @@ def fetch_consensus(symbol: str) -> dict | None:
             out["recommendations"] = rows
 
     return out or None
+
+
+def trend_snapshot(consensus: dict) -> dict | None:
+    """추이에 쌓을 최소 필드만 추린다.
+
+    목표가 전 구간(high/low/median)과 의견 분포를 매일 저장하면 state가 금방
+    커진다. 변화를 읽는 데 필요한 평균·중앙값과 의견 합계만 남긴다.
+    """
+    out = {}
+    targets = consensus.get("price_targets") or {}
+    for key in ("mean", "median"):
+        v = _num(targets.get(key))
+        if v is not None:
+            out[key] = v
+
+    recs = consensus.get("recommendations") or []
+    latest = recs[0] if recs and isinstance(recs[0], dict) else None
+    if latest:
+        def n(key):
+            v = _num(latest.get(key))
+            return int(v) if v is not None else 0
+        buy = n("strongBuy") + n("buy")
+        hold = n("hold")
+        sell = n("sell") + n("strongSell")
+        if buy or hold or sell:
+            out["buy"], out["hold"], out["sell"] = buy, hold, sell
+    return out or None
+
+
+def merge_trend(trend: dict, date: str, consensus: dict) -> int:
+    """하루치 컨센서스를 추이에 넣는다. 같은 날 재실행은 덮어쓴다."""
+    days = trend.setdefault("days", {})
+    day = days.setdefault(date, {})
+    added = 0
+    for symbol, data in consensus.items():
+        snap = trend_snapshot(data)
+        if snap:
+            day[symbol] = snap
+            added += 1
+    if not day:
+        days.pop(date, None)
+    return added
+
+
+def prune_trend(trend: dict, today: str, keep_days: int = TREND_KEEP_DAYS) -> None:
+    cutoff = (datetime.date.fromisoformat(today)
+              - datetime.timedelta(days=keep_days)).isoformat()
+    days = trend.get("days") or {}
+    trend["days"] = {d: v for d, v in days.items() if d >= cutoff}
 
 
 # ---------------------------------------------------------------------------
@@ -287,6 +342,15 @@ def main() -> None:
                 f"의견 {len(data.get('recommendations') or [])}기간")
         else:
             log(f"  컨센서스 {s['name']}: 없음")
+
+    trend = load_json(TREND_PATH, {"days": {}})
+    if not isinstance(trend, dict) or not isinstance(trend.get("days"), dict):
+        log("WARN: 컨센서스 추이 state 형식이 다름 — 새로 만든다")
+        trend = {"days": {}}
+    merged = merge_trend(trend, target_date, consensus)
+    prune_trend(trend, target_date)
+    save_json(TREND_PATH, trend)
+    log(f"  컨센서스 추이: {merged}종목 기록, 누적 {len(trend['days'])}일")
 
     # --- 2. 한경 리포트 (누적) ---
     state = load_json(STATE_PATH, {"reports": {}})

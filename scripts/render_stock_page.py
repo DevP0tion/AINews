@@ -373,6 +373,22 @@ def fmt_pct(value, *, unit: str = "%") -> tuple[str, str]:
     return f"{v:+.2f}{unit}", cls
 
 
+def render_target_change(change, currency: str | None) -> str:
+    """목표주가 평균의 전주 대비 변화. 비교할 기록이 없으면 줄을 만들지 않는다."""
+    if not isinstance(change, dict):
+        return ""
+    was, now = change.get("from_mean"), change.get("to_mean")
+    if not isinstance(was, (int, float)) or not isinstance(now, (int, float)):
+        return ""
+    pct, cls = fmt_pct(change.get("change_pct"))
+    return (
+        f'<div class="meta">목표주가 평균 '
+        f'{esc(fmt_price(was, currency, is_stock=True))} → '
+        f'{esc(fmt_price(now, currency, is_stock=True))} '
+        f'<span class="{cls}">{esc(pct)}</span></div>'
+    )
+
+
 def render_weekly(weekly) -> str:
     """주간 심화 섹션. 값은 전부 stock_report가 계산해 보낸 것을 옮기기만 한다."""
     if not isinstance(weekly, dict):
@@ -402,6 +418,7 @@ def render_weekly(weekly) -> str:
             f'<span class="{recovery_cls}">{esc(recovery)}</span> '
             f'({esc(fmt_pct(w.get("prev_pct_from_low"))[0])} → '
             f'{esc(fmt_pct(w.get("pct_from_low"))[0])})</div>'
+            f'{render_target_change(w.get("target_change"), currency)}'
             f'</div>'
         )
 
@@ -420,9 +437,10 @@ def render_weekly(weekly) -> str:
     return (
         f'<section class="card"><h2>주간 심화</h2>'
         f'{"".join(blocks)}{events}'
-        f'<p class="note">전부 종가 시계열에서 계산한 값이다. 주간 변동률의 기준은 '
+        f'<p class="note">전부 수집한 값에서 계산했다. 주간 변동률의 기준은 '
         f'한 주 경계 직전 종가이고, 저점 대비 회복률은 기간 저점 대비 상승률의 '
-        f'주간 증감(%p)이다.</p></section>'
+        f'주간 증감(%p)이다. 목표주가는 애널리스트 평균의 전주 대비 변화이며, '
+        f'비교할 기록이 없으면 표시되지 않는다.</p></section>'
     )
 
 

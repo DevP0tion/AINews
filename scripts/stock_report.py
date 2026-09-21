@@ -52,6 +52,7 @@ ARCHIVE_DIR = REPO_DIR / "archive"
 SEEN_STOCK_PATH = STATE_DIR / "seen_stock_urls.json"
 INVESTOR_PATH = STATE_DIR / "investor_trend.json"
 CALENDAR_PATH = REPO_DIR / "config" / "calendar.json"
+CONSENSUS_TREND_PATH = STATE_DIR / "consensus_trend.json"
 
 # 오늘 기준 며칠 앞까지의 이벤트를 리포트 상단에 띄울지
 CALENDAR_LOOKAHEAD_DAYS = 14   # adjustable
@@ -398,8 +399,47 @@ def is_weekly_day(today: str) -> bool:
     return WEEKDAY_NAMES[datetime.date.fromisoformat(today).weekday()] == WEEKLY_DAY
 
 
+def consensus_change(trend: dict, symbol: str, today: str,
+                     days: int = WEEK_DAYS) -> dict | None:
+    """목표주가 평균의 전주 대비 변화. 순수 함수 — state는 호출부가 읽는다.
+
+    "전주"는 경계(today - days) 이전에서 **가장 최근에 기록된 날**이다.
+    수집이 빠진 날이 있어도 그 앞 기록을 쓴다. 경계 이전 기록이 없으면
+    (수집 시작 직후) None — 비교할 대상이 없는 것을 0%로 쓰면 거짓말이 된다.
+    """
+    days_map = (trend or {}).get("days")
+    if not isinstance(days_map, dict):
+        return None
+    try:
+        cutoff = (datetime.date.fromisoformat(today)
+                  - datetime.timedelta(days=days)).isoformat()
+    except (TypeError, ValueError):
+        return None
+
+    def mean_at(date: str):
+        v = ((days_map.get(date) or {}).get(symbol) or {}).get("mean")
+        return float(v) if isinstance(v, (int, float)) and not isinstance(v, bool) else None
+
+    dates = sorted(d for d in days_map if isinstance(d, str) and d <= today)
+    now_date = next((d for d in reversed(dates) if mean_at(d) is not None), None)
+    was_date = next((d for d in reversed([d for d in dates if d <= cutoff])
+                     if mean_at(d) is not None), None)
+    if not now_date or not was_date or now_date == was_date:
+        return None
+
+    now, was = mean_at(now_date), mean_at(was_date)
+    return {
+        "from_date": was_date,
+        "to_date": now_date,
+        "from_mean": was,
+        "to_mean": now,
+        "change_pct": (now - was) / was * 100 if was > 0 else None,
+    }
+
+
 def build_weekly(stocks: list[dict], histories: dict[str, list],
-                 today: str, events: list[dict]) -> dict | None:
+                 today: str, events: list[dict],
+                 consensus_trend: dict | None = None) -> dict | None:
     """주간 변동률·고저와 레벨 컨텍스트의 전주 대비 변화. 전부 계산치다.
 
     WEEKLY_DAY가 아니면 None — 섹션 자체가 붙지 않는다.
@@ -411,15 +451,20 @@ def build_weekly(stocks: list[dict], histories: dict[str, list],
     for q in stocks:
         if not isinstance(q, dict):
             continue
-        stats = compute_weekly_stats(histories.get(q.get("symbol")), today)
+        symbol = q.get("symbol")
+        stats = compute_weekly_stats(histories.get(symbol), today)
         if not stats:
             continue
-        rows.append({
-            "name": q.get("name") or q.get("symbol"),
-            "symbol": q.get("symbol"),
+        row = {
+            "name": q.get("name") or symbol,
+            "symbol": symbol,
             "currency": q.get("currency"),
             **stats,
-        })
+        }
+        target = consensus_change(consensus_trend or {}, symbol, today)
+        if target:
+            row["target_change"] = target
+        rows.append(row)
 
     past = past_events(events, today, WEEK_DAYS)
     if not rows and not past:
@@ -572,6 +617,7 @@ def main() -> None:
 
     weekly = build_weekly(
         raw_quotes.get("stocks") or [], histories, today, calendar_all,
+        load_json(CONSENSUS_TREND_PATH, {}),
     )
 
     year, month = today[:4], today[5:7]
