@@ -20,9 +20,11 @@ PotionBot News 일일 리포트 저장소.
 [Job 1: collect] ── 결정론적 fetching (Python)
    ├ collect_data.py  : Anthropic 뉴스 sitemap / Claude 릴리즈 노트 / GitHub Releases / HN AI / arxiv
    │                    → inbox/YYYY-MM-DD-raw.json
-   └ collect_stock.py : 국내 증시·경제 RSS 5종 / Yahoo Finance 지수·관심종목 시세
-                        → inbox/YYYY-MM-DD-stock-raw.json
-   · 두 파일 커밋
+   ├ collect_stock.py : 국내 증시·경제 RSS 5종 / Yahoo Finance 지수·관심종목 시세
+   │                    → inbox/YYYY-MM-DD-stock-raw.json
+   └ collect_investor.py : KRX 투자자별 순매수 **직전 영업일 하루치**
+                        → state/investor_trend.json 에 누적 (리포트는 최근 5영업일 사용)
+   · 세 산출물 커밋
    ↓
 [Job 2: curate]
    ├ (a) Claude Code Action (anthropics/claude-code-action@v1)
@@ -88,6 +90,7 @@ AINews/
 ├── scripts/
 │   ├── collect_data.py               # Job 1: AI/IT 소스 fetching
 │   ├── collect_stock.py              # Job 1: 증시 RSS + Yahoo Finance 시세
+│   ├── collect_investor.py           # Job 1: KRX 투자자별 순매수 (하루치 누적)
 │   ├── daily_report.py               # Job 2(b): AI/IT 검증·필터·archive/state
 │   ├── stock_report.py               # Job 2(c): 주식 검증·필터·archive/state
 │   ├── render_stock_page.py          # Job 4: archive JSON → site/index.html
@@ -97,7 +100,8 @@ AINews/
 ├── state/
 │   ├── seen_urls.json                # AI/IT 뉴스 URL 인덱스 (영구 누적)
 │   ├── seen_claude.json              # Claude 업데이트 항목 키
-│   └── seen_stock_urls.json          # 주식 뉴스 URL 인덱스 (AI/IT와 분리)
+│   ├── seen_stock_urls.json          # 주식 뉴스 URL 인덱스 (AI/IT와 분리)
+│   └── investor_trend.json           # 투자자 순매수 일별 누적 (최근 40일 보관)
 ├── inbox/                            # Job 1 출력
 │   ├── YYYY-MM-DD-raw.json
 │   └── YYYY-MM-DD-stock-raw.json
@@ -183,6 +187,30 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 **종목 매칭** — 수집 단계에서 제목·요약에 `aliases`가 들어가면 `matched` 필드에 기계적으로 표시한다.
 오탐이 있을 수 있어 최종 판단은 curate 단계의 Claude가 한다.
 
+## 투자자 수급 (collect_investor.py)
+
+외국인·개인·기관의 순매수를 KRX에서 받아 리포트 상단(지수 바로 아래)에 표로 보여준다.
+
+**왜 누적 방식인가** — KRX는 기간 조회가 가능하지만, 매 실행마다 **직전 영업일 하루치만**
+받아 `state/investor_trend.json`에 쌓는다. 리포트는 그 누적분에서 최근 5영업일을 읽는다.
+하루 단위로 기록해두면 어느 날 수집이 실패해도 나머지 날짜는 남고, 재실행 시
+같은 날짜를 덮어쓰므로 중복이 생기지 않는다.
+
+| 항목 | 값 |
+|---|---|
+| 대상 | 코스피 · 코스닥 · `watchlist`의 각 종목 (호출 4회) |
+| 단위 | 원 (페이지에서는 억/조로 환산) |
+| 투자자 구분 | `외국인` / `개인` / `기관`(= KRX의 `기관합계` 행) |
+| 보관 | 40일 (`KEEP_DAYS`), 표시 5영업일 (`INVESTOR_DAYS`) |
+
+**인증이 필요하다.** KRX 정보데이터시스템이 로그인을 요구하도록 바뀌어,
+`pykrx`가 `KRX_ID`/`KRX_PW` 환경변수로 세션을 만든다.
+**둘 중 하나라도 없으면 조용히 건너뛴다** — 투자자 수급 섹션만 빠지고
+시세·뉴스는 그대로 수집된다. 로그인 실패·응답 형식 변경도 같은 방식으로 흡수한다.
+
+> 익명 접근은 막혀 있다. KRX 직접 호출은 `LOGOUT`을, 네이버 금융은 410/302를 반환하고,
+> KRX 공식 OPEN API에는 투자자별 거래실적 항목이 없다. 계정 방식이 현재 유일한 경로다.
+
 ## 중복 판정
 
 - **뉴스**: URL 정규화 (scheme/host 소문자화, trailing slash 제거, tracking param 제거, fragment 제거) 후 완전 일치
@@ -211,6 +239,10 @@ Repo → Settings → Secrets and variables → Actions → New repository secre
   - AI/IT 리포트를 받을 채널. Discord 채널 설정 → Integrations → Webhooks에서 발급한 URL
 - **`DISCORD_WEBHOOK_POTIONBOT_STOCK`**
   - 주식 리포트를 받을 채널. 같은 방식으로 **다른 채널에서** 발급한 URL
+- **`KRX_ID`**, **`KRX_PW`** *(선택 — 투자자 수급을 쓸 때만)*
+  - [KRX 정보데이터시스템](https://data.krx.co.kr/contents/MDC/COMS/client/MDCCOMS002_S0.cmd) 가입 후 아이디/비밀번호
+  - 미설정 시 투자자 수급 섹션만 빠지고 나머지는 정상 동작한다
+  - 자동 수집이 이용약관에 저촉되지 않는지 직접 확인할 것. 전용 계정 사용을 권장한다
 
 ### 2. GitHub Actions 권한
 
@@ -264,6 +296,11 @@ cat inbox/2026-04-20-raw.json
 
 TARGET_DATE=2026-04-20 python3 scripts/collect_stock.py
 cat inbox/2026-04-20-stock-raw.json
+
+# 투자자 수급 (KRX 계정 필요, 없으면 스스로 건너뛴다)
+pip install pykrx
+KRX_ID=... KRX_PW=... python3 scripts/collect_investor.py
+cat state/investor_trend.json
 ```
 
 ### daily_report.py 단독 실행
@@ -321,6 +358,8 @@ python3 scripts/test_stock_report.py
 | publish 실패 (webhook 오류) | Actions 로그에서 HTTP 코드 확인. webhook URL 유효성 점검. |
 | 증시 RSS 한 곳 실패 | `safe()`가 WARN 처리하고 나머지 피드로 계속 진행. 리포트 건수만 줄어든다. |
 | Yahoo 시세 조회 실패 | 해당 종목/지수만 시세 표에서 빠진다. 뉴스 섹션은 정상. |
+| KRX 로그인 실패 / 미설정 | 투자자 수급 섹션만 빠진다. 기존 누적분이 있으면 그 날짜만 비고 나머지는 표시된다. |
+| 투자자 수급 일부 결측 | 해당 칸이 `—`로 표시되고, 기간 합계는 수집된 날만 더한다. |
 | pages job 실패 (Pages 미설정) | Settings → Pages → Source가 "GitHub Actions"인지 확인. `publish_stock`은 `needs: pages`라 함께 스킵된다. AI/IT 전송은 영향 없음. |
 | 주식 archive 없음 | 빈 페이지를 배포하고 링크는 정상 전송한다 (링크가 404가 되는 것보다 낫다). |
 

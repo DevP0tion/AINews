@@ -61,7 +61,8 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install requests feedparser
+        # pykrx는 pandas를 끌고 와 설치가 가장 오래 걸린다 (투자자 수급 전용)
+        run: pip install requests feedparser pykrx
 
       - name: Collect raw data
         env:
@@ -72,11 +73,22 @@ jobs:
       - name: Collect stock data
         run: python scripts/collect_stock.py
 
+      # KRX 정보데이터시스템이 로그인을 요구해 pykrx가 계정으로 세션을 만든다.
+      # 하루치만 받아 state/investor_trend.json에 누적하고, 리포트는 최근 5영업일을 쓴다.
+      # 스크립트 자체가 모든 예외를 삼키지만(주식 리포트를 막지 않기 위해),
+      # 설치·인터프리터 단계의 실패까지 덮도록 continue-on-error를 함께 둔다.
+      - name: Collect investor trend
+        continue-on-error: true
+        env:
+          KRX_ID: ${{ secrets.KRX_ID }}
+          KRX_PW: ${{ secrets.KRX_PW }}
+        run: python scripts/collect_investor.py
+
       - name: Commit raw data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add inbox/
+          git add inbox/ state/
           if git diff --cached --quiet; then
             echo "변경 없음 (이미 같은 파일 존재)"
             exit 0

@@ -7,7 +7,13 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from stock_report import (  # noqa: E402
     filter_new, group_by_stock, normalize_url, validate_input,
 )
-from render_stock_page import fmt_change, fmt_price, fmt_volume, render  # noqa: E402
+from render_stock_page import (  # noqa: E402
+    fmt_billion, fmt_change, fmt_daylabel, fmt_price, fmt_volume,
+    render, render_investor,
+)
+from collect_investor import (  # noqa: E402
+    merge_day, pick_investor_values, prune, ticker_of,
+)
 
 NAMES = {"삼성전자", "SK하이닉스"}
 OK_URL = "https://www.mk.co.kr/news/stock/1"
@@ -111,5 +117,80 @@ assert 'href="https://x.test/&quot;"' in html_out, "URL이 속성에서 이스�
 empty = render("2026-09-21", {"quotes": {}, "market_news": [], "stock_news": {}})
 assert "신규 기사 없음" in empty
 assert empty.strip().endswith("</html>")
+
+# --- 투자자 수급 수집 -------------------------------------------------------
+
+# Yahoo 티커에서 KRX 6자리 코드만 떼어낸다
+assert ticker_of("005930.KS") == "005930"
+assert ticker_of("000660.KQ") == "000660"
+assert ticker_of("005930") == "005930"
+
+# 기관은 합계 행을 쓴다. 개별 업권 행은 무시
+rows = {"금융투자": 1, "보험": 2, "기관합계": 300, "개인": -100,
+        "외국인": 500, "기타외국인": 7, "전체": 0}
+assert pick_investor_values(rows) == {"외국인": 500, "개인": -100, "기관": 300}
+
+# 라벨이 일부 빠져도 있는 것만 담는다
+assert pick_investor_values({"외국인": 5}) == {"외국인": 5}
+# 셋 다 없으면 None — 빈 레코드를 state에 남기지 않는다
+assert pick_investor_values({"금융투자": 1, "전체": 2}) is None
+assert pick_investor_values({}) is None
+# 값이 정수가 아니면 그 항목만 버린다
+assert pick_investor_values({"외국인": "N/A", "개인": 3}) == {"개인": 3}
+
+# 같은 날짜·같은 대상 재실행은 덮어쓴다
+st = {"days": {}}
+merge_day(st, "2026-09-18", "KOSPI", {"외국인": 1})
+merge_day(st, "2026-09-18", "KOSPI", {"외국인": 2})
+merge_day(st, "2026-09-18", "KOSDAQ", {"외국인": 9})
+assert st["days"]["2026-09-18"] == {"KOSPI": {"외국인": 2}, "KOSDAQ": {"외국인": 9}}, st
+
+# 오래된 날짜는 잘라낸다 (최신 쪽을 남긴다)
+st = {"days": {f"2026-01-{d:02d}": {} for d in range(1, 11)}}
+prune(st, keep=3)
+assert sorted(st["days"]) == ["2026-01-08", "2026-01-09", "2026-01-10"], sorted(st["days"])
+
+
+# --- 투자자 수급 포맷/렌더 --------------------------------------------------
+
+assert fmt_billion(123_456_000_000) == ("+1,235억", "up")
+assert fmt_billion(-50_000_000_000) == ("-500억", "down")
+assert fmt_billion(0) == ("+0억", "flat")
+assert fmt_billion(1_500_000_000_000)[0] == "+1.50조"   # 1만억 넘으면 조 단위
+assert fmt_billion(None) == ("—", "flat")               # 수집 없던 날
+assert fmt_daylabel("2026-09-17") == "09/17"
+
+# 데이터가 없으면 섹션 자체를 만들지 않는다
+assert render_investor({}) == ""
+assert render_investor({"dates": [], "series": {}}) == ""
+
+# 결측일(None)이 섞여도 합계는 있는 값만 더한다
+html_inv = render_investor({
+    "dates": ["2026-09-17", "2026-09-18"],
+    "series": {"KOSPI": {"외국인": [100_000_000_000, None]}},
+})
+assert "+1,000억" in html_inv and "—" in html_inv, html_inv
+assert html_inv.count("+1,000억") == 2, "합계가 있는 값만으로 계산돼야 한다"
+
+# 대상 이름도 이스케이프된다 (watchlist는 사용자가 직접 쓰는 파일이다)
+evil = render_investor({
+    "dates": ["2026-09-17"],
+    "series": {"<img src=x>": {"외국인": [1]}},
+})
+assert "<img src=x>" not in evil and "&lt;img src=x&gt;" in evil
+
+# 투자자 섹션은 지수 바로 아래, 관심종목보다 위에 온다
+page = render("2026-09-21", {
+    "quotes": {"indices": [{"symbol": "^KS11", "name": "코스피", "price": 1,
+                            "change": 0, "change_pct": 0}],
+               "stocks": [{"symbol": "005930.KS", "name": "삼성전자", "price": 1,
+                           "change": 0, "change_pct": 0, "currency": "KRW"}]},
+    "investor_trend": {"dates": ["2026-09-17"],
+                       "series": {"코스피": {"외국인": [1]}}},
+    "market_news": [], "stock_news": {},
+})
+# meta description에도 "관심종목"이 들어가므로 본문 헤딩으로 앵커를 잡는다
+assert page.index("<h2>투자자 수급") < page.index("<h2>관심종목"), "배치 순서가 틀렸다"
+assert page.index("idx-price") < page.index("<h2>투자자 수급"), "지수가 먼저 와야 한다"
 
 print("ok")

@@ -36,6 +36,10 @@ REPO_DIR = pathlib.Path(os.environ.get("AINEWS_REPO", str(DEFAULT_REPO))).resolv
 STATE_DIR = REPO_DIR / "state"
 ARCHIVE_DIR = REPO_DIR / "archive"
 SEEN_STOCK_PATH = STATE_DIR / "seen_stock_urls.json"
+INVESTOR_PATH = STATE_DIR / "investor_trend.json"
+
+# 리포트에 싣는 투자자 동향 일수 (collect_investor.py는 더 길게 누적한다)
+INVESTOR_DAYS = 5
 
 KST = ZoneInfo("Asia/Seoul")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -194,6 +198,45 @@ def strip_private(d: dict) -> dict:
     return {k: v for k, v in d.items() if not k.startswith("_")}
 
 
+def recent_investor_trend(days: int = INVESTOR_DAYS) -> dict:
+    """누적 state에서 최근 N영업일을 잘라 리포트용 구조로 만든다.
+
+    collect_investor.py가 하루치씩 쌓아둔 것을 대상(KOSPI/종목명)별로 뒤집는다.
+    파일이 없거나 비어 있으면 빈 dict — 투자자 동향 섹션만 빠진다.
+
+    반환:
+      {"dates": ["2026-09-17", ...],                     # 오래된 → 최신
+       "series": {"KOSPI": {"외국인": [n, ...], ...}}}    # dates와 같은 길이,
+                                                          # 결측일은 None
+    """
+    state = load_json(INVESTOR_PATH, {"days": {}})
+    all_days = state.get("days") or {}
+    if not isinstance(all_days, dict) or not all_days:
+        return {}
+
+    dates = sorted(all_days)[-days:]
+    keys, series = [], {}
+    for d in dates:
+        for key in (all_days.get(d) or {}):
+            if key not in keys:
+                keys.append(key)
+
+    for key in keys:
+        by_investor: dict[str, list] = {}
+        for d in dates:
+            values = (all_days.get(d) or {}).get(key) or {}
+            for name in ("외국인", "개인", "기관"):
+                by_investor.setdefault(name, []).append(values.get(name))
+        # 전 기간이 결측인 투자자 구분은 버린다 (빈 줄이 남지 않게)
+        by_investor = {
+            n: v for n, v in by_investor.items() if any(x is not None for x in v)
+        }
+        if by_investor:
+            series[key] = by_investor
+
+    return {"dates": dates, "series": series} if series else {}
+
+
 def resolve_report_date(arg_date: str | None) -> str:
     raw = (arg_date
            or os.environ.get("TARGET_DATE")
@@ -257,10 +300,17 @@ def main() -> None:
 
     year, month = today[:4], today[5:7]
     out_path = ARCHIVE_DIR / year / month / f"{today}-stock.json"
+    investor = recent_investor_trend()
+    if investor:
+        log(f"투자자 동향: {len(investor['dates'])}일 × {len(investor['series'])}개 대상")
+    else:
+        log("투자자 동향 데이터 없음 — 해당 섹션은 생략된다")
+
     save_json(out_path, {
         "date": today,
         "generated_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "quotes": quotes,
+        "investor_trend": investor,
         "market_news": [strip_private(a) for a in market_new],
         "stock_news": {
             name: [strip_private(a) for a in items]

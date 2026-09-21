@@ -72,6 +72,62 @@ def fmt_volume(value) -> str:
     return f"{v:,.0f}"
 
 
+def fmt_billion(value) -> tuple[str, str]:
+    """순매수 금액(원)을 억 단위로. (표시 문자열, CSS 클래스)
+
+    수집이 없던 날은 None으로 들어온다 — 0과 구분해서 —로 표시한다.
+    """
+    if value is None:
+        return "—", "flat"
+    eok = float(value) / 100_000_000
+    cls = "up" if eok > 0 else "down" if eok < 0 else "flat"
+    if abs(eok) >= 10000:
+        return f"{eok / 10000:+,.2f}조", cls
+    return f"{eok:+,.0f}억", cls
+
+
+def fmt_daylabel(date: str) -> str:
+    """2026-09-17 → 09/17"""
+    return date[5:].replace("-", "/") if len(date) == 10 else date
+
+
+def render_investor(trend: dict) -> str:
+    """투자자 수급 — 대상별로 [투자자 × 영업일] 표. 맨 오른쪽에 기간 합계."""
+    dates = trend.get("dates") or []
+    series = trend.get("series") or {}
+    if not dates or not series:
+        return ""
+
+    head = "".join(f"<th>{esc(fmt_daylabel(d))}</th>" for d in dates)
+    blocks = []
+    for key, by_investor in series.items():
+        rows = []
+        for name, values in by_investor.items():
+            cells = []
+            for v in values:
+                text, cls = fmt_billion(v)
+                cells.append(f'<td class="{cls}">{esc(text)}</td>')
+            present = [v for v in values if v is not None]
+            total_text, total_cls = fmt_billion(sum(present) if present else None)
+            rows.append(
+                f'<tr><th class="inv-who">{esc(name)}</th>{"".join(cells)}'
+                f'<td class="total {total_cls}">{esc(total_text)}</td></tr>'
+            )
+        blocks.append(
+            f'<div class="inv-block"><h3>{esc(key)}</h3>'
+            f'<div class="inv-scroll"><table class="inv">'
+            f'<thead><tr><th></th>{head}<th class="total">합계</th></tr></thead>'
+            f'<tbody>{"".join(rows)}</tbody></table></div></div>'
+        )
+
+    return (
+        f'<section class="card"><h2>투자자 수급 · 순매수</h2>'
+        f'{"".join(blocks)}'
+        f'<p class="note">양수(빨강)는 순매수, 음수(파랑)는 순매도. '
+        f'수집이 없던 날은 —.</p></section>'
+    )
+
+
 def render_indices(indices: list[dict]) -> str:
     if not indices:
         return ""
@@ -163,6 +219,19 @@ letter-spacing:.02em;text-transform:uppercase}
 margin-right:6px}
 .meta{font-size:.76rem;color:var(--muted);margin:2px 0 8px;
 font-variant-numeric:tabular-nums}
+.inv-block{padding:12px 0;border-top:1px solid var(--line)}
+.inv-block:first-of-type{border-top:0;padding-top:0}
+.inv-block h3{font-size:.95rem;margin:0 0 8px}
+.inv-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.inv{border-collapse:collapse;width:100%;font-size:.8rem;
+font-variant-numeric:tabular-nums;white-space:nowrap}
+table.inv th,table.inv td{padding:5px 8px;text-align:right}
+table.inv thead th{font-weight:500;color:var(--muted);font-size:.72rem;
+border-bottom:1px solid var(--line)}
+table.inv th.inv-who{text-align:left;font-weight:500;color:var(--fg)}
+table.inv tbody tr+tr th,table.inv tbody tr+tr td{border-top:1px dashed var(--line)}
+table.inv .total{font-weight:600;border-left:1px solid var(--line)}
+.note{margin:10px 0 0;font-size:.72rem;color:var(--muted)}
 ul.news{list-style:none;margin:0;padding:0}
 ul.news li{padding:8px 0;border-top:1px dashed var(--line)}
 ul.news li:first-child{border-top:0}
@@ -212,6 +281,7 @@ def render(date: str, report: dict) -> str:
 <div class="stamp">{esc(date)} · 생성 {esc(stamp)}</div>
 </header>
 {render_indices(quotes.get("indices") or [])}
+{render_investor(report.get("investor_trend") or {})}
 {render_stocks(quotes.get("stocks") or [], report.get("stock_news") or {})}
 <section class="card">
 <h2>시장 주요 뉴스</h2>
