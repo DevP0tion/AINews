@@ -27,6 +27,7 @@ PotionBot News 일일 리포트 저장소.
 [Job 2: curate]
    ├ (a) Claude Code Action (anthropics/claude-code-action@v1)
    │    · CLAUDE_CODE_OAUTH_TOKEN 인증 (Pro/Max 구독 사용, 별도 결제 없음)
+   │    · 모델은 daily.yml의 claude_args에서 --model로 지정한다 (미지정 시 액션 기본값)
    │    · 파트 1: inbox 읽어서 한국어 요약·top 선정·specials 판정 → /tmp/processed.json
    │    · 파트 2: 증시 뉴스 선정·요약·종목 매칭        → /tmp/processed_stock.json
    │    · 산출물은 이 두 파일뿐. 여기서 Claude의 역할 종료
