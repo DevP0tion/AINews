@@ -35,7 +35,9 @@ from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from level_context import closes_of, compute_level_context  # noqa: E402
+from level_context import (  # noqa: E402
+    WEEK_DAYS, closes_of, compute_level_context, compute_weekly_stats,
+)
 
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 DEFAULT_REPO = SCRIPT_DIR.parent
@@ -49,6 +51,12 @@ CALENDAR_PATH = REPO_DIR / "config" / "calendar.json"
 
 # 오늘 기준 며칠 앞까지의 이벤트를 리포트 상단에 띄울지
 CALENDAR_LOOKAHEAD_DAYS = 14   # adjustable
+
+# 주간 심화 섹션을 붙이는 요일 (KST 기준, 리포트 대상 날짜로 판정)
+WEEKLY_DAY = "Monday"          # adjustable
+# %A는 로케일을 타므로 (runner 로케일이 C가 아니면 한국어가 나온다) 고정 목록을 쓴다
+WEEKDAY_NAMES = ("Monday", "Tuesday", "Wednesday", "Thursday",
+                 "Friday", "Saturday", "Sunday")
 
 # 리포트에 싣는 투자자 동향 일수 (collect_investor.py는 더 길게 누적한다)
 INVESTOR_DAYS = 5
@@ -300,6 +308,51 @@ def past_events(events: list[dict], today: str, days: int) -> list[dict]:
     return out
 
 
+# --- 주간 심화 섹션 ---------------------------------------------------------
+
+
+def is_weekly_day(today: str) -> bool:
+    """리포트 대상 날짜(KST)가 WEEKLY_DAY인가."""
+    return WEEKDAY_NAMES[datetime.date.fromisoformat(today).weekday()] == WEEKLY_DAY
+
+
+def build_weekly(stocks: list[dict], today: str, events: list[dict]) -> dict | None:
+    """주간 변동률·고저와 레벨 컨텍스트의 전주 대비 변화. 전부 계산치다.
+
+    WEEKLY_DAY가 아니면 None — 섹션 자체가 붙지 않는다.
+    `stocks`는 history가 아직 붙어 있는 **inbox 원본**이어야 한다.
+    """
+    if not is_weekly_day(today):
+        return None
+
+    rows = []
+    for q in stocks:
+        if not isinstance(q, dict):
+            continue
+        stats = compute_weekly_stats(q.get("history"), today)
+        if not stats:
+            continue
+        rows.append({
+            "name": q.get("name") or q.get("symbol"),
+            "symbol": q.get("symbol"),
+            "currency": q.get("currency"),
+            **stats,
+        })
+
+    past = past_events(events, today, WEEK_DAYS)
+    if not rows and not past:
+        log("주간 섹션: 실을 내용이 없음 — 생략")
+        return None
+
+    log(f"주간 섹션: 종목 {len(rows)}건, 지난 이벤트 {len(past)}건")
+    return {
+        "day": WEEKLY_DAY,
+        "days": WEEK_DAYS,
+        "stocks": rows,
+        "past_events": past,
+    }
+
+
 def recent_investor_trend(days: int = INVESTOR_DAYS) -> dict:
     """누적 state에서 최근 N영업일을 잘라 리포트용 구조로 만든다.
 
@@ -420,11 +473,15 @@ def main() -> None:
         f"종목 {sum(len(v) for v in grouped.values())}건 (중복 {stock_dup})"
     )
 
-    calendar = upcoming_events(load_calendar(), today)
+    calendar_all = load_calendar()
+    calendar = upcoming_events(calendar_all, today)
     if calendar:
         log(f"캘린더: {CALENDAR_LOOKAHEAD_DAYS}일 이내 이벤트 {len(calendar)}건")
     else:
         log("캘린더: 표시할 이벤트 없음 — 해당 섹션은 생략된다")
+
+    # history가 아직 붙어 있는 inbox 원본으로 계산한다 (quotes에서는 이미 떼어냈다)
+    weekly = build_weekly(raw_quotes.get("stocks") or [], today, calendar_all)
 
     year, month = today[:4], today[5:7]
     out_path = ARCHIVE_DIR / year / month / f"{today}-stock.json"
@@ -434,7 +491,7 @@ def main() -> None:
     else:
         log("투자자 동향 데이터 없음 — 해당 섹션은 생략된다")
 
-    save_json(out_path, {
+    report = {
         "date": today,
         "generated_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "quotes": quotes,
@@ -446,7 +503,10 @@ def main() -> None:
             for name, items in grouped.items()
         },
         "duplicate_counts": {"market": market_dup, "stock": stock_dup},
-    })
+    }
+    if weekly:
+        report["weekly"] = weekly
+    save_json(out_path, report)
     log(f"archive: {out_path.relative_to(REPO_DIR)}")
 
     for item in market_new:

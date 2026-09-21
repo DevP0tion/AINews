@@ -5,13 +5,14 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from stock_report import (  # noqa: E402
-    filter_new, group_by_stock, normalize_url, past_events, upcoming_events,
-    validate_input, with_level_context,
+    WEEKLY_DAY, build_weekly, filter_new, group_by_stock, is_weekly_day,
+    normalize_url, past_events, upcoming_events, validate_input,
+    with_level_context,
 )
 from render_stock_page import (  # noqa: E402
     fmt_billion, fmt_change, fmt_daylabel, fmt_dday, fmt_level_context, fmt_price,
-    fmt_volume, nice_bounds, render, render_calendar, render_chart,
-    render_investor, render_stale,
+    fmt_pct, fmt_volume, nice_bounds, render, render_calendar, render_chart,
+    render_investor, render_stale, render_weekly,
 )
 from collect_stock import is_stale, quote_time_iso  # noqa: E402
 from collect_investor import (  # noqa: E402
@@ -353,6 +354,79 @@ assert cal_page.index("다가오는 일정") < cal_page.index("코스피"), "캘
 # calendar 키가 없는 예전 archive도 그대로 렌더된다 (하위 호환)
 assert "다가오는 일정" not in render(
     "2026-09-21", {"quotes": {}, "market_news": [], "stock_news": {}},
+)
+
+
+# --- 주간 심화 섹션 ---------------------------------------------------------
+
+# 2026-09-21은 월요일, 22는 화요일
+assert WEEKLY_DAY == "Monday", WEEKLY_DAY
+assert is_weekly_day("2026-09-21") is True
+assert is_weekly_day("2026-09-22") is False
+
+WK_HISTORY = [
+    {"date": "2026-09-07", "close": 100.0},
+    {"date": "2026-09-11", "close": 80.0},
+    {"date": "2026-09-15", "close": 90.0},
+    {"date": "2026-09-18", "close": 95.0},
+    {"date": "2026-09-21", "close": 110.0},
+]
+WK_STOCKS = [{"symbol": "005930.KS", "name": "삼성전자", "currency": "KRW",
+              "history": WK_HISTORY}]
+
+# WEEKLY_DAY가 아니면 섹션 자체를 만들지 않는다
+assert build_weekly(WK_STOCKS, "2026-09-22", []) is None
+
+wk = build_weekly(WK_STOCKS, "2026-09-21", EVENTS)
+assert wk["day"] == "Monday"
+row = wk["stocks"][0]
+assert row["name"] == "삼성전자" and row["symbol"] == "005930.KS"
+assert round(row["change_pct"], 4) == 37.5          # 80 → 110
+assert row["week_high"] == 110.0 and row["week_low"] == 90.0
+assert round(row["recovery_delta"], 4) == 37.5      # 0% → 37.5%
+assert [e["label"] for e in wk["past_events"]] == ["어제 — 이미 지났다"]
+
+# 시계열이 없으면 그 종목만 빠진다 (섹션은 지난 이벤트로 유지)
+only_events = build_weekly([{"symbol": "X", "name": "X"}], "2026-09-21", EVENTS)
+assert only_events["stocks"] == [] and only_events["past_events"]
+
+# 실을 것이 하나도 없으면 None
+assert build_weekly([], "2026-09-21", []) is None
+
+# 포맷 — 부호를 항상 붙이고 없는 값은 —
+assert fmt_pct(3.456) == ("+3.46%", "up")
+assert fmt_pct(-3.456) == ("-3.46%", "down")
+assert fmt_pct(0) == ("+0.00%", "flat")
+assert fmt_pct(2.0, unit="%p")[0] == "+2.00%p"
+for bad in (None, "x", True):
+    assert fmt_pct(bad) == ("—", "flat"), bad
+
+# 렌더
+wk_html = render_weekly(wk)
+assert "주간 심화" in wk_html and "+37.50%" in wk_html
+assert "저점 대비 회복률" in wk_html and "+37.50%p" in wk_html
+assert render_weekly(None) == "" and render_weekly({}) == ""
+assert render_weekly({"stocks": [], "past_events": []}) == ""
+
+# 종목 이름·이벤트 라벨 이스케이프
+evil_wk = render_weekly({
+    "stocks": [{"name": "<img src=x>", "change_pct": 1.0}],
+    "past_events": [{"label": "<b>e</b>", "days_ago": 1}],
+})
+assert "<img src=x>" not in evil_wk and "&lt;img src=x&gt;" in evil_wk
+assert "<b>e</b>" not in evil_wk
+
+# 페이지에서는 관심종목 아래, 시장 뉴스 위
+wk_page = render("2026-09-21", {
+    "quotes": {"indices": [], "stocks": [{"symbol": "005930.KS", "name": "삼성전자",
+                                          "price": 1, "change": 0, "change_pct": 0}]},
+    "weekly": wk, "market_news": [], "stock_news": {},
+})
+assert wk_page.index("<h2>관심종목") < wk_page.index("<h2>주간 심화") < wk_page.index("<h2>시장 주요 뉴스")
+
+# weekly 키가 없는 평일 archive는 섹션 없이 렌더된다 (하위 호환)
+assert "주간 심화" not in render(
+    "2026-09-22", {"quotes": {}, "market_news": [], "stock_news": {}},
 )
 
 

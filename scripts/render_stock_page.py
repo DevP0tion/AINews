@@ -358,6 +358,68 @@ def render_stale(flag) -> str:
     )
 
 
+def fmt_pct(value, *, unit: str = "%") -> tuple[str, str]:
+    """(표시 문자열, CSS 클래스). 값이 없으면 —."""
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        return "—", "flat"
+    v = float(value)
+    cls = "up" if v > 0 else "down" if v < 0 else "flat"
+    return f"{v:+.2f}{unit}", cls
+
+
+def render_weekly(weekly) -> str:
+    """주간 심화 섹션. 값은 전부 stock_report가 계산해 보낸 것을 옮기기만 한다."""
+    if not isinstance(weekly, dict):
+        return ""
+    stocks = weekly.get("stocks") or []
+    past = weekly.get("past_events") or []
+    if not stocks and not past:
+        return ""
+
+    blocks = []
+    for w in stocks:
+        currency = w.get("currency")
+        change, change_cls = fmt_pct(w.get("change_pct"))
+        recovery, recovery_cls = fmt_pct(w.get("recovery_delta"), unit="%p")
+        span = ""
+        if w.get("from") and w.get("to"):
+            span = f'{esc(fmt_daylabel(w["from"]))}~{esc(fmt_daylabel(w["to"]))}'
+        sessions = w.get("sessions")
+        blocks.append(
+            f'<div class="wk-row">'
+            f'<div class="wk-head"><h3>{esc(w.get("name", ""))}</h3>'
+            f'<span class="chg {change_cls}">{esc(change)}</span></div>'
+            f'<div class="meta">주간 고 {esc(fmt_price(w.get("week_high"), currency, is_stock=True))}'
+            f' · 저 {esc(fmt_price(w.get("week_low"), currency, is_stock=True))}'
+            f'{f" · {span} {esc(sessions)}거래일" if span and sessions else ""}</div>'
+            f'<div class="meta">저점 대비 회복률 '
+            f'<span class="{recovery_cls}">{esc(recovery)}</span> '
+            f'({esc(fmt_pct(w.get("prev_pct_from_low"))[0])} → '
+            f'{esc(fmt_pct(w.get("pct_from_low"))[0])})</div>'
+            f'</div>'
+        )
+
+    events = ""
+    if past:
+        items = "".join(
+            f'<li><span class="dday">D+{esc(e.get("days_ago", ""))}</span>'
+            f'<span class="cal-label">{esc(e.get("label", ""))}</span></li>'
+            for e in past
+        )
+        events = (
+            f'<div class="wk-row"><h3>지난 {esc(weekly.get("days", 7))}일 이벤트</h3>'
+            f'<ul class="cal-list">{items}</ul></div>'
+        )
+
+    return (
+        f'<section class="card"><h2>주간 심화</h2>'
+        f'{"".join(blocks)}{events}'
+        f'<p class="note">전부 종가 시계열에서 계산한 값이다. 주간 변동률의 기준은 '
+        f'한 주 경계 직전 종가이고, 저점 대비 회복률은 기간 저점 대비 상승률의 '
+        f'주간 증감(%p)이다.</p></section>'
+    )
+
+
 def render_news_list(items: list[dict], compact: bool = False) -> str:
     if not items:
         return '<p class="empty">신규 기사 없음</p>'
@@ -451,6 +513,11 @@ font-variant-numeric:tabular-nums;color:var(--up)}
 .cal-label{flex:1;word-break:keep-all}
 ul.cal-list time{flex:none;font-size:.74rem;color:var(--muted);
 font-variant-numeric:tabular-nums}
+.wk-row{padding:12px 0;border-top:1px solid var(--line)}
+.wk-row:first-of-type{border-top:0;padding-top:0}
+.wk-row h3{font-size:1rem;margin:0}
+.wk-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.wk-row .meta{margin:4px 0 0}
 /* 카테고리 3색 — dataviz 검증 통과. 다크는 같은 hue를 어두운 면에 맞춰 다시 뽑은 값 */
 .viz{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .viz{
@@ -538,6 +605,7 @@ def render(date: str, report: dict) -> str:
 {render_indices(quotes.get("indices") or [])}
 {render_investor(report.get("investor_trend") or {})}
 {render_stocks(quotes.get("stocks") or [], report.get("stock_news") or {})}
+{render_weekly(report.get("weekly"))}
 <section class="card">
 <h2>시장 주요 뉴스</h2>
 {render_news_list(report.get("market_news") or [])}
