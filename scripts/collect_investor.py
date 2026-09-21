@@ -3,7 +3,11 @@
 collect_investor.py — 투자자별(외국인/개인/기관) 순매수를 KRX에서 하루치 수집.
 
 매 실행마다 **직전 영업일 하루치**만 가져와 state/investor_trend.json에 누적한다.
-리포트는 이 누적분에서 최근 5영업일을 읽어 추세로 보여준다 (stock_report.py).
+리포트는 이 누적분에서 최근 5영업일을 읽어 선 그래프로 보여준다 (stock_report.py).
+
+대상은 watchlist의 **종목만**이다. 시장(코스피/코스닥) 집계는 받지 않는다.
+투자자 구분(외국인/개인/기관)마다 매수·매도·순매수 세 값을 저장한다 —
+"순매수 +100억"이 1조 매수/9,900억 매도인지 100억 매수뿐인지 구분하기 위해서다.
 
 인증:
   KRX 정보데이터시스템이 로그인을 요구하도록 바뀌어 pykrx가 KRX_ID/KRX_PW
@@ -38,7 +42,8 @@ INVESTOR_LABELS = {
     "기관": ("기관합계", "기관"),
 }
 
-MARKETS = ("KOSPI", "KOSDAQ")
+# KRX가 돌려주는 컬럼 → 저장 키. 셋 다 있어야 하는 것은 아니다.
+MEASURES = ("매수", "매도", "순매수")
 
 
 def log(msg: str) -> None:
@@ -53,21 +58,31 @@ def ticker_of(symbol: str) -> str:
     return symbol.split(".")[0]
 
 
-def pick_investor_values(rows: dict) -> dict | None:
-    """{투자자구분: 순매수} 에서 외국인/개인/기관만 골라낸다.
+def pick_investor_values(frame: dict) -> dict | None:
+    """{컬럼: {투자자구분: 값}} 에서 외국인/개인/기관 × 매수/매도/순매수를 뽑는다.
 
-    KRX가 라벨을 바꾸거나 일부 행이 빠져도 있는 것만 담는다.
-    셋 다 없으면 None — 쓸모없는 빈 레코드를 state에 남기지 않는다.
+    KRX가 라벨을 바꾸거나 일부 행·열이 빠져도 있는 것만 담는다.
+    쓸 값이 하나도 없으면 None — 빈 레코드를 state에 남기지 않는다.
+
+    반환: {"외국인": {"매수": n, "매도": n, "순매수": n}, ...}
     """
-    out = {}
+    out: dict[str, dict] = {}
     for name, candidates in INVESTOR_LABELS.items():
-        for label in candidates:
-            if label in rows:
+        values = {}
+        for measure in MEASURES:
+            rows = frame.get(measure)
+            if not isinstance(rows, dict):
+                continue
+            for label in candidates:
+                if label not in rows:
+                    continue
                 try:
-                    out[name] = int(rows[label])
+                    values[measure] = int(rows[label])
                 except (TypeError, ValueError):
-                    log(f"WARN: {label} 값이 정수가 아님: {rows[label]!r}")
+                    log(f"WARN: {measure}/{label} 값이 정수가 아님: {rows[label]!r}")
                 break
+        if values:
+            out[name] = values
     return out or None
 
 
@@ -120,15 +135,16 @@ def load_watchlist() -> list[dict]:
 
 
 def fetch_one(stock_api, date: str, ticker: str) -> dict | None:
-    """하루치 투자자별 거래대금에서 순매수만 추출."""
+    """하루치 투자자별 거래대금에서 매수·매도·순매수를 추출."""
     df = stock_api.get_market_trading_value_by_investor(date, date, ticker)
     if df is None or df.empty:
         log(f"WARN: {ticker} 응답이 비어 있음 (휴장일이거나 조회 실패)")
         return None
-    if "순매수" not in df.columns:
-        log(f"WARN: {ticker} 응답에 '순매수' 컬럼 없음: {list(df.columns)}")
+    present = [m for m in MEASURES if m in df.columns]
+    if not present:
+        log(f"WARN: {ticker} 응답에 매수/매도/순매수 컬럼이 없음: {list(df.columns)}")
         return None
-    return pick_investor_values(df["순매수"].to_dict())
+    return pick_investor_values({m: df[m].to_dict() for m in present})
 
 
 def main() -> None:
@@ -158,8 +174,10 @@ def main() -> None:
     date_key = f"{target[:4]}-{target[4:6]}-{target[6:8]}"
     log(f"대상 영업일: {date_key}")
 
-    targets = [(m, m) for m in MARKETS]
-    targets += [(s["name"], ticker_of(s["symbol"])) for s in load_watchlist()]
+    targets = [(s["name"], ticker_of(s["symbol"])) for s in load_watchlist()]
+    if not targets:
+        log("watchlist가 비어 있습니다 — 건너뜁니다")
+        return
 
     state = load_state(STATE_PATH)
     collected = 0
@@ -173,7 +191,10 @@ def main() -> None:
             continue
         merge_day(state, date_key, key, values)
         collected += 1
-        log(f"  {key}: " + ", ".join(f"{k} {v:+,}" for k, v in values.items()))
+        summary = ", ".join(
+            f"{who} {vals.get('순매수', 0):+,}" for who, vals in values.items()
+        )
+        log(f"  {key}: 순매수 {summary}")
 
     if not collected:
         log("수집된 항목이 없습니다 — state를 건드리지 않습니다")

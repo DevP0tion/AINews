@@ -86,45 +86,191 @@ def fmt_billion(value) -> tuple[str, str]:
     return f"{eok:+,.0f}억", cls
 
 
+def fmt_axis(value: float) -> str:
+    """축 눈금용 — 부호를 강제하지 않고 짧게."""
+    eok = value / 100_000_000
+    if abs(eok) >= 10000:
+        return f"{eok / 10000:,.1f}조"
+    if abs(eok) >= 1:
+        return f"{eok:,.0f}억"
+    return "0"
+
+
 def fmt_daylabel(date: str) -> str:
     """2026-09-17 → 09/17"""
     return date[5:].replace("-", "/") if len(date) == 10 else date
 
 
+# 카테고리 3색. dataviz 검증 통과 (CVD ΔE 9.2 deutan / 27.6 normal, 양 모드).
+# 범례 + 직접 라벨 + 표 뷰가 함께 있어야 하는 조합이다 (light에서 aqua 대비 2.74).
+SERIES_ORDER = ("외국인", "개인", "기관")
+SERIES_SLOT = {"외국인": 1, "개인": 2, "기관": 3}
+
+# 차트 기하 (viewBox 단위)
+CH_W, CH_H = 300.0, 132.0
+PAD_L, PAD_R, PAD_T, PAD_B = 46.0, 10.0, 12.0, 22.0
+
+
+def nice_bounds(values: list[float]) -> tuple[float, float]:
+    """0을 반드시 포함하는 눈금 범위. 값이 모두 같아도 납작해지지 않게 한다."""
+    lo = min(list(values) + [0.0])
+    hi = max(list(values) + [0.0])
+    if lo == hi:
+        return -1.0, 1.0
+    span = hi - lo
+    return lo - span * 0.08, hi + span * 0.08
+
+
+def _points(values: list, dates: list, lo: float, hi: float):
+    """(x, y, 값) 목록. 결측은 None 자리로 남겨 선을 끊는다."""
+    n = len(dates)
+    plot_w = CH_W - PAD_L - PAD_R
+    plot_h = CH_H - PAD_T - PAD_B
+    out = []
+    for i, v in enumerate(values):
+        x = PAD_L + (plot_w * i / (n - 1) if n > 1 else plot_w / 2)
+        if v is None:
+            out.append(None)
+            continue
+        ratio = (float(v) - lo) / (hi - lo) if hi > lo else 0.5
+        out.append((x, PAD_T + plot_h * (1 - ratio), v))
+    return out
+
+
+def render_chart(title: str, dates: list, by_investor: dict) -> str:
+    """지표 하나의 선 그래프. 선 = 투자자, x = 영업일."""
+    flat = [
+        float(v) for values in by_investor.values()
+        for v in values if v is not None
+    ]
+    if not flat:
+        return ""
+    lo, hi = nice_bounds(flat)
+
+    plot_w = CH_W - PAD_L - PAD_R
+    zero_y = PAD_T + (CH_H - PAD_T - PAD_B) * (1 - (0 - lo) / (hi - lo))
+
+    parts = [
+        f'<g class="grid">',
+        f'<line x1="{PAD_L}" y1="{zero_y:.1f}" x2="{PAD_L + plot_w}" y2="{zero_y:.1f}" class="zero"/>',
+        f'<text x="{PAD_L - 6}" y="{zero_y + 3:.1f}" class="tick">{esc(fmt_axis(0))}</text>',
+        f'<text x="{PAD_L - 6}" y="{PAD_T + 3}" class="tick">{esc(fmt_axis(hi))}</text>',
+        f'<text x="{PAD_L - 6}" y="{CH_H - PAD_B + 3}" class="tick">{esc(fmt_axis(lo))}</text>',
+        "</g>",
+    ]
+
+    # x축 날짜 — 5개면 전부, 그보다 많으면 양끝과 가운데만
+    n = len(dates)
+    show = range(n) if n <= 5 else (0, n // 2, n - 1)
+    for i in show:
+        x = PAD_L + (plot_w * i / (n - 1) if n > 1 else plot_w / 2)
+        parts.append(
+            f'<text x="{x:.1f}" y="{CH_H - 6}" class="tick xtick">'
+            f'{esc(fmt_daylabel(dates[i]))}</text>'
+        )
+
+    for who in SERIES_ORDER:
+        values = by_investor.get(who)
+        if not values:
+            continue
+        slot = SERIES_SLOT[who]
+        pts = _points(values, dates, lo, hi)
+        # 결측을 만나면 선을 끊는다 (없는 값을 이어 그리면 거짓말이 된다)
+        run, segments = [], []
+        for pt in pts:
+            if pt is None:
+                if len(run) > 1:
+                    segments.append(run)
+                run = []
+            else:
+                run.append(pt)
+        if len(run) > 1:
+            segments.append(run)
+
+        for seg in segments:
+            d = " ".join(f"{x:.1f},{y:.1f}" for x, y, _ in seg)
+            parts.append(f'<polyline points="{d}" class="ln s{slot}"/>')
+        for pt in pts:
+            if pt is None:
+                continue
+            x, y, v = pt
+            text, _ = fmt_billion(v)
+            parts.append(
+                f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.2" class="dot s{slot}">'
+                f'<title>{esc(who)} {esc(text)}</title></circle>'
+            )
+
+    return (
+        f'<figure class="chart">'
+        f'<figcaption>{esc(title)}</figcaption>'
+        f'<svg viewBox="0 0 {CH_W:.0f} {CH_H:.0f}" role="img" '
+        f'aria-label="{esc(title)} 5영업일 추이">{"".join(parts)}</svg>'
+        f'</figure>'
+    )
+
+
+def render_investor_table(dates: list, by_measure: dict) -> str:
+    """차트와 같은 값을 읽을 수 있는 표. 접근성 대비(대비 WARN) 해소용."""
+    head = "".join(f"<th>{esc(fmt_daylabel(d))}</th>" for d in dates)
+    rows = []
+    for measure, by_investor in by_measure.items():
+        for who in SERIES_ORDER:
+            values = by_investor.get(who)
+            if not values:
+                continue
+            cells = []
+            for v in values:
+                text, cls = fmt_billion(v)
+                cells.append(f'<td class="{cls}">{esc(text)}</td>')
+            rows.append(
+                f'<tr><th class="inv-who">{esc(measure)} · {esc(who)}</th>'
+                f'{"".join(cells)}</tr>'
+            )
+    if not rows:
+        return ""
+    return (
+        f'<details class="tableview"><summary>값으로 보기</summary>'
+        f'<div class="inv-scroll"><table class="inv">'
+        f'<thead><tr><th></th>{head}</tr></thead><tbody>{"".join(rows)}</tbody>'
+        f'</table></div></details>'
+    )
+
+
 def render_investor(trend: dict) -> str:
-    """투자자 수급 — 대상별로 [투자자 × 영업일] 표. 맨 오른쪽에 기간 합계."""
+    """투자자 수급 — 종목마다 [순매수·매수·매도] 선 그래프 3개."""
     dates = trend.get("dates") or []
     series = trend.get("series") or {}
     if not dates or not series:
         return ""
 
-    head = "".join(f"<th>{esc(fmt_daylabel(d))}</th>" for d in dates)
+    legend = "".join(
+        f'<span class="lg"><i class="s{SERIES_SLOT[w]}"></i>{esc(w)}</span>'
+        for w in SERIES_ORDER
+    )
+
     blocks = []
-    for key, by_investor in series.items():
-        rows = []
-        for name, values in by_investor.items():
-            cells = []
-            for v in values:
-                text, cls = fmt_billion(v)
-                cells.append(f'<td class="{cls}">{esc(text)}</td>')
-            present = [v for v in values if v is not None]
-            total_text, total_cls = fmt_billion(sum(present) if present else None)
-            rows.append(
-                f'<tr><th class="inv-who">{esc(name)}</th>{"".join(cells)}'
-                f'<td class="total {total_cls}">{esc(total_text)}</td></tr>'
-            )
+    for key, by_measure in series.items():
+        charts = [
+            render_chart(m, dates, by_measure[m])
+            for m in ("순매수", "매수", "매도") if m in by_measure
+        ]
+        charts = [c for c in charts if c]
+        if not charts:
+            continue
         blocks.append(
             f'<div class="inv-block"><h3>{esc(key)}</h3>'
-            f'<div class="inv-scroll"><table class="inv">'
-            f'<thead><tr><th></th>{head}<th class="total">합계</th></tr></thead>'
-            f'<tbody>{"".join(rows)}</tbody></table></div></div>'
+            f'<div class="charts">{"".join(charts)}</div>'
+            f'{render_investor_table(dates, by_measure)}</div>'
         )
+    if not blocks:
+        return ""
 
     return (
-        f'<section class="card"><h2>투자자 수급 · 순매수</h2>'
+        f'<section class="card viz"><h2>투자자 수급 · 최근 {len(dates)}영업일</h2>'
+        f'<div class="legend">{legend}</div>'
         f'{"".join(blocks)}'
-        f'<p class="note">양수(빨강)는 순매수, 음수(파랑)는 순매도. '
-        f'수집이 없던 날은 —.</p></section>'
+        f'<p class="note">거래대금 기준. 순매수는 매수－매도이며 0선 위가 순매수, '
+        f'아래가 순매도. 수집이 없던 날은 선이 끊긴다.</p></section>'
     )
 
 
@@ -219,19 +365,41 @@ letter-spacing:.02em;text-transform:uppercase}
 margin-right:6px}
 .meta{font-size:.76rem;color:var(--muted);margin:2px 0 8px;
 font-variant-numeric:tabular-nums}
-.inv-block{padding:12px 0;border-top:1px solid var(--line)}
+/* 카테고리 3색 — dataviz 검증 통과. 다크는 같은 hue를 어두운 면에 맞춰 다시 뽑은 값 */
+.viz{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .viz{
+--s1:#3987e5;--s2:#d95926;--s3:#199e70}}
+:root[data-theme="dark"] .viz{--s1:#3987e5;--s2:#d95926;--s3:#199e70}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin:-4px 0 12px}
+.lg{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;color:var(--muted)}
+.lg i{width:14px;height:2px;border-radius:1px;display:inline-block}
+.lg i.s1{background:var(--s1)}.lg i.s2{background:var(--s2)}.lg i.s3{background:var(--s3)}
+.inv-block{padding:14px 0;border-top:1px solid var(--line)}
 .inv-block:first-of-type{border-top:0;padding-top:0}
-.inv-block h3{font-size:.95rem;margin:0 0 8px}
-.inv-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table.inv{border-collapse:collapse;width:100%;font-size:.8rem;
+.inv-block h3{font-size:.95rem;margin:0 0 10px}
+.charts{display:grid;gap:14px}
+@media(min-width:620px){.charts{grid-template-columns:repeat(3,1fr)}}
+figure.chart{margin:0}
+figure.chart figcaption{font-size:.74rem;color:var(--muted);margin-bottom:2px}
+figure.chart svg{width:100%;height:auto;display:block;overflow:visible}
+svg .zero{stroke:var(--line);stroke-width:1}
+svg .tick{fill:var(--muted);font-size:8px;text-anchor:end}
+svg .xtick{text-anchor:middle}
+svg .ln{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+svg .dot{stroke:var(--card);stroke-width:2}
+svg .s1{stroke:var(--s1)}svg .s2{stroke:var(--s2)}svg .s3{stroke:var(--s3)}
+svg circle.s1{fill:var(--s1)}svg circle.s2{fill:var(--s2)}svg circle.s3{fill:var(--s3)}
+.tableview{margin-top:10px}
+.tableview summary{font-size:.74rem;color:var(--muted);cursor:pointer}
+.inv-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:8px}
+table.inv{border-collapse:collapse;width:100%;font-size:.78rem;
 font-variant-numeric:tabular-nums;white-space:nowrap}
 table.inv th,table.inv td{padding:5px 8px;text-align:right}
 table.inv thead th{font-weight:500;color:var(--muted);font-size:.72rem;
 border-bottom:1px solid var(--line)}
 table.inv th.inv-who{text-align:left;font-weight:500;color:var(--fg)}
 table.inv tbody tr+tr th,table.inv tbody tr+tr td{border-top:1px dashed var(--line)}
-table.inv .total{font-weight:600;border-left:1px solid var(--line)}
-.note{margin:10px 0 0;font-size:.72rem;color:var(--muted)}
+.note{margin:12px 0 0;font-size:.72rem;color:var(--muted)}
 ul.news{list-style:none;margin:0;padding:0}
 ul.news li{padding:8px 0;border-top:1px dashed var(--line)}
 ul.news li:first-child{border-top:0}

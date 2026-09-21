@@ -9,7 +9,7 @@ from stock_report import (  # noqa: E402
 )
 from render_stock_page import (  # noqa: E402
     fmt_billion, fmt_change, fmt_daylabel, fmt_price, fmt_volume,
-    render, render_investor,
+    nice_bounds, render, render_chart, render_investor,
 )
 from collect_investor import (  # noqa: E402
     merge_day, pick_investor_values, prune, ticker_of,
@@ -125,25 +125,37 @@ assert ticker_of("005930.KS") == "005930"
 assert ticker_of("000660.KQ") == "000660"
 assert ticker_of("005930") == "005930"
 
-# 기관은 합계 행을 쓴다. 개별 업권 행은 무시
-rows = {"금융투자": 1, "보험": 2, "기관합계": 300, "개인": -100,
-        "외국인": 500, "기타외국인": 7, "전체": 0}
-assert pick_investor_values(rows) == {"외국인": 500, "개인": -100, "기관": 300}
+# 투자자 × 매수/매도/순매수. 기관은 합계 행을 쓰고 개별 업권은 무시
+frame = {
+    "매수": {"기관합계": 1000, "개인": 50, "외국인": 800, "금융투자": 1},
+    "매도": {"기관합계": 700, "개인": 150, "외국인": 300, "보험": 2},
+    "순매수": {"기관합계": 300, "개인": -100, "외국인": 500, "전체": 0},
+}
+assert pick_investor_values(frame) == {
+    "외국인": {"매수": 800, "매도": 300, "순매수": 500},
+    "개인": {"매수": 50, "매도": 150, "순매수": -100},
+    "기관": {"매수": 1000, "매도": 700, "순매수": 300},
+}, pick_investor_values(frame)
 
-# 라벨이 일부 빠져도 있는 것만 담는다
-assert pick_investor_values({"외국인": 5}) == {"외국인": 5}
-# 셋 다 없으면 None — 빈 레코드를 state에 남기지 않는다
-assert pick_investor_values({"금융투자": 1, "전체": 2}) is None
+# 일부 지표만 와도 있는 것만 담는다 (KRX 응답이 줄어드는 경우)
+assert pick_investor_values({"순매수": {"외국인": 5}}) == {"외국인": {"순매수": 5}}
+# 쓸 값이 하나도 없으면 None — 빈 레코드를 state에 남기지 않는다
+assert pick_investor_values({"순매수": {"금융투자": 1}}) is None
 assert pick_investor_values({}) is None
-# 값이 정수가 아니면 그 항목만 버린다
-assert pick_investor_values({"외국인": "N/A", "개인": 3}) == {"개인": 3}
+# 값이 정수가 아니면 그 칸만 버린다
+assert pick_investor_values(
+    {"순매수": {"외국인": "N/A", "개인": 3}}
+) == {"개인": {"순매수": 3}}
 
 # 같은 날짜·같은 대상 재실행은 덮어쓴다
 st = {"days": {}}
-merge_day(st, "2026-09-18", "KOSPI", {"외국인": 1})
-merge_day(st, "2026-09-18", "KOSPI", {"외국인": 2})
-merge_day(st, "2026-09-18", "KOSDAQ", {"외국인": 9})
-assert st["days"]["2026-09-18"] == {"KOSPI": {"외국인": 2}, "KOSDAQ": {"외국인": 9}}, st
+merge_day(st, "2026-09-18", "삼성전자", {"외국인": {"순매수": 1}})
+merge_day(st, "2026-09-18", "삼성전자", {"외국인": {"순매수": 2}})
+merge_day(st, "2026-09-18", "SK하이닉스", {"외국인": {"순매수": 9}})
+assert st["days"]["2026-09-18"] == {
+    "삼성전자": {"외국인": {"순매수": 2}},
+    "SK하이닉스": {"외국인": {"순매수": 9}},
+}, st
 
 # 오래된 날짜는 잘라낸다 (최신 쪽을 남긴다)
 st = {"days": {f"2026-01-{d:02d}": {} for d in range(1, 11)}}
@@ -151,7 +163,7 @@ prune(st, keep=3)
 assert sorted(st["days"]) == ["2026-01-08", "2026-01-09", "2026-01-10"], sorted(st["days"])
 
 
-# --- 투자자 수급 포맷/렌더 --------------------------------------------------
+# --- 포맷 / 스케일 ----------------------------------------------------------
 
 assert fmt_billion(123_456_000_000) == ("+1,235억", "up")
 assert fmt_billion(-50_000_000_000) == ("-500억", "down")
@@ -160,22 +172,72 @@ assert fmt_billion(1_500_000_000_000)[0] == "+1.50조"   # 1만억 넘으면 조
 assert fmt_billion(None) == ("—", "flat")               # 수집 없던 날
 assert fmt_daylabel("2026-09-17") == "09/17"
 
+# 축은 항상 0을 포함한다 (0을 자르면 추세가 과장된다)
+lo, hi = nice_bounds([100.0, 200.0])
+assert lo <= 0 <= hi, (lo, hi)
+lo, hi = nice_bounds([-500.0, -100.0])
+assert lo <= 0 <= hi, (lo, hi)
+# 값이 모두 같아도 납작해지지 않는다
+lo, hi = nice_bounds([0.0, 0.0])
+assert lo < hi, (lo, hi)
+
+
+# --- 차트 렌더 --------------------------------------------------------------
+
+DATES5 = ["2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19"]
+
+# 값이 하나도 없으면 차트를 만들지 않는다
+assert render_chart("순매수", DATES5, {"외국인": [None] * 5}) == ""
+
+chart = render_chart("순매수", DATES5, {
+    "외국인": [1e11, 2e11, -1e11, 3e11, 1e11],
+    "개인": [-1e11, -2e11, 1e11, -3e11, -1e11],
+})
+assert "<polyline" in chart and 'class="ln s1"' in chart
+assert chart.count("<circle") == 10, "점 5개 × 2계열"
+assert "<title>" in chart, "점마다 호버 값이 있어야 한다"
+
+# 결측이 있으면 선이 끊긴다 — 없는 값을 이어 그리면 거짓말이 된다
+gapped = render_chart("순매수", DATES5, {"외국인": [1e11, 2e11, None, 4e11, 5e11]})
+assert gapped.count("<polyline") == 2, "결측 앞뒤로 선이 나뉘어야 한다"
+assert gapped.count("<circle") == 4, "결측일에는 점이 없어야 한다"
+
+# 한쪽 끝이 단독 점이면 그쪽은 선이 생기지 않는다 (점 하나로는 선을 못 긋는다)
+edge = render_chart("순매수", DATES5, {"외국인": [1e11, None, 3e11, 4e11, 5e11]})
+assert edge.count("<polyline") == 1 and edge.count("<circle") == 4
+
+# 양쪽이 끊긴 단독 점은 선을 만들지 않는다
+lone = render_chart("순매수", DATES5, {"외국인": [None, 1e11, None, None, None]})
+assert "<polyline" not in lone and lone.count("<circle") == 1
+
+
+# --- 투자자 섹션 ------------------------------------------------------------
+
 # 데이터가 없으면 섹션 자체를 만들지 않는다
 assert render_investor({}) == ""
 assert render_investor({"dates": [], "series": {}}) == ""
 
-# 결측일(None)이 섞여도 합계는 있는 값만 더한다
-html_inv = render_investor({
-    "dates": ["2026-09-17", "2026-09-18"],
-    "series": {"KOSPI": {"외국인": [100_000_000_000, None]}},
+sec = render_investor({
+    "dates": DATES5,
+    "series": {"삼성전자": {
+        "순매수": {"외국인": [1e11] * 5, "개인": [-1e11] * 5, "기관": [0] * 5},
+        "매수": {"외국인": [5e11] * 5},
+        "매도": {"외국인": [4e11] * 5},
+    }},
 })
-assert "+1,000억" in html_inv and "—" in html_inv, html_inv
-assert html_inv.count("+1,000억") == 2, "합계가 있는 값만으로 계산돼야 한다"
+# 지표 3개가 각각 그래프 하나
+assert sec.count("<figure") == 3, sec.count("<figure")
+for m in ("순매수", "매수", "매도"):
+    assert f"<figcaption>{m}" in sec
+# 3계열이면 범례가 있어야 한다 (색만으로 구분시키지 않는다)
+assert sec.count('class="lg"') == 3
+# 값으로도 읽을 수 있어야 한다 (대비 WARN 해소)
+assert "<details" in sec and "값으로 보기" in sec
 
 # 대상 이름도 이스케이프된다 (watchlist는 사용자가 직접 쓰는 파일이다)
 evil = render_investor({
-    "dates": ["2026-09-17"],
-    "series": {"<img src=x>": {"외국인": [1]}},
+    "dates": DATES5,
+    "series": {"<img src=x>": {"순매수": {"외국인": [1e11] * 5}}},
 })
 assert "<img src=x>" not in evil and "&lt;img src=x&gt;" in evil
 
@@ -185,8 +247,8 @@ page = render("2026-09-21", {
                             "change": 0, "change_pct": 0}],
                "stocks": [{"symbol": "005930.KS", "name": "삼성전자", "price": 1,
                            "change": 0, "change_pct": 0, "currency": "KRW"}]},
-    "investor_trend": {"dates": ["2026-09-17"],
-                       "series": {"코스피": {"외국인": [1]}}},
+    "investor_trend": {"dates": DATES5,
+                       "series": {"삼성전자": {"순매수": {"외국인": [1e11] * 5}}}},
     "market_news": [], "stock_news": {},
 })
 # meta description에도 "관심종목"이 들어가므로 본문 헤딩으로 앵커를 잡는다

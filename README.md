@@ -22,7 +22,7 @@ PotionBot News 일일 리포트 저장소.
    │                    → inbox/YYYY-MM-DD-raw.json
    ├ collect_stock.py : 국내 증시·경제 RSS 5종 / Yahoo Finance 지수·관심종목 시세
    │                    → inbox/YYYY-MM-DD-stock-raw.json
-   └ collect_investor.py : KRX 투자자별 순매수 **직전 영업일 하루치**
+   └ collect_investor.py : KRX 투자자별 매수·매도·순매수 **직전 영업일 하루치**
                         → state/investor_trend.json 에 누적 (리포트는 최근 5영업일 사용)
    · 세 산출물 커밋
    ↓
@@ -90,7 +90,7 @@ AINews/
 ├── scripts/
 │   ├── collect_data.py               # Job 1: AI/IT 소스 fetching
 │   ├── collect_stock.py              # Job 1: 증시 RSS + Yahoo Finance 시세
-│   ├── collect_investor.py           # Job 1: KRX 투자자별 순매수 (하루치 누적)
+│   ├── collect_investor.py           # Job 1: KRX 투자자별 매매동향 (하루치 누적)
 │   ├── daily_report.py               # Job 2(b): AI/IT 검증·필터·archive/state
 │   ├── stock_report.py               # Job 2(c): 주식 검증·필터·archive/state
 │   ├── render_stock_page.py          # Job 4: archive JSON → site/index.html
@@ -189,7 +189,12 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 
 ## 투자자 수급 (collect_investor.py)
 
-외국인·개인·기관의 순매수를 KRX에서 받아 리포트 상단(지수 바로 아래)에 표로 보여준다.
+외국인·개인·기관의 매매동향을 KRX에서 받아 리포트 상단(지수 바로 아래)에
+**선 그래프**로 보여준다. 종목마다 `순매수 / 매수 / 매도` 그래프 3개가 나오고,
+각 그래프의 선 3개가 외국인·개인·기관이다. x축은 최근 5영업일.
+
+매수·매도를 따로 저장하는 이유 — `순매수 +100억`은 1조 매수/9,900억 매도일 수도,
+100억 매수뿐일 수도 있다. 거래 규모가 보여야 그 차이를 읽는다.
 
 **왜 누적 방식인가** — KRX는 기간 조회가 가능하지만, 매 실행마다 **직전 영업일 하루치만**
 받아 `state/investor_trend.json`에 쌓는다. 리포트는 그 누적분에서 최근 5영업일을 읽는다.
@@ -198,10 +203,19 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 
 | 항목 | 값 |
 |---|---|
-| 대상 | 코스피 · 코스닥 · `watchlist`의 각 종목 (호출 4회) |
-| 단위 | 원 (페이지에서는 억/조로 환산) |
+| 대상 | `watchlist`의 각 종목만 (시장 집계는 받지 않는다) |
+| 지표 | `매수` / `매도` / `순매수` (거래대금 기준) |
 | 투자자 구분 | `외국인` / `개인` / `기관`(= KRX의 `기관합계` 행) |
+| 단위 | 원 (페이지에서는 억/조로 환산) |
 | 보관 | 40일 (`KEEP_DAYS`), 표시 5영업일 (`INVESTOR_DAYS`) |
+
+**그래프 규칙** — 계열 색은 `dataviz` 검증을 통과한 3색이고 라이트/다크가 각각
+다른 값이다. 0선을 항상 포함해 추세가 과장되지 않게 하고, 수집이 없던 날은
+선을 끊는다(없는 값을 이어 그리면 거짓말이 된다). 색만으로 구분시키지 않도록
+범례와 `값으로 보기` 표를 함께 둔다.
+
+**스키마가 바뀌어도 예전 데이터를 읽는다** — 투자자별로 순매수 숫자 하나만
+저장하던 형태도 읽어서 순매수 그래프에만 쓰고, 매수·매도는 결측으로 남긴다.
 
 **인증이 필요하다.** KRX 정보데이터시스템이 로그인을 요구하도록 바뀌어,
 `pykrx`가 `KRX_ID`/`KRX_PW` 환경변수로 세션을 만든다.

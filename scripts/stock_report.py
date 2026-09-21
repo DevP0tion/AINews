@@ -201,13 +201,16 @@ def strip_private(d: dict) -> dict:
 def recent_investor_trend(days: int = INVESTOR_DAYS) -> dict:
     """누적 state에서 최근 N영업일을 잘라 리포트용 구조로 만든다.
 
-    collect_investor.py가 하루치씩 쌓아둔 것을 대상(KOSPI/종목명)별로 뒤집는다.
-    파일이 없거나 비어 있으면 빈 dict — 투자자 동향 섹션만 빠진다.
+    collect_investor.py가 하루치씩 쌓아둔 것을 [대상 → 지표 → 투자자] 로 뒤집는다.
+    파일이 없거나 비어 있으면 빈 dict — 투자자 수급 섹션만 빠진다.
+
+    예전 스키마(투자자별로 순매수 숫자 하나만 저장하던 형태)도 읽는다.
+    그 날짜는 순매수만 채워지고 매수·매도는 결측으로 남는다.
 
     반환:
-      {"dates": ["2026-09-17", ...],                     # 오래된 → 최신
-       "series": {"KOSPI": {"외국인": [n, ...], ...}}}    # dates와 같은 길이,
-                                                          # 결측일은 None
+      {"dates": ["2026-09-17", ...],                  # 오래된 → 최신
+       "series": {"삼성전자": {"순매수": {"외국인": [n, ...]}}}}
+                                                       # dates와 같은 길이, 결측은 None
     """
     state = load_json(INVESTOR_PATH, {"days": {}})
     all_days = state.get("days") or {}
@@ -215,24 +218,37 @@ def recent_investor_trend(days: int = INVESTOR_DAYS) -> dict:
         return {}
 
     dates = sorted(all_days)[-days:]
-    keys, series = [], {}
+
+    def cell(date: str, key: str, who: str, measure: str):
+        """하루치에서 한 칸을 꺼낸다. 없거나 형식이 다르면 None."""
+        values = ((all_days.get(date) or {}).get(key) or {}).get(who)
+        if isinstance(values, dict):
+            v = values.get(measure)
+        elif measure == "순매수":
+            v = values          # 예전 스키마: 숫자 하나 = 순매수
+        else:
+            v = None
+        return v if isinstance(v, (int, float)) else None
+
+    keys = []
     for d in dates:
         for key in (all_days.get(d) or {}):
             if key not in keys:
                 keys.append(key)
 
+    series = {}
     for key in keys:
-        by_investor: dict[str, list] = {}
-        for d in dates:
-            values = (all_days.get(d) or {}).get(key) or {}
-            for name in ("외국인", "개인", "기관"):
-                by_investor.setdefault(name, []).append(values.get(name))
-        # 전 기간이 결측인 투자자 구분은 버린다 (빈 줄이 남지 않게)
-        by_investor = {
-            n: v for n, v in by_investor.items() if any(x is not None for x in v)
-        }
-        if by_investor:
-            series[key] = by_investor
+        by_measure = {}
+        for measure in ("순매수", "매수", "매도"):
+            by_investor = {}
+            for who in ("외국인", "개인", "기관"):
+                values = [cell(d, key, who, measure) for d in dates]
+                if any(v is not None for v in values):
+                    by_investor[who] = values
+            if by_investor:
+                by_measure[measure] = by_investor
+        if by_measure:
+            series[key] = by_measure
 
     return {"dates": dates, "series": series} if series else {}
 
