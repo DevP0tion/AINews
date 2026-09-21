@@ -1,6 +1,6 @@
 {
   "date": "2026-09-21",
-  "collected_at": "2026-09-20T23:58:06Z",
+  "collected_at": "2026-09-21T05:24:40Z",
   "anthropic_news": [
     {
       "title": "Accenture embedded evaluation",
@@ -194,95 +194,102 @@
   },
   "hn_ai_stories": [
     {
-      "title": "Google's Open Agentic Orchestrator",
+      "title": "AX – Google’s Open Agentic Orchestrator",
       "url": "https://agentexecutor.io",
-      "score": 78,
+      "score": 348,
       "hn_url": "https://news.ycombinator.com/item?id=49780797",
       "time": 1789943563
     },
     {
-      "title": "ChatGPT now knows what you do on other websites via ad collector",
-      "url": "https://www.buchodi.com/chatgpt-now-knows-what-you-do-on-other-websites-via-ad-collector/",
-      "score": 533,
-      "hn_url": "https://news.ycombinator.com/item?id=49776729",
-      "time": 1789917524
-    },
-    {
       "title": "Pirate Face Rescues LLM Models from Deletion",
       "url": "https://pirateface.co/",
-      "score": 414,
+      "score": 497,
       "hn_url": "https://news.ycombinator.com/item?id=49776699",
       "time": 1789917367
     },
     {
+      "title": "AI chatbots give wrong answers to financial queries 'most of the time'",
+      "url": "https://www.ft.com/content/c0cd359d-df84-4208-a789-ffa864b43666",
+      "score": 23,
+      "hn_url": "https://news.ycombinator.com/item?id=49783062",
+      "time": 1789964924
+    },
+    {
+      "title": "Why MCP Was Always a Bad Idea?",
+      "url": "https://maharship.com/blog/why-mcp-was-always-a-bad-idea/",
+      "score": 88,
+      "hn_url": "https://news.ycombinator.com/item?id=49779329",
+      "time": 1789933480
+    },
+    {
+      "title": "The LLMentalist Effect (2023)",
+      "url": "https://softwarecrisis.dev/letters/llmentalist/",
+      "score": 169,
+      "hn_url": "https://news.ycombinator.com/item?id=49775104",
+      "time": 1789906813
+    },
+    {
       "title": "Show HN: A competition for small neural networks that play strategy games",
       "url": "https://tinybrains.dev",
-      "score": 24,
+      "score": 49,
       "hn_url": "https://news.ycombinator.com/item?id=49776523",
       "time": 1789916350
     },
     {
-      "title": "I stopped drinking the AI Kool-Aid",
-      "url": "https://joshtronic.com/2026/09/20/i-stopped-drinking-the-ai-kool-aid/",
-      "score": 42,
-      "hn_url": "https://news.ycombinator.com/item?id=49780162",
-      "time": 1789939046
+      "title": "Show HN: jevals – replacing LLM judges with typed Jev decisions",
+      "url": "https://github.com/openlayer-ai/jevals",
+      "score": 14,
+      "hn_url": "https://news.ycombinator.com/item?id=49780849",
+      "time": 1789943987
+    },
+    {
+      "title": "The president wanted to unleash AI. Then came Anthropic",
+      "url": "https://www.politico.com/news/magazine/2026/09/20/anthropic-white-house-ai-01085212",
+      "score": 9,
+      "hn_url": "https://news.ycombinator.com/item?id=49782916",
+      "time": 1789963291
+    },
+    {
+      "title": "If AI coding is lowering your code quality, you're not managing quality right",
+      "url": "https://www.i-kh.net/p/if-ai-coding-is-lowering-your-code",
+      "score": 79,
+      "hn_url": "https://news.ycombinator.com/item?id=49774795",
+      "time": 1789904230
     },
     {
       "title": "How to Write with an LLM",
       "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/",
-      "score": 715,
+      "score": 724,
       "hn_url": "https://news.ycombinator.com/item?id=49747070",
       "time": 1789681718
     },
     {
-      "title": "OpenAI's Sam Altman to Brief UN Security Council Next Week",
-      "url": "https://www.reuters.com/business/openais-sam-altman-to-brief-un-security-council-next-week-during-2026-09-18/",
-      "score": 43,
-      "hn_url": "https://news.ycombinator.com/item?id=49779802",
-      "time": 1789936363
+      "title": "Flock Partnered with Nonprofit That Uses AI to Rally Public Support",
+      "url": "https://theintercept.com/2026/09/17/flock-cameras-ai-astroturf-support/",
+      "score": 8,
+      "hn_url": "https://news.ycombinator.com/item?id=49781977",
+      "time": 1789953833
     },
     {
       "title": "Two parallel neural ectoderm progenitors contribute to the developing brain",
       "url": "https://med.stanford.edu/news/all-news/2026/09/two-separate-brains.html",
-      "score": 640,
+      "score": 643,
       "hn_url": "https://news.ycombinator.com/item?id=49763697",
       "time": 1789796930
     },
     {
-      "title": "Andrew Ng: AI Extinction Fears Are 'Science Fiction'",
-      "url": "https://www.youtube.com/watch?v=KnckQp-c388",
-      "score": 16,
-      "hn_url": "https://news.ycombinator.com/item?id=49778367",
-      "time": 1789927901
-    },
-    {
-      "title": "Base Browser: A hard fork of Firefox with no AI slop",
-      "url": "https://codeberg.org/basebrowserproject",
-      "score": 7,
-      "hn_url": "https://news.ycombinator.com/item?id=49779858",
-      "time": 1789936817
+      "title": "ChatGPT now knows what you do on other websites via ad collector",
+      "url": "https://www.buchodi.com/chatgpt-now-knows-what-you-do-on-other-websites-via-ad-collector/",
+      "score": 698,
+      "hn_url": "https://news.ycombinator.com/item?id=49776729",
+      "time": 1789917524
     },
     {
       "title": "I think you should almost never use AI to write",
       "url": "https://erichgrunewald.substack.com/p/why-you-should-almost-never-use-ai",
-      "score": 340,
+      "score": 345,
       "hn_url": "https://news.ycombinator.com/item?id=49767937",
       "time": 1789835724
-    },
-    {
-      "title": "Lego Brick Sorting Machine Uses AI to Save Millions from Landfill [video]",
-      "url": "https://www.youtube.com/watch?v=M0cWcAIeOyU",
-      "score": 11,
-      "hn_url": "https://news.ycombinator.com/item?id=49778425",
-      "time": 1789928299
-    },
-    {
-      "title": "GPT-6 Astra Solves a WWI German Radio Cipher",
-      "url": "https://www.prinzai.com/p/gpt-6-astra-solves-a-wwi-german-radio",
-      "score": 388,
-      "hn_url": "https://news.ycombinator.com/item?id=49763987",
-      "time": 1789800104
     },
     {
       "title": "Cache-to-Cache: Direct Semantic Communication Between LLMs (2025)",
@@ -290,154 +297,147 @@
       "score": 106,
       "hn_url": "https://news.ycombinator.com/item?id=49758615",
       "time": 1789757735
-    },
-    {
-      "title": "Two parallel neural ectoderm progenitors contribute to the developing brain",
-      "url": "https://www.newscientist.com/article/2589739-our-brain-evolved-from-two-primitive-nervous-systems-that-merged/",
-      "score": 129,
-      "hn_url": "https://news.ycombinator.com/item?id=49755533",
-      "time": 1789744327
     }
   ],
   "arxiv_recent": [
     {
-      "title": "Embedding Models Measure in Peculiar Ways",
-      "url": "https://arxiv.org/abs/2609.20821v1",
-      "summary": "Embedding spaces define notions of semantic similarity and distance. We study whether those embeddings reflect physical measurements of mass, distance, time and volume, which admit a unique, objective notion of semantic equivalence and distance. We find that physical measurement is only weakly modeled in the embedding space, and that instead quite peculiar measurement patterns can be observed. Further analysis indicates that embedding representations of physical measurements are strongly influenced by superficial string similarity, and recalibration of similarity does not substantially improve",
-      "published": "2026-09-17T17:59:54Z",
+      "title": "BrainWideBench: Benchmarking large-scale pretraining and across-animal transfer in multi-region neural recordings",
+      "url": "https://arxiv.org/abs/2609.22064v1",
+      "summary": "Advances in large-scale neural recording have made it possible to collect data across many animals and distributed brain regions, raising the question of whether this scale can be exploited to learn general-purpose neural representations transferable across diverse downstream tasks. Yet, progress toward this goal has been limited by fragmented evaluation protocols and a narrow focus on individual task domains. Here, we present BrainWideBench, a benchmark for evaluating across-animal transfer on multi-region neural recordings, built on the International Brain Laboratory Brainwide Map dataset of",
+      "published": "2026-09-18T17:54:32Z",
       "category": "cs.LG"
     },
     {
-      "title": "Paint-Anything: Unified Any-Color Control for Image Generation and Editing",
-      "url": "https://arxiv.org/abs/2609.20816v1",
-      "summary": "Professional design requires any-color control: the ability to specify an object's target color with any 24-bit hex value for image generation and editing. Prior work has explored color generation, editing, and colorization, but often relies on dedicated color representations or specialized inference procedures. Advances in large language models offer a simpler starting point: even compact models can associate hex values with color semantics. We present Paint-Anything, which learns a shared hex-prompt interface for generation and editing through object-level color supervision. We develop a dat",
-      "published": "2026-09-17T17:59:30Z",
+      "title": "Predictable Failure in Multi-Hop Retrieval: Score-Distributional Confidence Scoring and Abstention",
+      "url": "https://arxiv.org/abs/2609.22056v1",
+      "summary": "Multi-hop retrieval failures are not uniformly distributed across queries: they cluster in structurally predictable subpopulations. We prove two results formalizing this structure. First (CWAR Reducibility): confident-failure reduction is achievable if and only if retrieval features carry mutual information about success, a condition satisfied by LLM-judge pipelines but substantially weaker in dense-only settings, explaining the AUC-AC gap between regimes. Second (Feature Regime Complementarity): no single ANN score feature achieves best predictive performance across all failure regimes; the d",
+      "published": "2026-09-18T17:48:15Z",
       "category": "cs.LG"
     },
     {
-      "title": "How Does Distribution Shift Shape Pretraining Gains in Neural PDE Surrogates?",
-      "url": "https://arxiv.org/abs/2609.20814v1",
-      "summary": "Pretraining a neural PDE surrogate can reduce the amount of new CFD data needed when geometry or modeled physics changes. However, it remains unclear how different components of distribution shift affect this benefit. We pretrain a surrogate on 254,909 RANS solutions from one airfoil family and fine-tune it on a new family under two target settings with matched freestream ranges: the same Spalart-Allmaras (SA) modeling and SA with added $e^N$ transition modeling. At $N=1000$, the pretrained model matches the accuracy of a model trained from scratch on $3.25\\times$ as many samples for the same-",
-      "published": "2026-09-17T17:59:24Z",
+      "title": "Benchmarking World Models for Continual Learning on Compositional Tasks",
+      "url": "https://arxiv.org/abs/2609.22055v1",
+      "summary": "A desirable property of a world model is the ability to learn continually across tasks, adapting to new environments without forgetting what the agent has already learnt. In particular, the ability to retain and reuse knowledge obtained from prior experiences underpins an agent's ability to efficiently adapt to novel environments, as the dynamics of the physical world can often be described in recurring mechanisms. However, the world model's measure of adaptation entangles two abilities: the speed and capacity to learn unseen tasks, and the reuse of knowledge already acquired, since incoming t",
+      "published": "2026-09-18T17:46:28Z",
       "category": "cs.LG"
     },
     {
-      "title": "Quantifying Overclaiming Propensity in Frontier LLM Agents",
-      "url": "https://arxiv.org/abs/2609.20812v1",
-      "summary": "Frontier coding agents are increasingly trusted to work autonomously for long periods, yet an agent's final response is often the only account of that work a user sees. We quantify the propensity of frontier agents to \\emph{overclaim} task completion, a misrepresentation that can mislead the user. An agent overclaims when its final response contradicts information in its context. This definition requires no inference about intent and is independent of task success. We introduce \\emph{OverclaimBench}, an evaluation suite composed of five file-review scenarios, transcript-based coverage measurem",
-      "published": "2026-09-17T17:59:04Z",
+      "title": "Particle Competition and Cooperation for Robust Graph Convolutional Network Learning Under Label Noise",
+      "url": "https://arxiv.org/abs/2609.22053v1",
+      "summary": "Graph Convolutional Networks (GCNs) are highly sensitive to label noise, since corrupted supervision can propagate through the graph and degrade learned node representations. This work proposes PCC+GCN, a hybrid framework that uses Particle Competition and Cooperation (PCC) as a graph-based label-refinement stage before GCN training. PCC identifies suspicious labeled nodes through particle domination dynamics and determines whether their labels should be preserved, removed, or reassigned before GCN training. The framework also allows the graph used by PCC to be augmented with feature-based $k$",
+      "published": "2026-09-18T17:46:08Z",
       "category": "cs.LG"
     },
     {
-      "title": "Score Centering Stabilizes Off-policy Reinforcement Learning",
-      "url": "https://arxiv.org/abs/2609.20807v1",
-      "summary": "Reinforcement learning (RL) of large language models is notoriously sensitive to small differences between training and inference engines, often referred to as the training-inference mismatch (TIM). However, completely eliminating TIM is impractical, as it would come at a major cost to rollout efficiency. In this paper, we show that the instability of RL under TIM is primarily caused by drift: a persistent bias between training and inference engines that accumulates with every training step. We derive an additive \"score centering\" correction term that stabilizes RL under TIM by canceling drift",
-      "published": "2026-09-17T17:58:17Z",
+      "title": "Available Guardrails: Certifying Selective Prediction across ML Systems",
+      "url": "https://arxiv.org/abs/2609.22048v1",
+      "summary": "A selective predictor acts as a safety gate: it returns an output only when the prediction appears sufficiently trustworthy. Deployments increasingly require this reliability to be certified at a target precision for every reporting unit of interest, such as a tool, policy label, or patient subgroup. The main difficulty is often not whether a granted certificate is valid, but whether finite calibration data can produce one at all. As the gate becomes safer or more fine-grained, some units may receive too little evidence to certify. We make this notion of availability computable through classic",
+      "published": "2026-09-18T17:36:52Z",
       "category": "cs.LG"
     },
     {
-      "title": "An Empirical Study of Harness Design for Coding Agents",
-      "url": "https://arxiv.org/abs/2609.20804v1",
-      "summary": "Coding harnesses shape how autonomous coding agents translate model capabilities into long-horizon software-engineering performance, yet existing work typically evaluates harnesses as monolithic systems, leaving the effectiveness of individual components unclear. To enable component-level comparisons, we study this question with a lightweight coding harness whose execution loop is fixed while three components are varied: planning, action space, and context management. Across four models evaluated on SWE-Bench Verified and Terminal-Bench 2.1, we evaluate 176 matched settings spanning five conte",
-      "published": "2026-09-17T17:58:07Z",
+      "title": "$λ$-Controlled GRPO: Turning Flow-Matching Ratio Instability into a Budgeted Resource",
+      "url": "https://arxiv.org/abs/2609.22041v1",
+      "summary": "Reinforcement learning is increasingly used to align image generators with reward signals, and Flow-GRPO recently extended this paradigm to flow-matching models by treating the denoising sampler as a stochastic policy that can be optimized from reward feedback. Training in this setting is unstable in a way specific to multi-step denoising: the policy update changes systematically across denoising steps, with importance ratios drifting below one, becoming increasingly dispersed, clipping at different rates, and leaving fewer usable samples late in training. Prior work treats these effects as se",
+      "published": "2026-09-18T17:33:38Z",
       "category": "cs.LG"
     },
     {
-      "title": "PosteriorBench: From Point Estimates to Posterior Matching in Evaluating Generative Inverse Solvers",
-      "url": "https://arxiv.org/abs/2609.20794v1",
-      "summary": "Generative models are increasingly used to solve scientific inverse problems, but existing evaluations still focus primarily on whether a method can produce a single plausible reconstruction. This is insufficient for ill-posed problems, where multiple solutions may be consistent with the same sparse or noisy observations. In these settings, a method can achieve strong pointwise accuracy while still failing to capture the true posterior through mode collapse, overconfident uncertainty, or averaging incompatible solutions. We introduce PosteriorBench, a benchmark for evaluating the distributiona",
-      "published": "2026-09-17T17:54:12Z",
+      "title": "COMPLEX: A Closed-Form Certified Embedding of Multiparameter Persistence Modules",
+      "url": "https://arxiv.org/abs/2609.22012v1",
+      "summary": "Every multiparameter persistence vectorization we know of carries a one-sided Lipschitz upper bound and nothing below it: without a lower gauge there is no sense in which the features are faithful, and no per-prediction guarantee can be built on them. This paper supplies the missing side. COMPLEX is a closed-form, training-free embedding of multiparameter modules -- slice the module along a fixed near-diagonal net, embed each slice barcode by the certified PLACE/PALACE landmark map, concatenate. Under a checkable witnessing-slice coherence condition, holding on 100% of audited pairs on Orbit5k",
+      "published": "2026-09-18T17:08:41Z",
       "category": "cs.LG"
     },
     {
-      "title": "GeoAAC: Geometry-Based Adaptive Action Chunking from Denoising Trajectories in VLA Policies",
-      "url": "https://arxiv.org/abs/2609.20776v1",
-      "summary": "Action chunking is widely used for action generation and execution in Vision-Language-Action (VLA) policies, yet existing approaches commonly use a fixed action horizon. During a rollout, different task stages may require different levels of action continuity, control precision, and closed-loop feedback, making a fixed horizon unable to accommodate changing control requirements. We propose \\textbf{GeoAAC}, a geometry-based adaptive action chunking method for flow-based VLA policies that adjusts the action horizon according to the reliability of the current action prediction. We show that the g",
-      "published": "2026-09-17T17:48:07Z",
+      "title": "Abstention and Noise Filtering: Two Missing Primitives of Softmax Attention",
+      "url": "https://arxiv.org/abs/2609.22005v1",
+      "summary": "Gating the value pathway of attention reportedly improves language model pretraining, and prior studies disagree on why. We argue and provide experimental evidence that such gates supply two different things that softmax attention lacks: abstention and noise filtering. The first is abstention, which allows an attention head to output nothing, bypassing the requirement that attention weights must sum to one. The second is noise filtering, which allows the value pathway of an attention head to suppress interference from superposed features in the residual stream. In our experiments in matched mo",
+      "published": "2026-09-18T17:03:58Z",
       "category": "cs.LG"
     },
     {
-      "title": "Calibrated RF-Fingerprinting Under Interference With Heterogeneous Transmission Protocols",
-      "url": "https://arxiv.org/abs/2609.20765v1",
-      "summary": "Radio Frequency(RF)-Fingerprinting is a spectrum monitoring technique that identifies specific transmitters based on hardware impairments imprinted within the emitted signal. Although widely researched, studies almost exclusively consider scenarios where only one transmitter is emitting at a time, limiting real world applicability. In this work, we further the study of RF-Fingerprinting by considering co-channel interference, with multiple emitted signals interfering with each other, overlapping in time and frequency. Specifically, we formulate this problem as a multi-label classification prob",
-      "published": "2026-09-17T17:44:22Z",
+      "title": "Assessment of Machine Learning-Based Critical Heat Flux Models in the CTF Subchannel Code for Square Rod Bundle Prediction",
+      "url": "https://arxiv.org/abs/2609.21995v1",
+      "summary": "The prediction of critical heat flux (CHF), a key safety-related quantity in nuclear thermal hydraulics, remains an important challenge due to its direct relationship with fuel performance and reactor safety. Recent studies have demonstrated that relative to traditional empirical correlations and lookup tables (LUTs), machine learning (ML) methods can substantially improve CHF prediction accuracy. Most ML-based CHF models, however, have been developed and evaluated using tube databases, leaving their applicability to reactor-relevant rod bundle geometries largely unexplored.   This study evalu",
+      "published": "2026-09-18T16:56:45Z",
       "category": "cs.LG"
     },
     {
-      "title": "Agile-WAM: An Agile Tactile World Action Model for Contact-Rich Robot Control",
-      "url": "https://arxiv.org/abs/2609.20761v1",
-      "summary": "World Action Models (WAMs) advance beyond conventional visuomotor policies by jointly predicting future world states and robot actions, enabling the policy to learn physical dynamics that support effective control. However, recent tactile WAMs often rely on large-scale pretrained generative backbones to capture contact-rich physical dynamics, which limit their inference efficiency and flexible deployment. In this paper, we present \\ABBR{}, an agile tactile World Action Model for contact-rich robot control. \\ABBR{} encodes visual and tactile observations into a shared latent that serves as the",
-      "published": "2026-09-17T17:43:51Z",
+      "title": "Time series generation with spectrally aligned latent flow matching",
+      "url": "https://arxiv.org/abs/2609.21989v1",
+      "summary": "Latent flow models have proven to be a reliable and cost-effective method for time series generation. However, the latent compression induces unwanted artefacts, such as a spectral mismatch with respect to the underlying dataset, thus hindering their use as training surrogates. In this article, we propose a spectrally-aligned latent-flow time series generator, where the latent space for flow matching is trained to preserve dynamical properties that are relevant for the suitability of synthetic samples. We find that incorporating fine-tuning losses based on canonical signal representations such",
+      "published": "2026-09-18T16:49:46Z",
       "category": "cs.LG"
     },
     {
-      "title": "Coding Agents with an Obstacle-Aware Harness for Safe Robot Manipulation",
-      "url": "https://arxiv.org/abs/2609.20822v1",
-      "summary": "Coding agents have emerged as a promising paradigm for robot manipulation: a language model writes the robot controller as a program, and agents built in this way now operate robots without robot-specific training.Whether this paradigm is also safe, however, has not been asked. We evaluate coding agent under a safety constraint, where each task pairs a manipulation goal with an obstacle the robot must not touch. The agent pursues the goal but collides with the obstacle in most cases, treating task completion as its sole objective while neglecting safety. The agent reasons about the obstacle in",
-      "published": "2026-09-17T17:59:58Z",
+      "title": "Cross-sector generalization of accident-process role classification in occupational accident narratives",
+      "url": "https://arxiv.org/abs/2609.22081v1",
+      "summary": "Occupational accident narratives contain valuable information about work situations, unfavourable conditions, accident events, and their consequences. Automatically structuring these narratives can facilitate large-scale accident analysis and support occupational risk prevention. However, the terminology and writing styles used to describe accidents vary considerably across sectors and organisations, raising questions about the ability of automated coding systems to generalize beyond their training domain. In this paper, we evaluate the cross-sector generalization of accident-process role clas",
+      "published": "2026-09-18T17:59:10Z",
       "category": "cs.CL"
     },
     {
-      "title": "Embedding Models Measure in Peculiar Ways",
-      "url": "https://arxiv.org/abs/2609.20821v1",
-      "summary": "Embedding spaces define notions of semantic similarity and distance. We study whether those embeddings reflect physical measurements of mass, distance, time and volume, which admit a unique, objective notion of semantic equivalence and distance. We find that physical measurement is only weakly modeled in the embedding space, and that instead quite peculiar measurement patterns can be observed. Further analysis indicates that embedding representations of physical measurements are strongly influenced by superficial string similarity, and recalibration of similarity does not substantially improve",
-      "published": "2026-09-17T17:59:54Z",
+      "title": "Predictable Failure in Multi-Hop Retrieval: Score-Distributional Confidence Scoring and Abstention",
+      "url": "https://arxiv.org/abs/2609.22056v1",
+      "summary": "Multi-hop retrieval failures are not uniformly distributed across queries: they cluster in structurally predictable subpopulations. We prove two results formalizing this structure. First (CWAR Reducibility): confident-failure reduction is achievable if and only if retrieval features carry mutual information about success, a condition satisfied by LLM-judge pipelines but substantially weaker in dense-only settings, explaining the AUC-AC gap between regimes. Second (Feature Regime Complementarity): no single ANN score feature achieves best predictive performance across all failure regimes; the d",
+      "published": "2026-09-18T17:48:15Z",
       "category": "cs.CL"
     },
     {
-      "title": "Unifying Models of Intergroup Hostility in Online Discourse",
-      "url": "https://arxiv.org/abs/2609.20808v1",
-      "summary": "Hostile rhetoric toward social groups can normalize exclusion and justify mistreatment, as well as contribute to rising polarization and political violence. Efforts to moderate hostile rhetoric in online speech draw on foundational theories in social and moral psychology, and political science. However, these theories were developed largely in parallel, often propose different and sometimes conflicting accounts of how hostility develops, and have rarely been tested against each other in real discourse. The result is a fragmented understanding of the rhetorical mechanisms of hostility, without",
-      "published": "2026-09-17T17:58:25Z",
+      "title": "An Interpretable Memory Decision Controller for LLM Agents Based on Three-Signal Complementarity: Decoupling Confidence and Consistency",
+      "url": "https://arxiv.org/abs/2609.22043v1",
+      "summary": "Memory systems for large language models have focused predominantly on efficient retrieval, whereas the decision of whether retrieved memories should be trusted has received comparatively little attention. When the memory store contains conflicting positions, standard retrieval-augmented generation (RAG) blindly injects memories and amplifies hallucinations: in models susceptible to memory injection, the RAG hallucination rate under conflicting memories is markedly higher than that of a memory-free baseline. Inspired by memory signaling mechanisms in the prefrontal cortex, we propose the Memor",
+      "published": "2026-09-18T17:34:13Z",
       "category": "cs.CL"
     },
     {
-      "title": "An Empirical Study of Harness Design for Coding Agents",
-      "url": "https://arxiv.org/abs/2609.20804v1",
-      "summary": "Coding harnesses shape how autonomous coding agents translate model capabilities into long-horizon software-engineering performance, yet existing work typically evaluates harnesses as monolithic systems, leaving the effectiveness of individual components unclear. To enable component-level comparisons, we study this question with a lightweight coding harness whose execution loop is fixed while three components are varied: planning, action space, and context management. Across four models evaluated on SWE-Bench Verified and Terminal-Bench 2.1, we evaluate 176 matched settings spanning five conte",
-      "published": "2026-09-17T17:58:07Z",
+      "title": "QuranicMMLU: A Cognitively-Aware Benchmark for Evaluating Generative AI Solutions on Quranic Linguistic Knowledge",
+      "url": "https://arxiv.org/abs/2609.22038v1",
+      "summary": "We introduce QuranicMMLU, a benchmark for evaluating generative AI on Quranic Arabic across multiple dimensions of linguistic complexity. Existing Quranic benchmarks center on general question answering and semantic retrieval, without probing specific linguistic competencies or stratifying by cognitive demand and verse difficulty. We construct a five-pillar Quranic taxonomy spanning Phonology, Morphology, Syntax, Semantics, and Pragmatics, with 31 leaves covering phenomena from tajwīd and root-and-pattern morphology to occasions of revelation and inter-surah coherence. For each leaf we generat",
+      "published": "2026-09-18T17:30:27Z",
       "category": "cs.CL"
     },
     {
-      "title": "JEPA-Anything: Learning Predictive Models across Different Worlds",
-      "url": "https://arxiv.org/abs/2609.20800v1",
-      "summary": "World modeling enables intelligence to anticipate consequences, guide interventions, and learn from interaction. Yet predictive models remain domain-specific: can a common learning principle support world modeling across radically different systems? We introduce JEPA-Anything, a domain-agnostic framework based on orthogonal predictive factorization (OPF). Extending joint-embedding predictive architectures, OPF decomposes latent targets into complementary factors, learns them through dedicated pathways, and recombines them within a shared predictive design. We evaluate JEPA-Anything across seve",
-      "published": "2026-09-17T17:55:57Z",
+      "title": "DiaVLo: Diagnosing Behaviours of Vision-Language Models",
+      "url": "https://arxiv.org/abs/2609.22008v1",
+      "summary": "Vision-language models (VLMs) rely on storing and transferring appropriate information across their sub-components. Verifying that the VLMs exhibit desired behaviours, while avoiding harmful ones, is central to their reliable deployment. Yet, methods that identify VLM behaviours remain scarce. We present DiaVLo, a diagnostic framework that leverages human curation and VLMs' generation capabilities to construct specifications of desired and observed VLM behaviours, surfacing potential misalignments. Beyond this, DiaVLo also provides causal estimates to identify the most influential concepts ste",
+      "published": "2026-09-18T17:06:44Z",
       "category": "cs.CL"
     },
     {
-      "title": "RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning",
-      "url": "https://arxiv.org/abs/2609.20784v1",
-      "summary": "Multi-turn agents trained with reinforcement learning (RL) receive a single scalar reward per trajectory, which motivates self on-policy distillation (OPD) to supply dense token-level supervision from a self-teacher with privileged task skills, letting a skill-free student internalize them. This recipe, however, is undermined by two findings in agentic tasks: privileged information alone does not always make a teacher reliable, and the benefit of teacher supervision is stage-dependent. We therefore propose RetireOPD (Self-Retiring On-Policy Distillation), which first optimizes a decoupled, ski",
-      "published": "2026-09-17T17:52:08Z",
+      "title": "Abstention and Noise Filtering: Two Missing Primitives of Softmax Attention",
+      "url": "https://arxiv.org/abs/2609.22005v1",
+      "summary": "Gating the value pathway of attention reportedly improves language model pretraining, and prior studies disagree on why. We argue and provide experimental evidence that such gates supply two different things that softmax attention lacks: abstention and noise filtering. The first is abstention, which allows an attention head to output nothing, bypassing the requirement that attention weights must sum to one. The second is noise filtering, which allows the value pathway of an attention head to suppress interference from superposed features in the residual stream. In our experiments in matched mo",
+      "published": "2026-09-18T17:03:58Z",
       "category": "cs.CL"
     },
     {
-      "title": "Harm Laundering in GPT Models: Evidence That Gender Discrimination Is Transformed Rather Than Reduced Across Safety-Trained Generations",
-      "url": "https://arxiv.org/abs/2609.20779v1",
-      "summary": "Safety evaluations for large language models rely on surface-form classifiers that report declining harm scores across model generations. We provide evidence that this methodology is systematically incomplete: explicit discriminatory content is transformed rather than removed. We call this \\emph{harm laundering}. Analysing 450,000 gender-directed completions across 15 models spanning GPT-2 through to GPT-5 (OpenAI GPT lineage; three demographic conditions), we show that sexual violence clusters prevalent in GPT-2 women-directed output disappear by GPT-4, while men-directed completions gain pos",
-      "published": "2026-09-17T17:49:28Z",
+      "title": "RecreationWorld: Scalable and Verifiable Environments for Hybrid Computer-Use Agents",
+      "url": "https://arxiv.org/abs/2609.22000v1",
+      "summary": "Computer-use agents (CUAs) have advanced along two separate lines: graphical interaction and software development through code and the command line. Real digital work requires both, interleaved rather than stacked end to end. We study hybrid CUAs that autonomously decide when to explore an interface, implement software, and run and visually verify their artifacts. We introduce RecreationWorld, a five-platform framework built around recreation: given a running reference, an agent must discover its behavior and build a faithful implementation with no prescribed workflow. RecreationWorld provides",
+      "published": "2026-09-18T17:00:56Z",
       "category": "cs.CL"
     },
     {
-      "title": "dQwen3.5: Hybrid-Attention Diffusion Language Models",
-      "url": "https://arxiv.org/abs/2609.20751v1",
-      "summary": "Adapting a pretrained autoregressive (AR) model is a cost-efficient route to a diffusion language model (DLM). While nearly all such adaptations start from a full-attention transformer, AR modeling has shifted toward hybrid architectures that interleave attention and RNN layers. This creates an obstacle for adaptation: unlike attention, RNNs are structurally causal and nontrivial to bidirectionalize. Despite this mismatch, we investigate whether such backbones can become effective DLMs by adapting Qwen3.5 at 0.8B, 2B, 4B, and 9B scales, yielding the dQwen3.5 family. We find that hybrid backbon",
-      "published": "2026-09-17T17:39:46Z",
+      "title": "Moral Entropy: Auditing Bias and Uncertainty in Moral Judgment",
+      "url": "https://arxiv.org/abs/2609.21992v1",
+      "summary": "Most work in computational ethics treats annotator disagreement on moral content as noise to be voted away, collapsed into majority vote or the more permissive any-annotator rule the moment a single annotator flags an item. We argue this uncertainty should instead be modeled and learned from.   We introduce Moral Entropy, a Bayesian framework that keeps a full posterior over the true label and decomposes its entropy into aleatoric uncertainty (irreducible disagreement about the moral content) and epistemic uncertainty (from insufficient or noisy annotation) -- and lets any heuristic consensus",
+      "published": "2026-09-18T16:51:07Z",
       "category": "cs.CL"
     },
     {
-      "title": "On-Demand Attention: Language Models Know When to Recall",
-      "url": "https://arxiv.org/abs/2609.20734v1",
-      "summary": "Reasoning and agentic workloads increasingly demand efficient long-context inference. Yet full-attention decoding reads the growing history at every step, regardless of its benefit to the next prediction. We show that a pretrained model's decoding states already contain information predictive of this benefit, before the global read. Building on this finding, we introduce On-Demand Attention (ODA), a local-first decoding method that uses a lightweight recall head to selectively invoke global attention as its predicted benefit changes during generation. ODA trains only the recall head, leaving p",
-      "published": "2026-09-17T17:24:48Z",
+      "title": "NemotronLabs VoiceChat: An Open Full-duplex Speech-to-Speech Model with Tool Calling Capabilities",
+      "url": "https://arxiv.org/abs/2609.21967v1",
+      "summary": "We introduce NemotronLabs VoiceChat, an open full-duplex speech-to-speech model with native tool-calling capabilities. NemotronLabs VoiceChat combines a streaming speech encoder and decoder-only language model with parallel specialized output streams for agent text and structured function calls, an auxiliary RNN-T branch for incremental user transcription, and a streaming TTS decoder. This design enables the model to listen, transcribe, reason, invoke tools, and speak within a unified streaming architecture while preserving the temporal behavior required for natural conversation. On Full-Duple",
+      "published": "2026-09-18T16:27:22Z",
       "category": "cs.CL"
     },
     {
-      "title": "Don't Mask the Environment: Observation Supervision Changes How Agents Explore Under RL",
-      "url": "https://arxiv.org/abs/2609.20715v1",
-      "summary": "Agent trajectories record what an agent does and what happens next. Yet standard supervised fine-tuning (SFT) applies loss only to agent-authored action tokens, using environment observations as context but not as prediction targets. We ask whether this convention provides the best initialization for subsequent reinforcement learning. We introduce ActObs, which also supervises the observation tokens already present in each trajectory. Although deployed agents never generate observations, learning to predict them encourages the policy to model action consequences without adding data, parameters",
-      "published": "2026-09-17T17:11:29Z",
+      "title": "Detecting Pretraining Data in Large Language Models from a Free-Energy Perspective",
+      "url": "https://arxiv.org/abs/2609.21888v1",
+      "summary": "Detecting pretraining data in large language models is challenging because high likelihood can reflect either training exposure or strong generalization. In the joint space of prediction loss and predictive entropy, a likelihood-only detector uses a horizontal boundary and can mistake predictable non-members for members. Motivated by this, we introduce an inclined boundary that evaluates prediction loss relative to predictive entropy. Our analysis shows that entropy correction can preserve the expected membership signal while reducing its variance, thereby improving standardized member--non-me",
+      "published": "2026-09-18T15:16:51Z",
       "category": "cs.CL"
     }
   ]
