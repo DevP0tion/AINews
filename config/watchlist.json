@@ -1,0 +1,21 @@
+{
+  "_comment": "관심종목 목록. symbol은 Yahoo Finance 티커 (KOSPI: 6자리.KS, KOSDAQ: 6자리.KQ). aliases는 RSS 헤드라인에서 이 종목을 찾을 때 쓰는 별칭 — 붙여쓰기/약칭/영문명을 넣으면 매칭률이 올라간다.",
+  "stocks": [
+    {
+      "symbol": "005930.KS",
+      "name": "삼성전자",
+      "aliases": ["삼성전자", "삼전", "Samsung Electronics"]
+    },
+    {
+      "symbol": "000660.KS",
+      "name": "SK하이닉스",
+      "aliases": ["SK하이닉스", "하이닉스", "SK hynix"]
+    }
+  ],
+  "indices": [
+    {"symbol": "^KS11", "name": "코스피"},
+    {"symbol": "^KQ11", "name": "코스닥"},
+    {"symbol": "^IXIC", "name": "나스닥"},
+    {"symbol": "KRW=X", "name": "원/달러"}
+  ]
+}
