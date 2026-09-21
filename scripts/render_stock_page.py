@@ -299,6 +299,41 @@ def render_investor(trend: dict) -> str:
     )
 
 
+def fmt_dday(days) -> str:
+    """0 → D-DAY, 3 → D-3. 음수는 호출부가 걸러낸다."""
+    try:
+        n = int(days)
+    except (TypeError, ValueError):
+        return ""
+    return "D-DAY" if n == 0 else f"D-{n}"
+
+
+def render_calendar(events: list[dict]) -> str:
+    """다가오는 이벤트. stock_report가 이미 D-day 순으로 잘라 보낸다.
+
+    날짜가 "TBD"인 항목은 애초에 여기까지 오지 않는다.
+    """
+    if not events:
+        return ""
+    items = []
+    for e in events:
+        tag = fmt_dday(e.get("d_day"))
+        if not tag:
+            continue
+        items.append(
+            f'<li><span class="dday">{esc(tag)}</span>'
+            f'<span class="cal-label">{esc(e.get("label", ""))}</span>'
+            f'<time datetime="{esc(e.get("date", ""))}">{esc(fmt_daylabel(e.get("date", "")))}</time>'
+            f'</li>'
+        )
+    if not items:
+        return ""
+    return (
+        f'<section class="card cal"><h2>📅 다가오는 일정</h2>'
+        f'<ul class="cal-list">{"".join(items)}</ul></section>'
+    )
+
+
 def render_indices(indices: list[dict]) -> str:
     if not indices:
         return ""
@@ -407,6 +442,15 @@ margin-right:6px}
 font-variant-numeric:tabular-nums}
 .meta.level{margin-top:-6px}
 .stale{margin-right:4px;font-size:.85rem;cursor:help}
+ul.cal-list{list-style:none;margin:0;padding:0}
+ul.cal-list li{display:flex;align-items:baseline;gap:8px;padding:6px 0;
+border-top:1px dashed var(--line);font-size:.88rem}
+ul.cal-list li:first-child{border-top:0}
+.dday{flex:none;min-width:46px;font-size:.74rem;font-weight:600;
+font-variant-numeric:tabular-nums;color:var(--up)}
+.cal-label{flex:1;word-break:keep-all}
+ul.cal-list time{flex:none;font-size:.74rem;color:var(--muted);
+font-variant-numeric:tabular-nums}
 /* 카테고리 3색 — dataviz 검증 통과. 다크는 같은 hue를 어두운 면에 맞춰 다시 뽑은 값 */
 .viz{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .viz{
@@ -490,6 +534,7 @@ def render(date: str, report: dict) -> str:
 <h1>{esc(SITE_TITLE)}</h1>
 <div class="stamp">{esc(date)} · 생성 {esc(stamp)}</div>
 </header>
+{render_calendar(report.get("calendar") or [])}
 {render_indices(quotes.get("indices") or [])}
 {render_investor(report.get("investor_trend") or {})}
 {render_stocks(quotes.get("stocks") or [], report.get("stock_news") or {})}

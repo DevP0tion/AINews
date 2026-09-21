@@ -5,11 +5,13 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from stock_report import (  # noqa: E402
-    filter_new, group_by_stock, normalize_url, validate_input, with_level_context,
+    filter_new, group_by_stock, normalize_url, past_events, upcoming_events,
+    validate_input, with_level_context,
 )
 from render_stock_page import (  # noqa: E402
-    fmt_billion, fmt_change, fmt_daylabel, fmt_level_context, fmt_price,
-    fmt_volume, nice_bounds, render, render_chart, render_investor, render_stale,
+    fmt_billion, fmt_change, fmt_daylabel, fmt_dday, fmt_level_context, fmt_price,
+    fmt_volume, nice_bounds, render, render_calendar, render_chart,
+    render_investor, render_stale,
 )
 from collect_stock import is_stale, quote_time_iso  # noqa: E402
 from collect_investor import (  # noqa: E402
@@ -296,6 +298,62 @@ old_page = render("2026-09-21", {
     "market_news": [], "stock_news": {},
 })
 assert "⚠️" not in old_page
+
+
+# --- 이벤트 캘린더 ----------------------------------------------------------
+
+EVENTS = [
+    {"date": "2026-09-21", "label": "오늘 이벤트"},
+    {"date": "2026-09-28", "label": "일주일 뒤"},
+    {"date": "2026-10-05", "label": "딱 14일 뒤"},
+    {"date": "2026-10-06", "label": "15일 뒤 — 범위 밖"},
+    {"date": "2026-09-20", "label": "어제 — 이미 지났다"},
+]
+
+up = upcoming_events(EVENTS, "2026-09-21")
+assert [e["label"] for e in up] == ["오늘 이벤트", "일주일 뒤", "딱 14일 뒤"], up
+assert [e["d_day"] for e in up] == [0, 7, 14], up      # D-day 오름차순
+
+# 지난 이벤트는 주간 섹션에서만 쓴다
+past = past_events(EVENTS, "2026-09-21", 7)
+assert [e["label"] for e in past] == ["어제 — 이미 지났다"], past
+assert past[0]["days_ago"] == 1
+# 오늘 이벤트는 '지난 것'이 아니다 (다가오는 목록에 이미 있다)
+assert all(e["label"] != "오늘 이벤트" for e in past)
+
+assert upcoming_events([], "2026-09-21") == []
+
+# D-day 표기
+assert fmt_dday(0) == "D-DAY" and fmt_dday(3) == "D-3"
+assert fmt_dday(None) == "" and fmt_dday("x") == ""
+
+# 렌더 — "📅 D-n label"
+cal = render_calendar(up)
+assert "D-DAY" in cal and "D-7" in cal and "D-14" in cal, cal
+assert cal.index("D-DAY") < cal.index("D-7") < cal.index("D-14")
+assert "📅" in cal
+
+# 이벤트가 없으면 섹션 자체를 만들지 않는다
+assert render_calendar([]) == "" and render_calendar([{"label": "x"}]) == ""
+
+# 라벨도 이스케이프된다 (calendar.json은 사용자가 직접 쓰는 파일이다)
+evil_cal = render_calendar([{"date": "2026-09-21", "label": "<img src=x>", "d_day": 0}])
+assert "<img src=x>" not in evil_cal and "&lt;img src=x&gt;" in evil_cal
+
+# 캘린더는 지수보다 위, 즉 페이지 최상단에 온다
+cal_page = render("2026-09-21", {
+    "calendar": up,
+    "quotes": {"indices": [{"symbol": "^KS11", "name": "코스피", "price": 1,
+                            "change": 0, "change_pct": 0}], "stocks": []},
+    "market_news": [], "stock_news": {},
+})
+# CSS에도 .idx-price가 있으므로 본문에만 나오는 지수 이름으로 앵커를 잡는다
+assert cal_page.index("다가오는 일정") < cal_page.index("코스피"), "캘린더가 상단이어야 한다"
+
+# calendar 키가 없는 예전 archive도 그대로 렌더된다 (하위 호환)
+assert "다가오는 일정" not in render(
+    "2026-09-21", {"quotes": {}, "market_news": [], "stock_news": {}},
+)
 
 
 # --- 렌더링 -----------------------------------------------------------------

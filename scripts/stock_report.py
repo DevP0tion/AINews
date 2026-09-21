@@ -13,6 +13,9 @@ stock_report.py — curate 단계의 주식 산출물을 검증·중복제거해
 레벨 컨텍스트(기간 고저 대비 위치·박스권)도 마찬가지로 inbox의 종가 시계열에서
 직접 계산한다 — curated JSON에 같은 이름의 필드가 있어도 읽지 않는다.
 
+이벤트 캘린더는 config/calendar.json에서 읽는다. 날짜가 "TBD"인 항목은
+표시 대상에서 빠진다 — 없는 날짜를 만들어내느니 안 보여주는 쪽이 낫다.
+
 출력:
   · archive/YYYY/MM/YYYY-MM-DD-stock.json
   · state/seen_stock_urls.json 갱신 (AI 뉴스의 seen_urls.json과 분리)
@@ -42,6 +45,10 @@ STATE_DIR = REPO_DIR / "state"
 ARCHIVE_DIR = REPO_DIR / "archive"
 SEEN_STOCK_PATH = STATE_DIR / "seen_stock_urls.json"
 INVESTOR_PATH = STATE_DIR / "investor_trend.json"
+CALENDAR_PATH = REPO_DIR / "config" / "calendar.json"
+
+# 오늘 기준 며칠 앞까지의 이벤트를 리포트 상단에 띄울지
+CALENDAR_LOOKAHEAD_DAYS = 14   # adjustable
 
 # 리포트에 싣는 투자자 동향 일수 (collect_investor.py는 더 길게 누적한다)
 INVESTOR_DAYS = 5
@@ -224,6 +231,75 @@ def with_level_context(stocks: list[dict]) -> list[dict]:
     return out
 
 
+# --- 이벤트 캘린더 ----------------------------------------------------------
+
+
+def load_calendar() -> list[dict]:
+    """config/calendar.json에서 **날짜가 확정된** 이벤트만 읽는다.
+
+    "TBD"처럼 날짜가 비어 있는 항목은 여기서 걸러진다. 임의로 날짜를
+    만들어 붙이지 않는다 — 틀린 D-day는 아예 없느니만 못하다.
+    """
+    raw = load_json(CALENDAR_PATH, [])
+    if isinstance(raw, dict):            # {"events": [...]} 형태도 받아준다
+        raw = raw.get("events") or []
+    if not isinstance(raw, list):
+        log(f"WARN: {CALENDAR_PATH.name}이 배열이 아님 — 캘린더 생략")
+        return []
+
+    out, pending = [], 0
+    for e in raw:
+        if not isinstance(e, dict) or "_comment" in e:
+            continue
+        label = clean_text(e.get("label"), TITLE_MAX)
+        if not label:
+            log(f"WARN: label 없는 캘린더 항목 skip: {e}")
+            continue
+        date = (e.get("date") or "").strip() if isinstance(e.get("date"), str) else ""
+        if not DATE_RE.match(date):
+            pending += 1
+            continue
+        try:
+            datetime.date.fromisoformat(date)
+        except ValueError:
+            log(f"WARN: 존재하지 않는 날짜 {date!r} — skip: {label!r}")
+            continue
+        item = {"date": date, "label": label}
+        ticker = clean_text(e.get("ticker"), SOURCE_MAX)
+        if ticker:
+            item["ticker"] = ticker
+        out.append(item)
+
+    if pending:
+        log(f"캘린더: 날짜 미정(TBD) {pending}건은 표시하지 않는다")
+    return out
+
+
+def upcoming_events(events: list[dict], today: str,
+                    lookahead: int = CALENDAR_LOOKAHEAD_DAYS) -> list[dict]:
+    """오늘~lookahead일 이내 이벤트를 D-day 오름차순으로. 지난 이벤트는 뺀다."""
+    base = datetime.date.fromisoformat(today)
+    out = []
+    for e in events:
+        delta = (datetime.date.fromisoformat(e["date"]) - base).days
+        if 0 <= delta <= lookahead:
+            out.append({**e, "d_day": delta})
+    out.sort(key=lambda e: (e["d_day"], e["label"]))
+    return out
+
+
+def past_events(events: list[dict], today: str, days: int) -> list[dict]:
+    """최근 days일 안에 지나간 이벤트를 최신순으로 (주간 섹션용)."""
+    base = datetime.date.fromisoformat(today)
+    out = []
+    for e in events:
+        delta = (base - datetime.date.fromisoformat(e["date"])).days
+        if 0 < delta <= days:
+            out.append({**e, "days_ago": delta})
+    out.sort(key=lambda e: (e["days_ago"], e["label"]))
+    return out
+
+
 def recent_investor_trend(days: int = INVESTOR_DAYS) -> dict:
     """누적 state에서 최근 N영업일을 잘라 리포트용 구조로 만든다.
 
@@ -344,6 +420,12 @@ def main() -> None:
         f"종목 {sum(len(v) for v in grouped.values())}건 (중복 {stock_dup})"
     )
 
+    calendar = upcoming_events(load_calendar(), today)
+    if calendar:
+        log(f"캘린더: {CALENDAR_LOOKAHEAD_DAYS}일 이내 이벤트 {len(calendar)}건")
+    else:
+        log("캘린더: 표시할 이벤트 없음 — 해당 섹션은 생략된다")
+
     year, month = today[:4], today[5:7]
     out_path = ARCHIVE_DIR / year / month / f"{today}-stock.json"
     investor = recent_investor_trend()
@@ -356,6 +438,7 @@ def main() -> None:
         "date": today,
         "generated_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "quotes": quotes,
+        "calendar": calendar,
         "investor_trend": investor,
         "market_news": [strip_private(a) for a in market_new],
         "stock_news": {

@@ -1,0 +1,27 @@
+[
+  {
+    "_comment": "이벤트 캘린더. date를 YYYY-MM-DD로 채우면 오늘 기준 14일 이내인 항목이 리포트 상단에 'D-n 라벨'로 표시된다. date가 \"TBD\"인 항목은 표시되지 않는다 — 날짜는 직접 확인해서 기입하고, 추측한 날짜를 넣지 않는다. ticker는 선택이며 config/watchlist.json의 symbol을 쓴다. 이 항목처럼 _comment만 있는 원소는 무시된다."
+  },
+  {
+    "date": "TBD",
+    "label": "삼성전자 3분기 잠정실적 발표",
+    "ticker": "005930.KS"
+  },
+  {
+    "date": "TBD",
+    "label": "SK하이닉스 3분기 실적 발표",
+    "ticker": "000660.KS"
+  },
+  {
+    "date": "TBD",
+    "label": "월간 D램 고정거래가 발표"
+  },
+  {
+    "date": "TBD",
+    "label": "다음 FOMC 정례회의 결과 발표"
+  },
+  {
+    "date": "TBD",
+    "label": "한국은행 금융통화위원회 기준금리 결정"
+  }
+]
