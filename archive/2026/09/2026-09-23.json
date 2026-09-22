@@ -1,0 +1,87 @@
+{
+  "date": "2026-09-23",
+  "news": [
+    {
+      "title": "OpenAI GPT-6 Sol 공개 — 872k 컨텍스트, 100만 토큰당 $2/$10",
+      "summary": "OpenAI가 2026년 9월 22일 GPT-6 Sol을 공개했다. 컨텍스트 윈도우는 872k 토큰, 가격은 입력 100만 토큰당 $2.00 / 출력 $10.00이며 캐시 할인은 90%다. Artificial Analysis 측정 기준 Intelligence Index 48점으로 212개 모델 중 18위, 출력 속도는 초당 115.2 토큰(비교군 중앙값 76.1)이지만 첫 토큰까지 지연은 102.15초로 추론 모델 중앙값 3.87초보다 크게 높다.",
+      "url": "https://artificialanalysis.ai/models/gpt-6-sol"
+    },
+    {
+      "title": "GPT-6 Astra, 2005년 이후 미해독 상태였던 Enigma 전문 MVUEH 해독",
+      "summary": "1941년 7월 10일 송신된 독일 육군 Enigma 전문 MVUEH가 2026년 9월 15일 해독됐다. Carter Leffer가 GPT-6 Astra에 미해독 전문 분석을 맡겼고, 모델은 MVUEH를 가장 유망한 대상으로 지목한 뒤 Enigma 시뮬레이터와 Bombe를 Python·C++로 직접 구현하고 \"ROSENOW ROSENOW\"를 crib으로 삼아 키와 평문을 복원했다. 기존 시도를 막았던 암호문 전사 오류와 72번째 글자에서 발생한 드문 좌측 휠 턴오버를 처리한 것이 관건이었으며, 결과는 Frode Weierud가 검증했다.",
+      "url": "https://www.cryptocellar.org/bgac/the-mvueh-break.html"
+    },
+    {
+      "title": "에이전트 반복 최적화로 Rust 코드 성능 끌어올리기",
+      "summary": "Claude Opus 4.5, GPT-5.3 Codex, GPT-5.6 Sol/Luna, GPT-6 Astra에게 Rust 구현을 반복적으로 최적화시킨 실험 기록이다. Criterion으로 베이스라인을 잡고 1.2배 속도 향상이라는 명시적 목표를 반복 부여하며, 7~12개의 저렴한 서브에이전트에 코드 영역을 나눠 분석시키는 방식을 썼다. UMAP 구현은 umap-learn 대비 4~15배, umap-rs 대비 2~4배 빨라졌고, 초기 패스 대비 최종 GPT-6 Astra 패스까지 누적 7.5~32배 개선이 측정됐다.",
+      "url": "https://minimaxir.com/2026/09/agentic-iteration/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Claude Opus 5.5 출시 — 1M 컨텍스트, $4/$20 per MTok",
+      "content": "장시간 에이전틱 코딩·지식 작업용 모델 Claude Opus 5.5(`claude-opus-5-5`)가 기본 1M 토큰 컨텍스트, 최대 출력 128k 토큰, 상시 adaptive thinking과 함께 MTok당 $4/$20(Opus 5는 $5/$25)로 출시됐으며 Claude API·Bedrock·AWS·Google Cloud·Microsoft Foundry에서 사용할 수 있다.",
+      "special": true,
+      "id": "rn::2026-09-22::opus-5-5",
+      "url": "https://platform.claude.com/docs/en/release-notes/api"
+    },
+    {
+      "category": "모델/API",
+      "title": "Opus 5.5의 thinking·tool_choice·computer use 동작 변경",
+      "content": "Opus 5.5에서는 thinking을 끌 수 없어 `thinking` 필드를 보내면 400 오류가 나고(대신 effort 파라미터로 조절), `tool_choice`의 `any`·`tool`도 400을 반환하며, Claude API와 Google Cloud에서는 computer use에 `computer_toolset_20260801`이 필요하고 기존 `computer_20251124`는 400 오류가 난다(Amazon Bedrock에서는 계속 동작).",
+      "special": true,
+      "id": "rn::2026-09-22::thinking-disabled",
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#migrating-from-claude-opus-5"
+    },
+    {
+      "category": "모델/API",
+      "title": "메시지 안에서 tool 정의하는 inline tools 베타",
+      "content": "`inline-tools-2026-09-15` 베타 헤더를 쓰면 대화 중간 system message의 `tool_addition` 블록에 tool 전체 정의를 담아 `tools`를 수정하거나 프롬프트 캐시를 무효화하지 않고 tool을 추가·스키마 변경·서버 tool 버전 교체를 할 수 있고, MCP 커넥터 베타 헤더를 함께 쓰면 정의를 MCP toolset으로 두고 `mcp_tool_listing` 블록으로 tool 목록을 고정할 수 있다.",
+      "special": false,
+      "id": "rn::2026-09-22::inline-tools",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages#define-tools-in-a-message-beta"
+    },
+    {
+      "category": "모델/API",
+      "title": "Claude API의 Opus 5.5에 Fast mode 리서치 프리뷰 제공",
+      "content": "Claude API에서 Claude Opus 5.5를 쓸 때 Fast mode를 리서치 프리뷰로 사용할 수 있다.",
+      "special": false,
+      "id": "rn::2026-09-22::fast-mode",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.280 — 기본 Opus 모델이 Opus 5.5로 변경",
+      "content": "Claude Opus 5.5(`claude-opus-5-5`)가 추가돼 기본 Opus 모델이 됐고(1M 컨텍스트, MTok당 $4/$20, 캐시 읽기 $0.20), MCP tool 설명 길이 상한을 바꾸는 `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH`가 생겼으며 심볼릭 링크 경로 쓰기 판정과 auto mode 재시도 폭주 등이 수정됐다.",
+      "special": true,
+      "id": "gh::claude-code::v2.1.280",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.280"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v1.8.0",
+      "content": "claude-opus-5-5, inline tool 정의, MCP tool-list 고정(베타)을 지원하고, `add_tools()`가 즉시 반영되도록 하는 등 tool runner·스트리밍 버그를 함께 고쳤다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.8.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.8.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk v0.128.0",
+      "content": "claude-opus-5-5, inline tool 정의, MCP tool-list 고정(베타) 지원이 추가되고 `addTools()` 즉시 반영 등 tool runner 수정이 포함됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.128.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.128.0"
+    }
+  ],
+  "specials": [
+    "Claude Opus 5.5 출시 — 1M 컨텍스트, $4/$20 per MTok",
+    "Opus 5.5의 thinking·tool_choice·computer use 동작 변경",
+    "Claude Code v2.1.280 — 기본 Opus 모델이 Opus 5.5로 변경"
+  ],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
