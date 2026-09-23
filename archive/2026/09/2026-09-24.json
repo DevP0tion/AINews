@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-24",
+  "news": [
+    {
+      "title": "구글, Gemini 3.8 Flash TTS·Flash-Lite TTS 공개",
+      "summary": "구글이 음성 합성 모델 Gemini 3.8 Flash TTS와 Gemini 3.8 Flash-Lite TTS를 공개했다. 자연어 프롬프트로 목소리를 설계하고 대사 단위로 연기 톤·속도·방언을 지시할 수 있으며, 100개 이상의 언어·방언과 2,000개가 넘는 음성을 지원하고 30초 샘플로 목소리를 복제한다(동의 확인 절차 포함). Hume AI의 Voice Design Benchmark에서 71.4점으로 1위를 기록했고, Gemini API와 Google AI Studio에 우선 제공된다.",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-text-to-speech/"
+    },
+    {
+      "title": "Claude Code의 AGENTS.md, 텔레메트리를 끄면 조용히 무시된다는 보고",
+      "summary": "Claude Code 2.1.277에서 추가된 AGENTS.md 지원이 원격 기능 플래그(tengu_agents_md_mod)에 의존하는데, 이 플래그가 기본 비활성이라 DISABLE_TELEMETRY=1이나 CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1로 비필수 트래픽을 차단하면 로컬 AGENTS.md가 아무 경고 없이 로드되지 않는다는 내용이다. 글쓴이는 카나리 단어를 넣은 파일과 claude -p 질의로 2.1.277부터 최소 2.1.280까지 재현했고, 작업 디렉터리의 마크다운 파일을 읽는 데 서버 스위치를 기다릴 이유가 없다고 지적했다. 우회책으로는 CLAUDE.md에 @AGENTS.md 한 줄을 import하는 방법을 제시했다.",
+      "url": "https://blog.szypowi.cz/p/claude-code-reads-agents.md-only-when-telemetry-is-on/"
+    },
+    {
+      "title": "Inception Labs의 Mercury 2.5, 초당 770토큰 출력 속도 측정",
+      "summary": "Artificial Analysis 측정에서 Inception Labs의 Mercury 2.5가 초당 770.4토큰의 출력 속도를 기록했다. 다만 Intelligence Index는 12점으로 175개 모델 중 91위에 그쳐, 추론 성능보다 처리량에 무게가 실린 모델이다. 확장 추론을 쓰는 모델로 첫 토큰까지 2.95초가 걸리며, 컨텍스트는 26만 토큰, 가격은 100만 토큰당 입력 0.25달러·출력 0.75달러다.",
+      "url": "https://artificialanalysis.ai/models/mercury-2-5"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.281",
+      "content": "Claude apps gateway의 Bedrock upstream에 STS로 역할을 위임받는 assume_role과 Bedrock guardrail 적용 옵션이 추가되고, settings.json의 \"attribution\": false로 커밋·PR 귀속 표시를 모두 감출 수 있게 됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.281",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.281"
+    },
+    {
+      "category": "생태계",
+      "title": "Claude discovers a novel enzyme system with CRISPR-like repeats",
+      "content": "Anthropic은 Claude 에이전트 약 950개로 21시간·2억 1,000만 토큰을 들여 역전사효소 20만여 건을 훑어 후보 3,500건을 추린 끝에, 박테리오파지에서 CRISPR 유사 반복 서열을 동반한 새로운 효소 시스템(ART)을 찾아내고 실험으로 짧은 RNA 발현을 확인했다고 밝혔다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/claude-discovers-novel-enzyme-system",
+      "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 3
+  }
+}
