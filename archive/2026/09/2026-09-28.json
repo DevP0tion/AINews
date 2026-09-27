@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-28",
+  "news": [
+    {
+      "title": "봉인 해제된 소송 서면 — 작가조합 대 OpenAI·Microsoft 사건",
+      "summary": "작가조합(Authors Guild)과 스티븐 킹·존 그리샴·조지 R.R. 마틴 등 15명이 제기한 Alter v. OpenAI and Microsoft 소송의 서면이 공개됐다. 서면은 OpenAI가 LibGen에서 확보한 도서로 모델을 학습시켰고 2022년 여름 'Project Clear'에서 해당 파일을 삭제했다고 주장하며, Microsoft 측에는 2019년 4월 해적판 도서 사용이 보고됐다고 적고 있다. 뉴욕 남부지방법원 다지역 병합소송으로 진행 중이며 심리는 2027년 초로 예상된다. 현재까지는 원고 측 주장 단계로 법원 판단은 나오지 않았다.",
+      "url": "https://authorsguild.org/news/ag-v-openai-top-execs-knew-mass-book-piracy-was-illegal/"
+    },
+    {
+      "title": "José Valim, AI 시대의 프로그래밍 언어 진화 방향 제안",
+      "summary": "Elixir 창시자 José Valim이 코드 대부분을 에이전트가 작성하는 환경에서 언어 설계가 어떻게 바뀌어야 하는지 정리했다. 사람의 편의를 위한 문법 최적화 대신 명시적 타입 정보와 강한 보장을 우선해야 하며, 사람이 번거로워하는 명시적 기술은 에이전트가 기꺼이 작성한다는 것이 요지다. 또한 파일·행 번호 기반의 LSP 대신 심볼 테이블과 콜 그래프를 질의 가능한 데이터베이스로 노출하는 '프로그램 데이터베이스', 디버거 대신 프로그래밍 방식으로 런타임 상태에 접근하는 관측 기능을 제안했다.",
+      "url": "https://dashbit.co/blog/evolving-ai-era"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
