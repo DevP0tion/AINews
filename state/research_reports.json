@@ -2,6 +2,16 @@
   "reports": {
     "000660": [
       {
+        "report_idx": "652549",
+        "date": "2026-09-28",
+        "title": "SK하이닉스(000660) 소음보다 방향성에",
+        "target_price": "3,200,000",
+        "opinion": "Buy",
+        "analyst": "류형근",
+        "broker": "대신증권",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=652549"
+      },
+      {
         "report_idx": "651360",
         "date": "2026-08-03",
         "title": "SK하이닉스(000660) 2Q26 NDR 후기: 오해와 본질",
@@ -113,6 +123,16 @@
       }
     ],
     "005930": [
+      {
+        "report_idx": "652576",
+        "date": "2026-09-29",
+        "title": "삼성전자(005930) 긴 호흡으로",
+        "target_price": "560,000",
+        "opinion": "Strong Buy",
+        "analyst": "손인준",
+        "broker": "유진투자증권",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=652576"
+      },
       {
         "report_idx": "652536",
         "date": "2026-09-23",
