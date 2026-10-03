@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-03",
+  "news": [
+    {
+      "title": "Hierarchical Continuous Diffusion Language Models — 이산 토큰과 연속 잠재공간을 한 denoising 과정으로 결합",
+      "summary": "이산 diffusion 언어모델은 병렬 디코딩 시 각 토큰을 marginal에서 독립적으로 뽑아 토큰 간 통계적 의존성이 끊어지고, 연속 diffusion은 denoiser가 공유 연속 상태만 보기 때문에 마지막 디코딩까지 유효한 토큰 구성과 연결되지 않는다는 한계가 있었다. 저자들이 제안한 HC-DLM은 매 스텝마다 연속 잠재 상태에서 토큰을 읽어내고 그 토큰을 다음 잠재 업데이트의 scaffold로 되먹이는 방식으로 두 축을 결합하며, 학습 목적함수는 토큰 likelihood의 variational bound에서 유도된다. 동일 모델 크기 기준으로 Sudoku, Countdown, LM1B에서 이산·연속 baseline 대비 개선을 보고했다.",
+      "url": "https://arxiv.org/abs/2610.02193v1"
+    },
+    {
+      "title": "Redis 창시자 antirez, 로컬 LLM 추론 엔진 ds4 공개",
+      "summary": "Salvatore Sanfilippo(antirez)가 고용량 메모리 Mac·CUDA·ROCm 머신용 C 추론 엔진 DwarfStar 4(ds4)를 MIT 라이선스로 공개했다. MoE 구조를 겨냥해 routed expert에 asymmetric 2-bit quantization을 적용하고 KV cache를 SSD에 저장해 세션을 유지하며, DeepSeek V4/V4.1 Flash, GLM 5.x, Qwen 3.8 Flash Next 등의 open-weight 모델을 지원한다. CLI·HTTP 서버·네이티브 에이전트 세 가지 인터페이스를 제공하고, M5 Max(128GB) 샘플 벤치마크로 prefill 790.2 tok/s, 2K 컨텍스트 생성 39.4 tok/s를 제시했다.",
+      "url": "https://dwarfstar.sh/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "Anthropic, 1억 달러 투자해 엔지니어 1만 명 양성하는 Claude Frontier Academy 출범",
+      "content": "Anthropic이 2027년 말까지 Frontier Deployed Engineer 1만 명을 양성하는 1억 달러 규모 프로그램 Claude Frontier Academy를 발표했으며, 의료 레지던시 모델을 차용해 Anthropic 엔지니어와의 대면 교육과 소속 조직에서 실제 Claude 프로젝트를 주도하는 12주 레지던시로 구성되고 Accenture·Bain·McKinsey 등이 초기 코호트에 참여한다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/claude-frontier-academy",
+      "url": "https://www.anthropic.com/news/claude-frontier-academy"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.288",
+      "content": "mods용 `$.ui.selection()` API와 GitHub CLI가 없는 클라우드 세션용 내장 `gh api`, Ctrl+C로 지운 프롬프트 복구, MCP 서버의 OAuth 스코프 추가 요청 시 재인증 프롬프트가 추가되고, 응답 중 API 타임아웃으로 턴이 실패하던 문제와 토큰 사용량이 0으로 보고될 때 자동 compaction 대신 \"Prompt is too long\"으로 실패하던 문제, `--resume` 관련 컨텍스트 유실 문제들이 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.288",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.288"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
