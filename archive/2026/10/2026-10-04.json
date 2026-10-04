@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-04",
+  "news": [],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.289",
+      "content": "복합 셸 명령의 일부나 심볼릭 링크를 경유한 파일에 권한 규칙이 적용되지 않던 문제, 플러그인·mod 관련 멈춤과 오작동 등 다수 버그를 수정하고 mod용 `agent.spawn`을 추가했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.289",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.289"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 2
+  }
+}
