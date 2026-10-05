@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-05",
+  "news": [
+    {
+      "title": "사진·영상 전 프레임을 온디바이스로 의미 검색하는 macOS 도구 SCM",
+      "summary": "로컬에 저장된 사진과 영상의 모든 프레임을 대상으로 의미 기반 검색을 제공하는 macOS 오픈소스 도구 SCM이 Hacker News에 공개됐다. CLIP ViT-L/14@336(기본)과 SigLIP 계열 ONNX 모델을 전환해 쓰며, Tesseract OCR(35개 언어), Whisper 받아쓰기, llama.cpp 기반 로컬 질의를 묶어 영상 속 특정 장면을 타임코드 단위로 찾는다. 추론은 전부 기기 내에서 이뤄져 클라우드 업로드가 없고, 약 435MB의 가중치를 한 번 내려받은 뒤에는 오프라인으로 동작한다(MIT 라이선스).",
+      "url": "https://github.com/allenv0/SCM"
+    },
+    {
+      "title": "얀 르쿤, AI 멸종 위험론 일축하고 앤트로픽 CEO 비판",
+      "summary": "얀 르쿤이 AI가 인류를 멸종시킬 가능성에 \"전혀 우려하지 않는다\"며 위험론이 과장됐고 안전 진영에는 밀어붙일 의제가 있다고 주장했다. 최근의 이른바 'AI 폭주' 사례도 AI 자체가 아니라 허술하게 설계된 샌드박스 등 인간의 관리 부실 탓이며 충분히 예방 가능했다고 봤고, AI의 위험을 경고하는 다리오 아모데이를 \"완전히 착각하고 있다\"고 비판했다. 르쿤은 메타를 떠나 설립한 AMI Labs에서 JEPA 아키텍처 기반 world model을 언어가 아닌 제조 이상탐지·로보틱스 등 산업 용도로 개발하고 있다.",
+      "url": "https://fortune.com/2026/10/01/ai-godfather-yann-lecun-has-zero-concerns-about-human-extinction-says-anthropic-ceo-dario-amodei-is-deuded/"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 1
+  }
+}
