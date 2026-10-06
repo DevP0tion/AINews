@@ -1,0 +1,872 @@
+{
+  "date": "2026-10-06",
+  "collected_at": "2026-10-06T01:50:34Z",
+  "watchlist": [
+    {
+      "symbol": "005930.KS",
+      "name": "삼성전자",
+      "aliases": [
+        "삼성전자",
+        "삼전",
+        "Samsung Electronics"
+      ]
+    },
+    {
+      "symbol": "000660.KS",
+      "name": "SK하이닉스",
+      "aliases": [
+        "SK하이닉스",
+        "하이닉스",
+        "SK hynix"
+      ]
+    }
+  ],
+  "quotes": {
+    "indices": [
+      {
+        "symbol": "KRW=X",
+        "price": 1343.78,
+        "prev_close": 1340.49,
+        "change": 3.29,
+        "change_pct": 0.2454,
+        "volume": 0,
+        "currency": "KRW",
+        "market_time": 1791251475,
+        "quote_time": "2026-10-06T01:51:15Z",
+        "name": "원/달러"
+      }
+    ],
+    "stocks": [
+      {
+        "symbol": "000660.KS",
+        "price": 1801000.0,
+        "prev_close": 1841000.0,
+        "change": -40000.0,
+        "change_pct": -2.173,
+        "volume": 895979,
+        "currency": "KRW",
+        "market_time": 1791250285,
+        "quote_time": "2026-10-06T01:31:25Z",
+        "name": "SK하이닉스",
+        "stale": false
+      }
+    ]
+  },
+  "market_news": [
+    {
+      "title": "금투협, 채권시장 전망 등 글로벌 채권포럼 15일 개최",
+      "url": "https://www.yna.co.kr/view/AKR20261006069700008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:43:30Z",
+      "summary": "(서울=연합뉴스) 강수지 기자 = 금융투자협회는 오는 15일 한국증권금융, 예탁결제원과 공동으로 글로벌 채권포럼을 개최한다고 6일 밝혔다.",
+      "matched": []
+    },
+    {
+      "title": "삼성전기 폭풍매수…삼전닉스는 팔았다 [주식 초고수는 지금]",
+      "url": "https://www.mk.co.kr/news/stock/12169038",
+      "source": "매일경제 증권",
+      "published": "2026-10-06T01:42:36Z",
+      "summary": "수익률 상위 1% 투자자 6일 오전 9시30분 거래동향 순매수 삼성전기·티엘비·심텍順 삼성전자·하이닉스는 순매도 1·2위주식 투자 수익률 상위 1% 초고수들은 6일 장 초반 삼성전..",
+      "matched": [
+        "삼성전자",
+        "SK하이닉스"
+      ]
+    },
+    {
+      "title": "은평구 불광5구역 철거 시작…2030년 2천406세대 준공 목표",
+      "url": "https://www.yna.co.kr/view/AKR20261006069500004",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:40:32Z",
+      "summary": "(서울=연합뉴스) 정준영 기자 = 서울 은평구(구청장 김미경)는 불광제5구역 주택재개발정비사업의 철거 착공식이 지난 2일 불광5구역 조합과 GS...",
+      "matched": []
+    },
+    {
+      "title": "2025년 재무제표 '비적정' 상장사 53개…전년대비 소폭 감소",
+      "url": "https://www.yna.co.kr/view/AKR20261006058100008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:34:31Z",
+      "summary": "(서울=연합뉴스) 황철환 기자 = 유가증권시장과 코스닥 시장 상장사들의 재무제표 및 내부회계 관리제도 감사의견이 동반 개선세를 이어가고 있는 것...",
+      "matched": []
+    },
+    {
+      "title": "[게시판] 바디프랜드, 한국산업 KCSI 스마트라이프케어 부문 1위",
+      "url": "https://www.yna.co.kr/view/AKR20261006056600030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:34:09Z",
+      "summary": "▲ 바디프랜드는 &apos;2026 한국산업의 고객만족도(KCSI)&apos; 조사에서 스마트라이프케어 부문 1위에 선정됐다고 6일 밝혔다. KCSI는 실제 제품...",
+      "matched": []
+    },
+    {
+      "title": "[게시판] 소진공, 국내 최초로 '부정행위방지경영시스템' 인증 획득",
+      "url": "https://www.yna.co.kr/view/AKR20261006024600030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:33:26Z",
+      "summary": "▲ 소상공인시장진흥공단은 국내 최초로 &apos;부정행위방지경영시스템(ISO37003)&apos; 인증을 획득했다고 6일 밝혔다. ISO37003은 조직에서 발생...",
+      "matched": []
+    },
+    {
+      "title": "무주 안성에 귀농귀촌인 16세대 내년 3월 입주",
+      "url": "https://www.yna.co.kr/view/AKR20261006065300055",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:33:00Z",
+      "summary": "(무주=연합뉴스) 최영수 기자 = 전북 무주군은 안성면 공정리 일원에 조성 중인 귀농귀촌인 입주시설을 오는 11월께 준공한다고 6일 밝혔다.",
+      "matched": []
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
+      "url": "https://www.yna.co.kr/view/AKR20261006060600011",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:30:01Z",
+      "summary": "■ 경찰, 금융기관 해킹 정식수사로 전환…중수청 통보 검토",
+      "matched": []
+    },
+    {
+      "title": "시민이 선정한 일자리 공론화 주제는 세대 소통·지역일자리 등",
+      "url": "https://www.yna.co.kr/view/AKR20261006057900530",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:30:00Z",
+      "summary": "(서울=연합뉴스) 한혜원 기자 = 경제사회노동위원회 내 &apos;인구구조 변화와 일자리 공론화 특별위원회&apos;가 전국의 일반 시민을 대상으로 숙의토론을 거...",
+      "matched": []
+    },
+    {
+      "title": "[게시판] LS증권, 17일 개인 투자자 대상 투자전략 세미나",
+      "url": "https://www.yna.co.kr/view/AKR20261006066600008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:29:13Z",
+      "summary": "▲ LS증권[078020]은 오는 17일 오후 1시 서울 여의도 금융투자교육원에서 개인투자자 대상 투자전략 세미나를 개최한다고 6일 밝혔다. L...",
+      "matched": []
+    },
+    {
+      "title": "이형일 \"민생경제 안정화와 양극화 완화에 총력\"",
+      "url": "https://www.yna.co.kr/view/AKR20261006065700002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:29:13Z",
+      "summary": "(세종=연합뉴스) 이세원 기자 = 이형일 부총리 겸 재정경제부 장관은 &quot;민생경제 안정화와 양극화 완화에 총력을 다하겠다&quot;고 6일 말했다.",
+      "matched": []
+    },
+    {
+      "title": "배스킨라빈스, 12일부터 아이스크림·음료 가격 평균 5.9% 인상",
+      "url": "https://www.yna.co.kr/view/AKR20261006062100030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:26:54Z",
+      "summary": "(서울=연합뉴스) 김세린 기자 = 배스킨라빈스는 오는 12일부터 아이스크림과 음료 등 일부 제품 가격을 평균 5.9% 인상한다고 6일 밝혔다.",
+      "matched": []
+    },
+    {
+      "title": "1∼8월 글로벌 전기차 5.9% 증가…현대차그룹은 두 자릿수 성장",
+      "url": "https://www.yna.co.kr/view/AKR20261006062300003",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:22:46Z",
+      "summary": "(서울=연합뉴스) 장하나 기자 = 올해 1∼8월 글로벌 전기차 시장이 한 자릿수 성장에 머문 가운데 현대차그룹이 두 자릿수 성장으로 점유율을 끌...",
+      "matched": []
+    },
+    {
+      "title": "[게시판] 웰컴저축銀, 네이버페이와 상생금융 업무협약 체결",
+      "url": "https://www.yna.co.kr/view/AKR20261006061800002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:21:14Z",
+      "summary": "▲ 웰컴저축은행은 지난 2일 네이버페이와 &apos;상생금융 서비스 제공을 위한 업무협약&apos;을 체결했다고 6일 밝혔다. 이번 협약으로 양사는 네이버페이의 ...",
+      "matched": []
+    },
+    {
+      "title": "[게시판] 케이뱅크, 소상공인 제품으로 취약계층 1천800명 지원",
+      "url": "https://www.yna.co.kr/view/AKR20261006056200002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:20:25Z",
+      "summary": "▲ 케이뱅크[279570]는 중소상공인희망재단, 임팩트비즈니스재단과 함께 추진한 &apos;소상공인 희망이음 프로젝트&apos;를 통해 소상공인 우수제품을 서울시...",
+      "matched": []
+    },
+    {
+      "title": "\"韓 가상자산 경제 600조원대…동아시아 최대\"",
+      "url": "https://www.yna.co.kr/view/AKR20261006048300002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:20:15Z",
+      "summary": "(서울=연합뉴스) 유동현 기자 = 블록체인 분석업체 체이널리시스는 한국의 가상자산 경제 규모가 동아시아 최대 수준인 4천491억달러(약 604조...",
+      "matched": []
+    },
+    {
+      "title": "더그랜드롯데 서울, 호텔 투숙·미식 경험 소개할 에디터 모집",
+      "url": "https://www.yna.co.kr/view/AKR20261006057800030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:18:18Z",
+      "summary": "(서울=연합뉴스) 이상서 기자 = 더그랜드롯데 서울은 호텔 재단장을 계기로 호텔에서의 다양한 경험을 콘텐츠로 제작할 &apos;더그랜드롯데 서울 에디터 ...",
+      "matched": []
+    },
+    {
+      "title": "오뚜기 '동대문식 닭한마리 칼국수', 출시 한 달 매출 40% 증가",
+      "url": "https://www.yna.co.kr/view/AKR20261006054100030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:17:06Z",
+      "summary": "(서울=연합뉴스) 김세린 기자 = 오뚜기[007310]는 지난 7월 출시한 &apos;동대문식 닭한마리 칼국수&apos;의 8월 매출이 방한 외국인 관광객 등의 ...",
+      "matched": []
+    },
+    {
+      "title": "배라 싱글레귤러 4300원…쿼터는 이제 2만원 코앞",
+      "url": "https://www.hankyung.com/article/202610064871g",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T01:14:55Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "10대 의약품 중독 증가세 가파른데…\"원인 약품 모른다\"",
+      "url": "https://www.hankyung.com/article/2026100648407",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T01:13:18Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "버거킹, 아침 메뉴 매장 70곳 추가…전국 190곳으로 확대",
+      "url": "https://www.yna.co.kr/view/AKR20261006053300030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:12:34Z",
+      "summary": "(서울=연합뉴스) 한주홍 기자 = 버거킹이 모닝(아침) 메뉴 운영 매장을 70곳 추가해 전국 190개 매장에서 판매한다고 6일 밝혔다.",
+      "matched": []
+    },
+    {
+      "title": "LS증권, 개인투자자 대상 세미나…\"주식·채권 대응전략 제시\"",
+      "url": "https://www.hankyung.com/article/2026100648646",
+      "source": "한국경제 금융",
+      "published": "2026-10-06T01:11:18Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "'정비구역 지정권한 이양' 서울 자치구 TF 가동",
+      "url": "https://www.yna.co.kr/view/AKR20261006059300004",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:10:39Z",
+      "summary": "(서울=연합뉴스) 정준영 기자 = 서울 동작구(구청장 류삼영)는 지난 2일 &apos;정비구역 지정 권한 이양 자치구 태스크포스(TF)&apos;를 구성해 제1차...",
+      "matched": []
+    },
+    {
+      "title": "[MK시그널] 바이오제약 기업 암젠, 매수신호 발생",
+      "url": "https://www.mk.co.kr/news/stock/12169002",
+      "source": "매일경제 증권",
+      "published": "2026-10-06T01:06:37Z",
+      "summary": "안녕하세요. 미국 주식 핫 이슈 종목을 분석해드리는 AI 기자 ‘MK시그널’입니다. 암젠(AMGN)의 매수 신호가 발생했습니다. MK시그널에 따르면 암젠은 지난 26년 10월 5일..",
+      "matched": []
+    },
+    {
+      "title": "영등포구, '정비사업 신속추진지원단' 출범…전문가 108명",
+      "url": "https://www.yna.co.kr/view/AKR20261006058000004",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:05:44Z",
+      "summary": "(서울=연합뉴스) 유한주 기자 = 영등포구는 지역 내 도시정비 사업 속도를 높이기 위해 108명으로 구성된 &apos;정비사업 신속추진지원단&apos;을 출범한다...",
+      "matched": []
+    },
+    {
+      "title": "국민은행, 네이버페이·한국정보통신·이지샵과 업무협약",
+      "url": "https://www.hankyung.com/article/202610064827i",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T01:02:53Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "네이버 소비자분쟁 피해구제율 83.6%…\"구제기능 작동\"",
+      "url": "https://www.yna.co.kr/view/AKR20261006055600017",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:00:16Z",
+      "summary": "(서울=연합뉴스) 한상용 기자 = 네이버 이용자보호 및 자율규제위원회는 지난해 네이버에 접수된 소비자 분쟁 데이터를 전수 분석한 결과 피해구제율...",
+      "matched": []
+    },
+    {
+      "title": "\"합법적으로 맘껏 해킹할 수 있어…평생 공부는 '숙명'이죠\"",
+      "url": "https://www.hankyung.com/article/202610053516i",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T01:00:05Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "LG CNS, 디지털자산 블록체인 인프라 플랫폼 '기틀' 출시",
+      "url": "https://www.yna.co.kr/view/AKR20261006027000017",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:00:04Z",
+      "summary": "(서울=연합뉴스) 한상용 기자 = LG CNS는 금융기관의 디지털자산 서비스 구축을 지원하는 블록체인 인프라 플랫폼 &apos;기틀&apos;(KITL)을 출시했...",
+      "matched": []
+    },
+    {
+      "title": "기술 진화 속도 빠른데…늦어지는 국방 AI 법제화",
+      "url": "https://www.hankyung.com/article/202610020854i",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T01:00:02Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "탈퇴 버튼은 첫 화면이나 마이페이지에…다크패턴 가이드라인",
+      "url": "https://www.yna.co.kr/view/AKR20261006044700002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:00:01Z",
+      "summary": "(세종=연합뉴스) 김수현 기자 = 공정거래위원회는 &apos;다크패턴 방지를 위한 온라인 인터페이스 운영 가이드라인&apos;을 마련해 6일 배포했다고 밝혔다.",
+      "matched": []
+    },
+    {
+      "title": "LGU+·우리은행, 보이스피싱 '통화 단계'부터 막는다",
+      "url": "https://www.yna.co.kr/view/AKR20261006043400017",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T01:00:01Z",
+      "summary": "(서울=연합뉴스) 박형빈 기자 = LG유플러스[032640]는 우리은행과 통신·금융 정보를 실시간으로 연계하는 &apos;익시오 보이스피싱 금융안심&apos; 서...",
+      "matched": []
+    },
+    {
+      "title": "카카오뱅크, 연말까지 해외계좌송금 수수료 면제",
+      "url": "https://www.yna.co.kr/view/AKR20261006050900002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-06T00:55:16Z",
+      "summary": "(서울=연합뉴스) 이도흔 기자 = 카카오뱅크[323410]는 해외송금 고객의 수수료 부담을 덜기 위해 &apos;해외계좌송금 보내기·받기&apos; 수수료 면제 ...",
+      "matched": []
+    },
+    {
+      "title": "제주항공, 중국 하늘길 넓힌다…운수권 추가 확보·동계 노선 증편",
+      "url": "https://www.hankyung.com/article/202610064628g",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T00:52:00Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[MK 골든크로스 돌파종목 : 엠앤씨솔루션(484870) & 러셀(217500)]",
+      "url": "https://www.mk.co.kr/news/stock/12168983",
+      "source": "매일경제 증권",
+      "published": "2026-10-06T00:48:40Z",
+      "summary": "안녕하세요. 국내 핫 이슈 종목을 분석해드리는 AI 기자 ‘MK시그널’ 입니다. MK시그널이 오늘 분석한 핫 이슈 골든크로스 종목은 엠앤씨솔루션 & 러셀 입니다. - 엠앤씨솔루션(..",
+      "matched": []
+    },
+    {
+      "title": "iM증권, '국내 주식 소수점 거래 서비스' 오픈",
+      "url": "https://www.hankyung.com/article/2026100647476",
+      "source": "한국경제 금융",
+      "published": "2026-10-06T00:47:44Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"반도체 소부장株 훨훨\"…나스닥 최고치에 삼성전기 등 급등",
+      "url": "https://www.hankyung.com/article/2026100647566",
+      "source": "한국경제 금융",
+      "published": "2026-10-06T00:46:45Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[MK시그널] 인텔리안테크, 저궤도 위성 통신 사업 성장 기대감 부각 등에 주가 상승세... MK시그널 추천 후 상승률 12.86% 기록",
+      "url": "https://www.mk.co.kr/news/stock/12168967",
+      "source": "매일경제 증권",
+      "published": "2026-10-06T00:39:32Z",
+      "summary": "10월 6일 인텔리안테크(189300)가 상승 중이다. 전 거래일 인텔리안테크 주가는 종가기준 73,600원 상승으로 마감했다. 현재 76,000원으로 (9시 7분 기준) 전일 종..",
+      "matched": []
+    },
+    {
+      "title": "닭가슴살 퍽퍽했다면…하림, '닭안심 스테이크' 내놨다",
+      "url": "https://www.hankyung.com/article/202610064704i",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T00:39:27Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "LG전자, 美 AI 데이터센터 냉각 솔루션 공급 계약에 '급등'",
+      "url": "https://www.hankyung.com/article/2026100645236",
+      "source": "한국경제 금융",
+      "published": "2026-10-06T00:32:21Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[공모주 분석] 'AI 교육' 옷 벗은 엘리스그룹, '몸값 1조' AI 인프라 승부수",
+      "url": "https://www.hankyung.com/article/202610020258i",
+      "source": "한국경제 금융",
+      "published": "2026-10-06T00:30:04Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“퇴직금 불려보려다 피눈물 난다”…밤잠 설치는 직장인들, 대체 무슨 일",
+      "url": "https://www.mk.co.kr/news/economy/12168943",
+      "source": "매일경제 증권",
+      "published": "2026-10-06T00:28:32Z",
+      "summary": "퇴직연금 DB→DC 전환 3배 급증 노후자금 퇴직연금 10% 손실 이례적 한번 옮긴 적립금 DB 원복 사실상 불가퇴직을 앞둔 직장인들의 한숨이 깊어지고 있다. 연초 4200선이던 ..",
+      "matched": []
+    },
+    {
+      "title": "전 세계 출품작 중 단 '한 곳'…현대차그룹, 글로벌 웹 어워드서 최고상",
+      "url": "https://www.hankyung.com/article/202610064518g",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T00:25:36Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "안랩, 금융권 해킹 잇따르자 16%대 급등",
+      "url": "https://www.hankyung.com/article/2026100645656",
+      "source": "한국경제 금융",
+      "published": "2026-10-06T00:14:24Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[포토] 대화하는 송경희 위원장과 김종철 경철청장 직무대행",
+      "url": "https://www.hankyung.com/article/202610064560i",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T00:14:12Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "'SK하이닉스 짝꿍'의 반전…삼성과 손 잡더니 245억 '잭팟'",
+      "url": "https://www.hankyung.com/article/202610064556i",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T00:13:54Z",
+      "summary": "",
+      "matched": [
+        "SK하이닉스"
+      ]
+    },
+    {
+      "title": "[포토] 김종철 경찰청장 직무대행, 금융.공공기관 개인정보 유출 관련 회의 참석",
+      "url": "https://www.hankyung.com/article/202610064543i",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T00:11:52Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "8만원→6만원·78만원→34만원…초고수 순매수 1·2위 '의외의 종목'",
+      "url": "https://www.hankyung.com/article/202610064393i",
+      "source": "한국경제 금융",
+      "published": "2026-10-06T00:06:56Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "코스피, 美 기술주 훈풍에 상승…외인·기관 '사자'",
+      "url": "https://www.hankyung.com/article/2026100644136",
+      "source": "한국경제 금융",
+      "published": "2026-10-06T00:04:05Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "설탕 0g인데 달콤한 초코맛…켈로그 그래놀라의 비밀",
+      "url": "https://www.hankyung.com/article/202610064374g",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T00:04:05Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"수십억 쏟았는데\"…AI 해킹 폭증에도 보안투자 못 늘리는 이유",
+      "url": "https://www.hankyung.com/article/202610053514i",
+      "source": "한국경제 경제",
+      "published": "2026-10-06T00:00:06Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "美 S&P500 3분기 이익 전망 '고공행진'…에너지·IT가 주도",
+      "url": "https://www.hankyung.com/article/202610053661i",
+      "source": "한국경제 금융",
+      "published": "2026-10-06T00:00:02Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“한국콜마, 화장품 업황 호황에 실적 기대”…목표가↑",
+      "url": "https://www.mk.co.kr/news/stock/12168869",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T23:55:31Z",
+      "summary": "한국투자증권은 6일 한국콜마에 대해 화장품 업황 회복으로 호실적이 기대된다고 분석했다. 그러면서 투자의견 ‘매수(BUY)’를 유지하고 목표주가를 기존 16만원에서 15.6% 높은 ..",
+      "matched": []
+    },
+    {
+      "title": "젬백스 “PSP 치료제 ‘GV1001’ 72주 임상서 유효성·안전성 확인”",
+      "url": "https://www.mk.co.kr/news/stock/12168868",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T23:55:01Z",
+      "summary": "MDS서 국내 임상 2a상·OLE 추가 분석 결과 발표 “초기 단계 투약 시 질환 진행 억제 가능성 입증”젬백스앤카엘이 진행성핵상마비(PSP) 치료제 후보물질 ‘GV1001’의 장..",
+      "matched": []
+    },
+    {
+      "title": "“목표가 깎았지만 여기서 50%는 오른다”…기다림 필요한 현대차 주주 [오늘 나온 보고서]",
+      "url": "https://www.mk.co.kr/news/stock/12168864",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T23:47:13Z",
+      "summary": "NH증, 목표가 62만→54만원 하향 4분기 생산 정상화·신차 효과 기대 HEV 경쟁력·로보틱스 성장성 반영 도요타·혼다 평균 PER 대비 20% 할증현대차의 3분기 실적이 생산 ..",
+      "matched": []
+    },
+    {
+      "title": "“코스피, 7100만 찍으면 7700까지 간다”…장밋빛 전망 근거는? [오늘 나온 보고서]",
+      "url": "https://www.mk.co.kr/news/stock/12168863",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T23:46:53Z",
+      "summary": "대신증권 “삼성전가가 마이크론 바통” 삼전 3분기 실적 눈높이 107조 안팎 유가 안정땐 금리 하락에 외인 수급 개선 반도체·AI ‘비중확대’ 7100선이 분기점코스피가 7000선..",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "\"AI 요금 폭탄 막는다\"…야놀자넥스트, 기업용 AI 관리 솔루션 출시",
+      "url": "https://www.hankyung.com/article/202610064353g",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:44:02Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "'영화산업 지방이전' 마지막 퍼즐…부산 기장촬영소 가보니",
+      "url": "https://www.hankyung.com/article/202610064014i",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:36:35Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“광고·커머스 매출 성장 둔화, AI 비용 증가”…대신증권, NAVER 목표가↓",
+      "url": "https://www.mk.co.kr/news/stock/12168848",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T23:33:27Z",
+      "summary": "대신증권은 6일 NAVER에 대해 목표주가를 32만원에서 29만원으로 하향조정하고 투자의견은 매수를 유지한다고 밝혔다. 이는 광고·커머스 매출 성장 둔화와 인공지능 인프라 투자에 ..",
+      "matched": []
+    },
+    {
+      "title": "삼양, 60년 헤리티지 담은 '이 라면'으로 일본에 도전장",
+      "url": "https://www.hankyung.com/article/202610064346g",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:32:36Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "상선까지 덮친 드론 위협…해운사 방어 투자 확대",
+      "url": "https://www.hankyung.com/article/202610064355i",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:30:32Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "환율 12% 빠지자…순이익 쇼크 주의보 떴다",
+      "url": "https://www.hankyung.com/article/202610053642i",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T23:30:05Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"LG전자, AI 데이터센터 냉각·로보틱스 사업 기대…목표가↑\"-메리츠",
+      "url": "https://www.hankyung.com/article/2026100643096",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T23:25:16Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "AI 딥페이크 음원 급증…소니, 스트리밍 사기와 전면전",
+      "url": "https://www.hankyung.com/article/202610064326i",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:24:31Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"프랑스 3대 와인 기사에 한국인이?\"…정체는 백화점 직원",
+      "url": "https://www.hankyung.com/article/202610064207g",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:21:07Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "시베리아 페스트 의심 사망…美 \"면밀히 주시\"",
+      "url": "https://www.hankyung.com/article/202610064315i",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:17:46Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"현대로템, 페루 K2 수출 내년 유력, 그 외 진전 없어…목표가↓\"-DS",
+      "url": "https://www.hankyung.com/article/2026100642926",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T23:13:29Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[밤 사이 해외뉴스] 호르무즈 해협 선박 7척 연쇄 피격...유가 100달러 재돌파 비상",
+      "url": "https://www.hankyung.com/article/202610064263i",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:10:39Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "금리와 주가 동반 상승... 불편한 동행은 언제까지?",
+      "url": "https://www.mk.co.kr/news/stock/12168839",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T23:04:38Z",
+      "summary": "불앤베어 플러스미국 장기금리가 24년래 최고치를 찍은사이 나스닥은 사상최고치를 돌파했습니다. 언제까지 이런 상황이 지속될지 점검해 보겠습니다. ◆ 유의사항 : 본 영상은 2026...",
+      "matched": []
+    },
+    {
+      "title": "[밤 사이 해외뉴스 영상] 보우소나루 아들이 룰라 꺾자 브라질 증시 9% 폭등",
+      "url": "https://www.hankyung.com/article/202610064203i",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:03:25Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“재고 회복에 2년”…글로벌 고유가 장기화 경고",
+      "url": "https://www.hankyung.com/article/202610064191i",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T23:00:19Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "기록적 금리 상승에도 나스닥·엔비디아 신고가…\"더 오르겠지만 변동성\" [김현석의 월스트리트나우]",
+      "url": "https://www.hankyung.com/article/202610064183i",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T22:56:15Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“삼성바이오로직스, 5공장 효과 본격화…유증에 목표가는 하향” 하나증권",
+      "url": "https://www.mk.co.kr/news/stock/12168836",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T22:55:26Z",
+      "summary": "하나증권은 6일 삼성바이오로직스에 대해 투자의견 ‘매수’를 유지했으나 목표주가는 종전 203만원에서 195만원으로 낮춘다고 밝혔다. 이는 유상증자로 인한 지분 희석을 반영한 조정이..",
+      "matched": []
+    },
+    {
+      "title": "명륜진사갈비 본사 매출 2000억 늘 때…점주들 '울상'인 이유",
+      "url": "https://www.hankyung.com/article/202610064140g",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T22:48:26Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"HPSP, 파운드리 넘어 메모리 반도체까지 확장…목표가↑\"-KB",
+      "url": "https://www.hankyung.com/article/2026100641866",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T22:45:07Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "엔비디아 사상 최고가… 밴스 \"알래스카 LNG 협의 해야\" [오늘 아침, 당신이 알아야 할 7가지]",
+      "url": "https://www.hankyung.com/article/202610064150i",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T22:44:37Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"한국콜마, 눈높이 조정 후 주가 우상향할 것…목표가↑\"-한투",
+      "url": "https://www.hankyung.com/article/2026100641626",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T22:43:25Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"공급이 못 따라간다\"…수퍼사이클 탄 AI반도체 기판 3인방 비교분석",
+      "url": "https://www.hankyung.com/article/202610053159i",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T22:32:41Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "원화 강세의 그늘…실적시즌 앞두고 이익전망 '뒷걸음질'",
+      "url": "https://www.hankyung.com/article/202610053627i",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T22:30:42Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"리노공업, CPO 수혜주…목표가 10만원으로 상향\"-DS",
+      "url": "https://www.hankyung.com/article/2026100641636",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T22:26:17Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "키옥시아에 물린 日개미들...연말 신용매물 폭탄 우려",
+      "url": "https://www.hankyung.com/article/202610064033i",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T22:21:02Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "美 국채금리 급등에도 상승 마감…나스닥 사상 최고치 [뉴욕증시 브리핑]",
+      "url": "https://www.hankyung.com/article/2026100641476",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T22:12:19Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"금융권 슈퍼앱 경쟁 끝난다…슈퍼 에이전트가 대세\"",
+      "url": "https://www.hankyung.com/article/202610020746i",
+      "source": "한국경제 경제",
+      "published": "2026-10-05T22:01:10Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "첫날 285% 수익에 '화들짝'…공모주 분위기 180도 달라졌다 [분석+]",
+      "url": "https://www.hankyung.com/article/2026100201166",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T21:30:04Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"비중 줄여라\" 증권사마저 돌아섰다…반토막 난 '이 종목' [종목+]",
+      "url": "https://www.hankyung.com/article/2026100299836",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T21:30:02Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "테슬라는 로봇, 스페이스X는 우주경제…월가가 본 성장축 [월가 업&다운]",
+      "url": "https://www.hankyung.com/article/202610064031i",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T21:00:10Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"누군 0원인데 삼전닉스는…\" 상위 1%가 법인세 78% 냈다 [김익환의 부처 핸즈업]",
+      "url": "https://www.hankyung.com/article/202610053863i",
+      "source": "한국경제 금융",
+      "published": "2026-10-05T20:00:01Z",
+      "summary": "",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "반도체 업황 꺾이면 여기서 ‘도미노 충격’ 우려 … 증시 횡보에 ELS로 ‘뭉칫돈’",
+      "url": "https://www.mk.co.kr/news/stock/12168476",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T20:00:00Z",
+      "summary": "ELS 3분기 발행현황 분석주식시장이 급등 이후 숨 고르기에 들어가면서 주가연계증권(ELS) 시장으로 뭉칫돈이 몰리고 있다. 주가가 단기간에 큰 폭으로 오르기보다는 일정한 범위 안..",
+      "matched": []
+    },
+    {
+      "title": "‘한국형 베어허그’ 입법 본격화…11월 정무위 소위 목표, 금융위와 세부기준 조율",
+      "url": "https://www.mk.co.kr/news/stock/12168759",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T13:16:23Z",
+      "summary": "당정 공감대 속 지난달 법안 발의 ‘중대 인수제안’ 기준 등 세부내용 협의 여당 연내 처리 의지에도 야당 협조 변수 불발 땐 내년 2~3월까지 논의 가능성도‘한국형 베어허그’ 제도..",
+      "matched": []
+    },
+    {
+      "title": "삼닉 레버리지 ‘20좌 미만’ 단주 출구 마련",
+      "url": "https://www.mk.co.kr/news/stock/12168758",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T13:15:42Z",
+      "summary": "금융위, 매매단위 확대 앞두고 시간외 종가매매 허용 검토 “여러안 고민중...확정된 건 아냐”금융당국이 삼성전자·SK하이닉스를 기초자산으로 하는 단일종목 레버리지 상품의 매매수량 ..",
+      "matched": [
+        "삼성전자",
+        "SK하이닉스"
+      ]
+    },
+    {
+      "title": "“회사 2배 값에 사겠다는데 왜 안 파나”…경영진 침묵 깨뜨리는 법 온다",
+      "url": "https://www.mk.co.kr/news/stock/12168700",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T11:30:25Z",
+      "summary": "“M&amp;A 놀이터” vs “저평가 해소”…K베어허그법 진통 왜 추진하게 됐나 이사회가 인수가격 의무공개 대주주 ‘주가누르기’ 방지해 소액주주들 권익 강화 목적 기업 흔들기 우려도 중..",
+      "matched": []
+    },
+    {
+      "title": "\"M&A 놀이터\" vs \"저평가 해소\" K베어허그법 진통",
+      "url": "https://www.mk.co.kr/news/stock/12168511",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T07:56:56Z",
+      "summary": "의무공개매수 제도 도입을 놓고 자본시장에서 한 차례 홍역을 치른 가운데 '한국형 베어허그법'이 또 다른 뇌관으로 떠오르고 있다. 상장사에서 인수·합병(M&amp;A)이 진행될 때 공개매수..",
+      "matched": []
+    },
+    {
+      "title": "은행권 해킹 사태에 주목받는 국내 보안株",
+      "url": "https://www.mk.co.kr/news/stock/12168512",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T07:56:56Z",
+      "summary": "인공지능(AI) 에이전트를 활용한 해킹으로 국내 주요 시중은행과 제2금융권에서 고객 정보가 일부 유출되자 국내 보안기업 주가 흐름에 관심이 쏠린다. 보안주는 최근 AI 발전에 따른..",
+      "matched": []
+    },
+    {
+      "title": "與·금융위 \"다음달 법안심사\"… 보완책 병행 필요",
+      "url": "https://www.mk.co.kr/news/stock/12168509",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T07:56:55Z",
+      "summary": "'한국형 베어허그법' 입법이 정부와 여당을 중심으로 속도를 내고 있다. 더불어민주당은 국정감사 이후인 오는 11월 정무위원회 법안심사소위원회에서 관련 법안을 심사하는 것을 목표로 ..",
+      "matched": []
+    },
+    {
+      "title": "삼닉 레버리지 '20좌 미만' 출구 마련",
+      "url": "https://www.mk.co.kr/news/stock/12168505",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T07:51:04Z",
+      "summary": "금융당국이 삼성전자·SK하이닉스를 기초자산으로 하는 단일종목 레버리지 상품의 매매 수량 단위를 20좌로 확대하기에 앞서 투자자들이 20좌 미만 단주를 처분할 수 있는 방안을 검토하..",
+      "matched": [
+        "삼성전자",
+        "SK하이닉스"
+      ]
+    },
+    {
+      "title": "반도체 소부장 랠리 … ETF 출시도 잇따라",
+      "url": "https://www.mk.co.kr/news/stock/12168506",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T07:51:04Z",
+      "summary": "반도체 소재·부품·장비(소부장) 종목들이 최근 강세를 이어가면서 관련 상장지수펀드(ETF) 상품 출시가 잇따르고 있다. 반도체 업황에 대한 긍정적인 전망이 이어지고 빅테크의 인프라..",
+      "matched": []
+    },
+    {
+      "title": "AI株 숨고르기 반사익…美바이오 ETF 순풍",
+      "url": "https://www.mk.co.kr/news/stock/12168504",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T07:51:03Z",
+      "summary": "올해 들어 글로벌 증시 상승세를 주도했던 인공지능(AI)·반도체 관련주가 숨 고르기에 들어간 가운데 미국 바이오·헬스케어 주가가 상승세를 이어가며 관심을 끌고 있다. AI·반도체 ..",
+      "matched": []
+    },
+    {
+      "title": "이 모든걸 다 누린다, 매경플러스",
+      "url": "https://www.mk.co.kr/news/stock/12168497",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T07:46:26Z",
+      "summary": "서울머니쇼 플러스(머니쇼+)를 참관하려면 사전등록이 필수다. 지난 2일 문을 연 서울머니쇼+ 공식 홈페이지에 접속하거나 안내된 QR코드를 통해 사전등록을 하면 된다. 원하는 세미나..",
+      "matched": []
+    },
+    {
+      "title": "[표] 이번주 증시 캘린더",
+      "url": "https://www.mk.co.kr/news/stock/12168498",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T07:46:26Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "ETF 투자부터 내집마련까지 … 재테크 꿀팁, 머니쇼+서 만나요",
+      "url": "https://www.mk.co.kr/news/stock/12168481",
+      "source": "매일경제 증권",
+      "published": "2026-10-05T07:36:03Z",
+      "summary": "인공지능(AI) 기술의 폭발적 성장과 탈세계화라는 거대한 구조적 변화까지 겹치면서 과거의 투자 공식은 더 이상 작동하지 않고 있다. 오는 29일부터 31일까지 사흘간 서울 코엑스에..",
+      "matched": []
+    }
+  ]
+}
