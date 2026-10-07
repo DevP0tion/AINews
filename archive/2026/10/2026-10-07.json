@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-07",
+  "news": [
+    {
+      "title": "openTPU: AI 에이전트가 설계한 오픈소스 AI 가속기",
+      "summary": "openTPU는 ISA부터 RTL, FPGA 구현까지 전체 스택을 공개한 오픈소스 AI 추론 가속기로, AI 에이전트가 자신을 구동할 하드웨어를 어디까지 설계할 수 있는지를 실험한 프로젝트다. 캐시 없이 시퀀서가 DMA·int8 시스톨릭 행렬 유닛·fp32 벡터 유닛·양자화기에 매 사이클 명령을 내리는 단순 구조이며, Python 기반 커널 언어와 bit-exact 시뮬레이터, SystemVerilog RTL을 함께 제공한다. Xilinx Kintex-7 xc7k480t FPGA 카드에서 133.33 MHz로 동작하며 Qwen3·Gemma 4 등 10개 모델을 지원하고, LFM2.5-230M 디코딩에서 52.3 tok/s(4비트 양자화 시 82.1 tok/s)를 기록했다.",
+      "url": "https://github.com/FeSens/openTPU"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Expanding the Cyber Verification Program",
+      "content": "Anthropic이 보안 전문가 대상 Cyber Verification Program을 Defense Access·Red Team Access·Specialized Access 세 등급으로 확대해, 검증된 방어자에게 고급 사이버 역량과 완화된 차단 분류기를 제공한다.",
+      "special": true,
+      "id": "news::https://www.anthropic.com/news/cyber-verification-program",
+      "url": "https://www.anthropic.com/news/cyber-verification-program"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.292",
+      "content": "`claude plugin install`에 `--marketplace <source>` 옵션과 Agent 도구의 `effort` 파라미터, 프롬프트 자동완성 훅 `prompt.autocomplete`가 추가됐고, UNC 경로 파일 읽기에서 권한 프롬프트가 우회되던 보안 문제를 포함한 다수의 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.292",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.291",
+      "content": "2.1.290에서 클라우드 세션이 권한 프롬프트 응답을 누락하던 문제와 2.1.288에서 종료 시 세션 마지막 메시지가 사라지던 회귀 버그를 수정했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.291",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
+    }
+  ],
+  "specials": [
+    "Expanding the Cyber Verification Program"
+  ],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 0
+  }
+}
