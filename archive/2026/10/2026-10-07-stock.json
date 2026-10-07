@@ -1,0 +1,484 @@
+{
+  "date": "2026-10-07",
+  "generated_at": "2026-10-07T01:01:42Z",
+  "quotes": {
+    "indices": [
+      {
+        "symbol": "^KS11",
+        "price": 6954.5,
+        "prev_close": 6941.39,
+        "change": 13.11,
+        "change_pct": 0.189,
+        "volume": 61262,
+        "currency": "KRW",
+        "market_time": 1791333340,
+        "quote_time": "2026-10-07T00:35:40Z",
+        "name": "코스피"
+      },
+      {
+        "symbol": "^KQ11",
+        "price": 910.24,
+        "prev_close": 919.92,
+        "change": -9.68,
+        "change_pct": -1.052,
+        "volume": 167899,
+        "currency": "KRW",
+        "market_time": 1791333340,
+        "quote_time": "2026-10-07T00:35:40Z",
+        "name": "코스닥"
+      },
+      {
+        "symbol": "^IXIC",
+        "price": 27599.887,
+        "prev_close": 27477.31,
+        "change": 122.576,
+        "change_pct": 0.446,
+        "volume": 7658736000,
+        "currency": "USD",
+        "market_time": 1791325893,
+        "quote_time": "2026-10-06T22:31:33Z",
+        "name": "나스닥"
+      },
+      {
+        "symbol": "KRW=X",
+        "price": 1338.59,
+        "prev_close": 1336.89,
+        "change": 1.7,
+        "change_pct": 0.1271,
+        "volume": 0,
+        "currency": "KRW",
+        "market_time": 1791334539,
+        "quote_time": "2026-10-07T00:55:39Z",
+        "name": "원/달러"
+      }
+    ],
+    "stocks": [
+      {
+        "symbol": "005930.KS",
+        "price": 278000.0,
+        "prev_close": 272000.0,
+        "change": 6000.0,
+        "change_pct": 2.206,
+        "volume": 3331948,
+        "currency": "KRW",
+        "market_time": 1791333342,
+        "quote_time": "2026-10-07T00:35:42Z",
+        "name": "삼성전자",
+        "stale": false,
+        "level_context": {
+          "last_close": 277500.0,
+          "period_high": 362500.0,
+          "period_low": 196500.0,
+          "pct_from_high": -23.448275862068964,
+          "pct_from_low": 41.221374045801525,
+          "box_high": 285500.0,
+          "box_low": 248500.0,
+          "box_window": 20,
+          "samples": 123
+        },
+        "consensus": {
+          "price_targets": {
+            "current": 278000.0,
+            "high": 725000.0,
+            "low": 290000.0,
+            "mean": 478627.88,
+            "median": 450000.0
+          },
+          "recommendations": [
+            {
+              "period": "0m",
+              "strongBuy": 11,
+              "buy": 24,
+              "hold": 1,
+              "sell": 0,
+              "strongSell": 0
+            },
+            {
+              "period": "-1m",
+              "strongBuy": 11,
+              "buy": 24,
+              "hold": 1,
+              "sell": 0,
+              "strongSell": 0
+            },
+            {
+              "period": "-2m",
+              "strongBuy": 11,
+              "buy": 25,
+              "hold": 1,
+              "sell": 0,
+              "strongSell": 0
+            },
+            {
+              "period": "-3m",
+              "strongBuy": 11,
+              "buy": 25,
+              "hold": 1,
+              "sell": 0,
+              "strongSell": 0
+            }
+          ]
+        }
+      },
+      {
+        "symbol": "000660.KS",
+        "price": 1771000.0,
+        "prev_close": 1773000.0,
+        "change": -2000.0,
+        "change_pct": -0.113,
+        "volume": 628647,
+        "currency": "KRW",
+        "market_time": 1791333342,
+        "quote_time": "2026-10-07T00:35:42Z",
+        "name": "SK하이닉스",
+        "stale": false,
+        "level_context": {
+          "last_close": 1772000.0,
+          "period_high": 2919000.0,
+          "period_low": 916000.0,
+          "pct_from_high": -39.29427886262419,
+          "pct_from_low": 93.44978165938865,
+          "box_high": 1868000.0,
+          "box_low": 1690000.0,
+          "box_window": 20,
+          "samples": 123
+        },
+        "consensus": {
+          "price_targets": {
+            "current": 1772000.0,
+            "high": 5300000.0,
+            "low": 1535000.0,
+            "mean": 3141024.8,
+            "median": 3050000.0
+          },
+          "recommendations": [
+            {
+              "period": "0m",
+              "strongBuy": 11,
+              "buy": 27,
+              "hold": 1,
+              "sell": 0,
+              "strongSell": 0
+            },
+            {
+              "period": "-1m",
+              "strongBuy": 11,
+              "buy": 27,
+              "hold": 1,
+              "sell": 0,
+              "strongSell": 0
+            },
+            {
+              "period": "-2m",
+              "strongBuy": 11,
+              "buy": 26,
+              "hold": 1,
+              "sell": 0,
+              "strongSell": 0
+            },
+            {
+              "period": "-3m",
+              "strongBuy": 11,
+              "buy": 25,
+              "hold": 1,
+              "sell": 0,
+              "strongSell": 0
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "calendar": [],
+  "research_reports": {
+    "삼성전자": [
+      {
+        "date": "2026-10-07",
+        "title": "삼성전자(005930) 2027년 메모리 판가·실적 상향 조정",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=652751",
+        "target_price": "500,000",
+        "opinion": "Buy",
+        "analyst": "김선우,우서현",
+        "broker": "메리츠증권"
+      },
+      {
+        "date": "2026-10-06",
+        "title": "삼성전자(005930) 현저한 저평가",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=652716",
+        "target_price": "610,000",
+        "opinion": "매수",
+        "analyst": "한동희",
+        "broker": "SK증권"
+      },
+      {
+        "date": "2026-10-02",
+        "title": "삼성전자(005930) 분기 영업이익 100조 시대가 열렸다",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=652684",
+        "target_price": "460,000",
+        "opinion": "매수",
+        "analyst": "김운호, 고혁진",
+        "broker": "IBK투자증권"
+      }
+    ],
+    "SK하이닉스": [
+      {
+        "date": "2026-09-28",
+        "title": "SK하이닉스(000660) 소음보다 방향성에",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=652549",
+        "target_price": "3,200,000",
+        "opinion": "Buy",
+        "analyst": "류형근",
+        "broker": "대신증권"
+      },
+      {
+        "date": "2026-08-03",
+        "title": "SK하이닉스(000660) 2Q26 NDR 후기: 오해와 본질",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=651360",
+        "target_price": "4,000,000",
+        "opinion": "매수",
+        "analyst": "한동희",
+        "broker": "SK증권"
+      },
+      {
+        "date": "2026-07-30",
+        "title": "SK하이닉스(000660) 실적과 어긋난 주가, 한번은 거칠 과정",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=651264",
+        "target_price": "4,000,000",
+        "opinion": "매수",
+        "analyst": "김운호",
+        "broker": "IBK투자증권"
+      }
+    ]
+  },
+  "investor_trend": {
+    "dates": [
+      "2026-09-30",
+      "2026-10-01",
+      "2026-10-02",
+      "2026-10-06",
+      "2026-10-07"
+    ],
+    "series": {
+      "SK하이닉스": {
+        "순매수": {
+          "외국인": [
+            0,
+            0,
+            -207056161000,
+            0,
+            0
+          ],
+          "개인": [
+            0,
+            0,
+            -834720560000,
+            0,
+            0
+          ],
+          "기관": [
+            0,
+            0,
+            141156686000,
+            0,
+            0
+          ]
+        },
+        "매수": {
+          "외국인": [
+            0,
+            0,
+            1061621167691,
+            0,
+            0
+          ],
+          "개인": [
+            0,
+            0,
+            459487793000,
+            0,
+            0
+          ],
+          "기관": [
+            0,
+            0,
+            1294837645000,
+            0,
+            0
+          ]
+        },
+        "매도": {
+          "외국인": [
+            0,
+            0,
+            1268677328691,
+            0,
+            0
+          ],
+          "개인": [
+            0,
+            0,
+            1294208353000,
+            0,
+            0
+          ],
+          "기관": [
+            0,
+            0,
+            1153680959000,
+            0,
+            0
+          ]
+        }
+      },
+      "삼성전자": {
+        "순매수": {
+          "외국인": [
+            0,
+            0,
+            -94709799500,
+            0,
+            0
+          ],
+          "개인": [
+            0,
+            0,
+            -613213765500,
+            0,
+            0
+          ],
+          "기관": [
+            0,
+            0,
+            170653067500,
+            0,
+            0
+          ]
+        },
+        "매수": {
+          "외국인": [
+            0,
+            0,
+            811577215000,
+            0,
+            0
+          ],
+          "개인": [
+            0,
+            0,
+            299116926000,
+            0,
+            0
+          ],
+          "기관": [
+            0,
+            0,
+            1499850635750,
+            0,
+            0
+          ]
+        },
+        "매도": {
+          "외국인": [
+            0,
+            0,
+            906287014500,
+            0,
+            0
+          ],
+          "개인": [
+            0,
+            0,
+            912330691500,
+            0,
+            0
+          ],
+          "기관": [
+            0,
+            0,
+            1329197568250,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  "market_news": [
+    {
+      "title": "코스피 1.11% 내린 6864 개장…코스닥 0.27% 내린 917.45",
+      "summary": "7일 코스피는 전 거래일 대비 1.11%(77.14포인트) 내린 6,864.25로, 코스닥은 0.27%(2.47포인트) 내린 917.45로 개장했다. 간밤 S&P500과 나스닥이 사상 최고치를 기록했는데도 외국인과 기관이 동시 순매도에 나서며 지수를 끌어내렸고, 코스피에서 개인이 4,840억원을 순매수하는 동안 외국인은 3,467억원, 기관은 1,283억원을 팔았다. 8일 삼성전자 3분기 잠정실적 발표를 앞둔 경계심이 반영됐으며 개장 직후 삼성전자는 0.55% 올랐고 SK하이닉스는 1.80% 하락했다.",
+      "url": "https://www.hankyung.com/article/2026100772516",
+      "source": "한국경제 금융"
+    },
+    {
+      "title": "“추가 금리인상 필요없을 수도” 연준위원 첫 발언, 파장은",
+      "summary": "메리 데일리 미국 샌프란시스코 연방준비은행 총재가 추가 금리인상이 필요하지 않을 수도 있다는 취지로 발언해 시장에 파장이 일고 있다. 연준 인사 가운데 처음 나온 발언으로, 장기금리는 전일 대비 소폭 하락했다.",
+      "url": "https://www.mk.co.kr/news/stock/12169906",
+      "source": "매일경제 증권"
+    },
+    {
+      "title": "미 국채금리 급등 기업 덮쳤다…CCC급 조달비용 17%",
+      "summary": "미 국채금리 급등이 기업 차입비용으로 번지면서, 신용등급이 가장 낮은 CCC급 기업의 차입비용이 이달 17%까지 올라 2020년 5월 이후 최고 수준을 기록했다(파이낸셜타임스 보도). 조달 여건이 나빠지자 기업들은 채권 발행을 줄이고 투자·인수합병 계획을 축소하고 있으며, 차환 수요가 많거나 변동금리 부채 비중이 높은 기업이 특히 압박을 받고 있다.",
+      "url": "https://www.hankyung.com/article/202610077037i",
+      "source": "한국경제 경제"
+    },
+    {
+      "title": "고금리 덮치자 … 국민연금, 보험株 사고 증권株 팔아",
+      "summary": "고금리 국면이 이어지면서 국민연금공단이 3분기 국내 증시에서 고금리 수혜가 예상되는 보험주를 담고 고금리에 취약한 증권주를 덜어낸 것으로 나타났다. 국내 증시 최대 기관 투자자의 업종 교체라는 점에서 수급 측면의 시사점이 있다.",
+      "url": "https://www.mk.co.kr/news/stock/12169606",
+      "source": "매일경제 증권"
+    },
+    {
+      "title": "“한국 증시만 이런 거예요?”…고금리 뚫고 신고가 찍은 美나스닥",
+      "summary": "미국 장기 국채 금리가 24년 만의 최고 수준으로 치솟았는데도 뉴욕 증시에서는 기술주를 중심으로 신고가 흐름이 이어지고 있다. AI발 기업 이익 급상승 전망에 투자 규모가 전년 대비 60% 늘어난 것이 배경으로 꼽힌다.",
+      "url": "https://www.mk.co.kr/news/world/12169636",
+      "source": "매일경제 증권"
+    }
+  ],
+  "stock_news": {
+    "삼성전자": [
+      {
+        "title": "삼전 ‘영업익 100조’ 예고에도 주가는 영…8일도 심상치않다는데",
+        "summary": "삼성전자가 8일 3분기 잠정실적을 발표하는 가운데 원화값 강세로 영업이익 눈높이가 석 달 사이 113조원에서 106조원으로 낮아졌다. 4분기에는 HBM4 매출이 본격 확대되며 가격 협상력이 높아질 것이라는 기대가 있으나, 실적 발표일이 ETF 리밸런싱 날짜와 겹쳐 주가 변동성 요인이 남아 있다.",
+        "url": "https://www.mk.co.kr/news/stock/12169872",
+        "source": "매일경제 증권"
+      },
+      {
+        "title": "골드만삭스 \"삼성전자, 8일 변동성 확대…매도 요인 겹쳐\"",
+        "summary": "글로벌 투자은행 골드만삭스는 삼성전자의 3분기 잠정실적 발표일인 8일에 ETF 관련 매도 요인이 겹치면서 주가 변동성이 확대될 것으로 전망했다(골드만삭스).",
+        "url": "https://www.yna.co.kr/view/AKR20261007048300008",
+        "source": "연합뉴스 경제"
+      },
+      {
+        "title": "[특징주] 삼성전자, 장초반 2%대 급등…SK하이닉스는 0.6%↓",
+        "summary": "7일 삼성전자 주가가 장 초반 상승 전환해 2% 넘게 오르며 약세로 출발한 지수와 다른 흐름을 보였다. 같은 시각 SK하이닉스는 0.6% 하락했다.",
+        "url": "https://www.yna.co.kr/view/AKR20261007047000008",
+        "source": "연합뉴스 경제"
+      }
+    ],
+    "SK하이닉스": [
+      {
+        "title": "[특징주] 삼성전자, 장초반 2%대 급등…SK하이닉스는 0.6%↓",
+        "summary": "7일 장 초반 SK하이닉스는 0.6% 하락하며 2% 넘게 오른 삼성전자와 엇갈린 흐름을 보였다.",
+        "url": "https://www.yna.co.kr/view/AKR20261007047000008",
+        "source": "연합뉴스 경제"
+      },
+      {
+        "title": "‘또 최고가’ 엔비디아는 곧 시총 6조 달러인데…삼전·닉스는 왜 지지부진?",
+        "summary": "엔비디아가 6일(현지시간) 나흘째 상승하며 또다시 사상 최고치를 기록해 연내 시가총액 6조 달러 돌파 가능성이 커진 반면, SK하이닉스와 삼성전자 주가는 상대적으로 부진한 흐름을 이어가고 있다는 점을 짚은 기사다.",
+        "url": "https://www.mk.co.kr/news/stock/12170029",
+        "source": "매일경제 증권"
+      },
+      {
+        "title": "뉴욕증시 최고치…하이닉스ADR은 급락 [오늘 아침, 당신이 알아야 할 7가지]",
+        "summary": "간밤 뉴욕증시가 사상 최고치를 기록한 가운데 SK하이닉스 ADR은 급락했다.",
+        "url": "https://www.hankyung.com/article/202610076917i",
+        "source": "한국경제 금융"
+      }
+    ]
+  },
+  "duplicate_counts": {
+    "market": 0,
+    "stock": 0
+  }
+}
