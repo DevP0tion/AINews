@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-08",
+  "news": [
+    {
+      "title": "Diffusion 언어모델을 계층화하다 — H-CDLM, 토큰과 클러스터를 병렬 확산",
+      "summary": "연속 diffusion 언어모델(DLM)에 '계층적 병렬 확산'을 도입한 H-CDLM(Hierarchical Continuous Diffusion Language Models) 프레임워크가 공개됐다. 토큰 자체와 사전학습 임베딩을 클러스터링해 만든 더 거친 의미 단위를 동시에 확산시키고, 모달리티별로 샘플러·노이즈 스케줄을 따로 쓸 수 있게 했으며 연산·파라미터 추가 부담은 거의 없다고 밝혔다. 기존 CoBit에 적용한 H-CoBit은 generative perplexity가 LM1B 49.4, OWT 50.4로 베이스라인 대비 각각 24.2·20.7포인트 개선됐고 GSM8K 정확도는 27.4%를 기록했다.",
+      "url": "https://arxiv.org/abs/2610.08738v1"
+    },
+    {
+      "title": "Docker, YAML로 AI 에이전트를 정의·배포하는 'Docker Agent' 공개",
+      "summary": "Docker가 에이전트를 YAML 선언형 설정으로 정의해 실행·공유하는 docker CLI 플러그인 Docker Agent를 공개했다. 모델·지시문·툴셋을 YAML에 적고 `docker agent run agent.yaml`로 실행하며, 여러 전문 에이전트가 팀을 이뤄 작업을 위임하는 멀티 에이전트 오케스트레이션도 지원한다. think·todo·memory·RAG 내장 툴과 모든 MCP 서버를 붙일 수 있고 OpenAI·Anthropic·Gemini·Bedrock·Mistral·xAI 등을 지원하며, 에이전트를 OCI 레지스트리에 푸시해 다른 환경에서 꺼내 쓸 수 있다. 라이선스는 Apache-2.0이고 Docker Desktop 4.63 이상에 포함된다.",
+      "url": "https://github.com/docker/docker-agent"
+    },
+    {
+      "title": "AdvSim2Real — 적응형 prompt injection에 맞서 웹 에이전트를 훈련시키는 방법",
+      "summary": "웹 에이전트는 제3자가 작성한 페이지를 읽고 행동하기 때문에 페이지에 심어진 지시문에 목표가 탈취될 수 있지만, 그 페이지에 과제 수행에 필요한 값과 컨트롤이 함께 있어 무시할 수도 없다는 문제를 다룬 연구다. 기존 방어는 학습 전에 고정된 injection으로 파인튜닝해 학습된 모델에 맞춰 적응하는 공격자에게 우회되고, 적대적 학습은 공격자는 적응하지만 과제가 고정돼 에이전트가 풀어버린 과제는 더 이상 학습 신호를 주지 못한다. 저자들은 과제 커리큘럼과 공격자를 함께 진화시키는 AdvSim2Real을 제안했다.",
+      "url": "https://arxiv.org/abs/2610.08773v1"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Claude Haiku 5.5 출시 — 1M 컨텍스트, 최대 출력 128k",
+      "content": "대용량·저지연 작업에 맞춘 Claude Haiku 5.5(`claude-haiku-5-5`)가 출시됐으며, 1M 토큰 컨텍스트 윈도우와 128k 최대 출력 토큰, effort 파라미터를 쓰는 adaptive thinking을 지원하고 Claude API·Amazon Bedrock·AWS의 Claude Platform 등에서 쓸 수 있다.",
+      "special": true,
+      "id": "rn::2026-10-07::claude-haiku-5-5",
+      "url": "https://platform.claude.com/docs/en/release-notes/api"
+    },
+    {
+      "category": "모델/API",
+      "title": "Claude Sonnet 5.5 프롬프트 캐시 읽기 가격 인하",
+      "content": "Claude Sonnet 5.5의 prompt cache read 가격이 100만 토큰당 $0.20에서 $0.10으로 내려가 기본 입력 가격의 0.1배에서 0.05배가 됐고, 캐시 쓰기와 그 외 가격은 변동이 없다.",
+      "special": true,
+      "id": "rn::2026-10-07::prompt-cache-reads-sonnet-5-5",
+      "url": "https://platform.claude.com/docs/en/release-notes/api"
+    },
+    {
+      "category": "모델/API",
+      "title": "Compliance API, 통합 Claude 경험의 대화도 반환",
+      "content": "Compliance API의 chat 엔드포인트가 기존 Compliance Access Key 그대로 통합 Claude 경험(unified Claude experience)의 대화까지 반환하며, Claude Enterprise 조직을 대상으로 베타 제공된다.",
+      "special": false,
+      "id": "rn::2026-10-08::compliance-api-chats",
+      "url": "https://platform.claude.com/docs/en/manage-claude/compliance-api"
+    },
+    {
+      "category": "SDK",
+      "title": "Python·TypeScript SDK에 browser use·computer use 툴 클래스 추가(베타)",
+      "content": "Python과 TypeScript SDK에 browser use 툴과 computer use 툴용 클래스가 베타로 들어가, 클래스를 상속해 툴별로 메서드 하나씩 구현하는 방식으로 쓸 수 있다.",
+      "special": false,
+      "id": "rn::2026-10-07::browser-use-computer-use-sdk",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Max·Team 플랜에 월 API 크레딧 포함",
+      "content": "Claude Max와 Team 플랜에 매월 API 크레딧이 포함되며, 수령 방법은 'API credits for Max and Team plans' 문서에 안내된다.",
+      "special": false,
+      "id": "rn::2026-10-07::api-credits-for-subscribers",
+      "url": "https://platform.claude.com/docs/en/about-claude/api-credits-for-subscribers"
+    },
+    {
+      "category": "모델/API",
+      "title": "Managed Agents, limited 네트워킹의 allowed_hosts를 web_search·web_fetch에도 적용",
+      "content": "Claude Managed Agents에서 `limited` 네트워킹 환경의 `allowed_hosts` 설정이 `web_search`·`web_fetch` 툴에도 적용돼, 허용되지 않은 호스트의 URL을 요청한 `web_fetch`는 `url_not_allowed` 오류를 돌려주고 `web_search`는 해당 호스트의 결과를 제외한다.",
+      "special": false,
+      "id": "rn::2026-10-07::allowed-hosts-web-search-fetch",
+      "url": "https://platform.claude.com/docs/en/release-notes/api"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.293 — Haiku 5.5 추가, 메모리 누수·컨텍스트 압축 버그 수정",
+      "content": "Anthropic API의 기본 Haiku 모델로 Claude Haiku 5.5를 추가하고, `subagentStatusLine` 페이로드의 `agentType`과 mod용 `$.tool.register`의 `isDeferred`를 더했으며, 컨텍스트 압축 전 자기 작업을 완료된 것으로 오인해 되돌리는 문제와 HTTP MCP 연결의 메모리 누수를 고쳤다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.293",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.293"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v1.12.0",
+      "content": "`claude-haiku-5-5`와 타입이 지정된 computer·browser toolset 툴 호출을 추가하고, `/v1/models`에 lifecycle stage 필드·필터, RBAC 역할의 `display_name`(기존 `name`은 deprecated), 워크스페이스 목록의 `include_default` 파라미터 등을 더했다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.12.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.12.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk v0.132.0",
+      "content": "Python SDK와 같은 범위로 `claude-haiku-5-5`와 타입이 지정된 computer·browser toolset 툴 호출, `/v1/models` lifecycle stage 필드·필터 등을 추가했고, JSONL 스트림을 두 번 순회하면 예외를 던지도록 고쳤다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.132.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.132.0"
+    }
+  ],
+  "specials": [
+    "Claude Haiku 5.5 출시 — 1M 컨텍스트, 최대 출력 128k",
+    "Claude Sonnet 5.5 프롬프트 캐시 읽기 가격 인하"
+  ],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 1
+  }
+}
