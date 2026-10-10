@@ -1,0 +1,833 @@
+{
+  "date": "2026-10-10",
+  "collected_at": "2026-10-10T01:08:15Z",
+  "watchlist": [
+    {
+      "symbol": "005930.KS",
+      "name": "삼성전자",
+      "aliases": [
+        "삼성전자",
+        "삼전",
+        "Samsung Electronics"
+      ]
+    },
+    {
+      "symbol": "000660.KS",
+      "name": "SK하이닉스",
+      "aliases": [
+        "SK하이닉스",
+        "하이닉스",
+        "SK hynix"
+      ]
+    }
+  ],
+  "quotes": {
+    "indices": [
+      {
+        "symbol": "^KS11",
+        "price": 6625.93,
+        "prev_close": 6803.9,
+        "change": -177.97,
+        "change_pct": -2.616,
+        "volume": 302539,
+        "currency": "KRW",
+        "market_time": 1791457540,
+        "quote_time": "2026-10-08T11:05:40Z",
+        "name": "코스피"
+      },
+      {
+        "symbol": "^KQ11",
+        "price": 892.27,
+        "prev_close": 898.43,
+        "change": -6.16,
+        "change_pct": -0.686,
+        "volume": 0,
+        "currency": "KRW",
+        "market_time": 1791457540,
+        "quote_time": "2026-10-08T11:05:40Z",
+        "name": "코스닥"
+      },
+      {
+        "symbol": "^IXIC",
+        "price": 27366.17,
+        "prev_close": 27193.34,
+        "change": 172.83,
+        "change_pct": 0.636,
+        "volume": 6095485000,
+        "currency": "USD",
+        "market_time": 1791580559,
+        "quote_time": "2026-10-09T21:15:59Z",
+        "name": "나스닥"
+      },
+      {
+        "symbol": "KRW=X",
+        "price": 1340.02,
+        "prev_close": 1342.56,
+        "change": -2.54,
+        "change_pct": -0.1892,
+        "volume": 0,
+        "currency": "KRW",
+        "market_time": 1791579599,
+        "quote_time": "2026-10-09T20:59:59Z",
+        "name": "원/달러"
+      }
+    ],
+    "stocks": [
+      {
+        "symbol": "005930.KS",
+        "price": 262000.0,
+        "prev_close": 268500.0,
+        "change": -6500.0,
+        "change_pct": -2.421,
+        "volume": 25252540,
+        "currency": "KRW",
+        "market_time": 1791441160,
+        "quote_time": "2026-10-08T06:32:40Z",
+        "name": "삼성전자",
+        "stale": true
+      },
+      {
+        "symbol": "000660.KS",
+        "price": 1681000.0,
+        "prev_close": 1723000.0,
+        "change": -42000.0,
+        "change_pct": -2.438,
+        "volume": 3951816,
+        "currency": "KRW",
+        "market_time": 1791441018,
+        "quote_time": "2026-10-08T06:30:18Z",
+        "name": "SK하이닉스",
+        "stale": true
+      }
+    ]
+  },
+  "market_news": [
+    {
+      "title": "삼전닉스 대신 방산·반도체 테마형으로…변화하는 레버리지 ETF 판도",
+      "url": "https://www.mk.co.kr/news/stock/12172657",
+      "source": "매일경제 증권",
+      "published": "2026-10-10T00:05:32Z",
+      "summary": "정방향 레버리지 ETF 62종 분석 개미들 레버리지 투자 중심 이동 삼전·하이닉스 비중 8.9%로 ‘뚝’ 시장지수형은 28.0% → 69.8% 방산·반도체 등도 3.8% → 20...",
+      "matched": [
+        "삼성전자",
+        "SK하이닉스"
+      ]
+    },
+    {
+      "title": "[다음주 경제] 취업자 얼마나 늘었나…IMF, 韓성장률 전망 수정치 발표",
+      "url": "https://www.yna.co.kr/view/AKR20261010018000002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-10T00:03:29Z",
+      "summary": "(세종·서울=연합뉴스) 이세원 배영경 한지훈 기자 = 다음 주(12∼16일)에는 취업자 숫자와 가계대출 동향 등 민생과 밀접한 경제 지표가 공개...",
+      "matched": []
+    },
+    {
+      "title": "검색 제국 흔들리는 바이두…AI 클라우드·로보택시서 돌파구",
+      "url": "https://www.hankyung.com/article/202609144116i",
+      "source": "한국경제 경제",
+      "published": "2026-10-10T00:00:07Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[로펌을만나다] 이준기 태평양 대표 \"기업엔 수사 장기화 자체가 처벌\"",
+      "url": "https://www.yna.co.kr/view/AKR20261008175900004",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-10T00:00:05Z",
+      "summary": "(서울=연합뉴스) 이미령 이승연 기자 = &quot;기업에는 수사가 길어지는 것 자체가 처벌입니다. 수사와 기소 기관이 나뉘더라도 사건을 해결하는 과정까...",
+      "matched": []
+    },
+    {
+      "title": "[IPO챗] 이번주 수요예측 10곳…진코스텍 등 2개사 상장",
+      "url": "https://www.yna.co.kr/view/AKR20261008073000008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-10T00:00:05Z",
+      "summary": "(서울=연합뉴스) 정회인 기자 = 한글날 연휴가 끝난 다음 주(12∼16일) 기업공개(IPO) 시장에서는 10개 기업이 기관투자자 대상 수요예측...",
+      "matched": []
+    },
+    {
+      "title": "\"내 S&P500 팔긴 싫은데 불안해\"…서학개미 겨냥 ETF 나왔다",
+      "url": "https://www.hankyung.com/article/202610092663i",
+      "source": "한국경제 금융",
+      "published": "2026-10-10T00:00:03Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"국내은행, 외형 성장 한계…'위험 대비 수익성'으로 전환해야\"",
+      "url": "https://www.yna.co.kr/view/AKR20261009050300002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-10T00:00:02Z",
+      "summary": "(서울=연합뉴스) 이도흔 기자 = 국내은행이 자산 규모를 키우는 양적 성장 전략에서 벗어나 위험관리와 수익성을 중심으로 경영체계를 전환해야 한다...",
+      "matched": []
+    },
+    {
+      "title": "\"김장을 왜 해요?\"…1kg '3만원' 김치 불티나는 이유 [프라이스&]",
+      "url": "https://www.hankyung.com/article/202610078534i",
+      "source": "한국경제 경제",
+      "published": "2026-10-10T00:00:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"뭐가 진짜 불닭면이지?\"…짝퉁 한 방에 가르는 기막힌 기술",
+      "url": "https://www.hankyung.com/article/2026101032617",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T23:32:11Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "랩 수익률, 코스피의 6배…\"수수료 더 내도 전문가 찾는다\"",
+      "url": "https://www.hankyung.com/article/2026100928971",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T23:29:26Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "자문형 랩, 두 달 만에 28% 수익",
+      "url": "https://www.hankyung.com/article/2026100928991",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T23:29:17Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "50만원도 가입…적립식 랩 인기",
+      "url": "https://www.hankyung.com/article/2026100928981",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T23:28:59Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "AI 수요 오해 풀렸지만, S&P 신기록 다가섰지만, 또 떨어진 반도체 [김현석의 월스트리트나우]",
+      "url": "https://www.hankyung.com/article/202610103221i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T23:06:40Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "삼성이 연 '분기 이익 100조 시대'…소부장주 투자법은?",
+      "url": "https://www.hankyung.com/article/202610081365i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T23:00:09Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[아프리카인물열전](41) '유리천장 깬 개혁가' WTO 첫 여성 수장 오콘조이웨알라",
+      "url": "https://www.yna.co.kr/view/AKR20260921172200079",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T23:00:07Z",
+      "summary": "(카이로=연합뉴스) 김상훈 특파원 = 세계무역기구(WTO) 사무총장 응고지 오콘조이웨알라(72)의 이름 앞에는 &apos;최초의 여성&apos;이자 &apos;최초의 아프...",
+      "matched": []
+    },
+    {
+      "title": "\"직접 굴리다 멘탈 털렸다\" 지친 개미…1억 맡겼더니 '반전'",
+      "url": "https://www.hankyung.com/article/2026100929331",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T22:37:55Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"BTS 6700억 벌었다는데 왜\"…주가 반토막에 개미들 '비명' [종목+]",
+      "url": "https://www.hankyung.com/article/2026100814886",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T22:02:35Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "정부 '원양어선 안전펀드' 지원받은 11척 중 2척 중국서 건조",
+      "url": "https://www.yna.co.kr/view/AKR20261008084400051",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T22:01:02Z",
+      "summary": "(부산=연합뉴스) 이영재 기자 = 정부의 노후 원양어선 교체 지원사업인 &apos;원양어선 안전 펀드&apos;의 지원 대상 선박 가운데 일부가 중국 조선소에서 ...",
+      "matched": []
+    },
+    {
+      "title": "[신상잇슈] 롯데칠성 '순하리 청레몬진'·연세유업 '공주의밤 생크림빵'",
+      "url": "https://www.yna.co.kr/view/AKR20261008168100030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T22:00:04Z",
+      "summary": "▲ 롯데칠성음료[005300]는 과일탄산주 브랜드 &apos;순하리진&apos;의 신제품 &apos;순하리 청레몬진 무가당&apos;을 출시했다.",
+      "matched": []
+    },
+    {
+      "title": "[금주핫템] LG생건 '시크릿 에센스'·미즈노 '멀티 패딩 라이트'",
+      "url": "https://www.yna.co.kr/view/AKR20261008155300030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T22:00:02Z",
+      "summary": "▲ LG생활건강[051900]의 &apos;숨37&apos;은 피부 관리 제품인 &apos;시크릿 에센스&apos;를 개선해 출시했다. 제품은 2009년 출시 이후 335만병이 판...",
+      "matched": []
+    },
+    {
+      "title": "[AI돋보기] AI가 물건 고르고 결제까지…내 카드 맡겨도 될까",
+      "url": "https://www.yna.co.kr/view/AKR20261002022300017",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T21:33:01Z",
+      "summary": "(서울=연합뉴스) 심재훈 기자 = &quot;인천공항에서 광화문까지 가는 차 좀 잡아줘.&quot;",
+      "matched": []
+    },
+    {
+      "title": "검사 지휘 폐지됐는데…산안감독관 절반은 수사경력 '1년 미만'",
+      "url": "https://www.yna.co.kr/view/AKR20261009051000530",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T21:05:01Z",
+      "summary": "(서울=연합뉴스) 옥성구 기자 = 검사의 수사지휘권이 폐지된 가운데 산업안전감독관의 절반 가까이는 수사 경력이 1년 미만인 것으로 나타났다. 노...",
+      "matched": []
+    },
+    {
+      "title": "온라인 정기결제·자동갱신 피해구제 최근 5년간 8.8배↑",
+      "url": "https://www.yna.co.kr/view/AKR20261008146100001",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T21:00:02Z",
+      "summary": "(서울=연합뉴스) 류미나 기자 = 온라인 서비스의 정기결제·자동갱신과 관련한 소비자 피해구제 신청이 최근 5년간 8.8배로 급증한 것으로 나타났...",
+      "matched": []
+    },
+    {
+      "title": "국내 기름값 21주째 하락…휘발유·경유 1천800원대 지속",
+      "url": "https://www.yna.co.kr/view/AKR20261008122800003",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T21:00:02Z",
+      "summary": "(서울=연합뉴스) 임성호 기자 = 전국 주유소 기름값이 지난주 대비 소폭 내리며 21주 연속 하락세를 이어갔다.",
+      "matched": []
+    },
+    {
+      "title": "[부동산캘린더] 내주 향남역 그로브 스위첸 등 1천829가구 분양",
+      "url": "https://www.yna.co.kr/view/AKR20261009050400003",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T21:00:01Z",
+      "summary": "(세종=연합뉴스) 오진송 기자 = 다음 주에는 전국에서 1천829가구가 분양에 나선다.",
+      "matched": []
+    },
+    {
+      "title": "\"저 친구 퇴사할거 같은데요\"…AI가 먼저 알려준다 [임다연의 요즘 CEO 경영법]",
+      "url": "https://www.hankyung.com/article/202610081389i",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T21:00:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"국세청 세법 개정 건의에 재경부 80% 퇴짜…재탕 174건\"",
+      "url": "https://www.yna.co.kr/view/AKR20261009048800002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T20:57:41Z",
+      "summary": "(세종=연합뉴스) 이대희 기자 = 국세청이 최근 3년 동안 재정경제부에 낸 세금 관련 법령 개정건의 10건 중 8건은 세법개정안에 담기지 못한 ...",
+      "matched": []
+    },
+    {
+      "title": "작년 체납자 은닉재산 신고포상 32건 12.5억원…평균액 감소",
+      "url": "https://www.yna.co.kr/view/AKR20261009048600002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T20:55:05Z",
+      "summary": "(세종=연합뉴스) 이세원 기자 = 지난해 체납자 은닉재산 신고자에게 지급한 포상금 총액은 전년보다 늘었지만, 건당 평균 지급액은 줄어든 것으로 ...",
+      "matched": []
+    },
+    {
+      "title": "은행권 금리 경쟁…1년만기 예금 3%대 후반으로 속속 인상",
+      "url": "https://www.yna.co.kr/view/AKR20261009056800002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T20:53:01Z",
+      "summary": "(서울=연합뉴스) 이도흔 기자 = 시장금리 상승 속에 은행 정기예금 금리도 연 3%대 후반으로 향하고 있다.",
+      "matched": []
+    },
+    {
+      "title": "전산장애 잦은 금융사 20곳, 작년 보안예산 집행률 70% 밑돌아",
+      "url": "https://www.yna.co.kr/view/AKR20261009021400002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T20:51:00Z",
+      "summary": "(서울=연합뉴스) 배영경 기자 = 전산장애 발생이 잦은 금융사 20곳의 지난해 정보보호 예산 집행률이 70%를 밑도는 것으로 나타났다.",
+      "matched": []
+    },
+    {
+      "title": "‘고금리’를 극복하는 이익의 힘 … 현재가 90년대 버블과 다른 이유",
+      "url": "https://www.mk.co.kr/news/stock/12172344",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T20:30:00Z",
+      "summary": "미국 국채금리 5% ... 고금리 시대의 투자법최근 미국 시장을 보면서 투자자들의 주된 반응은 “금리가 이렇게 높은데 주식이 더 올라간다고?”라는 말씀입니다. 그도 그럴 것이 단순..",
+      "matched": []
+    },
+    {
+      "title": "푸틴에 손벌린 트럼프 \"러 경유 공급 합의\"…대러 제재 완화(종합)",
+      "url": "https://www.yna.co.kr/view/AKR20261010004551071",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T20:10:13Z",
+      "summary": "(워싱턴=연합뉴스) 이유미 특파원 = 도널드 트럼프 미국 대통령은 러시아산 경유를 미국과 세계 시장에 대규모로 공급하기로 블라디미르 푸틴 러시아...",
+      "matched": []
+    },
+    {
+      "title": "오픈AI發 버블 논쟁…다가오는 실적 시즌[월가 백브리핑]",
+      "url": "https://www.hankyung.com/article/202610103126i",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T17:17:12Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"하루에 1조 벌었는데…\" 한국 개미들 다시 '미장' 가는 이유 [분석+]",
+      "url": "https://www.hankyung.com/article/2026100807756",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T13:11:44Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "스페이스X 목표가 254달러…월가 AI·우주 주목 [월가 업&다운]",
+      "url": "https://www.hankyung.com/article/202610093086i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T13:02:28Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "블룸버그 \"오픈AI, 올 연말엔 연 환산 매출 700억달러 달성\"",
+      "url": "https://www.hankyung.com/article/202610093047i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T11:38:44Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"한국 여행 필수코스\" 외국인 몰리더니…'매출 폭등' 대반전 [현장+]",
+      "url": "https://www.hankyung.com/article/202610081720g",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T11:30:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "비상장주식의 상속, 온전한 기업승계를 위하여 [세종의 가사분쟁 솔루션]",
+      "url": "https://www.hankyung.com/article/202610081327i",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T11:00:03Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"우리만 팝니다\"…면세점 '독점' 경쟁, 이유 있었네",
+      "url": "https://www.hankyung.com/article/202610080071g",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T10:26:57Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "떡볶이부터 붕어빵까지…노재헌의 'K푸드 외교' [차이나 워치]",
+      "url": "https://www.hankyung.com/article/202610092990i",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T10:03:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "계속되는 'AI 거품론'…TSMC가 답을 할까 [다음주 주요변수 미리보기]",
+      "url": "https://www.hankyung.com/article/202610092829i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T09:30:59Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "제7대 경제단체 될까…박종범 \"제도 기반 마련에 교감”",
+      "url": "https://www.hankyung.com/article/202610092969i",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T09:23:28Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "박정현 \"전국 243개 지자체 부채 58조원…미래 세대에 부담\"",
+      "url": "https://www.yna.co.kr/view/AKR20261009052500063",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T09:20:24Z",
+      "summary": "(세종=연합뉴스) 양영석 기자 = 전국 243개 지방자치단체가 미래에 갚아야 할 부채가 58조4천억원을 웃도는 것으로 집계됐다",
+      "matched": []
+    },
+    {
+      "title": "AI·여행·금융…쏟아진 월가 매수콜 [한경 프리미엄9 TODAY]",
+      "url": "https://www.hankyung.com/article/2026100928921",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T09:09:44Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "'부잣집 딸'처럼 입는다더니…2030 女 난리 난 패션",
+      "url": "https://www.hankyung.com/article/2026100928931",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T09:08:45Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "가수 1억 vs 모델 1100만원…연예계도 소득 양극화",
+      "url": "https://www.hankyung.com/article/2026100928941",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T09:07:33Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "에픽AI '수주 레이더' 나왔다…기업들 신규계약 체결 한눈에",
+      "url": "https://www.hankyung.com/article/2026100928951",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T09:07:25Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "탈탄소 전환 급한데…값싼 전기 공급엔 소극적인 정부",
+      "url": "https://www.hankyung.com/article/2026100928441",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T09:07:06Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "사망자에 연금 퍼주기…복지부 3년 넘게 몰랐다",
+      "url": "https://www.hankyung.com/article/2026100928471",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T09:06:36Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "한국판 국부펀드, 차입금 조달 허용",
+      "url": "https://www.hankyung.com/article/202610092946i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T09:04:13Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "주민 반발에…印 '데이터센터' 확충 제동",
+      "url": "https://www.hankyung.com/article/2026100929071",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T09:02:24Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "美 전역 주파수 탐내는 머스크…통신 3사 '긴장'",
+      "url": "https://www.hankyung.com/article/2026100929081",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T09:02:15Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "트럼프 \"내달 3일까지 이란 공격 안해\"",
+      "url": "https://www.hankyung.com/article/2026100929091",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T09:02:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "15세 안윤주, 아시아 주니어 골프 초대 챔피언",
+      "url": "https://www.hankyung.com/article/2026100929241",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T08:56:57Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[단독] 메모리 넘어 AI 부품·전력기기 확보전…빅테크 '5년 계약' 줄섰다",
+      "url": "https://www.hankyung.com/article/2026100929011",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T08:49:45Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[단독] 삼성전자 물량 80%가 장기계약분…빅테크 줄섰다",
+      "url": "https://www.hankyung.com/article/2026100929291",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T08:47:49Z",
+      "summary": "",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "오픈AI 매출 실망…AI 낙관론에 '찬물'",
+      "url": "https://www.hankyung.com/article/2026100929311",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T08:46:40Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "부품 하나만 없어도 데이터센터 '올스톱'",
+      "url": "https://www.hankyung.com/article/2026100929031",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T08:46:38Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "'AI 수주' 쌓였는데…전력기기 빅3 주가는 찬바람",
+      "url": "https://www.hankyung.com/article/2026100929181",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T08:43:26Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "이왕섭 팀장 \"AI 인프라 다음 주도주는 CPU·기판·MLCC\"",
+      "url": "https://www.hankyung.com/article/2026100929121",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T08:42:25Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "로봇 팔아 '1600억' 벌더니…中 공장서 본 '무서운 풍경'",
+      "url": "https://www.hankyung.com/article/2026100928731",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T08:41:52Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "슈퍼마켓연합회·택배노조, 쿠팡 장애에 대책 마련·보상 촉구",
+      "url": "https://www.yna.co.kr/view/AKR20261009050900030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T08:41:24Z",
+      "summary": "(서울=연합뉴스) 김세린 기자 = 9일 새벽 발생한 쿠팡의 서비스 접속 장애와 관련해 중소상인 단체와 택배노조가 재발 방지 대책 마련과 피해 보...",
+      "matched": []
+    },
+    {
+      "title": "정인섭 한화오션 사장 \"크레인 아닌 협상장서 논의 이어가야\"",
+      "url": "https://www.hankyung.com/article/2026100928631",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T08:37:58Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "고유가 시대, 경차의 부활",
+      "url": "https://www.hankyung.com/article/2026100928641",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T08:37:45Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "최태원 SK 회장 \"호남 반도체, 수요 있으면 더 크게 짓겠다\"",
+      "url": "https://www.hankyung.com/article/2026100928621",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T08:37:32Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "현대차, 유럽 전기차 누적판매 50만대 돌파",
+      "url": "https://www.hankyung.com/article/2026100928651",
+      "source": "한국경제 경제",
+      "published": "2026-10-09T08:37:19Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[단독] “1100억으로 1.2조 수익 냈습니다”…주식으로 대박낸 회장님",
+      "url": "https://www.mk.co.kr/news/stock/12172464",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T08:35:29Z",
+      "summary": "투자 대박낸 기업인들 최규옥 前오스템임플란트 회장 주성엔지니어링 2만원대 매집 2대주주 오른뒤 ‘텐배거’ 달성 곽동신, HPSP서 545% 수익 KCC는 삼성물산서 4조 벌어 오랜..",
+      "matched": []
+    },
+    {
+      "title": "반도체주 담은 개미들 '술렁'…67조 쇼크에 '무서운 경고'",
+      "url": "https://www.hankyung.com/article/2026100928671",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T08:34:52Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "경영권 팔아 수천억 쥔 창업자들…패밀리오피스로 승부",
+      "url": "https://www.mk.co.kr/news/stock/12172428",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T08:30:35Z",
+      "summary": "경영권을 팔아 수천억 원의 현금을 확보한 창업자가 늘면서 이들의 돈을 굴리는 개인투자회사, 이른바 패밀리오피스도 국내에서 속속 생겨나고 있다. 일부 패밀리오피스는 세계적인 사모펀드..",
+      "matched": []
+    },
+    {
+      "title": "\"1100억 투자해 1.2조 수익\"… 회장님은 주식 고수",
+      "url": "https://www.mk.co.kr/news/stock/12172429",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T08:30:35Z",
+      "summary": "반도체 증착 장비 기업 주성엔지니어링이 반도체 장비주 랠리를 타고 코스닥 시가총액 2위 자리를 오르내리고 있다. 이 와중에 창업주인 황철주 회장 못지않게 주목받는 인물이 최규옥 전..",
+      "matched": []
+    },
+    {
+      "title": "반도체 소부장·2차전지 덕에 코스닥은 선방",
+      "url": "https://www.mk.co.kr/news/stock/12172396",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T08:03:09Z",
+      "summary": "최근 코스피가 부진한 흐름을 보이는 가운데 코스닥은 상대적으로 선방하고 있다. 고금리에 대한 부담 속에서도 반도체 업황에 대한 기대감이 반영되면서 코스닥의 상승세가 이어지는 모습이..",
+      "matched": []
+    },
+    {
+      "title": "MTS 더 간편하게…증권사 불꽃 경쟁",
+      "url": "https://www.mk.co.kr/news/stock/12172397",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T08:03:09Z",
+      "summary": "증권사들의 모바일트레이딩시스템(MTS) 진화 경쟁이 가속화하고 있다. 전통적인 거래 기능이나 단순한 연금자산 조회를 넘어 고객 자산 이탈을 막는 '승부수' 역할을 하고 있다. 9일..",
+      "matched": []
+    },
+    {
+      "title": "日·대만 달리는데…3대 걸림돌에 막힌 코스피",
+      "url": "https://www.mk.co.kr/news/stock/12172395",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T08:03:08Z",
+      "summary": "글로벌 증시가 인공지능(AI) 랠리를 재개하고 신고가 행진을 이어가는 가운데 코스피는 제자리걸음을 하며 크게 대조되는 모습을 보이고 있다. 이달 들어 미국과 대만 증시가 AI 가속..",
+      "matched": []
+    },
+    {
+      "title": "3분기 실적시즌 개막…'깜짝 실적' 예상 종목은?  [한경우의 케이스스터디]",
+      "url": "https://www.hankyung.com/article/2026100812136",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T08:00:03Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "광주 군공항 찾은 최태원, 반도체 투자 우려 '한방에' 불식",
+      "url": "https://www.yna.co.kr/view/AKR20261009046800054",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T07:52:02Z",
+      "summary": "(전남광주=연합뉴스) 장덕종 기자 = 최태원 SK그룹 회장이 9일 호남 반도체 클러스터 예정지인 광주 군공항을 직접 찾아 투자 의지를 강하게 밝...",
+      "matched": []
+    },
+    {
+      "title": "충북도·충주시, 중국 닝보 롱바이와 4천300억원 투자협약",
+      "url": "https://www.yna.co.kr/view/AKR20261009045600064",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T07:18:28Z",
+      "summary": "(청주=연합뉴스) 전창해 기자 = 충북도와 충주시는 9일 중국 선전에서 이차전지 소재기업인 닝보 롱바이(Ningbo Ronbay New Ener...",
+      "matched": []
+    },
+    {
+      "title": "[외환] 원/달러 환율 4.3원 오른 1,342.8원(15:30 기준가)",
+      "url": "https://www.yna.co.kr/view/AKR20261009043000002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T06:33:31Z",
+      "summary": "(",
+      "matched": []
+    },
+    {
+      "title": "주성엔지니어링 ‘텐배거’에 웃은 오스템 최규옥 ... 회장님들 투자 비법",
+      "url": "https://www.mk.co.kr/news/stock/12172298",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T06:16:34Z",
+      "summary": "3년전 오스템 매각한 최규옥 회장 주성엔지니어링 2대 주주 등극해 당시 2만원대 초중반에 장내매집 현 주가는 12배 폭등한 26만원대 한미반도체 곽동신도 HPSP 대박 본업 주..",
+      "matched": []
+    },
+    {
+      "title": "'한글' 넘어 '인공지능 직원' 미국에 판다는 한컴…주가 반등 가능할까",
+      "url": "https://www.hankyung.com/article/202610081938i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T06:00:02Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 15:00",
+      "url": "https://www.yna.co.kr/view/AKR20261009039200011",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T06:00:00Z",
+      "summary": "[연합뉴스 이 시각 헤드라인] - 15:00",
+      "matched": []
+    },
+    {
+      "title": "김승수 \"한국어교원 10명 중 7명은 활동 안해…고용·처우 열악\"",
+      "url": "https://www.yna.co.kr/view/AKR20261009038600001",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-09T05:53:46Z",
+      "summary": "(서울=연합뉴스) 류미나 기자 = 한글날 100주년을 맞은 8일 세계 각국에서 우리말 교육을 담당하는 한국어교원들이 수업에 전념하며 장기적으로 ...",
+      "matched": []
+    },
+    {
+      "title": "\"삼성닉스·마이크론 다 담았다\"…상장일 110억 몰린 ETF",
+      "url": "https://www.hankyung.com/article/202610092653i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T05:09:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "삼전·하닉 언제 팔까…8400억 IT펀드 수장이 찍은 '매도 신호 4가지'",
+      "url": "https://www.hankyung.com/article/202609293059i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T05:00:07Z",
+      "summary": "",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "5%대 美 금리 vs 불뿜는 반도체 실적…10월 증시 향방 가를 3대 변수",
+      "url": "https://www.hankyung.com/article/202610081087i",
+      "source": "한국경제 금융",
+      "published": "2026-10-09T05:00:04Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“회수시장 활성화 돼야 벤처 생태계 선순환 가능”",
+      "url": "https://www.mk.co.kr/news/stock/12172251",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T03:49:43Z",
+      "summary": "금투협, 회수시장 활성화 세미나 개최 “국내 회수는 IPO에 85% 집중” 지적 세컨더리 등 시장 다양화 필요성 강조 관련 시장에 향후 3년간 1조원 투자금융투자협회가 개최한 세미..",
+      "matched": []
+    },
+    {
+      "title": "오픈AI 매출발 나스닥 하락... 결국 시장의 소음이었나",
+      "url": "https://www.mk.co.kr/news/stock/12172248",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T03:01:26Z",
+      "summary": "불앤베어 플러스오픈AI 매출이 시장기대에 미치지 못했다는 보도가 나오며 관련주가 일제히 급락했습니다. 하지만 시장이 기준을 잘 몰라 착각한 것이라는 반론이 쏟아졌는데요. 오늘 영상..",
+      "matched": []
+    },
+    {
+      "title": "“241층 구조대 오나요?”…고점서 36% 빠진 삼성전기, 증권가 전망은",
+      "url": "https://www.mk.co.kr/news/stock/12172221",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T01:49:34Z",
+      "summary": "삼성전기가 최근 글로벌 대형 기업과 인공지능(AI) 서버용 적층세라믹캐패시터(MLCC) 공급 계약을 체결하며 올해 누적 수주액이 약 3조 9000억원으로 급증했다. 증권가는 MLC..",
+      "matched": []
+    },
+    {
+      "title": "브라질증시 폭등 예상한 전설의 ‘투자 기계’…함께 매수한 종목은?",
+      "url": "https://www.mk.co.kr/news/stock/12172188",
+      "source": "매일경제 증권",
+      "published": "2026-10-09T00:05:51Z",
+      "summary": "스턴리 드러켄밀러의 투자비결 “확신이 들면 거금을 투자하라”‘투자 기계’라는 별명을 지닌 월가의 전설적 투자자 스탠리 드러켄밀러의 브라질 증시 상장지수펀드(ETF) 매수 타점이 화..",
+      "matched": []
+    },
+    {
+      "title": "세달만에 90만원 뚝, 33% 급락한 SK하닉…코스피 톱 10곳 중 8곳도 떨어졌다",
+      "url": "https://www.mk.co.kr/news/stock/12172148",
+      "source": "매일경제 증권",
+      "published": "2026-10-08T22:07:33Z",
+      "summary": "3분기 실적시즌 본격화…힘 못쓰는 韓대형주3분기 실적 발표 시즌이 본격화하는 가운데 국내 증시를 대표하는 대형주들의 주가가 좀처럼 힘을 쓰지 못하고 있다. 반도체와 전자부품 업종을..",
+      "matched": []
+    },
+    {
+      "title": "“전기차 안 팔려 죽을맛이었는데”…K배터리 기업, 호실적 낸 비결은",
+      "url": "https://www.mk.co.kr/news/business/12172123",
+      "source": "매일경제 증권",
+      "published": "2026-10-08T20:59:17Z",
+      "summary": "LG엔솔 3분기 실적 발표 3분기 영업익 7560억 26%↑ 매출은 분기 기준 사상 최대 글로벌 전기차 시장 회복세 하반기 美 ESS 생산 확대에 배터리 3사 실적개선 기대감전기차..",
+      "matched": []
+    }
+  ]
+}
