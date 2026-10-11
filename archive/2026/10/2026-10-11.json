@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-11",
+  "news": [
+    {
+      "title": "Jane Street: autoregressive diffusion으로 시장 데이터를 생성할 수 있는가",
+      "summary": "Jane Street 인턴팀이 거래·BBO 갱신 같은 시장 이벤트를 '발생 시점까지 포함해' 생성하는 모델을 실험했다. causally masked transformer가 이벤트별 latent을 만들고, 이벤트 종류를 분류하는 head와 가격·경과시간 등 연속 피처를 만드는 diffusion head를 AdaLN으로 조건화하는 구조다. 초기 DDPM(1,000-step cosine, DDIM 샘플링)은 7개 연속 타깃 모두에서 값의 88~95%가 평균에서 8 표준편차 이상 벗어날 정도로 불안정했으나 rectified flow matching으로 바꾸자 추가 튜닝 없이 안정화됐고, 스파이크 구간을 평탄화한 뒤 질량을 되돌려주는 atom smoothing을 더해 marginal 분포가 실제에 근접했다. 다만 autoregressive rollout에서는 horizon이 길어질수록 품질이 저하돼 아직 현실적인 생성기로 쓸 수준은 아니라고 결론지었다.",
+      "url": "https://blog.janestreet.com/can-you-use-autoregressive-diffusion-to-generate-market-data/"
+    },
+    {
+      "title": "Epoch AI InnovationEval: 최신 모델들, 사람이 만든 알고리즘 혁신을 재현하지 못했다",
+      "summary": "Epoch AI가 10월 7일 공개한 InnovationEval은 모델이 학습에서 본 적 없는 최신 ML 혁신을 스스로 재발명할 수 있는지 측정한다. 과제는 Qwen3-8B에서 강한 GRPO 베이스라인을 능가하는 신규 post-training 기법을 만드는 것이고, 사람 기준선은 on-policy self-distillation(SDPO)이었다. 에이전트별로 3,000 GPU-hour와 추론 토큰 100억 개 예산이 주어졌는데, 논문을 보지 않은 모델 중 측정 가능한 개선을 낸 것은 GPT-5.6 Sol 하나였고(GRPO 손실에 self-imitation 항 추가, 단답형 과제에서 SDPO 대비 약 35%), Claude Fable 5는 범위 내 개선을 내지 못했다. 저자들은 Sol의 발견조차 기존 연구와 너무 유사하고 효과가 약하다고 평가하면서도, 모델 성능 향상 속도가 빠르며 완전 자율 연구 이전에도 AI가 유용할 수 있다고 덧붙였다.",
+      "url": "https://epoch.ai/publications/innovationeval"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 4
+  }
+}
