@@ -130,16 +130,6 @@
         "analyst": "김선우,우서현",
         "broker": "메리츠증권",
         "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=648580"
-      },
-      {
-        "report_idx": "648437",
-        "date": "2026-04-15",
-        "title": "SK하이닉스(000660) Memory를 System으로 봐야 그림이 보인다",
-        "target_price": "1,800,000",
-        "opinion": "매수",
-        "analyst": "김운호",
-        "broker": "IBK투자증권",
-        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=648437"
       }
     ],
     "005930": [
@@ -282,16 +272,6 @@
         "analyst": "-",
         "broker": "iM증권",
         "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=649481"
-      },
-      {
-        "report_idx": "648425",
-        "date": "2026-04-15",
-        "title": "삼성전자(005930) 2026 + 2027 = k + f(매크로 환경, AI 수익성)",
-        "target_price": "270,000",
-        "opinion": "Buy",
-        "analyst": "정우성",
-        "broker": "LS증권",
-        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=648425"
       }
     ]
   }
