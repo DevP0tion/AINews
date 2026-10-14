@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-14",
+  "news": [
+    {
+      "title": "Google DeepMind, 프런티어 모델 'Gemini 4 Argon' 공개",
+      "summary": "Google DeepMind가 차세대 프런티어 모델 Gemini 4 Argon을 공개하고 Google AI Pro·Ultra 구독자에게 당일부터 제공한다고 밝혔다. 대규모 리팩터링·레거시 코드 마이그레이션 같은 장기 소프트웨어 엔지니어링, 3D 모델링, 양자 오류 보정·효소 설계 등 과학 연구, 영상 기반 로봇 기술 학습을 강점으로 내세웠고 단일 응답으로 1M 토큰까지 출력할 수 있다. 자체 공개 벤치마크에서는 Vals Index 68.9%, DeepSWE v1.1 77.9%, LABBench 2 88.8%로 비교 대상(GPT-6 Astra, Claude Fable 5.1, Claude Opus 5.5) 중 최고치를 기록했으나 FrontierSWE v2와 Terminal-Bench 계열에서는 경쟁 모델에 뒤처진 혼재된 결과를 보였다.",
+      "url": "https://deepmind.google/models/gemini/"
+    },
+    {
+      "title": "Anthropic, git을 대체한 자체 버전 관리 시스템 'Scion' 공개",
+      "summary": "Anthropic이 모노레포 머지량이 2026년 5월 일 2,500건에서 9월 3만 건 이상으로 늘면서 소스 컨트롤이 개발 병목이 됐다며, 자체 버전 관리 시스템 Scion을 만들어 5개월에 걸쳐 git에서 이전한 과정을 공개했다. 클라이언트가 항상 온라인이라는 전제로 히스토리·blame·머지·리베이스를 모두 서버가 처리하고, write-ahead log 상의 changeset을 기본 단위로 삼아 트리·블롭 단위 희소 체크아웃만 받아가는 구조다. 기존 git 미러 인프라 대비 CPU·메모리 사용량이 약 200분의 1로 줄고 CI·연구용 체크아웃이 분 단위에서 초 단위로 단축됐으며, Anthropic은 Scion이 범용 git 대체재는 아니라고 밝혔다.",
+      "url": "https://www.anthropic.com/engineering/redesigning-source-control"
+    },
+    {
+      "title": "Character.AI, 법원 감독 매각을 위한 챕터 11 자발적 파산 신청",
+      "summary": "Character.AI가 2026년 10월 12일자로 자발적 챕터 11 파산을 신청하고 법원 감독 아래 회사 매각 절차를 밟는다고 공지했다. 지난 1년간의 법적·규제·운영 압박을 이유로 들었고, 이사회는 법원 감독 매각이 이해관계자 가치를 극대화할 최선의 방안이라고 판단했다고 밝혔다. 매각 절차는 11월 말에서 12월 초 마무리될 전망이며 현재는 서비스와 유료 구독이 그대로 유지되지만, 플랫폼을 계속 운영할 인수 제안이 나오지 않으면 서비스를 종료한다고 설명했다.",
+      "url": "https://blog.character.ai/an-update-on-character-ai/"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
