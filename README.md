@@ -18,7 +18,7 @@ PotionBot News 일일 리포트 저장소.
 [매일 06:30 KST cron]
    ↓
 [Job 1: collect] ── 결정론적 fetching (Python)
-   ├ collect_data.py  : Anthropic 뉴스 sitemap / Claude 릴리즈 노트 / GitHub Releases / HN AI / arxiv
+   ├ collect_data.py  : Anthropic sitemap / Claude 릴리즈 노트(Platform·앱) / GitHub Releases / HN AI / arxiv
    │                    → inbox/YYYY-MM-DD-raw.json
    ├ collect_stock.py : 국내 증시·경제 RSS 5종 / Yahoo Finance 지수·관심종목 시세
    │                    → inbox/YYYY-MM-DD-stock-raw.json
@@ -101,10 +101,12 @@ AINews/
 │   ├── send_discord.py               # Job 3/5: Discord 전송 (--stock으로 링크 모드)
 │   ├── test_daily_report.py          # 중복 키 self-check
 │   ├── test_stock_report.py          # 주식 검증·중복·재시도·렌더링 self-check
-│   └── test_level_context.py         # 레벨 컨텍스트·주간 통계 self-check
+│   ├── test_level_context.py         # 레벨 컨텍스트·주간 통계 self-check
+│   └── test_collect_data.py          # sitemap·앱 릴리즈 노트 파서 self-check
 ├── state/
 │   ├── seen_urls.json                # AI/IT 뉴스 URL 인덱스 (영구 누적)
 │   ├── seen_claude.json              # Claude 업데이트 항목 키
+│   ├── seen_sitemap.json             # 루트 claude-* 페이지 최초 발견일 (collect가 갱신)
 │   ├── seen_stock_urls.json          # 주식 뉴스 URL 인덱스 (AI/IT와 분리)
 │   ├── investor_trend.json           # 투자자 순매수 일별 누적 (최근 40일 보관)
 │   ├── research_reports.json         # 증권사 리포트 누적 (최근 180일 보관)
@@ -187,8 +189,16 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 
 ## 수집 소스 (collect_data.py)
 
-- **Anthropic News** — https://www.anthropic.com/sitemap.xml 의 `/news/` 항목을 `lastmod` 내림차순 10건 (anthropic.com은 RSS 미제공)
-- **Claude 릴리즈 노트** — https://docs.claude.com/en/release_notes/overview.md (raw markdown)
+- **Anthropic 사이트** — https://www.anthropic.com/sitemap.xml (anthropic.com은 RSS 미제공). 결과는 `anthropic_news`에 `section`으로 구분해 담는다
+  - `/news/` 10건, `/engineering/` 5건, `/research/` 5건 — 섹션별 `lastmod` 내림차순.
+    섹션 바로 아래 글만 받는다 (`/research/team/*` 같은 팀 페이지 제외)
+  - 루트 경로 `claude-*` 페이지(모델 발표 등, `section: page`) — sitemap에 `lastmod`가 없어
+    `state/seen_sitemap.json`에 **최초 발견일**을 기록하고, 그 날짜가 오늘~어제인 것만 넘긴다.
+    파일이 없으면 첫 실행은 기준선만 만들고 아무것도 넘기지 않는다 (기존 페이지는 `null`로 기록)
+- **Claude Platform 릴리즈 노트** — https://platform.claude.com/docs/en/release-notes/overview.md (raw markdown).
+  예전 주소 `docs.claude.com/en/release-notes/*`는 여기로 301된다
+- **Claude 앱 릴리즈 노트** — https://support.claude.com/en/articles/12138966-release-notes
+  HTML 본문을 날짜(`<h3>`) 단위로 잘라 최신 5개 섹션을 `{date, heading, text}`로 담는다
 - **GitHub Releases API** — `anthropics/claude-code`, `anthropics/anthropic-sdk-python`, `anthropics/anthropic-sdk-typescript`
 - **Hacker News** top stories 중 AI 키워드 매치
 - **arxiv** cs.LG / cs.CL 최신 (참고용)
@@ -393,11 +403,11 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 
 - **뉴스**: URL 정규화 (scheme/host 소문자화, trailing slash 제거, tracking param 제거, fragment 제거) 후 완전 일치
 - **Claude 업데이트**: curate 단계가 부여한 `id` 완전 일치.
-  `id`는 원본에서 따온 안정적 값 — `gh::{repo}::{tag}` / `news::{url}` / `rn::{날짜}::{키워드}`.
+  `id`는 원본에서 따온 안정적 값 — `gh::{repo}::{tag}` / `news::{url}` / `rn::{날짜}::{키워드}` / `app::{날짜}::{키워드}`.
   (title은 매일 재작성되는 자유 문구라 키로 쓰지 않는다.)
   - `id`가 없는 레거시 항목은 `{category}::{title_normalized}` 키로 fallback
   - `gh::`·`news::` 항목은 `url::{normalized_url}`도 보조 키로 함께 대조
-    (릴리즈 노트는 여러 항목이 같은 overview URL을 공유하므로 제외)
+    (`rn::`·`app::` 릴리즈 노트는 여러 항목이 같은 URL을 공유하므로 제외)
 - **주식 뉴스**: URL 정규화 후 완전 일치. 인덱스는 `state/seen_stock_urls.json`으로
   AI/IT 뉴스와 분리돼 있어 한쪽이 다른 쪽 기사를 가리지 않는다.
   시장 전반 뉴스와 종목별 뉴스가 같은 실행 안에서 겹치는 것은 허용한다.
@@ -471,7 +481,7 @@ Actions 탭 → **Daily Report** → **Run workflow** (manual trigger):
 
 ```bash
 pip install requests feedparser
-TARGET_DATE=2026-04-20 python3 scripts/collect_data.py
+TARGET_DATE=2026-04-20 python3 scripts/collect_data.py   # state/seen_sitemap.json도 갱신한다
 cat inbox/2026-04-20-raw.json
 
 TARGET_DATE=2026-04-20 python3 scripts/collect_stock.py
@@ -523,9 +533,10 @@ python3 scripts/send_discord.py --stock
 python3 scripts/test_daily_report.py
 python3 scripts/test_stock_report.py
 python3 scripts/test_level_context.py
+python3 scripts/test_collect_data.py
 ```
 
-셋 다 외부 의존성 없이 돈다 — `requests`·`feedparser`·`pykrx`는 수집 함수 안에서
+모두 외부 의존성 없이 돈다 — `requests`·`feedparser`·`pykrx`는 수집 함수 안에서
 임포트하므로 순수 함수만 테스트할 때는 설치가 필요 없다.
 
 ## 실패 처리

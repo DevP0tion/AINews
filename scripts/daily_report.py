@@ -10,11 +10,12 @@ daily_report.py — Routine 환경에서 실행되는 처리 스크립트.
 
 중복 판정 (Claude 업데이트):
   - `id`가 있으면 그 값이 대표 키. curate 단계가 원본에서 따온 안정적 값
-    (gh::{repo}::{tag} / news::{url} / rn::{date}::{slug})을 넣으므로,
-    매일 재작성되는 title 문구가 달라져도 같은 릴리즈는 같은 키가 된다.
+    (gh::{repo}::{tag} / news::{url} / rn::{date}::{slug} / app::{date}::{slug})을
+    넣으므로, 매일 재작성되는 title 문구가 달라져도 같은 릴리즈는 같은 키가 된다.
   - `id`가 없으면 기존 `{category}::{title.lower()}`로 fallback (하위 호환).
   - id가 gh::/news:: 프리픽스인 항목은 `url::{normalize_url(url)}`을 보조 키로
-    함께 등록·대조한다. rn:: 항목은 여러 건이 같은 overview URL을 공유하므로 제외.
+    함께 등록·대조한다. rn::/app:: 항목은 여러 건이 같은 릴리즈 노트 URL을
+    공유하므로 제외.
 
 동작:
   0. 입력 스키마 검증 (validate_input) — 입력은 신뢰할 수 없는 텍스트를 읽은
