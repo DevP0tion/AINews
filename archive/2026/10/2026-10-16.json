@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-16",
+  "news": [
+    {
+      "title": "Liquid AI, 온디바이스 에이전트용 MoE 추론 모델 LFM2.5-24B-A2B 공개",
+      "summary": "Liquid AI가 10월 13일 온디바이스 에이전트를 겨냥한 오픈 웨이트 추론 모델 LFM2.5-24B-A2B를 공개했다. 총 24B 파라미터 중 토큰당 약 2B만 활성화하는 MoE 구조(40 layers, 블록당 64 experts, top-4 routing)에 gated short convolution과 GQA를 섞었고, 컨텍스트는 32,768에서 131,072 토큰으로 늘렸다. Apple M5 Max에서 184 tokens/s를 기록했지만 GPQA Diamond 74.42, SWE-Bench Verified 51.00으로 지식·코딩 과제에서는 더 큰 MoE 모델에 뒤진다고 밝혔다.",
+      "url": "https://www.liquid.ai/blog/lfm2-5-24b-a2b"
+    },
+    {
+      "title": "Goodfire \"신경망은 이미 깔끔하다\" — superposition 가설에 반론",
+      "summary": "Goodfire의 Nick Cammarata가 뉴런의 다의성(polysemanticity)이 superposition이 아니라 구조·시각화 도구의 한계와 '재귀적 일반화(recursive generalization)' 패턴에서 비롯된다는 작업 가설을 제시했다. InceptionV1의 마지막 레이어를 residual connection·LayerNorm으로 재학습하자 모델 크기나 데이터를 바꾸지 않고도 뉴런의 99~100%가 쉽게 해석됐다고 주장한다. Qwen3-32B 예비 감사에서는 뉴런 pole의 약 90%가 하나의 주된 기능을, 약 7%가 두 개를 갖는다고 추정했으며, 저자 본인이 이 수치가 예비적이고 임계값에 좌우된다고 밝혔다.",
+      "url": "https://already-clean.goodfire.com/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Claude Opus 5.5 Fast mode, research preview 종료",
+      "content": "Claude Opus 5.5의 Fast mode가 research preview를 벗어나 액세스 신청 없이 쓸 수 있고 `fast-mode-2026-02-01` 베타 헤더도 더 이상 필요하지 않으며(보내도 동작), 모든 usage tier에 기본 fast mode rate limit이 생겼다. Opus 5와 Opus 4.8의 Fast mode는 계속 research preview로 베타 헤더가 필요하다.",
+      "special": true,
+      "id": "rn::2026-10-15::fast-mode-out-of-research-preview",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode"
+    },
+    {
+      "category": "모델/API",
+      "title": "Microsoft Foundry에서도 Opus 5.5 Fast mode 사용 가능",
+      "content": "Claude Opus 5.5의 Fast mode가 Azure 호스팅 배포를 대상으로 Claude in Microsoft Foundry에서 사용 가능해졌다.",
+      "special": false,
+      "id": "rn::2026-10-15::fast-mode-microsoft-foundry",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry"
+    },
+    {
+      "category": "모델/API",
+      "title": "Compliance API, 사용자 저장 지시문 조회 추가 (베타)",
+      "content": "Compliance API가 조직 구성원이 claude.ai의 Instructions for Claude와 Cowork의 Global instructions에 저장한 텍스트를 반환하며, Claude Enterprise 조직 대상 베타로 `GET /v1/compliance/organizations/{org_uuid}/user_preferences`를 `read:compliance_user_data` 스코프로 호출한다.",
+      "special": false,
+      "id": "rn::2026-10-15::compliance-api-user-preferences",
+      "url": "https://platform.claude.com/docs/en/manage-claude/compliance-api"
+    },
+    {
+      "category": "생태계",
+      "title": "An update on independent evaluators",
+      "content": "Anthropic이 프런티어 모델 평가 비영리 단체 METR 팀에 '직원 수준(employee-like)' 접근 권한을 제공하기 시작했고 METR이 위험 평가를 공개할 예정이며, SecureBio·Accenture와도 평가자로 협력하고 Hugging Face 등 다른 기관과 초기 논의를 진행 중이라고 밝혔다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/an-update-on-independent-evaluators",
+      "url": "https://www.anthropic.com/news/an-update-on-independent-evaluators"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.301",
+      "content": "unattended retry 모드가 너무 먼 usage limit 리셋을 기다리지 않고 요청을 종료하도록 `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS`를 추가하고, vim 모드에 `%` 모션과 OpenTelemetry `tool_decision` 이벤트의 `classifier_verdict`·`permission_mode`·`classifier_category` 필드를 더했다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.301",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v1.15.0",
+      "content": "Messages에 `speed` 파라미터와 `usage.speed`를 추가하고, model capabilities의 thinking 타입에 `between_tools`를 더하며, Console 조직의 usage-tier 지출 상한을 읽기 전용 spend limit으로 반환한다(일부 모델은 speed 사용 시 베타 헤더 필요).",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.15.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.15.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk-v0.135.0",
+      "content": "Messages의 `speed` 파라미터와 `usage.speed`, thinking 타입의 `between_tools`를 추가하고, 끝까지 읽지 않고 버려진 스트림을 닫는 등 클라이언트 스트림 처리 버그를 수정했다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.135.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.135.0"
+    }
+  ],
+  "specials": [
+    "Claude Opus 5.5 Fast mode, research preview 종료"
+  ],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 6
+  }
+}
