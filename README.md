@@ -183,9 +183,17 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 }
 ```
 
-- `symbol`: Yahoo Finance 티커. KOSPI는 `6자리.KS`, KOSDAQ은 `6자리.KQ`
+- `symbol`: Yahoo Finance 티커. KOSPI는 `6자리.KS`, KOSDAQ은 `6자리.KQ`, 상하이는 `6자리.SS`
+  (예: 창신메모리 `688825.SS`)
 - `name`: 리포트에 표시되는 이름. Claude가 종목별 뉴스를 묶을 때 쓰는 키이기도 하다
 - `aliases`: RSS 헤드라인에서 이 종목을 찾을 때 쓰는 별칭. 약칭·영문명을 넣으면 매칭률이 오른다
+
+해외 종목도 같은 방식으로 추가한다. 국내 종목과 다른 점:
+- 페이지에 통화 코드를 붙이고(`46.00 CNY`) 현재가 아래에 원화 환산값(`≈9,248원`)을 함께 찍는다.
+  환율은 Yahoo `{통화}KRW=X`(예: `CNYKRW=X`)를 수집 시점에 받은 값이다
+- KRX 투자자 동향은 국내 종목(`.KS`/`.KQ`)만 수집하므로 투자자 수급 섹션에 나오지 않는다.
+  한경 컨센서스 증권사 리포트도 국내 종목만 다룬다
+- 거래소 휴장일이 국내와 달라서, 그쪽 휴장 중에는 시세가 지연(⚠️)으로 표시된다
 
 ## 수집 소스 (collect_data.py)
 
@@ -220,6 +228,8 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 **시세** — Yahoo Finance chart API (`query1.finance.yahoo.com/v8/finance/chart/{symbol}`, API 키 불필요).
 `range=1d`의 `meta.chartPreviousClose`를 전일 종가로, `regularMarketPrice`를 현재가로 쓴다.
 대상은 `config/watchlist.json`의 `indices`(코스피/코스닥/나스닥/원달러)와 `stocks`.
+원화가 아닌 종목은 같은 API로 `{통화}KRW=X` 환율을 통화당 1회 받아 `krw_rate`로 붙인다
+(실패하면 환산만 생략).
 
 **종가 시계열** — 관심종목에 한해 `range=6mo&interval=1d`로 일봉 종가도 받아
 **별도 파일** `inbox/YYYY-MM-DD-stock-history.json`에 `{symbol: [{"date","close"}]}`
@@ -377,7 +387,7 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 
 | 항목 | 값 |
 |---|---|
-| 대상 | `watchlist`의 각 종목만 (시장 집계는 받지 않는다) |
+| 대상 | `watchlist`의 KRX 종목(`.KS`/`.KQ`)만 (해외 종목·시장 집계는 받지 않는다) |
 | 지표 | `매수` / `매도` / `순매수` (거래대금 기준) |
 | 투자자 구분 | `외국인` / `개인` / `기관`(= KRX의 `기관합계` 행) |
 | 단위 | 원 (페이지에서는 억/조로 환산) |

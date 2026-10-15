@@ -16,14 +16,15 @@ from collect_research import (  # noqa: E402
 )
 from render_stock_page import (  # noqa: E402
     fmt_billion, fmt_change, fmt_consensus, fmt_daylabel, fmt_dday,
-    fmt_level_context, fmt_pct, fmt_price, fmt_volume, group_by_month,
+    fmt_krw, fmt_level_context, fmt_pct, fmt_price, fmt_volume, group_by_month,
+    krw_rate_of,
     month_label, nice_bounds, render, render_calendar, render_chart,
     render_drawer, render_investor, render_reports, render_stale,
     render_target_change, render_weekly,
 )
-from collect_stock import is_stale, quote_time_iso  # noqa: E402
+from collect_stock import fx_symbol, is_stale, quote_time_iso  # noqa: E402
 from collect_investor import (  # noqa: E402
-    merge_day, pick_investor_values, prune, ticker_of,
+    is_krx, merge_day, pick_investor_values, prune, ticker_of,
 )
 
 NAMES = {"삼성전자", "SK하이닉스"}
@@ -103,6 +104,20 @@ assert fmt_price(1383.46, "KRW") == "1,383.46"      # 원/달러
 assert fmt_price(833.76, "KRW") == "833.76"         # 코스닥
 assert fmt_price(26522.545, "USD") == "26,522.54"   # 나스닥
 assert fmt_price(None, "KRW") == "—"
+# 원화 외 종목은 통화 코드를 붙인다 — 원화 종목과 나란히 놓여 단위 없이는 구분이 안 된다
+assert fmt_price(46.0, "CNY", is_stock=True) == "46.00 CNY"
+assert fmt_price(46.0, "CNY", is_stock=True, unit=False) == "46.00"
+assert fmt_price(46.0, None, is_stock=True) == "46.00"     # 통화를 모르면 붙이지 않는다
+
+# 원화 환산 — 환율이 정상일 때만, 원화 종목에는 만들지 않는다
+CNY_RATE = {"symbol": "CNYKRW=X", "rate": 201.042, "quote_time": "2026-10-15T00:00:00Z"}
+assert krw_rate_of({"currency": "CNY", "krw_rate": CNY_RATE}) == 201.042
+assert krw_rate_of({"currency": "KRW", "krw_rate": CNY_RATE}) is None
+assert krw_rate_of({"currency": "CNY"}) is None
+for bad in (0, -1, None, True, "201", float("nan")):
+    assert krw_rate_of({"currency": "CNY", "krw_rate": {"rate": bad}}) is None, bad
+assert fmt_krw(46.0, 201.042) == "≈9,248원", fmt_krw(46.0, 201.042)
+assert fmt_krw(46.0, None) == "" and fmt_krw(None, 201.0) == ""
 assert fmt_change(None, None) == ("—", "flat")
 assert fmt_change(100, 1.5)[1] == "up"
 assert fmt_change(-100, -1.5)[1] == "down"
@@ -185,6 +200,10 @@ short_line = fmt_level_context(
      "box_low": 100.0, "box_high": 100.0, "box_window": 1}, "KRW",
 )
 assert short_line.endswith("1일 박스 100~100"), short_line
+
+# 원화 외 종목의 박스는 통화 코드를 한 번만 찍는다
+cny_line = fmt_level_context({"box_low": 44.5, "box_high": 48.0, "box_window": 20}, "CNY")
+assert cny_line == "20일 박스 44.50~48.00 CNY", cny_line
 
 # 0은 부호를 붙이지 않는다 — "고점 +0.0%"는 고점을 넘은 것처럼 읽힌다
 zero_line = fmt_level_context(
@@ -326,6 +345,32 @@ assert all(len(h["date"]) == 10 for h in hist), hist
 assert calls[-1]["range"] == collect_stock.HISTORY_RANGE, calls
 assert delays == [1.0], delays
 
+# 원화 환산용 환율 티커
+assert fx_symbol("CNY") == "CNYKRW=X" and fx_symbol("usd") == "USDKRW=X"
+for none in ("KRW", "krw", None, "", 1):
+    assert fx_symbol(none) is None, none
+
+# 환율은 통화당 한 번만 받고, 원화 종목에는 붙이지 않는다
+FX_PAYLOAD = {"chart": {"result": [{"meta": {"regularMarketPrice": 201.042,
+                                             "regularMarketTime": 1792025367}}]}}
+fx_quotes = [{"symbol": "005930.KS", "currency": "KRW"},
+             {"symbol": "688825.SS", "currency": "CNY"},
+             {"symbol": "688981.SS", "currency": "CNY"}]
+out, calls, _ = _with_fake([FX_PAYLOAD], lambda: collect_stock.attach_krw_rates(fx_quotes))
+assert len(calls) == 1, calls
+assert "krw_rate" not in out[0], out[0]
+assert out[1]["krw_rate"] == out[2]["krw_rate"] == {
+    "symbol": "CNYKRW=X", "rate": 201.042, "quote_time": quote_time_iso(1792025367),
+}, out[1]
+
+# 환율 조회가 끝내 실패하면 krw_rate 없이 나간다 (시세는 그대로)
+failed = [{"symbol": "688825.SS", "currency": "CNY", "price": 46.0}]
+out, _, _ = _with_fake(
+    [OSError("dns")] * (collect_stock.FETCH_RETRIES + 1),
+    lambda: collect_stock.attach_krw_rates(failed),
+)
+assert out == [{"symbol": "688825.SS", "currency": "CNY", "price": 46.0}], out
+
 
 assert quote_time_iso(0) == "1970-01-01T00:00:00Z"
 assert quote_time_iso(1789967099) == "2026-09-21T05:04:59Z"   # KST 14:04 장중
@@ -355,6 +400,32 @@ old_page = render("2026-09-21", {
     "market_news": [], "stock_news": {},
 })
 assert "⚠️" not in old_page
+
+# 원화 외 종목: 가격에 통화 코드, 그 아래 원화 환산, meta 줄에 쓴 환율
+fx_page = render("2026-10-15", {
+    "quotes": {"indices": [], "stocks": [
+        {"symbol": "005930.KS", "name": "삼성전자", "price": 273250.0, "prev_close": 270000.0,
+         "change": 3250.0, "change_pct": 1.2, "currency": "KRW"},
+        {"symbol": "688825.SS", "name": "창신메모리", "price": 46.0, "prev_close": 46.99,
+         "change": -0.99, "change_pct": -2.107, "currency": "CNY", "krw_rate": CNY_RATE},
+    ]},
+    "market_news": [], "stock_news": {},
+})
+assert '<span class="price">46.00 CNY</span>' in fx_page
+assert '<div class="fx">≈9,248원</div>' in fx_page
+assert "전일종가 46.99 CNY" in fx_page and "원/CNY 201.04" in fx_page
+assert '<span class="price">273,250</span>' in fx_page
+assert fx_page.count('class="fx"') == 1          # 원화 종목에는 환산 줄이 없다
+
+# 환율이 없으면 환산만 빠지고 통화 코드는 남는다
+no_fx_page = render("2026-10-15", {
+    "quotes": {"indices": [], "stocks": [
+        {"symbol": "688825.SS", "name": "창신메모리", "price": 46.0, "change": -0.99,
+         "change_pct": -2.107, "currency": "CNY"},
+    ]},
+    "market_news": [], "stock_news": {},
+})
+assert "46.00 CNY" in no_fx_page and 'class="fx"' not in no_fx_page and "원/CNY" not in no_fx_page
 
 
 # --- 애널리스트 컨센서스 ----------------------------------------------------
@@ -715,6 +786,10 @@ assert empty.strip().endswith("</html>")
 assert ticker_of("005930.KS") == "005930"
 assert ticker_of("000660.KQ") == "000660"
 assert ticker_of("005930") == "005930"
+
+# KRX 조회 대상은 .KS/.KQ만 — 해외 종목은 KRX에 없다
+assert is_krx("005930.KS") and is_krx("000660.KQ") and is_krx("005930.ks")
+assert not is_krx("688825.SS") and not is_krx("005930")
 
 # 투자자 × 매수/매도/순매수. 기관은 합계 행을 쓰고 개별 업권은 무시
 frame = {

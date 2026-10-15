@@ -19,7 +19,8 @@ curate 단계의 Claude가 raw 파일을 통째로 읽기 때문에, 뉴스 선�
     "watchlist": [{"symbol", "name", "aliases"}],
     "quotes": {
       "indices": [{"symbol","name","price","change","change_pct","prev_close",...}],
-      "stocks":  [{... 동일 + "volume", "quote_time", "stale"}]
+      "stocks":  [{... 동일 + "volume", "quote_time", "stale",
+                   "krw_rate": {"symbol","rate","quote_time"}}]   # krw_rate는 원화 외 종목만
     },
     "market_news": [
       {"title","url","source","published","summary","matched": ["삼성전자", ...]}
@@ -275,6 +276,40 @@ def fetch_quotes(
     return out
 
 
+def fx_symbol(currency) -> str | None:
+    """원화 환산에 쓸 Yahoo 환율 티커. CNY → CNYKRW=X. 원화거나 통화를 모르면 None."""
+    if not isinstance(currency, str) or not currency.strip():
+        return None
+    code = currency.strip().upper()
+    return None if code == "KRW" else f"{code}KRW=X"
+
+
+def attach_krw_rates(quotes: list[dict]) -> list[dict]:
+    """원화가 아닌 종목에 원화 환율(krw_rate)을 붙인다. 통화당 한 번만 조회한다.
+
+    환율 조회가 실패하면 그 통화의 종목은 krw_rate 없이 나간다 —
+    페이지는 통화 코드만 찍고 환산값을 생략한다. 시세 자체는 그대로 둔다.
+    """
+    rates: dict[str, dict | None] = {}
+    for q in quotes:
+        symbol = fx_symbol(q.get("currency"))
+        if not symbol:
+            continue
+        if symbol not in rates:
+            fx = safe(f"fx/{symbol}", lambda: fetch_quote(symbol), None)
+            rate = (fx or {}).get("price")
+            if isinstance(rate, (int, float)) and not isinstance(rate, bool) and rate > 0:
+                rates[symbol] = {"symbol": symbol, "rate": rate,
+                                 "quote_time": fx.get("quote_time")}
+                log(f"  fx {symbol}: {rate}")
+            else:
+                rates[symbol] = None
+                log(f"WARN: {symbol} 환율 없음 — 원화 환산 생략")
+        if rates[symbol]:
+            q["krw_rate"] = rates[symbol]
+    return quotes
+
+
 def fetch_histories(entries: list[dict]) -> dict[str, list]:
     """관심종목의 종가 시계열을 {symbol: [{"date","close"}]}로.
 
@@ -398,7 +433,9 @@ def main() -> None:
         "watchlist": stocks,
         "quotes": {
             "indices": fetch_quotes(indices, collected_at),
-            "stocks": fetch_quotes(stocks, collected_at, mark_stale=True),
+            "stocks": attach_krw_rates(
+                fetch_quotes(stocks, collected_at, mark_stale=True)
+            ),
         },
         "market_news": deduped,
     }

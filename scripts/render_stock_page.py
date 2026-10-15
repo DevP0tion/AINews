@@ -14,6 +14,7 @@ from __future__ import annotations
 import datetime
 import html
 import json
+import math
 import os
 import pathlib
 import re
@@ -36,17 +37,44 @@ def esc(value) -> str:
     return html.escape(str(value), quote=True)
 
 
-def fmt_price(value, currency: str | None, *, is_stock: bool = False) -> str:
+def fmt_price(value, currency: str | None, *, is_stock: bool = False,
+              unit: bool = True) -> str:
     """원화 주가는 호가 단위가 1원이라 정수로, 지수·환율은 소수 2자리로 찍는다.
 
     통화만으로는 구분할 수 없다 — 코스피·원달러도 currency가 KRW라서
     통화로 판정하면 6,998.16이 6,998로 잘린다. 호출부가 종류를 알려준다.
+
+    원화가 아닌 종목은 뒤에 통화 코드를 붙인다 (46.00 CNY). 원화 종목과 나란히
+    놓이므로 단위가 없으면 구분이 안 된다. 범위(A~B)의 앞쪽처럼 단위를 한 번만
+    찍을 자리에서는 unit=False로 뺀다.
     """
     if value is None:
         return "—"
     if is_stock and currency == "KRW":
         return f"{float(value):,.0f}"
-    return f"{float(value):,.2f}"
+    text = f"{float(value):,.2f}"
+    if is_stock and unit and currency:
+        text += f" {currency}"
+    return text
+
+
+def krw_rate_of(q: dict) -> float | None:
+    """원화 외 종목의 원화 환율. 수집이 붙여준 값이 정상일 때만 돌려준다."""
+    if q.get("currency") in (None, "KRW"):
+        return None
+    fx = q.get("krw_rate")
+    rate = fx.get("rate") if isinstance(fx, dict) else None
+    if isinstance(rate, bool) or not isinstance(rate, (int, float)):
+        return None
+    rate = float(rate)
+    return rate if math.isfinite(rate) and rate > 0 else None
+
+
+def fmt_krw(value, rate: float | None) -> str:
+    """원화 환산 표기. 예: "≈9,248원". 값이나 환율이 없으면 빈 문자열."""
+    if rate is None or isinstance(value, bool) or not isinstance(value, (int, float)):
+        return ""
+    return f"≈{float(value) * rate:,.0f}원"
 
 
 def fmt_change(change, pct) -> tuple[str, str]:
@@ -86,7 +114,7 @@ def fmt_level_context(ctx, currency: str | None) -> str:
     if box_low is not None and box_high is not None and window:
         parts.append(
             f"{int(window)}일 박스 "
-            f"{fmt_price(box_low, currency, is_stock=True)}~"
+            f"{fmt_price(box_low, currency, is_stock=True, unit=False)}~"
             f"{fmt_price(box_high, currency, is_stock=True)}"
         )
     return " · ".join(parts)
@@ -539,6 +567,14 @@ def render_stocks(quotes: list[dict], stock_news: dict, reports: dict | None = N
         cons = fmt_consensus(q.get("consensus"), q.get("currency"), q.get("price"))
         cons_row = f'<div class="meta level">{esc(cons)}</div>' if cons else ""
         report_list = render_reports((reports or {}).get(name))
+        # 원화 외 종목: 가격 아래에 원화 환산, meta 줄에 쓴 환율을 밝힌다.
+        # 환율은 수집 시점 값이라 종가 시각과 어긋날 수 있어 "≈"로 표기한다.
+        rate = krw_rate_of(q)
+        krw = fmt_krw(q.get("price"), rate)
+        krw_row = f'<div class="fx">{esc(krw)}</div>' if krw else ""
+        rate_note = (
+            f' · 원/{esc(q.get("currency"))} {esc(f"{rate:,.2f}")}' if rate else ""
+        )
         blocks.append(
             f'<article class="stock">'
             f'<header class="stock-head">'
@@ -546,10 +582,10 @@ def render_stocks(quotes: list[dict], stock_news: dict, reports: dict | None = N
             f'<span class="ticker">{esc(q["symbol"])}</span></div>'
             f'<div class="stock-num"><span class="price">{esc(fmt_price(q.get("price"), q.get("currency"), is_stock=True))}</span>'
             f'{stale}'
-            f'<span class="chg {cls}">{esc(text)}</span></div>'
+            f'<span class="chg {cls}">{esc(text)}</span>{krw_row}</div>'
             f'</header>'
             f'<div class="meta">전일종가 {esc(fmt_price(q.get("prev_close"), q.get("currency"), is_stock=True))}'
-            f' · 거래량 {esc(fmt_volume(q.get("volume")))}</div>'
+            f' · 거래량 {esc(fmt_volume(q.get("volume")))}{rate_note}</div>'
             f'{level_row}'
             f'{cons_row}'
             f'{report_list}'
@@ -641,6 +677,7 @@ margin-right:6px}
 font-variant-numeric:tabular-nums}
 .meta.level{margin-top:-6px}
 .stale{margin-right:4px;font-size:.85rem;cursor:help}
+.fx{font-size:.76rem;color:var(--muted);font-variant-numeric:tabular-nums}
 ul.reports{list-style:none;margin:8px 0 0;padding:8px 0 0;border-top:1px dashed var(--line)}
 ul.reports li{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;padding:4px 0;
 font-size:.82rem}
