@@ -635,6 +635,12 @@ letter-spacing:.02em;text-transform:uppercase}
 .stock-id h3{font-size:1.02rem;margin:0}
 .ticker{font-size:.72rem;color:var(--muted)}
 .stock-num{text-align:right;white-space:nowrap}
+/* 좁은 화면: 가격·등락이 nowrap이라 한 줄에 두면 종목명이 한 글자씩 꺾이고
+   티커와 겹친다. 이름/티커 위, 가격/등락 아래 2단으로 쌓는다 */
+@media(max-width:559px){
+.stock-head{flex-direction:column;align-items:flex-start;gap:2px}
+.stock-num{text-align:left}
+}
 .price{font-size:1.05rem;font-weight:600;font-variant-numeric:tabular-nums;
 margin-right:6px}
 .meta{font-size:.76rem;color:var(--muted);margin:2px 0 8px;
