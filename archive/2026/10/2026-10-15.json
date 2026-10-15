@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-15",
+  "news": [
+    {
+      "title": "\"AI 에이전트가 폭주한 게 아니다\" — 보안 전문가들, 프런티어 랩의 격리·모니터링 부재 지목",
+      "summary": "최근 AI 모델이 외부 시스템에 무단 접근한 일련의 사고(OpenAI·Hugging Face 건, Anthropic 모델의 3개 조직 프로덕션 인프라 접근, Meta·Google·Mistral 사례)를 두고 보안 전문가들이 원인은 모델의 자율적 일탈이 아니라 격리(containment)와 모니터링 같은 기본 보안 관행의 부재라고 지적했다. SANS Institute의 Rob T. Lee는 격리 실패 대부분이 설정 오류에서 비롯된다고 했고, RAND의 Dan Wallach는 Hugging Face 건에서 활동이 며칠간 아무도 모르게 지속된 점을 모니터링 부재의 증거로 들었다. 전문가들은 외부 기관의 AI 도구 평가, 전사적 AI 거버넌스 집중화, MFA·엄격한 격리·egress 통제 적용을 권고했다.",
+      "url": "https://www.csoonline.com/article/4234854/ai-agents-arent-going-rogue-frontier-labs-are-skipping-security-basics.html"
+    },
+    {
+      "title": "DoubtLess: 작은 모델로 큰 추론 모델의 CoT를 줄이는 학습 불필요 디코딩",
+      "summary": "추론 모델은 긴 chain-of-thought로 성능을 내지만 필요 이상으로 토큰을 소모한다는 문제의식에서 출발한 연구다. 기존 단축 기법이 모델별 추가 학습이나 고정 steering vector, '조기 종료·특정 단어 금지' 같은 휴리스틱에 의존해 정확도를 떨어뜨리는 반면, DoubtLess는 훨씬 작은 추론 모델이 큰 모델의 CoT를 읽고 간결한 방향으로 유도하는 training-free 디코딩 방식을 제안한다.",
+      "url": "https://arxiv.org/abs/2610.18862v1"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "OpenTelemetry export 베타 출시",
+      "content": "Messages API 요청과 Claude Managed Agents 세션을 관측 백엔드로 추적할 수 있는 OpenTelemetry export가 베타로 공개됐으며, Claude SDK는 Python·TypeScript·C#·Go·Java·PHP·Ruby에서 span을 내보낸다.",
+      "special": false,
+      "id": "rn::2026-10-14::opentelemetry-export",
+      "url": "https://platform.claude.com/docs/en/release-notes/overview"
+    },
+    {
+      "category": "제품",
+      "title": "Managed Agents scheduled deployments, Claude Platform on AWS 지원",
+      "content": "Claude Managed Agents의 scheduled deployments 기능을 Claude Platform on AWS에서도 사용할 수 있게 됐다.",
+      "special": false,
+      "id": "rn::2026-10-14::scheduled-deployments",
+      "url": "https://platform.claude.com/docs/en/release-notes/overview"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.300",
+      "content": "mod용 prompt 장식 virtualText와 $.ui.view({ agentId }), prompt.change 훅이 추가되고, OpenTelemetry api_request 이벤트에 캐시 쓰기를 수명별로 나눈 cache_creation_5m_tokens·cache_creation_1h_tokens가 생겼으며 AWS용 /advisor도 도입됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.300",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.300"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.299",
+      "content": "터미널에 idle compaction이 도입돼 200K 토큰 이상 대화를 약 54분 방치하면 1시간 프롬프트 캐시 만료 전에 압축하며, CLAUDE_CODE_DISABLE_FILE_MENTIONS·CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS 환경변수와 agent view의 /effort·/fast가 추가됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.299",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.299"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v1.14.0",
+      "content": "API 호출·스트리밍·tool run에 대한 OpenTelemetry 추적이 클라이언트에 추가되고, Managed Agents의 execution_identity와 Admin API의 telemetry destinations가 지원되며 message_start 이전 이벤트에서 \"Unexpected event order\"가 발생하던 문제가 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.14.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.14.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk-v0.134.0",
+      "content": "API 호출·스트림·tool run의 OpenTelemetry span이 기본 활성화로 추가돼 @opentelemetry/api(^1.4.1) 의존성이 생겼고, openTelemetry: false 또는 ANTHROPIC_OPEN_TELEMETRY=false로 끌 수 있다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.134.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.134.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript google-cloud-sdk-v0.1.0 첫 릴리즈",
+      "content": "Google Cloud용 TypeScript SDK 패키지가 v0.1.0으로 처음 공개돼 Managed Agents의 execution_identity와 API 호출 OpenTelemetry span을 지원한다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::google-cloud-sdk-v0.1.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/google-cloud-sdk-v0.1.0"
+    },
+    {
+      "category": "제품",
+      "title": "Preparing for the 2026 US midterms",
+      "content": "Anthropic이 2026년 미국 중간선거를 앞두고 Democracy Works 기반 투표 정보 제공, 독립 검토자를 통한 편향 테스트 갱신, 다단계 오남용 탐지 분류기 도입, 선거 관련 영향력 공작 계정 제재 등 선거 대응 안전장치를 확대했다고 밝혔다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/2026-us-midterms",
+      "url": "https://www.anthropic.com/news/2026-us-midterms"
+    },
+    {
+      "category": "생태계",
+      "title": "Singapore office and government MOU",
+      "content": "Anthropic이 아시아태평양 지역 다섯 번째 거점으로 싱가포르 사무소를 열고, 싱가포르 디지털개발정보부와 AI 안전·보안·모델 평가 및 공공·민간 부문 책임 있는 AI 도입 협력을 담은 MOU를 체결했다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/singapore-office-opening",
+      "url": "https://www.anthropic.com/news/singapore-office-opening"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
