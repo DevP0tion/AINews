@@ -5,7 +5,7 @@ collect_investor.py — 투자자별(외국인/개인/기관) 순매수를 KRX�
 매 실행마다 **직전 영업일 하루치**만 가져와 state/investor_trend.json에 누적한다.
 리포트는 이 누적분에서 최근 5영업일을 읽어 선 그래프로 보여준다 (stock_report.py).
 
-대상은 watchlist의 **종목만**이다. 시장(코스피/코스닥) 집계는 받지 않는다.
+대상은 watchlist의 **KRX 종목(.KS/.KQ)만**이다. 해외 종목과 시장(코스피/코스닥) 집계는 받지 않는다.
 투자자 구분(외국인/개인/기관)마다 매수·매도·순매수 세 값을 저장한다 —
 "순매수 +100억"이 1조 매수/9,900억 매도인지 100억 매수뿐인지 구분하기 위해서다.
 
@@ -56,6 +56,11 @@ def log(msg: str) -> None:
 def ticker_of(symbol: str) -> str:
     """Yahoo 티커에서 KRX 6자리 코드만 떼어낸다. 005930.KS → 005930"""
     return symbol.split(".")[0]
+
+
+def is_krx(symbol: str) -> bool:
+    """KRX 상장 종목인가 (Yahoo 접미사 .KS/.KQ). 해외 종목은 KRX에 조회하지 않는다."""
+    return symbol.upper().endswith((".KS", ".KQ"))
 
 
 def pick_investor_values(frame: dict) -> dict | None:
@@ -174,9 +179,13 @@ def main() -> None:
     date_key = f"{target[:4]}-{target[4:6]}-{target[6:8]}"
     log(f"대상 영업일: {date_key}")
 
-    targets = [(s["name"], ticker_of(s["symbol"])) for s in load_watchlist()]
+    watchlist = load_watchlist()
+    skipped = [s for s in watchlist if not is_krx(s["symbol"])]
+    if skipped:
+        log("KRX 외 종목 제외: " + ", ".join(f"{s['name']}({s['symbol']})" for s in skipped))
+    targets = [(s["name"], ticker_of(s["symbol"])) for s in watchlist if is_krx(s["symbol"])]
     if not targets:
-        log("watchlist가 비어 있습니다 — 건너뜁니다")
+        log("조회할 KRX 종목이 없습니다 — 건너뜁니다")
         return
 
     state = load_state(STATE_PATH)

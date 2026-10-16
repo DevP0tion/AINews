@@ -1,5 +1,5 @@
 {
-  "_comment": "관심종목 목록. symbol은 Yahoo Finance 티커 (KOSPI: 6자리.KS, KOSDAQ: 6자리.KQ). aliases는 RSS 헤드라인에서 이 종목을 찾을 때 쓰는 별칭 — 붙여쓰기/약칭/영문명을 넣으면 매칭률이 올라간다.",
+  "_comment": "관심종목 목록. symbol은 Yahoo Finance 티커 (KOSPI: 6자리.KS, KOSDAQ: 6자리.KQ, 상하이: 6자리.SS). 원화가 아닌 종목은 페이지에 통화 코드와 원화 환산값이 함께 표시되고, KRX 투자자 동향은 국내 종목만 수집된다. aliases는 RSS 헤드라인에서 이 종목을 찾을 때 쓰는 별칭 — 붙여쓰기/약칭/영문명을 넣으면 매칭률이 올라간다.",
   "stocks": [
     {
       "symbol": "005930.KS",
@@ -10,6 +10,11 @@
       "symbol": "000660.KS",
       "name": "SK하이닉스",
       "aliases": ["SK하이닉스", "하이닉스", "SK hynix"]
+    },
+    {
+      "symbol": "688825.SS",
+      "name": "창신메모리",
+      "aliases": ["창신메모리", "CXMT", "ChangXin"]
     }
   ],
   "indices": [

@@ -27,6 +27,12 @@ rn = claude_item_keys({"id": "rn::2026-08-06::opus-5-ga", "category": "모델/AP
                        "title": "x", "url": "https://docs.claude.com/en/release_notes/overview"})
 assert rn == ["rn::2026-08-06::opus-5-ga"], rn
 
+# app::(앱 릴리즈 노트)도 같은 이유로 보조 url 키가 없다
+app = claude_item_keys({"id": "app::2026-10-07::monthly-api-credits", "category": "제품",
+                        "title": "x",
+                        "url": "https://support.claude.com/en/articles/12138966-release-notes"})
+assert app == ["app::2026-10-07::monthly-api-credits"], app
+
 # id 없으면 기존 {category}::{title.lower()} fallback
 legacy = claude_item_keys({"category": "SDK", "title": "Legacy Item",
                            "url": "https://example.com/a"})
