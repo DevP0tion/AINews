@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-19",
+  "news": [
+    {
+      "title": "Hybrid Reasoning Agents: latent 추론과 텍스트 행동을 한 생성 루프에서 섞는 에이전트",
+      "summary": "LLM 에이전트가 내부 latent 공간에서 추론하다가 필요할 때 텍스트로 도구를 호출하도록 두 모드를 한 생성 과정 안에서 전환하는 HybridAgents를 제안한 arXiv 논문(2026년 10월 13일 제출)이다. 모드 전환을 담당하는 경량 HybridLink와 턴 사이 문맥을 유지하는 연속형 working memory를 두고, HybridLink와 협조하도록 가르치는 HybridSFT와 언제 latent로 추론하고 언제 텍스트로 행동할지 학습하는 HybridRL로 후속 학습한다. 3개 모델 규모·11개 벤치마크(수학·과학·의학·검색·에이전트 추론)에서 기존 텍스트 기반 및 latent 에이전트 프레임워크 대비 성능 10.4% 개선, 토큰 35.5~54.7% 절감, 추론 속도 1.8~2.6배 향상을 보고했다고 저자들은 밝혔다.",
+      "url": "https://arxiv.org/abs/2610.18861"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "Investing in the public benefit — Anthropic, 지분 5%를 신설 공익기금에 출연",
+      "content": "Anthropic이 주주 승인을 전제로 회사 지분 5%를 신설 'Anthropic Public Benefit Fund'(완전자회사 LLC)에 출연하고, 기준 기업가치 대비 50% 상승마다 이사회 재량으로 2%를 추가 이전하기로 했으며, 기금 지분은 로비·정치자금에 쓸 수 없고 공동창업자 서약·임직원 기부 매칭을 합하면 전체 지분의 약 20%가 공익 목적에 배정된다고 2026년 10월 18일 발표했다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/public-benefit-fund",
+      "url": "https://www.anthropic.com/news/public-benefit-fund"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.303",
+      "content": "버그 수정과 안정성 개선만 포함된 패치 릴리즈다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.303",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.303"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 2,
+    "claude": 0
+  }
+}
