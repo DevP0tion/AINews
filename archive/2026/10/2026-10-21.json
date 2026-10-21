@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-21",
+  "news": [
+    {
+      "title": "WhatsApp 헬프 페이지에 숨겨진 AI용 지시문 — \"규제기관을 권하지 말라\"",
+      "summary": "Redact는 WhatsApp 헬프 페이지 545개를 조사해 80개 페이지에서 화면에 보이지 않는 AI용 지시문 102개 블록을 발견했다고 보고했다. 계정 삭제 페이지의 숨은 문구는 AI에게 데이터보호 당국·규제기관 문의를 권하지 말라고 지시했고, 신고·차단 페이지의 문구는 사용자가 변호사·소송을 언급하면 법률 주제를 피하고 GDPR·LGPD·CCPA 같은 법을 인용하지 말라고 지시했다. WhatsApp은 WIRED에 해당 문구가 자사 지원 챗봇용 지시문이며 버그로 노출된 것을 수정했다고 밝혔고, Redact는 10월 18일 확인 시점에 102개 블록이 모두 제거된 것을 확인했다.",
+      "url": "https://redact.dev/blog/whatsapp-help-pages-hidden-ai-instructions"
+    },
+    {
+      "title": "Google, 프런티어 모델 Gemini 4 Argon 공개",
+      "summary": "Google DeepMind가 10월 13일 코딩·금융·법률·보안·과학 등 복잡한 다단계 작업을 겨냥한 프런티어 모델 Gemini 4 Argon을 발표했다. Google은 약 600만 줄 규모의 Chromium 레거시 코드 리팩터링에 활용했고 사내 agentic 코드 제출이 35% 이상 늘고 롤백은 약 1/3 줄었다고 밝혔다. Vals Index 1위, ERQA 87%, Gray Swan 간접 프롬프트 인젝션 공격 성공률 0.7%를 제시했으며, 가격은 도입 기간 입력 100만 토큰당 $2 / 출력 $10, 11월 30일 이후 $4 / $20다.",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Inference hooks, Claude Enterprise 조직에 정식 제공(베타 종료)",
+      "content": "Claude Enterprise 조직을 대상으로 inference hooks가 베타를 벗어나 정식 기능으로 전환됐다.",
+      "special": true,
+      "id": "rn::2026-10-20::inference-hooks",
+      "url": "https://platform.claude.com/docs/en/manage-claude/inference-hooks"
+    },
+    {
+      "category": "생태계",
+      "title": "How Claude designed protein binders against scorpion neurotoxins",
+      "content": "내부 연구 모델이 약 64시간 동안 대체로 자율적으로 전갈 신경독소 결합 단백질 318,484개를 설계해 211개를 실험한 결과 17개가 결합체 기준을 충족했으며(최상위 Cn2-B1·Cn2-B2는 한 자리 nM 친화도), 재조합 독소 대상 결합 실험만 수행했을 뿐 중화 시험은 하지 않아 해독제를 만들었다고 주장하지 않는다고 밝혔다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/research/claude-scorpion-toxin-binder-design",
+      "url": "https://www.anthropic.com/research/claude-scorpion-toxin-binder-design"
+    },
+    {
+      "category": "생태계",
+      "title": "Using Claude to reduce the attack surface of code",
+      "content": "Frontier Red Team이 오픈소스 25개 프로젝트(500만 줄 이상)에 Claude를 돌려 공격 표면 관련 493건을 보고했고(보안 제어가 조용히 꺼지는 설정 조합 94건 포함, OpenSSH에서는 기본 설정에서 미인증 클라이언트가 닿는 약 4,500줄의 실험적 post-quantum 서명 코드 발견), 해당 기법을 재사용 가능한 Claude skill로 패키징해 OSS-Scanner 연동을 추진 중이라고 밝혔다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/research/attack-surface-reduction",
+      "url": "https://www.anthropic.com/research/attack-surface-reduction"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.305",
+      "content": "Linux 샌드박스에서 user namespace 생성을 허용하는 `sandbox.allowNestedUserNamespaces` 설정이 추가됐고, Vertex·Bedrock 등에서 tool search 거부 시 모든 요청이 실패하던 2.1.304 회귀를 포함해 다수 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.305",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v1.17.0",
+      "content": "조직 webhook 엔드포인트와 user profile enforcement 이벤트가 추가되고, Admin API의 RBAC 그룹 owner-access 오류 코드가 보강됐으며 Bedrock·Google Cloud 클라이언트의 default_headers 유지 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.17.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.17.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v1.16.0",
+      "content": "User Profiles가 정식 제공(GA)으로 전환된 내용이 반영됐고, analytics 리포트 페이지에 `data_refreshed_at`·`has_more`가 추가되며 Admin API에 워크스페이스 rate limit 수정 기능이 들어갔다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v1.16.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.16.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk-v0.137.0",
+      "content": "조직 webhook 엔드포인트와 user profile enforcement 이벤트 타입이 추가됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.137.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.137.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk-v0.136.0",
+      "content": "User Profiles GA 반영과 함께 tool helper가 모든 tool definition 필드를 받도록 개선되고, `x-amz-security-token`을 민감 헤더로 취급하도록 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v0.136.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.136.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript bedrock-sdk-v0.36.0",
+      "content": "`AnthropicBedrockMantle`의 Messages·토큰 카운팅 요청에 `user_profile_id`를 보내고, user profiles를 지원하지 않는 `AnthropicBedrock`에서 `userProfiles`를 읽으면 `AnthropicError`를 던진다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::bedrock-sdk-v0.36.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/bedrock-sdk-v0.36.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript vertex-sdk-v0.22.0",
+      "content": "user profile 엔드포인트를 제공하지 않는 `AnthropicVertex`에서 `userProfiles` 또는 `beta.userProfiles`를 읽으면 `AnthropicError`를 던지도록 변경됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::vertex-sdk-v0.22.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/vertex-sdk-v0.22.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript google-cloud-sdk-v0.2.0",
+      "content": "Google Cloud 연동이 v1 엔드포인트를 사용하도록 바뀌고 organization 엔드포인트가 추가됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::google-cloud-sdk-v0.2.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/google-cloud-sdk-v0.2.0"
+    }
+  ],
+  "specials": [
+    "Inference hooks, Claude Enterprise 조직에 정식 제공(베타 종료)"
+  ],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 1
+  }
+}
