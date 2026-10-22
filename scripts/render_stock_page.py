@@ -3,8 +3,9 @@
 render_stock_page.py — 주식 리포트 archive JSON을 GitHub Pages용 HTML 한 장으로 렌더링.
 
 입력: 환경변수 REPORT_DATE (YYYY-MM-DD)
-읽기: archive/YYYY/MM/YYYY-MM-DD-stock.json
-출력: site/index.html  (Pages 아티팩트로 업로드되는 디렉터리)
+읽기: archive/YYYY/MM/YYYY-MM-DD-stock.json, archive/YYYY/MM/YYYY-MM-DD.json (SDK 항목만)
+출력: site/index.html, site/YYYY-MM-DD/index.html, site/sdk/index.html
+      (Pages 아티팩트로 업로드되는 디렉터리)
 
 의존성 없는 순수 문자열 렌더링 — 템플릿 엔진도 브라우저도 쓰지 않는다.
 등락 색상은 국내 관례를 따른다 (상승 빨강 / 하락 파랑).
@@ -26,6 +27,7 @@ REPO_DIR = pathlib.Path(__file__).resolve().parent.parent
 OUT_DIR = REPO_DIR / "site"
 
 SITE_TITLE = "PotionBot 주식 리포트"
+SDK_TITLE = "Claude SDK 업데이트"
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
@@ -638,6 +640,8 @@ color:var(--link);text-decoration:none;font-variant-numeric:tabular-nums}
 .drawer li a:hover{background:var(--bg)}
 .drawer li a.on{font-weight:600;color:var(--fg);
 box-shadow:inset 3px 0 0 var(--link);background:var(--bg)}
+.drawer .side{border-bottom:1px solid var(--line);padding:4px 0}
+.drawer .side a{padding-left:16px}
 .pager{display:flex;gap:10px;margin-top:8px}
 .pg{font-size:.76rem;color:var(--link);text-decoration:none}
 .pg:hover{text-decoration:underline}
@@ -810,6 +814,12 @@ def render_drawer(current: str, dates: list[str], prefix: str) -> str:
             f'<ul>{items}</ul></details>'
         )
 
+    sdk_mark = ' aria-current="page" class="on"' if current == "sdk" else ""
+    sdk_link = (
+        f'<ul class="side"><li><a href="{esc(prefix)}sdk/"{sdk_mark}>'
+        f'{esc(SDK_TITLE)}</a></li></ul>'
+    )
+
     return (
         '<input type="checkbox" id="navt" hidden>'
         '<header class="topbar">'
@@ -820,7 +830,7 @@ def render_drawer(current: str, dates: list[str], prefix: str) -> str:
         '<nav class="drawer" aria-label="리포트 목록">'
         '<div class="drawer-head"><span>리포트 목록</span>'
         '<label for="navt" class="close" aria-label="닫기">✕</label></div>'
-        f'<div class="drawer-body">{"".join(blocks)}</div>'
+        f'<div class="drawer-body">{sdk_link}{"".join(blocks)}</div>'
         '</nav>'
     )
 
@@ -895,6 +905,72 @@ PotionBot News · 자동 수집 ·
 """
 
 
+def render_sdk_page(groups: list[tuple[str, list[dict]]], all_dates: list[str]) -> str:
+    """SDK 릴리스 모음 — 날짜별 카드에 릴리스 한 줄 + 요약 한 줄.
+
+    Discord에는 보내지 않고 이 페이지에만 싣는다. site/sdk/ 에 놓이므로 prefix는 "../".
+    """
+    cards = []
+    for date, items in groups:
+        rows = []
+        for c in items:
+            title = esc(c.get("title", "")) + (" ⚠️" if c.get("special") else "")
+            if c.get("url"):
+                title = (f'<a href="{esc(c["url"])}" target="_blank" '
+                         f'rel="noopener noreferrer">{title}</a>')
+            content = (f'<p class="summary compact">{esc(c["content"])}</p>'
+                       if c.get("content") else "")
+            rows.append(f"<li>{title}{content}</li>")
+        cards.append(
+            f'<section class="card"><h2>{esc(date)}</h2>'
+            f'<ul class="news">{"".join(rows)}</ul></section>'
+        )
+    total = sum(len(items) for _, items in groups)
+
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{esc(SDK_TITLE)}</title>
+<meta name="description" content="Anthropic SDK 릴리스 요약 모음">
+<style>{CSS}</style>
+</head>
+<body>
+{render_drawer("sdk", all_dates, "../")}
+<div class="wrap">
+<header class="top">
+<h1>{esc(SDK_TITLE)}</h1>
+<div class="stamp">{total}건 · 최신 날짜 먼저</div>
+</header>
+{"".join(cards) or '<p class="empty">SDK 업데이트 없음</p>'}
+<footer>
+PotionBot News · 자동 수집 ·
+<a href="https://github.com/DevP0tion/AINews" target="_blank" rel="noopener noreferrer">GitHub</a>
+</footer>
+</div>
+</body>
+</html>
+"""
+
+
+def sdk_updates() -> list[tuple[str, list[dict]]]:
+    """AI/IT archive에서 category가 SDK인 항목만 모은다. [(날짜, 항목)] 최신 날짜 먼저."""
+    out = []
+    for path in (REPO_DIR / "archive").glob("*/*/*.json"):
+        if not DATE_RE.match(path.stem):
+            continue  # YYYY-MM-DD-stock.json
+        try:
+            items = json.loads(path.read_text(encoding="utf-8")).get("claude_updates") or []
+        except json.JSONDecodeError as e:
+            log(f"WARN: {path.name} 파싱 실패: {e} — 건너뜁니다")
+            continue
+        sdk = [c for c in items if isinstance(c, dict) and c.get("category") == "SDK"]
+        if sdk:
+            out.append((path.stem, sdk))
+    return sorted(out, key=lambda g: g[0], reverse=True)
+
+
 def load_report(date: str) -> dict:
     path = REPO_DIR / "archive" / date[:4] / date[5:7] / f"{date}-stock.json"
     if not path.exists():
@@ -940,8 +1016,9 @@ def main() -> None:
         written += 1
 
     # 루트는 최신 리포트. Discord는 날짜 URL을 보내지만, 루트로 들어온
-    # 사람에게도 최신이 보여야 한다.
-    latest = dates[-1]
+    # 사람에게도 최신이 보여야 한다. 주식 처리가 실패한 날도 SDK 페이지 때문에
+    # 배포는 돌므로, 루트는 리포트가 실제로 있는 마지막 날짜를 보인다.
+    latest = next((d for d in reversed(dates) if load_report(d)), dates[-1])
     root = OUT_DIR / "index.html"
     root.write_text(
         render(latest, load_report(latest) or
@@ -949,6 +1026,12 @@ def main() -> None:
                dates, prefix=""),
         encoding="utf-8",
     )
+
+    groups = sdk_updates()
+    sdk_dir = OUT_DIR / "sdk"
+    sdk_dir.mkdir(parents=True, exist_ok=True)
+    (sdk_dir / "index.html").write_text(render_sdk_page(groups, dates), encoding="utf-8")
+    log(f"SDK 페이지: {len(groups)}개 날짜, {sum(len(i) for _, i in groups)}건")
 
     total = sum(f.stat().st_size for f in OUT_DIR.rglob("*.html"))
     log(f"생성 완료: {written}개 날짜 + 루트 (최신 {latest}), 합계 {total:,} bytes")

@@ -6,8 +6,13 @@ PotionBot News 일일 리포트 저장소.
 
 | 리포트 | 내용 | 전송 형태 | 채널 |
 |---|---|---|---|
-| **AI/IT** | AI/IT 뉴스 + Claude/Anthropic 업데이트 | Discord embed 2개 | `DISCORD_WEBHOOK_POTIONBOT_NEWS` |
+| **AI/IT** | AI/IT 뉴스 + Claude/Anthropic 업데이트 (**SDK 제외**) | Discord embed 2개 | `DISCORD_WEBHOOK_POTIONBOT_NEWS` |
 | **주식** | 지수·관심종목 시세 + 증시 뉴스 | GitHub Pages 링크 한 줄 | `DISCORD_WEBHOOK_POTIONBOT_STOCK` |
+| **SDK** | `category: "SDK"` Claude 업데이트 누적 모음 | GitHub Pages `/sdk/` (채팅 전송 없음) | — |
+
+SDK 릴리스(`anthropic-sdk-python`·`anthropic-sdk-typescript` 등)는 하루 수 건씩 쏟아져
+채팅을 덮으므로 Discord embed에서 빼고 Pages의 `/sdk/` 한 페이지에 날짜별로 모은다.
+단 `special: true`(⚠️)인 SDK 항목은 embed의 «특이사항»에는 그대로 남는다.
 
 실행 시각이 06:30 KST인 이유: 미 증시 정규장 마감(06:00 KST, 서머타임 05:00)보다 뒤라
 전일 미국 지수 종가가 확정돼 있고, 국내 증시 개장(09:00)보다 앞선다.
@@ -41,10 +46,11 @@ PotionBot News 일일 리포트 저장소.
         · 리포트별로 [처리 → 커밋]이 분리돼 있고, 커밋 스텝에만 토큰이 주입된다
    ↓
 [Job 3: publish] ── AI/IT를 Discord embed로 전송
-   · archive/YYYY/MM/YYYY-MM-DD.json 읽어서 webhook POST
+   · archive/YYYY/MM/YYYY-MM-DD.json 읽어서 webhook POST (SDK 카테고리는 제외)
    ↓
 [Job 4: pages] ── archive의 **모든 날짜**를 정적 HTML로 렌더링해서 GitHub Pages 배포
    · render_stock_page.py → site/{날짜}/index.html + site/index.html(최신)
+                           + site/sdk/index.html (AI/IT archive의 SDK 항목 전체)
    · actions/deploy-pages
    ↓
 [Job 5: publish_stock] ── 그날 날짜 페이지 링크 한 줄만 주식 채널로 전송
@@ -58,11 +64,14 @@ Job 2에서 AI/IT 처리·커밋이 먼저 끝난 뒤 주식 처리가 시작된
 주식 스텝은 `continue-on-error`라 실패해도 job 자체는 성공으로 끝나고,
 결과는 `curate.outputs.stock_outcome`으로 후속 job에 전달된다.
 
-| 상황 | Job 3 (AI/IT 전송) | Job 4~5 (주식 배포·전송) |
-|---|---|---|
-| 둘 다 정상 | 전송 | 배포 후 링크 전송 |
-| 주식만 실패 | **전송** | 스킵 (`::warning::` 로그) |
-| AI/IT 실패 | 스킵 | 스킵 (job이 거기서 중단) |
+| 상황 | Job 3 (AI/IT 전송) | Job 4 (Pages 배포) | Job 5 (주식 링크 전송) |
+|---|---|---|---|
+| 둘 다 정상 | 전송 | 배포 | 전송 |
+| 주식만 실패 | **전송** | **배포** (SDK 페이지 갱신, 그날 주식 페이지는 빈 페이지) | 스킵 (`::warning::` 로그) |
+| AI/IT 실패 | 스킵 | 스킵 | 스킵 (job이 거기서 중단) |
+
+주식이 실패해도 배포하는 이유 — SDK 업데이트는 채팅에 없고 Pages에만 있다.
+루트(`/`)는 주식 리포트가 실제로 있는 마지막 날짜를 보이므로 빈 페이지가 루트를 덮지 않는다.
 
 반대 방향(AI/IT 실패 시 주식만 살리기)은 지원하지 않는다.
 AI/IT 처리가 실패하면 Claude 출력 자체가 잘못됐을 가능성이 높아 주식도 신뢰하기 어렵다.
@@ -97,9 +106,10 @@ AINews/
 │   ├── daily_report.py               # Job 2(b): AI/IT 검증·필터·archive/state
 │   ├── stock_report.py               # Job 2(c): 주식 검증·필터·archive/state
 │   ├── level_context.py              # 종가 시계열 → 기간 고저·박스권·주간 통계 (순수 함수)
-│   ├── render_stock_page.py          # Job 4: archive JSON → site/index.html
+│   ├── render_stock_page.py          # Job 4: archive JSON → site/ (주식 날짜별 + sdk/)
 │   ├── send_discord.py               # Job 3/5: Discord 전송 (--stock으로 링크 모드)
 │   ├── test_daily_report.py          # 중복 키 self-check
+│   ├── test_send_discord.py          # embed에서 SDK 제외 self-check
 │   ├── test_stock_report.py          # 주식 검증·중복·재시도·렌더링 self-check
 │   ├── test_level_context.py         # 레벨 컨텍스트·주간 통계 self-check
 │   └── test_collect_data.py          # sitemap·앱 릴리즈 노트 파서 self-check
@@ -121,7 +131,8 @@ AINews/
 │   └── YYYY/MM/YYYY-MM-DD-stock.json
 └── site/                             # Job 4 생성물 (gitignore — 매 실행마다 새로 만듦)
     ├── index.html                     # 최신 리포트
-    └── YYYY-MM-DD/index.html          # 날짜별 리포트
+    ├── YYYY-MM-DD/index.html          # 날짜별 리포트
+    └── sdk/index.html                 # SDK 업데이트 누적 모음
 ```
 
 ### 사이트 구조
@@ -131,6 +142,8 @@ AINews/
 - `/` — 최신 리포트. 루트로 들어온 사람에게 보이는 화면
 - `/YYYY-MM-DD/` — 그날 리포트. **Discord 링크는 이 주소로 나간다**.
   나중에 지난 메시지를 눌러도 그날 내용이 그대로 나온다
+- `/sdk/` — AI/IT archive(`YYYY-MM-DD.json`)에서 `category: "SDK"` 항목만 모은 한 페이지.
+  날짜별 카드에 릴리스 제목(원문 링크)과 한 줄 요약, 최신 날짜 먼저. 드로어 맨 위에 링크가 있다
 - 좌측 **드로어**에 전체 날짜 목록이 월별로 접혀 있고, 보고 있는 날짜는 표시된다.
   헤더에는 하루씩 넘기는 `‹ 이전 / 다음 ›` 링크가 있다
 

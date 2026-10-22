@@ -120,6 +120,10 @@ def build_payload(date: str, report: dict) -> dict:
     # Claude embed
     by_cat: dict[str, list] = {}
     for c in claude_updates:
+        # SDK 릴리스는 채팅에 싣지 않는다 — Pages의 sdk/ 페이지에만 모인다.
+        # special(⚠️) SDK 항목은 아래 특이사항 목록에는 그대로 남는다.
+        if c["category"] == "SDK":
+            continue
         by_cat.setdefault(c["category"], []).append(c)
 
     claude_fields: list[dict] = []

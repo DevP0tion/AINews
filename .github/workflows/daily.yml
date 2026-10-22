@@ -269,13 +269,13 @@ jobs:
         run: python scripts/send_discord.py
 
   # ---------------------------------------------------------------------------
-  # 4. 주식 리포트를 HTML 한 장으로 렌더링해서 GitHub Pages에 배포
+  # 4. 주식 리포트 + SDK 업데이트 페이지를 렌더링해서 GitHub Pages에 배포
   #    Settings → Pages → Source 를 "GitHub Actions" 로 설정해야 동작한다.
   # ---------------------------------------------------------------------------
   pages:
     needs: [collect, curate]
-    # 주식 처리가 실패했으면 배포할 내용이 없다. AI/IT 전송(publish)은 영향받지 않는다.
-    if: needs.curate.outputs.stock_outcome == 'success'
+    # 주식 처리가 실패해도 배포한다 — SDK 업데이트는 채팅에 없고 이 페이지에만 있다.
+    # 주식 링크 전송만 publish_stock 에서 stock_outcome 으로 막는다.
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -299,7 +299,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Render stock page
+      - name: Render stock & SDK pages
         run: python scripts/render_stock_page.py
 
       - uses: actions/configure-pages@v5
@@ -316,7 +316,9 @@ jobs:
   # 5. 주식 채널에는 배포된 페이지 링크 한 줄만 보낸다
   # ---------------------------------------------------------------------------
   publish_stock:
-    needs: [collect, pages]
+    needs: [collect, curate, pages]
+    # 주식 처리가 실패한 날은 그날 페이지가 비어 있으므로 링크를 보내지 않는다
+    if: needs.curate.outputs.stock_outcome == 'success'
     runs-on: ubuntu-latest
     env:
       REPORT_DATE: ${{ needs.collect.outputs.target_date }}

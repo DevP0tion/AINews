@@ -19,7 +19,7 @@ from render_stock_page import (  # noqa: E402
     fmt_krw, fmt_level_context, fmt_pct, fmt_price, fmt_volume, group_by_month,
     krw_rate_of,
     month_label, nice_bounds, render, render_calendar, render_chart,
-    render_drawer, render_investor, render_reports, render_stale,
+    render_drawer, render_investor, render_reports, render_sdk_page, render_stale,
     render_target_change, render_weekly,
 )
 from collect_stock import fx_symbol, is_stale, quote_time_iso  # noqa: E402
@@ -973,5 +973,29 @@ assert "‹ 이전" in last and "다음 ›" not in last
 # 문자열이 아니라 실제 마크업으로 확인한다)
 assert '<div class="pager">' not in page_for("2026-09-21", ["2026-09-21"])
 assert '<div class="pager">' in mid
+
+
+# --- SDK 페이지 ------------------------------------------------------------
+
+# 드로어에서 SDK 페이지로 가는 링크도 상대경로다
+assert 'href="sdk/"' in root_drawer
+assert 'href="../sdk/"' in day_drawer
+
+sdk = render_sdk_page([
+    ("2026-09-19", [
+        {"category": "SDK", "title": "sdk-python v1.7.0 <b>", "content": "요약",
+         "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.7.0",
+         "special": True},
+        {"category": "SDK", "title": "url 없는 항목", "content": ""},
+    ]),
+], DRAWER_DATES)
+assert "<h2>2026-09-19</h2>" in sdk
+assert "sdk-python v1.7.0 &lt;b&gt; ⚠️</a>" in sdk, "제목은 이스케이프, special은 ⚠️"
+assert "<li>url 없는 항목</li>" in sdk, "url이 없으면 링크 없이 제목만"
+assert "2건" in sdk
+# SDK 페이지는 site/sdk/ 에 있으므로 날짜 링크는 ../ 로, 자신은 현재 페이지로 표시
+assert 'href="../2026-09-21/"' in sdk
+assert '<a href="../sdk/" aria-current="page"' in sdk
+assert "SDK 업데이트 없음" in render_sdk_page([], DRAWER_DATES)
 
 print("ok")
