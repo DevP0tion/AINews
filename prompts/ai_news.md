@@ -105,6 +105,7 @@
 - `rn::`의 날짜 섹션: 릴리즈 노트 원문의 날짜 헤딩 그대로 (`YYYY-MM-DD`). 키워드는 원문에서 따온 **영문 소문자 + 하이픈** (예: `opus-5-ga`, `mcp-oauth`). 번역·의역 금지.
 - `app::`의 `date`: 원본 JSON의 `date` 값 그대로. 키워드 규칙은 `rn::`과 같다 (각 항목의 굵은 제목에서 따온다).
 - `app::` 항목의 `url`: `text` 안에 그 항목의 링크가 있으면 그것을, 없으면 `https://support.claude.com/en/articles/12138966-release-notes`.
+- **이미 보고된 항목은 같은 id**: `rn::`·`app::` id를 정하기 전에 `Read`로 `state/seen_claude.json`을 읽어 같은 날짜 섹션(`rn::{날짜}::`·`app::{날짜}::`)으로 시작하는 id가 있는지 확인한다. 이미 보고된 변경과 같은 내용이면 새 키워드를 짓지 말고 **그 id를 글자 그대로** 쓴다 — 스크립트가 중복으로 걸러 다시 전송되지 않는다. 키워드만으로 같은 변경인지 애매하면 어제 archive(`archive/YYYY/MM/YYYY-MM-DD.json`)의 `claude_updates` title·content와 비교한다.
 
 선정할 것이 없으면 빈 배열로: `{"news": [], "claude_updates": []}`
 

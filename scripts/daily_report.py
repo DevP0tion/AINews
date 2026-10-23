@@ -16,6 +16,9 @@ daily_report.py — Routine 환경에서 실행되는 처리 스크립트.
   - id가 gh::/news:: 프리픽스인 항목은 `url::{normalize_url(url)}`을 보조 키로
     함께 등록·대조한다. rn::/app:: 항목은 여러 건이 같은 릴리즈 노트 URL을
     공유하므로 제외.
+  - rn::/app:: 키워드는 curate가 매일 새로 지어 같은 항목이 다른 id로 다시
+    들어온다. 그래서 섹션 날짜가 그저께 이전이고 같은 섹션을 이미 보고했으면
+    중복으로 본다 (is_stale_rereport).
 
 동작:
   0. 입력 스키마 검증 (validate_input) — 입력은 신뢰할 수 없는 텍스트를 읽은
@@ -92,6 +95,35 @@ def claude_item_keys(c: dict) -> list[str]:
     if url and item_id.startswith(URL_KEY_PREFIXES):
         keys.append(f"url::{normalize_url(url)}")
     return keys
+
+
+# rn::/app:: id 앞부분의 날짜 섹션 ("rn::2026-10-21::"). 이 단위로 '이미 보고한 섹션'을 판정한다.
+SECTION_ID_RE = re.compile(r"^(?:rn|app)::(\d{4}-\d{2}-\d{2})::")
+# 실행(06:30 KST)은 미 태평양시로 전날 오후라 섹션 날짜는 대상 날짜의 어제까지가 정상이다.
+STALE_SECTION_DAYS = 2
+
+
+def seen_sections(seen_claude: set) -> set[str]:
+    return {m.group(0) for k in seen_claude if (m := SECTION_ID_RE.match(k))}
+
+
+def is_stale_rereport(item_id: str, today: str, sections: set[str]) -> bool:
+    """그저께 이전 섹션의 항목인데 같은 섹션을 이미 보고했으면 True.
+
+    curate가 같은 릴리즈 노트 항목에 날마다 다른 키워드를 붙여 id 대조를 빠져나간다
+    (예: rn::2026-10-21::sdk-and-cli-changes → 이튿날 rn::2026-10-21::sdk-cli-releases).
+    URL은 서로 다른 항목끼리 공유하는 경우가 많아 키로 쓸 수 없으므로 섹션 날짜로 막는다.
+    처음 보는 섹션은 늦게 올라온 항목(미 오후 추가분)일 수 있어 통과시킨다.
+    이미 보고한 섹션에 나중에 추가된 항목도 같이 막힌다 — 의도한 트레이드오프.
+    """
+    m = SECTION_ID_RE.match(item_id)
+    if not m or m.group(0) not in sections:
+        return False
+    try:
+        section = datetime.date.fromisoformat(m.group(1))
+    except ValueError:
+        return False
+    return (datetime.date.fromisoformat(today) - section).days >= STALE_SECTION_DAYS
 
 
 # --- 입력 스키마 검증 -------------------------------------------------------
@@ -216,7 +248,7 @@ def strip_private(d: dict) -> dict:
     return {k: v for k, v in d.items() if not k.startswith("_")}
 
 
-def filter_new(collected: dict, seen_urls: set, seen_claude: set):
+def filter_new(collected: dict, seen_urls: set, seen_claude: set, today: str | None = None):
     news_new, news_dup = [], []
     for a in collected.get("news", []):
         if not a.get("url"):
@@ -227,6 +259,7 @@ def filter_new(collected: dict, seen_urls: set, seen_claude: set):
         (news_dup if n in seen_urls else news_new).append(a)
 
     claude_new, claude_dup = [], []
+    sections = seen_sections(seen_claude) if today else set()
     for c in collected.get("claude_updates", []):
         if not c.get("category") or not c.get("title"):
             log(f"WARN: category/title 누락 Claude 항목 skip: {c}")
@@ -234,6 +267,9 @@ def filter_new(collected: dict, seen_urls: set, seen_claude: set):
         keys = claude_item_keys(c)
         c["_keys"] = keys
         is_dup = any(k in seen_claude for k in keys)
+        if not is_dup and today and is_stale_rereport(keys[0], today, sections):
+            log(f"이미 보고한 지난 섹션의 재등장 — 중복 처리: {keys[0]} / {c['title']!r}")
+            is_dup = True
         (claude_dup if is_dup else claude_new).append(c)
 
     specials = [c["title"] for c in claude_new if c.get("special")]
@@ -335,7 +371,7 @@ def main() -> None:
     log(f"기존 state: URL {len(seen_urls)}건, Claude 항목 {len(seen_claude)}건")
 
     news_new, news_dup, claude_new, claude_dup, specials = filter_new(
-        collected, seen_urls, seen_claude,
+        collected, seen_urls, seen_claude, today,
     )
     dup_counts = {"news": len(news_dup), "claude": len(claude_dup)}
     log(
