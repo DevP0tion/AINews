@@ -40,6 +40,18 @@ def log(msg: str) -> None:
     print(f"[send_discord] {msg}", file=sys.stderr)
 
 
+def sdk_page_url() -> str:
+    """Pages의 sdk/ 주소. publish는 pages job과 병렬이라 배포 출력을 받을 수 없으므로
+    Actions가 항상 넣어 주는 GITHUB_REPOSITORY(owner/name)로 조립한다. 없으면 ""."""
+    override = (os.environ.get("SDK_PAGE_URL") or "").strip()
+    if override:
+        return override
+    owner, _, name = (os.environ.get("GITHUB_REPOSITORY") or "").partition("/")
+    if not owner or not name:
+        return ""
+    return f"https://{owner.lower()}.github.io/{name}/sdk/"
+
+
 def chunk_field(name: str, value: str) -> list[dict]:
     if len(value) <= MAX_FIELD:
         return [{"name": name[:256], "value": value, "inline": False}]
@@ -121,10 +133,22 @@ def build_payload(date: str, report: dict) -> dict:
     by_cat: dict[str, list] = {}
     for c in claude_updates:
         # SDK 릴리스는 채팅에 싣지 않는다 — Pages의 sdk/ 페이지에만 모인다.
-        # special(⚠️) SDK 항목은 아래 특이사항 목록에는 그대로 남는다.
         if c["category"] == "SDK":
             continue
         by_cat.setdefault(c["category"], []).append(c)
+
+    # specials는 제목만 담긴 리스트라 위 필터를 거치지 않는다. breaking SDK 릴리스가
+    # 몰리는 날 특이사항이 SDK로 덮이지 않도록 SDK 몫은 건수 한 줄로 접는다.
+    sdk_special_titles = {
+        c["title"] for c in claude_updates
+        if c["category"] == "SDK" and c.get("special")
+    }
+    sdk_special_count = sum(1 for s in specials if s in sdk_special_titles)
+    specials = [s for s in specials if s not in sdk_special_titles]
+    if sdk_special_count:
+        url = sdk_page_url()
+        page = f"[SDK 페이지]({url})" if url else "SDK 페이지"
+        specials.append(f"SDK 업데이트 {sdk_special_count}건 ⚠️ — {page}에서 확인")
 
     claude_fields: list[dict] = []
     for cat, items in by_cat.items():

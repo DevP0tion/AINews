@@ -12,7 +12,9 @@ PotionBot News 일일 리포트 저장소.
 
 SDK 릴리스(`anthropic-sdk-python`·`anthropic-sdk-typescript` 등)는 하루 수 건씩 쏟아져
 채팅을 덮으므로 Discord embed에서 빼고 Pages의 `/sdk/` 한 페이지에 날짜별로 모은다.
-단 `special: true`(⚠️)인 SDK 항목은 embed의 «특이사항»에는 그대로 남는다.
+`special: true`(⚠️)인 SDK 항목도 «특이사항»에 제목을 싣지 않고
+`SDK 업데이트 N건 ⚠️ — SDK 페이지에서 확인` 한 줄로 접는다 (링크는 `GITHUB_REPOSITORY`로 조립,
+`SDK_PAGE_URL`로 덮어쓸 수 있다). breaking 릴리스가 몰리는 날 특이사항이 SDK로 덮이지 않게 하기 위해서다.
 
 실행 시각이 06:30 KST인 이유: 미 증시 정규장 마감(06:00 KST, 서머타임 05:00)보다 뒤라
 전일 미국 지수 종가가 확정돼 있고, 국내 증시 개장(09:00)보다 앞선다.
