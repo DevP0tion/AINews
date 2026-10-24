@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-25",
+  "news": [
+    {
+      "title": "A practical guide to AI image generation, from diffusion to agents",
+      "summary": "GAN(2014)부터 2026년까지의 이미지 생성 모델 흐름과 동작 원리를 실무 관점에서 정리한 가이드다. 대부분의 이미지 모델은 노이즈 제거를 학습한 diffusion 모델이며, latent diffusion은 출력보다 변당 약 8배 작은 압축 캔버스에서 동작하고, Flux Schnell·SDXL Turbo 같은 distilled 모델은 약 30 스텝 대신 4 스텝으로 결과를 내려 한다고 설명한다. 저자는 Flux처럼 텍스트와 이미지를 함께 처리하는 transformer 블록을 쓰는 최신 모델을 들어, diffusion이냐 autoregressive냐보다 모델이 언어를 얼마나 깊이 이해하느냐가 실질적인 구분선이라고 주장한다.",
+      "url": "https://danielball.com/notes/ai_image_generation.html"
+    },
+    {
+      "title": "No signs of AI payoff outside the tech sector",
+      "summary": "Apollo 수석 이코노미스트 Torsten Slok이 10월 24일 공개한 분석으로, AI가 아직 테크 섹터 밖 기업들에는 재무적 성과로 이어지지 않았다고 주장한다. 2019년 4분기 물가 기준으로 본 종업원당 매출과 이익률이 Magnificent 7에서는 올라가는 반면 나머지 S&P 493에서는 횡보하고 있고, 샌프란시스코 연은의 가동률 조정 총요소생산성 지표에서도 생산성 개선 조짐이 보이지 않는다고 짚었다. Ramp 데이터를 근거로 토큰 지출이 소수 기업에 집중되고 AI 관련 기업들 사이에서 순환되는 양상도 지적했다.",
+      "url": "https://www.apollo.com/wealth/insights-news/insights/daily-spark/no-signs-of-ai-payoff-outside-the-tech-sector"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 4
+  }
+}
