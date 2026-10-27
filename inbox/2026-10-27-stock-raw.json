@@ -1,0 +1,946 @@
+{
+  "date": "2026-10-27",
+  "collected_at": "2026-10-27T00:41:34Z",
+  "watchlist": [
+    {
+      "symbol": "005930.KS",
+      "name": "삼성전자",
+      "aliases": [
+        "삼성전자",
+        "삼전",
+        "Samsung Electronics"
+      ]
+    },
+    {
+      "symbol": "000660.KS",
+      "name": "SK하이닉스",
+      "aliases": [
+        "SK하이닉스",
+        "하이닉스",
+        "SK hynix"
+      ]
+    },
+    {
+      "symbol": "688825.SS",
+      "name": "창신메모리",
+      "aliases": [
+        "창신메모리",
+        "CXMT",
+        "ChangXin"
+      ]
+    }
+  ],
+  "quotes": {
+    "indices": [
+      {
+        "symbol": "^KS11",
+        "price": 5689.94,
+        "prev_close": 5469.47,
+        "change": 220.47,
+        "change_pct": 4.031,
+        "volume": 26458,
+        "currency": "KRW",
+        "market_time": 1793060510,
+        "quote_time": "2026-10-27T00:21:50Z",
+        "name": "코스피"
+      },
+      {
+        "symbol": "^KQ11",
+        "price": 751.31,
+        "prev_close": 727.21,
+        "change": 24.1,
+        "change_pct": 3.314,
+        "volume": 91659,
+        "currency": "KRW",
+        "market_time": 1793060510,
+        "quote_time": "2026-10-27T00:21:50Z",
+        "name": "코스닥"
+      },
+      {
+        "symbol": "^IXIC",
+        "price": 26169.38,
+        "prev_close": 25955.342,
+        "change": 214.039,
+        "change_pct": 0.825,
+        "volume": 6508626000,
+        "currency": "USD",
+        "market_time": 1793049359,
+        "quote_time": "2026-10-26T21:15:59Z",
+        "name": "나스닥"
+      },
+      {
+        "symbol": "KRW=X",
+        "price": 1324.18,
+        "prev_close": 1325.17,
+        "change": -0.99,
+        "change_pct": -0.0747,
+        "volume": 0,
+        "currency": "KRW",
+        "market_time": 1793061710,
+        "quote_time": "2026-10-27T00:41:50Z",
+        "name": "원/달러"
+      }
+    ],
+    "stocks": [
+      {
+        "symbol": "005930.KS",
+        "price": 223250.0,
+        "prev_close": 213000.0,
+        "change": 10250.0,
+        "change_pct": 4.818,
+        "volume": 1895573,
+        "currency": "KRW",
+        "market_time": 1793060512,
+        "quote_time": "2026-10-27T00:21:52Z",
+        "name": "삼성전자",
+        "stale": false
+      },
+      {
+        "symbol": "000660.KS",
+        "price": 1367000.0,
+        "prev_close": 1275000.0,
+        "change": 92000.0,
+        "change_pct": 7.21,
+        "volume": 542945,
+        "currency": "KRW",
+        "market_time": 1793060511,
+        "quote_time": "2026-10-27T00:21:51Z",
+        "name": "SK하이닉스",
+        "stale": false
+      },
+      {
+        "symbol": "688825.SS",
+        "price": 42.66,
+        "prev_close": 42.85,
+        "change": -0.19,
+        "change_pct": -0.443,
+        "volume": 325530672,
+        "currency": "CNY",
+        "market_time": 1792998002,
+        "quote_time": "2026-10-26T07:00:02Z",
+        "name": "창신메모리",
+        "stale": false,
+        "krw_rate": {
+          "symbol": "CNYKRW=X",
+          "rate": 198.613,
+          "quote_time": "2026-10-27T00:41:45Z"
+        }
+      }
+    ]
+  },
+  "market_news": [
+    {
+      "title": "[게시판] 두나무, 대한적십자사 창립 121주년 기념 대통령표창",
+      "url": "https://www.yna.co.kr/view/AKR20261027049900002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:36:11Z",
+      "summary": "▲ 가상자산 거래소 업비트를 운영하는 두나무는 서울 중구 우리은행 본점에서 26일 열린 &apos;대한적십자사 창립 121주년 기념식&apos;에서 국가 재난 시...",
+      "matched": []
+    },
+    {
+      "title": "하이트진로, AI업무혁신 인재 26명 양성…우수 과제 5건 선정",
+      "url": "https://www.yna.co.kr/view/AKR20261027039900030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:35:11Z",
+      "summary": "(서울=연합뉴스) 김세린 기자 = 하이트진로[000080]가 인공지능(AI)을 활용한 업무혁신을 이끌 핵심 인재 26명을 양성하고 실무에 적용할...",
+      "matched": []
+    },
+    {
+      "title": "[게시판] 우리금융, 아시안게임 후원 선수 초청 격려행사",
+      "url": "https://www.yna.co.kr/view/AKR20261027050600002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:34:53Z",
+      "summary": "▲ 우리금융그룹은 지난 26일 서울 중구 본사에서 &apos;우리금융 후원 및 소속 아시안게임 메달리스트 초청 행사&apos;를 열고 포상금과 격려 선물을 전달했...",
+      "matched": []
+    },
+    {
+      "title": "[게시판] 토스증권, 청년 대상 '글로벌 산업 트렌드' 특강",
+      "url": "https://www.yna.co.kr/view/AKR20261027049300008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:34:20Z",
+      "summary": "▲ 토스증권은 서울 중구문화재단 장충동작은도서관에서 청년들을 대상으로 강연을 진행했다고 27일 밝혔다. 강연에 나선 이영곤 토스증권 리서치센터장...",
+      "matched": []
+    },
+    {
+      "title": "광주은행, 곡성·구례·진도지점 개설 올해 사실상 무산",
+      "url": "https://www.yna.co.kr/view/AKR20261027047800054",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:34:19Z",
+      "summary": "(전남광주=연합뉴스) 전승현 기자 = 광주은행이 전남광주통합특별시 출범에 맞춰 전남권 중 지점이 없는 곡성·구례·진도군에 점포를 개설하려던 계획...",
+      "matched": []
+    },
+    {
+      "title": "JYP, 日 투자그룹 지분 50% 인수 소식에 10%대 급등",
+      "url": "https://www.mk.co.kr/news/stock/12186628",
+      "source": "매일경제 증권",
+      "published": "2026-10-27T00:33:20Z",
+      "summary": "JYP엔터테인먼트(JYP)가 일본계 투자그룹이 전체 지분 절반 규모 인수를 추진한다는 소식에 급등하고 있다. 27일 오전 9시 5분 현재 JYP는 전일 대비 3850원(10.69%..",
+      "matched": []
+    },
+    {
+      "title": "NH농협은행, 포스코인터내셔널에 3년간 5천억원 생산적금융 지원",
+      "url": "https://www.yna.co.kr/view/AKR20261027049100002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:32:56Z",
+      "summary": "(서울=연합뉴스) 채새롬 기자 = NH농협은행은 포스코인터내셔널과 &apos;식량안보 강화 및 생산적 금융 확대를 위한 업무협약&apos;을 26일 체결했다고 2...",
+      "matched": []
+    },
+    {
+      "title": "스타벅스 코리아, 아태 바리스타 대회서 '시그니처 음료' 수상",
+      "url": "https://www.yna.co.kr/view/AKR20261027044700030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:32:42Z",
+      "summary": "(서울=연합뉴스) 한주홍 기자 = 스타벅스 코리아는 스타벅스 아시아·태평양 지역 바리스타 챔피언십에서 &apos;베스트 시그니처 음료&apos; 부문을 수상했다고...",
+      "matched": []
+    },
+    {
+      "title": "이스타항공 마나도 노선 인기…탑승률 96%, 취항 1년 만에 9만명 수송",
+      "url": "https://www.hankyung.com/article/202610276949g",
+      "source": "한국경제 경제",
+      "published": "2026-10-27T00:32:29Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[게시판] BC카드, 한글날 제정 100주년 기념 '비씨네 한글가게'",
+      "url": "https://www.yna.co.kr/view/AKR20261027048900002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:31:53Z",
+      "summary": "▲ BC카드는 한글날 제정 100주년을 맞아 한글의 아름다움을 알리는 &apos;비씨네 한글 가게&apos;를 28∼30일 서울 중구 을지트윈타워 2층에서 운영한...",
+      "matched": []
+    },
+    {
+      "title": "싱가포르, 사우디 원유 지하 비축…중동발 공급 충격 대비",
+      "url": "https://www.hankyung.com/article/202610276960i",
+      "source": "한국경제 경제",
+      "published": "2026-10-27T00:31:40Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "미래운용 \"배당커버드콜액티브 ETF, 올해 개인 순매수 2조 넘어\"",
+      "url": "https://www.yna.co.kr/view/AKR20261027048800008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:31:30Z",
+      "summary": "(서울=연합뉴스) 김태종 기자 = 미래에셋자산운용은 &apos;TIGER 배당커버드콜액티브 ETF(472150)&apos;의 올해 개인 순매수 규모가 2조원을 돌...",
+      "matched": []
+    },
+    {
+      "title": "셀트리온, 3분기 매출·영업이익 역대 최대(종합)",
+      "url": "https://www.yna.co.kr/view/AKR20261027040500017",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:29:46Z",
+      "summary": "(서울=연합뉴스) 신선미 기자 = 셀트리온[068270]은 올해 3분기 연결 기준 매출 1조5천755억원, 영업이익 5천253억원으로 모두 역대...",
+      "matched": []
+    },
+    {
+      "title": "관광공사, 미디어 아트 공모전 시상식…최우수상에 '모여, 한결'",
+      "url": "https://www.yna.co.kr/view/AKR20261027027700030",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:29:16Z",
+      "summary": "(서울=연합뉴스) 이상서 기자 = 한국관광공사는 지난 26일 서울 중구 관광공사 서울센터에서 &apos;2026 하이커 미디어 아트 공모전&apos; 시상식을 열...",
+      "matched": []
+    },
+    {
+      "title": "[게시판] 수출입은행, 신보와 생산적 포용금융 활성화 업무협약",
+      "url": "https://www.yna.co.kr/view/AKR20261027043000002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:29:00Z",
+      "summary": "▲ 한국수출입은행은 신용보증기금과 &apos;수은형 생산적 포용금융 활성화를 위한 업무협약&apos;을 체결했다고 27일 밝혔다. 이에 따라 수은은 신보에 10억...",
+      "matched": []
+    },
+    {
+      "title": "“AI 꺾이면 132조원 증발”...한은이 던진 ‘최악 시나리오’",
+      "url": "https://www.mk.co.kr/news/stock/12186625",
+      "source": "매일경제 증권",
+      "published": "2026-10-27T00:28:48Z",
+      "summary": "앤트로픽이 상반기에만 106조 원의 적자를 냈습니다. 상장을 앞둔 AI 대표 기업의 충격적인 성적표 앞에서도, 월가는 “앤트로픽의 상장은 무조건 성공해야만 한다”고 기도하고 있습니..",
+      "matched": []
+    },
+    {
+      "title": "코스피, '앤트로픽 IPO' 훈풍에 4%대 급반등…코스닥도 3%↑(종합)",
+      "url": "https://www.yna.co.kr/view/AKR20261027046800008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:28:39Z",
+      "summary": "(서울=연합뉴스) 김유아 기자 = 27일 코스피와 코스닥이 동반 급등세를 나타내고 있다.",
+      "matched": []
+    },
+    {
+      "title": "“양질의 수주와 내실 경영”…대우건설, 3분기 영업이익 223% 급증",
+      "url": "https://www.mk.co.kr/news/stock/12186622",
+      "source": "매일경제 증권",
+      "published": "2026-10-27T00:25:26Z",
+      "summary": "대우건설이 올해 3분기 외형 감소에도 수익성을 크게 개선한 것으로 나타났다. 대우건설은 27일 공시를 통해 올해 3분기 경영실적(연결기준, 잠정집계)을 발표했다. 3분기 매출은 1..",
+      "matched": []
+    },
+    {
+      "title": "[임기범의 AI 혁신 스토리] AI 해킹 시대, 금융보안의 과제",
+      "url": "https://www.yna.co.kr/view/AKR20261027035000371",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:22:53Z",
+      "summary": "인공지능(AI)이 해킹 도구로 쓰이기 시작한 시대에 국내 금융권이 연쇄 해킹을 당했다. 지난달 30일 접수된 신한은행 침해사고로 시작된 사태는 ...",
+      "matched": []
+    },
+    {
+      "title": "삼성물산 '퓨처스케이프 데모데이'…스타트업 실증성과 공유",
+      "url": "https://www.yna.co.kr/view/AKR20261027042500003",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:21:43Z",
+      "summary": "(서울=연합뉴스) 임기창 기자 = 삼성물산은 지난 26일 서울 강동구 본사에서 오픈이노베이션 프로그램 &apos;2026 퓨처스케이프 데모데이&apos;를 열어 ...",
+      "matched": []
+    },
+    {
+      "title": "엔씨, 10년째 게임 스타트업 지스타 참가 지원",
+      "url": "https://www.yna.co.kr/view/AKR20261027041500017",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:21:24Z",
+      "summary": "(서울=연합뉴스) 김주환 기자 = 엔씨는 국제게임전시회 지스타(G-STAR)에 국내 게임 스타트업 참가를 10년째 지원한다고 27일 밝혔다.",
+      "matched": []
+    },
+    {
+      "title": "삼성액티브운용, '코리아TOP5플러스채권혼합50액티브' ETF 상장",
+      "url": "https://www.yna.co.kr/view/AKR20261027043300008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:20:48Z",
+      "summary": "(서울=연합뉴스) 고은지 기자 = 삼성액티브자산운용은 국내 시가총액 상위 주도주와 단기 채권을 조합한 상장지수펀드(ETF)인 &apos;KoAct 코리아...",
+      "matched": []
+    },
+    {
+      "title": "IPARK현대산업개발, 내달 2일 목동 아이파크 라운지 개관",
+      "url": "https://www.yna.co.kr/view/AKR20261027043900003",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:19:05Z",
+      "summary": "(서울=연합뉴스) 서미숙 기자 = IPARK현대산업개발은 다음 달 2일 서울시 구로구 고척동 현준프라자 7층에 목동 아이파크 라운지를 오픈한다고...",
+      "matched": []
+    },
+    {
+      "title": "삼성생명, 15억달러 규모 해외 신종자본증권 발행 완료",
+      "url": "https://www.yna.co.kr/view/AKR20261027042700002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:18:05Z",
+      "summary": "(서울=연합뉴스) 강수련 기자 = 삼성생명[032830]은 15억달러(약 2조원) 규모의 30년 만기 해외 신종자본증권 발행을 성공적으로 완료했...",
+      "matched": []
+    },
+    {
+      "title": "한국앤컴퍼니, 15년째 장애인 이동권 지원…배터리 나눔 누적 4000개",
+      "url": "https://www.hankyung.com/article/202610276898g",
+      "source": "한국경제 경제",
+      "published": "2026-10-27T00:17:18Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[MK시그널] 유니테스트, HBM 테스트 장비와 페로브스카이트 태양전지, 쌍두마차 기대감에 상승률 14.58%",
+      "url": "https://www.mk.co.kr/news/stock/12186611",
+      "source": "매일경제 증권",
+      "published": "2026-10-27T00:17:10Z",
+      "summary": "10월 27일 유니테스트(086390)가 상승 중이다. 전 거래일 유니테스트 주가는 종가기준 10,930원 하락으로 마감했다. 현재 11,430원으로 (9시 8분 기준) 전일 종가..",
+      "matched": []
+    },
+    {
+      "title": "[게시판] NH아문디, 오늘 유튜브 라이브 '투자브리핑' 개최",
+      "url": "https://www.yna.co.kr/view/AKR20261027040200008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:15:23Z",
+      "summary": "▲ NH-아문디자산운용은 유튜브 라이브 &apos;투자브리핑&apos;을 27일 오후 4시 개최한다. 사내 전문가들이 출연해 국내외 금융시장 흐름과 전망을 짚어보...",
+      "matched": []
+    },
+    {
+      "title": "[MK 골든크로스 돌파종목 : 노을(376930) & 웹젠(069080)]",
+      "url": "https://www.mk.co.kr/news/stock/12186607",
+      "source": "매일경제 증권",
+      "published": "2026-10-27T00:14:37Z",
+      "summary": "안녕하세요. 국내 핫 이슈 종목을 분석해드리는 AI 기자 ‘MK시그널’ 입니다. MK시그널이 오늘 분석한 핫 이슈 골든크로스 종목은 노을 & 웹젠 입니다. - 노을(376930)은..",
+      "matched": []
+    },
+    {
+      "title": "하나은행, 반얀트리 서울 손잡고 초고액자산가 서비스 강화",
+      "url": "https://www.yna.co.kr/view/AKR20261027037200002",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:10:58Z",
+      "summary": "(서울=연합뉴스) 채새롬 기자 = 하나은행은 26일 국내 대표 럭셔리 호텔인 &apos;반얀트리 클럽 앤 스파 서울&apos;을 운영하는 에이블현대호텔리조트와 업...",
+      "matched": []
+    },
+    {
+      "title": "한솔로지스틱스, 美 인디애나에 물류 거점…배터리 공급망 사업 확대",
+      "url": "https://www.hankyung.com/article/202610276901i",
+      "source": "한국경제 경제",
+      "published": "2026-10-27T00:10:50Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "코람코라이프인프라리츠, 안양물류센터 2천700억원에 인수",
+      "url": "https://www.yna.co.kr/view/AKR20261027038200008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:09:50Z",
+      "summary": "(서울=연합뉴스) 강수지 기자 = 코람코라이프인프라리츠는 안양물류센터를 2천700억원에 인수한다고 27일 밝혔다.",
+      "matched": []
+    },
+    {
+      "title": "[특징주] '앤트로픽 투자' SK텔레콤, 장 초반 6%대 강세",
+      "url": "https://www.yna.co.kr/view/AKR20261027038700008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:09:43Z",
+      "summary": "(서울=연합뉴스) 곽윤아 기자 = SK텔레콤[017670]이 27일 인공지능(AI) 기업 앤트로픽의 기업공개(IPO) 신청서 제출 소식에 힘입어...",
+      "matched": []
+    },
+    {
+      "title": "[특징주] JYP엔터, 일본계 투자사 '인수추진'에 장초반 7%대 급등",
+      "url": "https://www.yna.co.kr/view/AKR20261027038300008",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:08:59Z",
+      "summary": "(서울=연합뉴스) 김유향 기자 = JYP엔터테인먼트[035900](이하 JYP) 주가가 27일 장 초반 급등하고 있다.",
+      "matched": []
+    },
+    {
+      "title": "LH, 4분기 건설형 임대주택 4천663가구 입주자 모집",
+      "url": "https://www.yna.co.kr/view/AKR20261027037700003",
+      "source": "연합뉴스 경제",
+      "published": "2026-10-27T00:08:13Z",
+      "summary": "(세종=연합뉴스) 오진송 기자 = 한국토지주택공사(LH)는 올해 4분기 전국 16개 단지에서 건설형 임대주택 4천663가구의 입주자를 모집한다고...",
+      "matched": []
+    },
+    {
+      "title": "\"한 끼에 23만원 넘어도 킹크랩\"…연말 호텔 뷔페 예약 '만석'",
+      "url": "https://www.hankyung.com/article/2026102768057",
+      "source": "한국경제 경제",
+      "published": "2026-10-27T00:07:05Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "기업 가치 2650조원?…이 회사 상장 소식에 반도체株 ‘들썩’ [오늘 나온 보고서]",
+      "url": "https://www.mk.co.kr/news/stock/12186591",
+      "source": "매일경제 증권",
+      "published": "2026-10-27T00:06:52Z",
+      "summary": "‘클로드’ 만든 엔트로픽 IPO 추진 美반도체지수 2.8%·야간선물 2.6%↑ iM證 “삼전·하닉 중심으로 반등 시도” 메타, 최대 950억달러 자금조달 추진 빅테크 현금창출능력,..",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "코스피 3%대 반등해 5600선 회복…코스닥도 2%대 상승",
+      "url": "https://www.mk.co.kr/news/stock/12186590",
+      "source": "매일경제 증권",
+      "published": "2026-10-27T00:05:25Z",
+      "summary": "코스피가 27일 개장 직후 3% 넘게 급등하며 5600선을 단숨에 회복했다. 코스닥도 3%대 상승 중이다. 27일 오전 9시 8분 기준 코스피는 전일 대비 209.31포인트(3.8..",
+      "matched": []
+    },
+    {
+      "title": "\"싱가포르 이어 일본·베트남까지\"…화요, 글로벌 면세망 넓힌다",
+      "url": "https://www.hankyung.com/article/202610276807g",
+      "source": "한국경제 경제",
+      "published": "2026-10-27T00:02:54Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[단독] 오비맥주 첫 소주 '찰랑'…한 달 만에 3000곳 뚫었다",
+      "url": "https://www.hankyung.com/article/202610265816i",
+      "source": "한국경제 경제",
+      "published": "2026-10-27T00:00:06Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "AI 반대하는 美 정치권…공적연금 수익 57%는 AI주가 벌었다",
+      "url": "https://www.hankyung.com/article/202610276828i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:57:18Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“이익 안정적이지만 주가 재평가 더딜 듯”…기업은행 목표가↓",
+      "url": "https://www.mk.co.kr/news/stock/12186587",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T23:53:31Z",
+      "summary": "키움증권은 27일 기업은행에 대해 안정적인 이익을 내고 있지만 이익 증가율과 주주환원 확대 속도를 고려하면 주가 재평가에 시간이 걸릴 것이라며 목표주가를 기존 3만원에서 2만800..",
+      "matched": []
+    },
+    {
+      "title": "대한항공·아시아나 조종사가 직접 나섰다…청소년 진로특강",
+      "url": "https://www.hankyung.com/article/202610276781g",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:53:02Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "같은 매장 상품도 15만원 비싸게 판다…'AI 가격 인상' 논란",
+      "url": "https://www.hankyung.com/article/202610276760i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:44:42Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "반도체 수출 호조…3분기 GDP 1% '깜짝 성장'",
+      "url": "https://www.hankyung.com/article/202610276778i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:44:05Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "매출 135% 뛴 홍초…3100억 열도 식초시장 정조준",
+      "url": "https://www.hankyung.com/article/202610276682g",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:43:54Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "금리 오르는데 고꾸라진 은행주…언제쯤 반등할까 [종목+]",
+      "url": "https://www.hankyung.com/article/2026102766946",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T23:41:17Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "룰라 재선에 브라질 증시 15% 폭락…재정불안 고조",
+      "url": "https://www.hankyung.com/article/202610276776i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:39:57Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "3분기 한국경제 1% '깜짝 성장'…연간 3% 달성 유력",
+      "url": "https://www.hankyung.com/article/2026102766677",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:38:16Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "법인세 올려도 기업 안 떠났다…조세피난처 세수 급증",
+      "url": "https://www.hankyung.com/article/202610276737i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:35:25Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"앤트로픽, IPO 증권신고서 제출…예상 웃돈 수익성 확인\"-메리츠",
+      "url": "https://www.hankyung.com/article/2026102766116",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T23:30:08Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "지드래곤부터 BTS까지…준지, K팝 스타 48인 전시서 의상 협업",
+      "url": "https://www.hankyung.com/article/202610276590g",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:29:15Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"국내서 딱 두 곳뿐\"…글로벌 호텔상 휩쓴 '이곳'",
+      "url": "https://www.hankyung.com/article/202610276663g",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:28:42Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“BNK금융, 이익신뢰도 저하됐지만 주가 급락 과도”…목표가↓",
+      "url": "https://www.mk.co.kr/news/stock/12186568",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T23:26:15Z",
+      "summary": "하나증권은 BNK금융에 대해 연초 이후 3개분기 연속으로 실적이 시장의 예상치보다 낮게 나오는 ‘어닝쇼크’를 시현해 이익신뢰도가 크게 저하됐다고 27일 밝혔다. 투자의견은 매수를 ..",
+      "matched": []
+    },
+    {
+      "title": "닷컴버블보다 더 힘든 장세? 증시 상승 위한 ‘마지막 고비’는",
+      "url": "https://www.mk.co.kr/news/stock/12186567",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T23:25:38Z",
+      "summary": "불앤베어 플러스야데니리서치의 에드 야데니가 증시가 오르기 위한 조건을 제시합니다. 코앞으로 다가온 앤트로픽 상장 일정도 함께 짚어봤습니다. ◆ 유의사항 : 본 영상은 2026.10..",
+      "matched": []
+    },
+    {
+      "title": "비날리아, 이탈리아산 '프로세코' 와인 선보여",
+      "url": "https://www.hankyung.com/article/202610276695i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:24:54Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "앤트로픽 IPO 시동…8000억달러 지출 약정 공개",
+      "url": "https://www.hankyung.com/article/202610276665i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:23:14Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"현대차, 로봇·자율주행 '스토리' 넘어 실적 증명해야\"-NH",
+      "url": "https://www.hankyung.com/article/2026102766626",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T23:16:39Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"편의점서 강아지 간식 산다\"…CU 펫 특화매장 10곳",
+      "url": "https://www.hankyung.com/article/202610276560g",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:16:33Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"록히드마틴, F-35 넘어 AI 무인기도 개발…역대급 수주 확보\"-NH",
+      "url": "https://www.hankyung.com/article/2026102766336",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T23:13:48Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"내년 코스피 최대 8200\"...대신증권 \"반도체 저평가 지나쳐\"",
+      "url": "https://www.hankyung.com/article/202610264950i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T23:11:30Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[밤 사이 해외 뉴스 영상] 트럼프 관세 폭탄에 결국 백기…6조원 들여 미국 공장 짓는 독일 아우디",
+      "url": "https://www.hankyung.com/article/202610276615i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:08:42Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "AI 불안 낮춘 앤트로픽…월가 \"11월 중순까지 대기\" [김현석의 월스트리트나우]",
+      "url": "https://www.hankyung.com/article/202610276417i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T23:06:26Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"반도체가 다 먹여살리네\"…후진국도 아닌데 '두자릿수 경제성장'",
+      "url": "https://www.hankyung.com/article/202610276371g",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:02:50Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“LG생건, 가격 매력 커졌다”…상상인증권, 목표가 35만원으로 상향",
+      "url": "https://www.mk.co.kr/news/stock/12186557",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T23:02:40Z",
+      "summary": "상상인증권은 27일 LG생활건강에 대해 투자의견을 ‘보유’에서 ‘매수’로 높이고 목표주가도 33만원에서 35만원으로 올려잡았다. 실적 회복 속도가 빨라졌다기보다는 주가 하락으로 가..",
+      "matched": []
+    },
+    {
+      "title": "[밤 사이 해외뉴스] 엔비디아·마이크론이 다 먹었다? 미 증시 폭등 뒤에 숨겨진 AI 거품 경고",
+      "url": "https://www.hankyung.com/article/202610276589i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T23:01:53Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“HD현대마린솔루션, 수익성 부진에 목표가 뚝”…그래도 ‘사라’, 왜?",
+      "url": "https://www.mk.co.kr/news/stock/12186555",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T22:59:29Z",
+      "summary": "하나증권은 27일 HD현대마린솔루션에 대해 3분기 실적이 시장 기대치를 하회했다며 목표주가를 기존 33만원에서 29만원으로 하향 조정했다. 다만 핵심사업 매출이 두 자릿수 성장세를..",
+      "matched": []
+    },
+    {
+      "title": "\"HD현대에너지솔루션, 영업익 기대치 절반 수준…목표가↓-DS",
+      "url": "https://www.hankyung.com/article/2026102765846",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T22:57:07Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "유가 하락에 금값 4000달러 회복…Fed 금리 결정 주목",
+      "url": "https://www.hankyung.com/article/202610276551i",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T22:53:55Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"삼전닉스, 120조 추가 주주환원 기대…저평가 해소 계기\"-KB",
+      "url": "https://www.hankyung.com/article/2026102765496",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T22:51:09Z",
+      "summary": "",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "앤트로픽 역대 최대 IPO추진… 국내증시, 커지는 바닥 논쟁 [오늘아침, 당신이 알아야 할 7가지]",
+      "url": "https://www.hankyung.com/article/202610276552i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T22:43:15Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"거래대금 106조→39조 급감…'증권주 바닥권 근접'\"",
+      "url": "https://www.hankyung.com/article/2026102765546",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T22:41:06Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "고점 대비 반토막 난 '기가비스'…증권가는 \"2배까지도 오른다\"",
+      "url": "https://www.hankyung.com/article/202610266200i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T22:36:48Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "전세계에 투자한다던 내 TDF…열어보니 '삼전닉스'가 3분의1?",
+      "url": "https://www.hankyung.com/article/202610265701i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T22:30:21Z",
+      "summary": "",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "\"제철이라 싸질 줄 알았는데\"…가격 두 배 뛴 '가을 별미'",
+      "url": "https://www.hankyung.com/article/2026102765327",
+      "source": "한국경제 경제",
+      "published": "2026-10-26T22:26:05Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "앤트로픽 IPO 증권신고서 제출에 AI 들썩…나스닥 0.8%↑ [뉴욕증시 브리핑]",
+      "url": "https://www.hankyung.com/article/2026102765086",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T22:10:45Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "'보조금 터진다'…룰라 재집권에 브라질 증시 17% 폭락",
+      "url": "https://www.hankyung.com/article/2026102764867",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T22:01:41Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“삼전닉스, 실적도 좋고 역사적 저평가라며?”… 주가는 언제 오를까",
+      "url": "https://www.mk.co.kr/news/stock/12186541",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T21:54:09Z",
+      "summary": "오는 28~29일 3분기 실적 발표 앞둬 호실적 전망에도…주가는 지지부진이번주 실적발표를 앞둔 삼성전자와 SK하이닉스가 올해 3분기 나란히 역대 최대실적을 거둘 것으로 전망되지만 ..",
+      "matched": [
+        "삼성전자",
+        "SK하이닉스"
+      ]
+    },
+    {
+      "title": "'삼전닉스 다음 자리 비었다'…시총 3위 놓고 4파전 [분석+]",
+      "url": "https://www.hankyung.com/article/2026102651626",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T21:30:06Z",
+      "summary": "",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "\"AI면 다 되는 줄 알았는데\"…1410대 1 vs 3대 1 '극과 극' [분석+]",
+      "url": "https://www.hankyung.com/article/2026102657086",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T21:30:04Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "17년 만에 바닥이더니…원화가치 상승폭 두 달째 세계 1위 [김익환의 부처 핸즈업]",
+      "url": "https://www.hankyung.com/article/202610265630i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T21:00:23Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"지난번엔 16% 뛰었다는데\"…개미들 기대하는 '반등 신호'",
+      "url": "https://www.hankyung.com/article/2026102659291",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T21:00:17Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“이번주도 반등 없으면 큰일”…삼전닉스 주주환원·빅테크 실적·美금리 나온다",
+      "url": "https://www.mk.co.kr/news/stock/12186509",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T20:45:21Z",
+      "summary": "3대 변수에 숨죽인 개미들 수급 불안 시달리는 코스피 6개월 만에 최저치로 하락 삼전닉스 추가 환원에 관심 AI 수익 의구심 큰 상황서 빅테크 실적이 향방 가를듯국내 증시가 주가..",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "직원 1명당 87억 벌었다…돈 쓸어담는 '괴물 회사' 알고 보니",
+      "url": "https://www.hankyung.com/article/202610276404i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T20:05:41Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"데이터센터 멈출 수도\"…초대형 상장 앞둔 앤트로픽의 경고",
+      "url": "https://www.hankyung.com/article/202610276399i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T19:31:19Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "앤트로픽 상장 초읽기…8000억달러 AI 투자 약정에 시장 촉각",
+      "url": "https://www.hankyung.com/article/202610276393i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T19:05:20Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "앤트로픽, 나스닥 상장 신청",
+      "url": "https://www.mk.co.kr/news/stock/12186407",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T14:18:26Z",
+      "summary": "최첨단 인공지능(AI) 기업 앤트로픽이 미국 증시에 상장하기 위한 기업공개(IPO) 증권신고서를 공개했다. 26일(현지시간) 앤트로픽이 미국 증권거래위원회(SEC)에 제출한 서류에..",
+      "matched": []
+    },
+    {
+      "title": "100억 벌고 90억 잃어도 세금은 100억 기준...증권사 교육세 13배 폭증",
+      "url": "https://www.mk.co.kr/news/stock/12186366",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T13:13:22Z",
+      "summary": "상반기 거래 늘고 세율도 인상 10개 종투사 올 8663억 부담 ETF 거래비용 증가 우려도국내 증시 활황으로 주식과 상장지수펀드(ETF) 거래가 급증하면서 증권사들의 교육세 부담..",
+      "matched": []
+    },
+    {
+      "title": "폭락장에 피눈물 흘리는데…'9천피' 대반전 시나리오 떴다 [분석+]",
+      "url": "https://www.hankyung.com/article/2026102658706",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T13:00:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"합병 전 테슬라 매수\"…애플 먹구름 \"아이폰 18 부진\" [월가 업&다운]",
+      "url": "https://www.hankyung.com/article/202610266297i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T12:51:31Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "일본계 '지분 매수설' 영향…JYP엔터, 애프터마켓서 14% 급등",
+      "url": "https://www.hankyung.com/article/202610266289i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T12:32:54Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“있는 돈 없는 돈, 이미 다 끌어넣었나”…코스피 거래대금도 하락세",
+      "url": "https://www.mk.co.kr/news/stock/12186320",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T12:30:23Z",
+      "summary": "이달 거래대금 20조원대 기록 지난 6월 50조원대서 크게 줄어 향후 변수 빅테크 실적과 연준 회견최근 코스피가 5500선에서 등락을 거듭하는 가운데, 코스피 거래량과 거래대금이..",
+      "matched": []
+    },
+    {
+      "title": "“투자금까지 모았지만 함부로 못 들어가”…K반도체 대어들 IPO 속도조절",
+      "url": "https://www.mk.co.kr/news/business/12186261",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T11:11:04Z",
+      "summary": "퓨리오사·딥엑스 프리IPO 수천억 모으며 성공했지만 “실적·성과 입증이 우선” 증시입성 시기 저울질 나서국내 인공지능(AI) 반도체 기업에 대한 또 다른 주요 관심사는 상장 시기다..",
+      "matched": []
+    },
+    {
+      "title": "9월에라도 피신할걸…주식형 펀드 빼서 여기 넣었으면 돈 벌었다",
+      "url": "https://www.mk.co.kr/news/stock/12186232",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T10:42:01Z",
+      "summary": "국내외 채권형 펀드에 4조 밀물 최근 변동장 한달 수익률 플러스 -16% 성적표 주식형펀드와 대조올 상반기 국내외 증시 강세에 외면받던 채권형 펀드로 투자자금이 다시 돌아오고 있다..",
+      "matched": []
+    },
+    {
+      "title": "유니트리, JP모건의 투자의견·목표주가 상향에 7%대 급등",
+      "url": "https://www.hankyung.com/article/202610266136i",
+      "source": "한국경제 금융",
+      "published": "2026-10-26T09:44:30Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "풍전약품, 30억원 규모 유상증자 실시",
+      "url": "https://www.mk.co.kr/news/stock/12186146",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T08:53:15Z",
+      "summary": "코스닥 상장사 풍전약품이 30억원 규모의 제3자배정증자를 실시한다고 2026년 10월 26일 공시했다. 이번 유상증자에서 신주 발행 주식 수는 보통주 120만 주, 증자 전 발행 ..",
+      "matched": []
+    },
+    {
+      "title": "알티캐스트, 15억원 규모 유상증자 실시",
+      "url": "https://www.mk.co.kr/news/stock/12186147",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T08:53:15Z",
+      "summary": "코스닥 상장사 알티캐스트가 14억 8999만 8840원 규모의 제3자배정증자를 실시한다고 2026년 10월 26일 공시했다. 이번 유상증자에서 신주 발행 주식 수는 보통주 123만..",
+      "matched": []
+    },
+    {
+      "title": "파생계약으로 빌린 돈 7조… 주가 급락에 기업들 비상",
+      "url": "https://www.mk.co.kr/news/stock/12186134",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T08:45:00Z",
+      "summary": "대기업들이 올해 들어 상장 계열사 지분을 증권사에 맡기고 주가수익스왑(PRS)을 통해 끌어온 자금이 7조원에 육박하는 것으로 나타났다. 하지만 최근 증시 급락으로 기초자산으로 넘긴..",
+      "matched": []
+    },
+    {
+      "title": "증권사엔 쏠쏠한 장사 … 주가 하락 위험없이 수수료 벌어",
+      "url": "https://www.mk.co.kr/news/stock/12186096",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T08:34:42Z",
+      "summary": "주가수익스왑(PRS)이 증권사의 새로운 수익원으로 부상하고 있다. 조 단위 자금을 공급해주는 대가로 수수료를 챙길 수 있어서다. 가장 큰 주가 하락 위험은 기업에 전가할 수 있다...",
+      "matched": []
+    },
+    {
+      "title": "급등장에 주식 맡기고 돈 빌렸더니 … 한화·SK '2조 손실' 우려",
+      "url": "https://www.mk.co.kr/news/stock/12186095",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T08:34:41Z",
+      "summary": "주가수익스왑(PRS)은 2024년 무렵부터 대기업의 '대체 자금줄'로 급부상한 파생상품이다. 회사채 발행이나 금융권 대출과는 달리 장부상 차입금이 늘어나지 않을 수 있고, 지분을 ..",
+      "matched": []
+    },
+    {
+      "title": "손익 합산도 안되는데 … 13배 치솟는 증권사 교육세",
+      "url": "https://www.mk.co.kr/news/stock/12186085",
+      "source": "매일경제 증권",
+      "published": "2026-10-26T08:33:22Z",
+      "summary": "국내 증시 활황으로 주식과 상장지수펀드(ETF) 거래가 급증하면서 증권사들의 교육세 부담이 지난해보다 13배 가까이 늘어날 것으로 전망됐다. ETF 시장에 호가를 댄 증권사에 부과..",
+      "matched": []
+    }
+  ]
+}
