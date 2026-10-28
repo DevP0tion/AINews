@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-28",
+  "news": [
+    {
+      "title": "dSpark: 스케줄 distillation으로 Diffusion LLM 디코딩 가속",
+      "summary": "Diffusion LLM(dLLM)은 토큰을 병렬 생성할 수 있지만 응답을 완성하려면 디코딩 라운드가 많이 필요하다는 문제를 다룬 논문이다. 저자들은 '예측하기 쉬운 토큰'이 아니라 '공개하면 다른 위치의 예측을 쉽게 만드는 토큰'을 먼저 확정하도록 unmasking 스케줄을 설계하고, 이를 모델에 distill하는 dSpark 프레임워크를 제안했다. 생성 품질 유지를 위해 KL divergence 정규화를 함께 쓰며, GSM8K에서 LLaDA-8B-Instruct 대비 10.12배, Dream-7B-Instruct 대비 5.12배 속도 향상을 보고했다.",
+      "url": "https://arxiv.org/abs/2610.35804v1"
+    },
+    {
+      "title": "Survival LLM: 인터넷 없이 로컬에서 돌아가는 오프라인 재난 대응 AI",
+      "summary": "설치 후에는 인터넷 없이 완전히 로컬에서 동작하는 오픈소스(MIT) AI 어시스턴트 겸 비상 자료 라이브러리다. 하드웨어 메모리에 따라 NVIDIA Nemotron 3.5 Super/Lightning, Qwen3.8 27B, IBM Granite 4.2 8B 중 하나를 자동 선택하며, Wikipedia 약 93만 건과 MedlinePlus·Ready.gov(FEMA)·CDC·군 생존 교범·wikiHow·iFixit 등을 평문으로 담은 9GB 라이브러리를 함께 내려받는다. 답변마다 출처 문서를 함께 보여주고 질문은 기기 밖으로 나가지 않으며, 페이지는 작은 모델일수록 오류가 늘어나므로 인용 출처를 확인하라고 명시한다.",
+      "url": "https://www.brangus.io/survival-llm"
+    },
+    {
+      "title": "Stanford Daily, \"Anthropic이 스탠퍼드 교수 저작물을 불법 수집해 Claude 학습에 사용\" 보도",
+      "summary": "Stanford Daily는 10월 27일, Anthropic이 스탠퍼드 교수 10여 명의 저작물을 무단으로 수집해 Claude 학습에 사용했다고 보도했다. 기사에 따르면 Bartz v. Anthropic 소송에서 William Alsup 판사는 합법적으로 취득한 책으로 학습하는 것은 공정이용이지만 해적판 책을 영구 보관 도서관에 두는 것은 허용되지 않는다고 판단했고, 약 50만 건의 등록 저작물을 대상으로 15억 달러 합의가 이뤄졌다(저작물당 약 3,000달러). Tobias Wolff와 Chang-rae Lee는 이 합의에서 빠져 2026년 5월 별도 소송(Cruz v. Anthropic)을 제기해 저작물당 최대 15만 달러의 법정 손해배상과 배심재판을 요구하고 있으며, 기사에는 Anthropic 측 입장이 담기지 않았다.",
+      "url": "https://stanforddaily.com/2026/10/27/professors-books-pirated-to-train-claude/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "Expanding our partnership with GSA to bring Claude to all levels of government",
+      "content": "미국 조달청(GSA)과의 파트너십을 확대해 연방을 넘어 모든 단위의 정부 기관이 Claude를 도입할 수 있도록 한다는 발표다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/expanding-partnership-gsa",
+      "url": "https://www.anthropic.com/news/expanding-partnership-gsa"
+    },
+    {
+      "category": "생태계",
+      "title": "Early progress on accelerating drug development with Claude",
+      "content": "Claude를 활용해 신약 개발 과정을 가속하려는 작업의 초기 성과를 정리한 Anthropic 리서치 글이다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/research/early-progress-drug-development",
+      "url": "https://www.anthropic.com/research/early-progress-drug-development"
+    },
+    {
+      "category": "생태계",
+      "title": "Discovering and exploiting vulnerabilities in real-world software with Claude",
+      "content": "Claude로 실제 소프트웨어의 취약점을 발견하고 익스플로잇하는 능력을 다룬 Anthropic 리서치 글이다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/research/discovering-vulnerabilities-with-claude",
+      "url": "https://www.anthropic.com/research/discovering-vulnerabilities-with-claude"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.312",
+      "content": "Claude apps gateway에 `oidc.user_id_claim` 설정이 추가되어 `sub` 대신 Entra ID의 `oid` 같은 다른 id_token claim으로 사용자를 식별할 수 있게 됐고, 큰 CLAUDE.md를 앞부분만 보고 덮어쓰던 문제와 Bash `cd` 이후 디렉터리별 skill을 못 찾던 문제 등 다수 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.312",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 2
+  }
+}
