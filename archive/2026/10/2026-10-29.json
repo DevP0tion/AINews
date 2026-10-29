@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-29",
+  "news": [
+    {
+      "title": "Google, 프런티어 모델 'Gemini 4 Carbon' 공개 — 사이버보안·장기 에이전트 작업 특화",
+      "summary": "구글이 10월 28일 최신 프런티어 모델 Gemini 4 Carbon을 발표했다. 대규모 코드베이스의 버그 진단·수정 같은 장기 다단계 에이전트 작업과 보안 분야에 초점을 맞췄으며, Artificial Analysis Intelligence Index v5.0에서 59점으로 1위, SEC-bench Pro 88.2%, CWE-bench 71.0%를 기록했다. 현재는 일부 사이버 방어 인력에게만 제공되며 Fairwind 프로그램을 통해 신뢰 파트너로 확대할 예정이고, 도입 가격은 100만 입력 토큰당 $2 / 출력 $10(이후 $4 / $20)이다.",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/"
+    },
+    {
+      "title": "Google Research, LLM의 '수면(sleep)' 프레임워크로 지속학습 망각 문제 완화",
+      "summary": "모델이 새 데이터를 학습하면 기존 능력이 무너지는 catastrophic forgetting을 줄이기 위해, 입력을 처리하는 wake 단계와 학습을 정리하는 sleep 단계를 번갈아 수행하는 프레임워크를 제안했다. sleep 단계에서는 low-rank Mixture-of-Experts 용량을 추가해 기존 파라미터를 덮어쓰지 않고 단기 기억을 증류·강화학습 모방으로 장기 용량에 옮기고(memory consolidation), 비표준 전문가를 무작위로 활성화해 합성 학습 샘플을 만들어 선별 학습한다(dreaming). 미지 언어 번역에서 성능 저하가 거의 없었고 BABILong 장문맥은 10M 토큰까지 거의 완벽, SQuAD 단일 태스크 48.9%를 보고했다.",
+      "url": "https://research.google/blog/the-sleep-framework-a-new-way-for-llms-to-retain-knowledge-in-continual-learning/"
+    },
+    {
+      "title": "Cursor, 코드로 에이전트를 정의하는 Agent SDK 정식 출시",
+      "summary": "Cursor가 자사 Bugbot·Security Reviewer 등을 만드는 데 쓰던 내부 프레임워크를 Agent SDK로 공개했다. 프롬프트는 Markdown 파일, 도구는 TypeScript 함수로 작성해 에이전트를 코드로 관리하고, GitHub·GitLab·Bitbucket의 PR 같은 이벤트에 반응시키거나 전문 에이전트·병렬 서브에이전트에 작업을 위임할 수 있다. eval과 이벤트 리플레이가 내장돼 있으며, `agent-sdk deploy`로 Cursor 인프라에 배포하거나 Node 프로세스로 셀프 호스팅할 수 있다.",
+      "url": "https://cursor.com/blog/agent-sdk"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "AI for Science expands to foundations and research institutions",
+      "content": "연구자에게 무료 Claude 크레딧을 제공하는 AI for Science 프로그램을 Sloan Foundation·NSF·Allen Institute·Broad Institute gnomAD 등 전 세계 20개 과학 지원기관·연구기관과의 협력으로 확대한다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
+      "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 2
+  }
+}
