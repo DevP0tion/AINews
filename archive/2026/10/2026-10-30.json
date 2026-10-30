@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-30",
+  "news": [
+    {
+      "title": "Martin Fowler, \"LLM-Voice\": LLM이 쓴 문체가 글쓰기와 사고를 함께 잠식한다",
+      "summary": "Martin Fowler가 10월 29일 글에서 독자가 기계가 쓴 듯한 문체(LLM-Voice)에 본능적으로 거부감을 느끼며, 탐지 도구로 증명되는지보다 그 반응 자체가 더 중요하다고 주장했다. 글쓰기는 자신이 무엇을 이해했는지 정리하는 과정이므로 집필을 LLM에 넘기면 사고도 함께 넘기게 된다고 지적한다. 실천 지침으로 초안을 LLM에 맡기지 말 것, 재작성 제안은 신중히 받을 것, 개요 단계까지만 제한적으로 활용하고 본문은 직접 쓸 것, AI 사용 시 감사의 말 등에 사용 방식을 공개할 것을 제시했으며 장애·번역·저위험 문서는 예외로 인정했다.",
+      "url": "https://martinfowler.com/bliki/LLM-Voice.html"
+    },
+    {
+      "title": "Y Combinator Labs, Minecraft에서 50개 에이전트 군집 실험: 관료화와 과도한 위험회피",
+      "summary": "YC Labs가 Olam Labs와 함께 Minecraft·Mindustry에서 다중 에이전트 군집 실험을 진행한 결과를 공개했다. 'Civ50' 실험은 GPT-6.1 Sol 에이전트 50개를 생존 모드 월드에 3시간 투입해 '번영하는 문명을 건설하라'는 목표를 줬는데, 투표 없이 디렉터리 순서대로 위계가 생겨 한 에이전트가 616건의 직접 메시지를 받는 사실상의 리더가 됐고 전체 약 5,900건의 메시지가 오갔다. 배급·규칙·허가·역할이 생기며 관료제가 비대해졌고 사망 34건 중 22건이 첫날 밤에 발생한 뒤 에이전트들이 점점 위험회피적으로 변해 결국 번영에는 이르지 못했으며, 저자들은 이 누적되는 과도한 신중함을 코딩 에이전트에서 관찰되는 행동과 비교했다.",
+      "url": "https://labs.ycombinator.com/projects/games/index.html"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.314",
+      "content": "작업 디렉터리 밖 경로의 쓰기를 모든 권한 모드에서 거부하는 `permissions.blockWritesOutsideWorkingDirectories` 설정과 Claude apps gateway 업스트림의 IdP 그룹 지정(`groups`)·Bedrock guardrail 로깅(`guardrail_trace`)이 추가되고, VS Code와 Claude Desktop Code 탭에 유휴 상태 자동 컴팩션이 들어갔으며 effort 상한·Bedrock 이미지 과다·TLS 인증서 등 다수 버그가 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.314",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314"
+    },
+    {
+      "category": "모델/API",
+      "title": "Usage and Cost Analytics API 베타 출시",
+      "content": "`analytics-usage-cost-2026-08-24` 베타 헤더로 쓰는 `/v1/organizations/analytics/usage`·`/cost` 엔드포인트가 베타로 공개돼, Claude Console·Claude Enterprise 조직의 토큰 사용량과 비용을 모델·워크스페이스·API 키·요청 주체별로 필터링하고 그룹화해 조회할 수 있다.",
+      "special": false,
+      "id": "rn::2026-10-29::usage-cost-analytics-api",
+      "url": "https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api"
+    },
+    {
+      "category": "모델/API",
+      "title": "기존 Usage and Cost API, 레거시로 전환",
+      "content": "Usage and Cost API와 Claude Enterprise Analytics API의 `usage_report`·`cost_report`·`user_usage_report`·`user_cost_report` 엔드포인트가 레거시로 분류됐으며, 모두 계속 지원되지만 신규 Analytics API로의 마이그레이션 가이드가 함께 제공된다.",
+      "special": false,
+      "id": "rn::2026-10-29::usage-cost-api-legacy",
+      "url": "https://platform.claude.com/docs/en/manage-claude/usage-cost-api"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 1,
+    "claude": 0
+  }
+}
