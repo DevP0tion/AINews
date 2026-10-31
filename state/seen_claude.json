@@ -349,6 +349,7 @@
     "rn::2026-10-22::fast-mode-google-cloud",
     "rn::2026-10-29::usage-cost-analytics-api",
     "rn::2026-10-29::usage-cost-api-legacy",
+    "rn::2026-10-30::fast-mode-deprecation",
     "url::https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.121.0",
     "url::https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.122.0",
     "url::https://github.com/anthropics/anthropic-sdk-python/releases/tag/v0.125.0",
