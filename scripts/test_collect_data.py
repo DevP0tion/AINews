@@ -8,8 +8,9 @@ import tempfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import collect_data  # noqa: E402
 from collect_data import (  # noqa: E402
-    detect_new_root_pages, fetch_anthropic_news, parse_apps_release_notes,
-    parse_sitemap, parse_us_date, select_section_posts,
+    detect_new_root_pages, fetch_anthropic_news, fetch_hn_ai_stories, is_seen,
+    load_seen_urls, parse_apps_release_notes, parse_sitemap, parse_us_date,
+    select_section_posts,
 )
 
 B = "https://www.anthropic.com/"
@@ -155,5 +156,50 @@ assert "outside" not in json.dumps(secs) and "orphan" not in json.dumps(secs)
 
 assert len(parse_apps_release_notes(HTML, limit=1)) == 1
 assert parse_apps_release_notes("<html><p>no article</p></html>") == []
+
+# --- seen_urls 필터 (HN·arxiv 기보도 제외) --------------------------------------
+
+# daily_report.normalize_url과 같은 정규화로 대조한다 (끝 슬래시·추적 파라미터 무시)
+SEEN = {"https://phorion.io/blog/backdoor", "https://example.com/a?id=1"}
+assert is_seen("https://phorion.io/blog/backdoor/", SEEN)
+assert is_seen("https://Phorion.io/blog/backdoor?utm_source=hn", SEEN)
+assert is_seen("https://example.com/a?id=1", SEEN)
+assert not is_seen("https://example.com/a?id=2", SEEN)
+assert not is_seen("", SEEN)
+
+with tempfile.TemporaryDirectory() as d:
+    path = pathlib.Path(d) / "seen_urls.json"
+    assert load_seen_urls(path) == set()                      # 파일 없음 → 필터 꺼짐
+    path.write_text(json.dumps({"urls": sorted(SEEN)}))
+    assert load_seen_urls(path) == SEEN
+    path.write_text("{broken")
+    assert load_seen_urls(path) == set()                      # 깨진 파일 → 필터 꺼짐
+    path.write_text("[]")
+    assert load_seen_urls(path) == set()                      # 형식 오류 → 필터 꺼짐
+
+HN_ITEMS = {
+    1: {"type": "story", "title": "Backdoor in Claude Code", "url": "https://phorion.io/blog/backdoor/", "score": 991},
+    2: {"type": "story", "title": "Cooking tips", "url": "https://example.com/cook", "score": 500},
+    3: {"type": "story", "title": "New LLM trick", "url": "https://example.com/llm", "score": 300},
+    4: {"type": "story", "title": "Ask HN: AI agent ideas", "score": 50},   # url 없음 → HN 링크
+    5: {"type": "story", "title": "Another LLM post", "url": "https://example.com/llm2", "score": 10},
+}
+
+
+def fake_hn(url, **kw):
+    if url.endswith("topstories.json"):
+        return list(HN_ITEMS)
+    return HN_ITEMS[int(url.rsplit("/", 1)[1].split(".")[0])]
+
+
+collect_data.http_get_json = fake_hn
+stories = fetch_hn_ai_stories(limit=2, seen=SEEN)
+# 이미 보도한 글(1)은 빼고, 빠진 자리를 다음 후보로 채운다
+assert [s["url"] for s in stories] == [
+    "https://example.com/llm", "https://news.ycombinator.com/item?id=4",
+], stories
+assert [s["url"] for s in fetch_hn_ai_stories(limit=1)] == [
+    "https://phorion.io/blog/backdoor/",
+]                                                             # seen 미지정 → 기존 동작
 
 print("ok")

@@ -112,7 +112,7 @@ AINews/
 │   ├── test_send_discord.py          # embed에서 SDK 제외 self-check
 │   ├── test_stock_report.py          # 주식 검증·중복·재시도·렌더링 self-check
 │   ├── test_level_context.py         # 레벨 컨텍스트·주간 통계 self-check
-│   └── test_collect_data.py          # sitemap·앱 릴리즈 노트 파서 self-check
+│   └── test_collect_data.py          # sitemap·앱 릴리즈 노트 파서·기보도 필터 self-check
 ├── state/
 │   ├── seen_urls.json                # AI/IT 뉴스 URL 인덱스 (영구 누적)
 │   ├── seen_claude.json              # Claude 업데이트 항목 키
@@ -223,6 +223,11 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 - **GitHub Releases API** — `anthropics/claude-code`, `anthropics/anthropic-sdk-python`, `anthropics/anthropic-sdk-typescript`
 - **Hacker News** top stories 중 AI 키워드 매치
 - **arxiv** cs.LG / cs.CL 최신 (참고용)
+
+HN·arxiv 후보는 `state/seen_urls.json`에 이미 있는 URL(과거 리포트에 실린 기사)을 **수집 단계에서 뺀다**.
+HN 상위 글은 며칠씩 첫 페이지에 남아 점수가 계속 오르므로, 그대로 넘기면 curate 단계가
+이미 보도한 글을 다시 고르고 중복 필터가 전부 걸러 그날 뉴스가 0건이 된다.
+HN은 뺀 자리를 다음 후보로 채워 최대 15건을 유지한다.
 
 ## 수집 소스 (collect_stock.py)
 
@@ -425,6 +430,7 @@ Claude에게 전달되는 지침은 `prompts/` 아래 세 파일에 나뉘어 �
 ## 중복 판정
 
 - **뉴스**: URL 정규화 (scheme/host 소문자화, trailing slash 제거, tracking param 제거, fragment 제거) 후 완전 일치
+  - 같은 정규화로 수집 단계(`collect_data.py`)에서도 HN·arxiv 기보도 후보를 미리 뺀다
 - **Claude 업데이트**: curate 단계가 부여한 `id` 완전 일치.
   `id`는 원본에서 따온 안정적 값 — `gh::{repo}::{tag}` / `news::{url}` / `rn::{날짜}::{키워드}` / `app::{날짜}::{키워드}`.
   (title은 매일 재작성되는 자유 문구라 키로 쓰지 않는다.)

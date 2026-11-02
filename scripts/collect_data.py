@@ -23,6 +23,11 @@ AI 판단이 필요한 부분(한국어 요약, top 선정, specials 판정)은 
   }
 
 부수 효과: state/seen_sitemap.json 갱신 (루트 claude-* 페이지의 최초 발견일).
+
+hn_ai_stories·arxiv_recent는 state/seen_urls.json에 이미 있는 URL(과거 리포트에
+실린 기사)을 뺀 뒤 담는다. HN 상위 글은 며칠씩 첫 페이지에 남아 점수가 계속
+오르므로, 그대로 넘기면 curate 단계가 이미 보도한 글을 다시 고르고
+daily_report.py의 중복 필터가 전부 걸러 뉴스가 0건이 된다.
 """
 from __future__ import annotations
 
@@ -392,10 +397,36 @@ def fetch_github_releases(repo: str, limit: int = 5):
     return out
 
 
-def fetch_hn_ai_stories(limit: int = 15):
-    """Hacker News top stories 중 AI 관련 필터."""
+SEEN_URLS_PATH = pathlib.Path("state/seen_urls.json")
+
+
+def load_seen_urls(path: pathlib.Path = SEEN_URLS_PATH) -> set[str]:
+    """과거 리포트에 실린 뉴스 URL (daily_report.normalize_url로 정규화된 값).
+
+    파일이 없거나 깨졌으면 빈 집합 — 필터만 꺼지고 수집은 계속된다.
+    """
+    if not path.exists():
+        return set()
+    try:
+        return set(json.loads(path.read_text(encoding="utf-8")).get("urls", []))
+    except (json.JSONDecodeError, AttributeError) as e:
+        log(f"WARN seen_urls: {path} 파싱 실패: {e} — 기보도 필터 생략")
+        return set()
+
+
+def is_seen(url: str, seen: set[str]) -> bool:
+    # daily_report.py가 state에 넣는 키와 같은 정규화를 써야 대조가 맞는다
+    from daily_report import normalize_url
+
+    return bool(url) and normalize_url(url) in seen
+
+
+def fetch_hn_ai_stories(limit: int = 15, seen: set[str] | None = None):
+    """Hacker News top stories 중 AI 관련 필터. seen에 있는 URL은 건너뛴다."""
+    seen = seen or set()
     top_ids = http_get_json("https://hacker-news.firebaseio.com/v0/topstories.json")[:120]
     out = []
+    skipped = 0
     for sid in top_ids:
         try:
             item = http_get_json(
@@ -408,23 +439,32 @@ def fetch_hn_ai_stories(limit: int = 15):
         title = (item.get("title") or "").lower()
         if not any(kw in title for kw in AI_KEYWORDS):
             continue
+        url = item.get("url") or f"https://news.ycombinator.com/item?id={sid}"
+        if is_seen(url, seen):
+            skipped += 1
+            continue
         out.append({
             "title": item.get("title"),
-            "url": item.get("url") or f"https://news.ycombinator.com/item?id={sid}",
+            "url": url,
             "score": item.get("score", 0),
             "hn_url": f"https://news.ycombinator.com/item?id={sid}",
             "time": item.get("time"),
         })
         if len(out) >= limit:
             break
+    if skipped:
+        log(f"hn: 이미 보도한 URL {skipped}건 제외")
     return out
 
 
-def fetch_arxiv_recent(categories=("cs.LG", "cs.CL"), limit: int = 10):
-    """arxiv 최근 논문 (cs.LG, cs.CL)."""
+def fetch_arxiv_recent(categories=("cs.LG", "cs.CL"), limit: int = 10,
+                       seen: set[str] | None = None):
+    """arxiv 최근 논문 (cs.LG, cs.CL). seen에 있는 URL은 뺀다."""
     import feedparser
 
+    seen = seen or set()
     out = []
+    skipped = 0
     for cat in categories:
         url = (
             f"https://export.arxiv.org/api/query"
@@ -435,6 +475,9 @@ def fetch_arxiv_recent(categories=("cs.LG", "cs.CL"), limit: int = 10):
         # requests로 TIMEOUT 걸어 받은 뒤 본문만 파싱 — HTTP 실패는 safe()가 WARN 처리.
         feed = feedparser.parse(http_get_text(url))
         for e in feed.entries[:limit]:
+            if is_seen(getattr(e, "link", ""), seen):
+                skipped += 1
+                continue
             out.append({
                 "title": getattr(e, "title", "").strip().replace("\n", " "),
                 "url": getattr(e, "link", ""),
@@ -442,6 +485,8 @@ def fetch_arxiv_recent(categories=("cs.LG", "cs.CL"), limit: int = 10):
                 "published": getattr(e, "published", ""),
                 "category": cat,
             })
+    if skipped:
+        log(f"arxiv: 이미 보도한 URL {skipped}건 제외")
     return out
 
 
@@ -453,6 +498,8 @@ def fetch_arxiv_recent(categories=("cs.LG", "cs.CL"), limit: int = 10):
 def main() -> None:
     target_date = os.environ.get("TARGET_DATE") or datetime.datetime.utcnow().strftime("%Y-%m-%d")
     log(f"대상 날짜: {target_date}")
+    seen_urls = load_seen_urls()
+    log(f"seen_urls: {len(seen_urls)}건 (HN·arxiv 기보도 필터)")
 
     data = {
         "date": target_date,
@@ -481,8 +528,12 @@ def main() -> None:
                 [],
             ),
         },
-        "hn_ai_stories": safe("hn", fetch_hn_ai_stories, []),
-        "arxiv_recent": safe("arxiv", fetch_arxiv_recent, []),
+        "hn_ai_stories": safe(
+            "hn", lambda: fetch_hn_ai_stories(seen=seen_urls), [],
+        ),
+        "arxiv_recent": safe(
+            "arxiv", lambda: fetch_arxiv_recent(seen=seen_urls), [],
+        ),
     }
 
     out_path = pathlib.Path(f"inbox/{target_date}-raw.json")
