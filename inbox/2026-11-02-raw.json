@@ -1,6 +1,6 @@
 {
   "date": "2026-11-02",
-  "collected_at": "2026-11-02T00:58:24Z",
+  "collected_at": "2026-11-02T06:48:10Z",
   "anthropic_news": [
     {
       "title": "Enabling independent research",
@@ -266,250 +266,250 @@
   },
   "hn_ai_stories": [
     {
-      "title": "AI delivers 'zero financial payoff' to most companies, Apollo economist says",
-      "url": "https://techcrunch.com/2026/10/25/ai-delivers-zero-financial-payoff-to-most-companies-according-to-apollo-economist/",
-      "score": 128,
-      "hn_url": "https://news.ycombinator.com/item?id=50330456",
-      "time": 1793571045
+      "title": "AI fan wikis riddled with errors are muddying the waters of games culture",
+      "url": "https://www.eurogamer.net/ai-fan-wikis-errors-complicating-games-culture",
+      "score": 67,
+      "hn_url": "https://news.ycombinator.com/item?id=50332086",
+      "time": 1793584027
     },
     {
       "title": "The AI cost of JavaScript frameworks",
       "url": "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
-      "score": 291,
+      "score": 346,
       "hn_url": "https://news.ycombinator.com/item?id=50323088",
       "time": 1793513179
     },
     {
       "title": "I Am the Reason OpenAI Is Killing Unlimited Chats",
       "url": "https://chaosmanage.github.io/i-killed-unlimited-chatgpt/",
-      "score": 16,
+      "score": 42,
       "hn_url": "https://news.ycombinator.com/item?id=50327416",
       "time": 1793552494
     },
     {
+      "title": "In LLM era, can software startup survive?",
+      "url": "https://news.ycombinator.com/item?id=50331001",
+      "score": 16,
+      "hn_url": "https://news.ycombinator.com/item?id=50331001",
+      "time": 1793575726
+    },
+    {
       "title": "AI agent swarms in Minecraft fail to build civilization, drown in bureaucracy",
       "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-swarms-unleashed-in-minecraft-to-build-a-thriving-civilization-50-agent-teams-fail-after-falling-into-paralyzing-bureaucracy",
-      "score": 148,
+      "score": 164,
       "hn_url": "https://news.ycombinator.com/item?id=50325662",
       "time": 1793540844
     },
     {
-      "title": "Backdoor in Claude Code for VS Code extension on the Cursor Marketplace",
-      "url": "https://phorion.io/blog/offical-claude-code-vsx-compromise/",
-      "score": 991,
-      "hn_url": "https://news.ycombinator.com/item?id=50300683",
-      "time": 1793344152
-    },
-    {
       "title": "Anthropic blocks users for anything touching training larger models",
       "url": "https://twitter.com/jiahaoshao1/status/2116475922190922088",
-      "score": 455,
+      "score": 463,
       "hn_url": "https://news.ycombinator.com/item?id=50319358",
       "time": 1793475559
     },
     {
+      "title": "Postmortem on Claude Code Cursor extension hack",
+      "url": "https://www.microsoft.com/en-us/security/blog/2026/10/30/inside-malicious-claude-code-branded-cursor-extension-persistent-ssh-backdoor/",
+      "score": 7,
+      "hn_url": "https://news.ycombinator.com/item?id=50332497",
+      "time": 1793587286
+    },
+    {
       "title": "Muse AI agent is a commercial surveillance network disguised as an AI assistant",
       "url": "https://paulfwalsh.substack.com/p/metas-muse-ai-agent-is-a-commercial",
-      "score": 31,
+      "score": 45,
       "hn_url": "https://news.ycombinator.com/item?id=50328293",
       "time": 1793557982
     },
     {
-      "title": "It wasn't AI that flipped Proton's charge",
-      "url": "https://blog.raed.dev/posts/proton-loser-thinking/",
-      "score": 140,
-      "hn_url": "https://news.ycombinator.com/item?id=50328488",
-      "time": 1793559235
-    },
-    {
-      "title": "ChatGPT and Codex usage limits merging",
-      "url": "https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits",
-      "score": 216,
-      "hn_url": "https://news.ycombinator.com/item?id=50320588",
-      "time": 1793483347
-    },
-    {
       "title": "AI text watermarking and quality loss",
       "url": "https://blog.keyvan.net/p/ai-text-watermarking-and-quality",
-      "score": 66,
+      "score": 72,
       "hn_url": "https://news.ycombinator.com/item?id=50320599",
       "time": 1793483413
     },
     {
+      "title": "ChatGPT and Codex usage limits merging",
+      "url": "https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits",
+      "score": 221,
+      "hn_url": "https://news.ycombinator.com/item?id=50320588",
+      "time": 1793483347
+    },
+    {
       "title": "Do the math: How we took over ChatGPT accounts",
       "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai",
-      "score": 357,
+      "score": 358,
       "hn_url": "https://news.ycombinator.com/item?id=50314699",
       "time": 1793442611
     },
     {
-      "title": "We ran AI agent swarms in Minecraft and Mindustry",
-      "url": "https://labs.ycombinator.com/projects/games/index.html",
-      "score": 417,
-      "hn_url": "https://news.ycombinator.com/item?id=50296486",
-      "time": 1793310028
+      "title": "AI delivers 'zero financial payoff' to most companies, Apollo economist says",
+      "url": "https://techcrunch.com/2026/10/25/ai-delivers-zero-financial-payoff-to-most-companies-according-to-apollo-economist/",
+      "score": 214,
+      "hn_url": "https://news.ycombinator.com/item?id=50330456",
+      "time": 1793571045
     },
     {
-      "title": "So I guess everyone uses LLMs to think now",
-      "url": "https://eva.ac/blog/llms/",
-      "score": 63,
-      "hn_url": "https://news.ycombinator.com/item?id=50330253",
-      "time": 1793569744
+      "title": "It wasn't AI that flipped Proton's charge",
+      "url": "https://blog.raed.dev/posts/proton-loser-thinking/",
+      "score": 152,
+      "hn_url": "https://news.ycombinator.com/item?id=50328488",
+      "time": 1793559235
     },
     {
-      "title": "Sleep framework: A new way for LLMs to retain knowledge in continual learning",
-      "url": "https://research.google/blog/the-sleep-framework-a-new-way-for-llms-to-retain-knowledge-in-continual-learning/",
-      "score": 263,
-      "hn_url": "https://news.ycombinator.com/item?id=50272479",
-      "time": 1793190265
+      "title": "Cisco gives engineer unlimited AI tokens to rewrite legacy code",
+      "url": "https://fortune.com/2026/10/30/cisco-president-jeetu-patel-gen-z-27-year-old-unlimited-ai-tokens-rewrite-legacy-code-entry-level-jobs/",
+      "score": 312,
+      "hn_url": "https://news.ycombinator.com/item?id=50304122",
+      "time": 1793369300
     },
     {
-      "title": "Silicon Valley's in-flight magazine Colossus gives moguls coverage they crave",
-      "url": "https://sfstandard.com/2026/10/30/colossus-glossy-quarterly-silicon-valley/",
-      "score": 5,
-      "hn_url": "https://news.ycombinator.com/item?id=50329018",
-      "time": 1793562348
+      "title": "Malware uses LLMs to rank victims by how much they're worth",
+      "url": "https://blog.talosintelligence.com/appraisal-by-ai-model-driven-victim-prioritization-in-the-volta-infostealer/",
+      "score": 259,
+      "hn_url": "https://news.ycombinator.com/item?id=50316531",
+      "time": 1793456943
     }
   ],
   "arxiv_recent": [
     {
-      "title": "Propose-Filter-Release: Scaling Noise to Typical Sensitivity via Private Filtering",
-      "url": "https://arxiv.org/abs/2610.40654v1",
-      "summary": "An estimator can be accurate and stable on typical data, yet sensitive to a few possible records. Differentially private mechanisms commonly scale their noise to the worst-case influence of a single record, which lets these records dictate the noise even when the remaining data would allow far less. Removing them first would restore the smaller scale, but the removal must itself be private.   We introduce \\emph{propose-filter-release} (PFR), which, by privately filtering its input, turns a mechanism that protects the addition or removal of a typical record, one that fits the remaining data, in",
-      "published": "2026-10-29T17:59:49Z",
+      "title": "Latent Reasoning in Continuous Space for Unified Multimodal Models",
+      "url": "https://arxiv.org/abs/2610.42149v1",
+      "summary": "Unified Multimodal Models (UMMs) achieve remarkable success on diverse multimodal understanding and generation tasks, yet they still struggle to effectively leverage language-based chain-of-thought reasoning for image generation. As a result, existing reasoning-augmented UMMs often fail to inherit the test-time scaling and fine-grained controllability observed in large language models. We attribute this failure to a fundamental modality mismatch: reasoning is performed in a discrete token space, whereas image generation operates in a continuous space. To bridge this gap, we introduce a Latent",
+      "published": "2026-10-30T17:59:43Z",
       "category": "cs.LG"
     },
     {
-      "title": "Rethinking Neural Thickets Without Weight Perturbations",
-      "url": "https://arxiv.org/abs/2610.40649v1",
-      "summary": "The Neural Thickets hypothesis posits that pretrained language models lie in dense neighborhoods of task-specific experts in weight space, which random Gaussian perturbations can uncover. We reproduce the reported gains, but show that they do not require this geometric explanation. Perturbing a single decoder block already recovers much of the improvement, while keeping the model entirely frozen and adding a random bias to its output logits matches or exceeds full-weight perturbations on most reasoning tasks. This suggests an alternative explanation based on output diversity, validation-based",
-      "published": "2026-10-29T17:59:29Z",
+      "title": "Counting on Dummies: Privacy Amplification with Observable Counts and Truncated Batches",
+      "url": "https://arxiv.org/abs/2610.42139v1",
+      "summary": "In many practical deployments of Differentially Private Stochastic Gradient Descent (DP-SGD), the server processes data in batches. Randomly sampling these batches allows for better privacy bounds via privacy amplification results. Most sampling schemes with provable privacy amplification, including Poisson sampling and random allocation, result in variable batch sizes. The privacy guarantee of these schemes requires that the batch sizes are not revealed. In distributed settings, the server performing the aggregation or any party observing the communication traffic may learn these batch sizes.",
+      "published": "2026-10-30T17:58:42Z",
       "category": "cs.LG"
     },
     {
-      "title": "Read, Allocate, Route: Role-Coupled Tokenization for Pixel-Space Generative Transformers",
-      "url": "https://arxiv.org/abs/2610.40647v1",
-      "summary": "Pixel-space generative Transformers typically use one token per image patch, so capturing finer detail requires more tokens and makes global attention increasingly expensive. We observe that finer detail does not necessarily require more global communication: low-frequency structure benefits from global exchange, while high-frequency detail can be modeled locally. Based on this insight, we introduce SpecSlot, a pixel-space rectified-flow Transformer that decouples output detail from the length of the global attention sequence. SpecSlot expands each spatial anchor into multiple slots, each assi",
-      "published": "2026-10-29T17:59:21Z",
+      "title": "A Better Critic Matters for Distribution Matching Distillation",
+      "url": "https://arxiv.org/abs/2610.42135v1",
+      "summary": "Distribution Matching Distillation (DMD) trains a few-step student using the difference between a teacher's score and an online critic's estimate of the student distribution's score. We investigate what the critic needs, in capacity and in information, to provide a reliable training signal. On the capacity side, controlled experiments across seven SiT model sizes on ImageNet show that increasing teacher size while keeping a small critic fixed can degrade student quality and cause training collapse. Scaling the critic alongside the teacher, a strategy we call joint scaling, prevents collapse in",
+      "published": "2026-10-30T17:58:26Z",
       "category": "cs.LG"
     },
     {
-      "title": "Adaptive Scenario Generation for KL-DRO Around a Learned Density Model",
-      "url": "https://arxiv.org/abs/2610.40644v1",
-      "summary": "Distributionally robust optimization (DRO) hedges data-driven two-stage stochastic programs against error in the distribution estimated from a finite record, and standard ambiguity sets differ in how they treat realizations absent from that record. A divergence ball around the empirical distribution contains only reweightings of the record, whereas a transport ball also contains distributions supported off the record, including on realizations the data-generating process cannot produce, against which the decision is then hedged as well. We instead propose a Kullback-Leibler (KL) ball centered",
-      "published": "2026-10-29T17:59:01Z",
+      "title": "Instance-dependent sequential limits as an exact information ledger",
+      "url": "https://arxiv.org/abs/2610.42133v1",
+      "summary": "Instance-dependent limits for bandit regret, sequential tests, best-arm identification and Markov decision processes are proved by one chain. It runs from a divergence decomposition through data processing to a statistic, a testing step that turns a class guarantee into a requirement on the history, and optimization over alternatives and allocations. Only the first step is an identity. This work writes the chain as an exact ledger. By the chain rule, data processing loses exactly a conditional divergence, which vanishes for arms in natural exponential families at the per-arm counts and reward",
+      "published": "2026-10-30T17:57:44Z",
       "category": "cs.LG"
     },
     {
-      "title": "world2vec: Mechanistic world models through latent dynamics learning",
-      "url": "https://arxiv.org/abs/2610.40637v1",
-      "summary": "World models can achieve strong control performance without faithfully capturing the dynamics of their environment, limiting their potential for mechanistic interpretability and scientific discovery. Here, we introduce world2vec to learn mechanistic world models without reward information directly from observations and actions. World2vec learns latent dynamics that faithfully reproduce the true system over long prediction horizons, with at least one order of magnitude fewer parameters than DreamerV3, TD-MPC2 and LeWM. This enables state of the art performance in controlling continuous environm",
-      "published": "2026-10-29T17:58:23Z",
+      "title": "Physiological Trajectories and Observation Patterns in ICU Mortality Prediction: Transportability Under Changing Measurement Conditions",
+      "url": "https://arxiv.org/abs/2610.42126v1",
+      "summary": "Objective: To distinguish the transferable predictive value of physiological trajectories from that of observation patterns in ICU mortality prediction, and to assess whether measurement timing affects performance independently of observation quantity.   Materials and Methods: In-hospital mortality was predicted at 48 hours using MIMIC-III, MIMIC-IV, and eICU. Nested representations progressively integrated latest-value snapshots (R1), longitudinal physiological summaries (R2), and measurement frequency and timing features (R3). Models fitted on 7,762 MetaVision patients were evaluated on 21,6",
+      "published": "2026-10-30T17:56:10Z",
       "category": "cs.LG"
     },
     {
-      "title": "An ODE-based Sampler for Discrete Diffusion Models",
-      "url": "https://arxiv.org/abs/2610.40618v1",
-      "summary": "The marginals of a continuous diffusion model can be reproduced by a deterministic ordinary differential equation (ODE), known as the probability flow ODE, which provides a foundation for accelerated sampling and consistency distillation. In this paper we address the question whether an analogous formulation exists for discrete diffusion models and answer it affirmatively by introducing exponential residual flows (ERFs). Our framework augments the discrete state with a continuous residual variable for each token and position. These residuals evolve deterministically according to piecewise-defi",
-      "published": "2026-10-29T17:55:25Z",
+      "title": "Gradient Descent on Two ReLU Neurons: Global Landscape and Bifurcation Dynamics",
+      "url": "https://arxiv.org/abs/2610.42118v1",
+      "summary": "Understanding how gradient descent learns features remains a central challenge in neural network theory. We study this question in a minimal multi-index setting that already exhibits rich multi-phase gradient dynamics: a well-specified two-neuron ReLU teacher-student model under isotropic Gaussian inputs, trained by population gradient flow from small initialization. We show that the dynamics are organized by two directions: the \"easy\" bisector direction, which carries the leading signal, and the \"hard\" splitting direction, which governs specialization. To characterize the loss structure and l",
+      "published": "2026-10-30T17:51:35Z",
       "category": "cs.LG"
     },
     {
-      "title": "Difficulty Calibration Across Time for Membership Inference in Diffusion Models",
-      "url": "https://arxiv.org/abs/2610.40616v1",
-      "summary": "Modern diffusion models are trained on massive datasets that often include copyrighted or private images. Membership inference attacks (MIAs) address this by testing whether a given image was in a model's training set. The standard approach scores an image by its reconstruction loss and flags low-loss images as members. This often fails because some images are simply easier to reconstruct than others, so a simple unseen image can score a lower loss than a complex training image. Difficulty calibration separates memorization from how difficult an image is to begin with. We show how to calibrate",
-      "published": "2026-10-29T17:54:54Z",
+      "title": "Fast Privacy Loss Accounting for Random Allocation via Multiscale FFT",
+      "url": "https://arxiv.org/abs/2610.42117v1",
+      "summary": "In the random allocation sampling scheme each user's data is used in $k$ steps chosen randomly and uniformly from a sequence of $t$ steps. This scheme is known to improve on Poisson sampling in private optimization and in communication-efficient aggregation. The existing privacy loss distribution (PLD) accountant for this scheme runs in time quadratic in the inverse of the accuracy parameter $α$ (Feldman and Shenfeld, 2026). We give an algorithm, \\emph{multiscale FFT}, that represents likelihood ratios on a grid that is uniform within each dyadic interval and computes the exact rounding of eve",
+      "published": "2026-10-30T17:51:03Z",
       "category": "cs.LG"
     },
     {
-      "title": "Multistatic ISAC with Deep Learning-Based Clutter Suppression for 5G and Beyond",
-      "url": "https://arxiv.org/abs/2610.40586v1",
-      "summary": "Integrated sensing and communications (ISAC) systems using 5G and beyond signals of opportunity enable joint wireless sensing and communication using shared infrastructure and spectrum resources. While multistatic ISAC can increase sensing coverage with spatially distributed receivers, dense and dynamic clutter can significantly degrade bistatic range and Doppler estimation, leading to errors in target localization and velocity estimation. This paper presents a multistatic ISAC framework with clutter suppression for high-fidelity estimation of target position and velocity. Distributed clutter",
-      "published": "2026-10-29T17:47:02Z",
+      "title": "SATFRONT: Detecting Atmospheric Fronts with Satellite Data using Machine Learning",
+      "url": "https://arxiv.org/abs/2610.42111v1",
+      "summary": "Atmospheric fronts are associated with much of the high-impact weather in the mid-latitudes, yet their identification and classification remain largely manual and subjective. Existing deep learning approaches rely primarily on gridded reanalysis or forecast data, limiting their applicability to satellite observations available for time-critical applications. We introduce SATFRONT, a machine learning framework for detecting cold, warm, and occluded fronts over Europe from geostationary satellite observations, with reanalysis data as an optional additional input. The model is trained on frontal",
+      "published": "2026-10-30T17:48:20Z",
       "category": "cs.LG"
     },
     {
-      "title": "Gym-Anything for Robotics: Scaling physical simulations with digital agents",
-      "url": "https://arxiv.org/abs/2610.40565v1",
-      "summary": "Realistic, fast robotics simulations could enable large-scale training of embodied AI models that transfer to the real world. However, despite decades of progress, available simulations cover only a narrow range of real-world tasks and physical phenomena. The core bottleneck is that creating better simulations requires significant expert effort and therefore does not scale. To address this, we introduce Gym-Anything for Robotics, a framework in which coding agents create realistic robotics simulations. Our core insight is that simulation creation is a coding agent task, so improvements in codi",
-      "published": "2026-10-29T17:42:32Z",
+      "title": "Regret-Optimal Wasserstein-Robust Linear Regression",
+      "url": "https://arxiv.org/abs/2610.42109v1",
+      "summary": "Distributionally robust optimization (DRO) minimizes worst-case risk under distributional uncertainty, but its decisions can be suboptimal in terms of their excess risk, or regret. We study this gap for multivariate least-squares regression, assuming that the observed source law and unknown target law differ by an adversarial 2-Wasserstein perturbation of size $\\varepsilon$. We first identify the asymptotic complexity of robust decision-making in the $\\varepsilon \\to 0$ limit, characterized by a problem-specific condition number $κ$. Here, a wide spectrum of simple algorithms, including DRO, a",
+      "published": "2026-10-30T17:47:58Z",
       "category": "cs.LG"
     },
     {
-      "title": "Training Foundation Models with a Single Algorithm",
-      "url": "https://arxiv.org/abs/2610.40564v1",
-      "summary": "Foundation models are typically trained in stages: pretraining, midtraining, supervised fine-tuning (SFT), and reinforcement learning (RL), with changes in both data and learning algorithms. We show that this algorithmic separation is not fundamental. By deriving suitable RL objectives as maximum-likelihood fitting to model-generated target distributions, we place all of these stages under a single likelihood-based training algorithm, unified training. This perspective turns the foundation-model training lifecycle into a problem of choosing which data to train on, in what proportions, and when",
-      "published": "2026-10-29T17:42:05Z",
+      "title": "Hard Constraint Projection in a Physics Informed Neural Network (Burgers)",
+      "url": "https://arxiv.org/abs/2610.42106v1",
+      "summary": "Physics informed machine learning provides a framework to study and simulate fluid dynamics, potentially at a fraction of the computational cost of traditional numerical methods, with the goal of improving the explainability, accuracy and robustness of purely data driven machine learning methods. In this work, we extend the hard constraint projection (HCP) method developed by Chen et al. [Journal of Computational Physics, 445, 110624, 2021] from a linear partial differential equation (PDE) to a nonlinear PDE: the 1D Burgers' equation. To strictly impose a discrete approximation of the governin",
+      "published": "2026-10-30T17:47:01Z",
       "category": "cs.LG"
     },
     {
-      "title": "Elucidating the Design Space of LM Data Attribution",
-      "url": "https://arxiv.org/abs/2610.40655v1",
-      "summary": "Data attribution methods for Language Models (LMs) are typically evaluated using downstream tasks like fact retrieval. However, existing evaluations vary multiple dataset properties simultaneously, making it impossible to isolate exactly why an attribution algorithm fails. To diagnose these failures, we explore the design space of LLM data attribution, with a primary focus on evaluation. We introduce the Controlled Attribution Benchmark (CATT) for fact tracing, in which we fine-tune LLMs on entirely fictitious knowledge, providing unambiguous ground truth for attribution. This synthetic setup",
-      "published": "2026-10-29T17:59:53Z",
+      "title": "Latent Reasoning in Continuous Space for Unified Multimodal Models",
+      "url": "https://arxiv.org/abs/2610.42149v1",
+      "summary": "Unified Multimodal Models (UMMs) achieve remarkable success on diverse multimodal understanding and generation tasks, yet they still struggle to effectively leverage language-based chain-of-thought reasoning for image generation. As a result, existing reasoning-augmented UMMs often fail to inherit the test-time scaling and fine-grained controllability observed in large language models. We attribute this failure to a fundamental modality mismatch: reasoning is performed in a discrete token space, whereas image generation operates in a continuous space. To bridge this gap, we introduce a Latent",
+      "published": "2026-10-30T17:59:43Z",
       "category": "cs.CL"
     },
     {
-      "title": "ShallowDefend: Harnessing Shallow Safety Alignment for Multi-Turn Defender",
-      "url": "https://arxiv.org/abs/2610.40627v1",
-      "summary": "Safety alignment has enabled large language models to reliably refuse harmful requests directly, yet the same request distributed across a multi-turn conversation still succeeds far too often. This brittleness has a mechanistic root: Alignment is shallow, with safety behavior concentrated in a model's first few output tokens, and existing defenses inherit the weakness, supervising the surface form of the response without ever giving the model an explicit safety decision to learn. We take the opposite view of shallowness: if a short span determines the trajectory of an entire response, that spa",
-      "published": "2026-10-29T17:56:53Z",
+      "title": "Flide: Accelerating Decision Inference with Exact State Forking",
+      "url": "https://arxiv.org/abs/2610.42148v1",
+      "summary": "Decision models such as Jev have emerged as a highly promising paradigm for LLM agent systems, providing lightweight and reliable categorical reasoning for rapid System One execution. However, existing generation-oriented inference engines fail to support these workloads effectively, suffering from severe prefix recomputation overheads or distorted output probabilities. To address this challenge, we propose Flide, an efficient and exact inference engine that decouples the logical tree structure of a decision request from its physical execution within a single flattened token stream. Through Fo",
+      "published": "2026-10-30T17:59:38Z",
       "category": "cs.CL"
     },
     {
-      "title": "Testimony from Timelines: Evidence-Grounded Significance Testing of Temporal Clinical Hypotheses",
-      "url": "https://arxiv.org/abs/2610.40619v1",
-      "summary": "Ask a language model whether sales tend to dip after a product recall, or whether one side effect tends to follow another after a vaccine, and it answers in a fluent sentence that reads like a finding, with no test behind it. Assertions about how events unfold across many cases fill the Web, and each is a temporal hypothesis that only a significance test over the right records can settle. The verifier must specify the null, select the test and decide which records bear on the hypothesis, and any of these choices can go wrong while the conclusion still comes out right. Yet benchmarks for langua",
-      "published": "2026-10-29T17:55:30Z",
+      "title": "DecisionRank: On-Policy Distillation for Decision-Model Rerankers",
+      "url": "https://arxiv.org/abs/2610.42128v1",
+      "summary": "Decision models target structured tasks by directly predicting choices or scores, avoiding autoregressive decoding latency. However, transferring a generative LLM's ranking knowledge to a decision model remains challenging: the teacher expresses preferences through a ranked list of document ID sequences, while the student determines the ranking using scores from the first-token position. To bridge this gap, we introduce DecisionRank, a decision model trained through item-space on-policy distillation (OPD). Item-space OPD constructs the student's rollout by sorting its document scores into a ra",
+      "published": "2026-10-30T17:56:58Z",
       "category": "cs.CL"
     },
     {
-      "title": "TextSeal2: Distortion-Free LLM Watermarking with Copula Mixing and Memoryless Races",
-      "url": "https://arxiv.org/abs/2610.40613v1",
-      "summary": "We present TextSeal2, a distortion-free watermark for large language models that keeps its signal under speculative decoding: tokens that replace rejected drafts remain watermarked with the same keys, and the acceptance rate is unchanged. It also preserves output diversity and adds no measurable inference latency. Its predecessor, TextSeal, restores diversity in the Gumbel-max scheme by routing each token to one of two keys via a coin flip. This is suboptimal because the detector averages the scores from both keys without knowing which key was used. TextSeal2 instead merges two or more keys in",
-      "published": "2026-10-29T17:54:12Z",
+      "title": "Subquadratic Attention with a Hierarchical Tree-Structured Indexer",
+      "url": "https://arxiv.org/abs/2610.42112v1",
+      "summary": "The quadratic scaling of attention is a fundamental bottleneck limiting the long-context capabilities of large language models (LLMs). A variety of approaches have attempted to circumvent this, but they either fail to match attention's expressiveness (e.g., sliding-window or linear attention variants with fixed-size state) or only achieve constant-factor speedups (e.g., sparse attention methods whose indexers themselves scale quadratically). In this paper, we derive an asymptotically subquadratic sparse attention method based on a hierarchical, tree-structured indexer, which we call Zyphra Hie",
+      "published": "2026-10-30T17:48:37Z",
       "category": "cs.CL"
     },
     {
-      "title": "When to Assist and What to Suggest: Joint Gating and Memory-Grounded Hint Generation in One Compact Decoder",
-      "url": "https://arxiv.org/abs/2610.40611v1",
-      "summary": "Proactive assistants offer short, memory-grounded hints during a conversation, deciding when to assist and what to suggest. Current systems split this between a gate and a larger generator; we evaluate both together on 28,058 decision points. Stage-wise generation scores are oracle-gate ceilings: behind a real gate, end-to-end exact match is 0.2619 against a ceiling of 0.2971, and end-to-end precision is 0.2387, leaving substantial headroom. A gate pays off through precision and compute, whose saving falls from 4.39x with an 8B generator to 1.38x with a 1B one. The memory profile drives hint q",
-      "published": "2026-10-29T17:54:07Z",
+      "title": "RangeSWA: Training-Free Length Extrapolation for Continuous Diffusion Language Models",
+      "url": "https://arxiv.org/abs/2610.42084v1",
+      "summary": "Continuous diffusion language models show promising potential in text generation tasks, but are prone to problems such as text repetition, semantic drift, and generation quality degradation when the generation length exceeds the training length. To address these challenges, we propose RangeSWA, a training-free length extrapolation method. The method combines local sliding-window attention, remote block summaries, and dynamic content retrieval to preserve local details and support long-range context access. In addition, generation degradation caused by length extrapolation is mitigated through",
+      "published": "2026-10-30T17:35:48Z",
       "category": "cs.CL"
     },
     {
-      "title": "VeriCUA: Verification as Agentic Exploration for Computer-Using Agents",
-      "url": "https://arxiv.org/abs/2610.40578v1",
-      "summary": "Building and scaling computer-using agents (CUAs) across desktop, mobile, and web environments requires reliable task-completion verification for data curation, evaluation, and reinforcement learning. Typical automated approaches prompt vision-language models (VLMs) to judge trajectories or generate programs to inspect application state. However, both rely on partial views of complex digital environments. VLM judges are restricted to supplied observations, while generated programs depend on accessible state. These views can omit decisive evidence or leave completion judgments unsupported. Tail",
-      "published": "2026-10-29T17:45:26Z",
+      "title": "The Knowledge Layer Model (KLM): Evidence-Visible AI Output, Routing Diagnostics, and Negative Results",
+      "url": "https://arxiv.org/abs/2610.42066v1",
+      "summary": "AI answers require more than apparent correctness: reviewers need to inspect their recorded basis. We introduce the Knowledge Layer Model (KLM), an open, implementation-neutral specification for inference records with versioned epistemic assessments, evidence relations, and explicit unknowns. SEDIM, the knowledge and evidence architecture of Nage AI OS, is a reference implementation. We reference KLM v0.3 (repository tag v0.3.0). Empirical material consists of separate internal experiments, not end-to-end validation. A historical platform-domain routing benchmark reports 137/150 classification",
+      "published": "2026-10-30T17:26:18Z",
       "category": "cs.CL"
     },
     {
-      "title": "Multi-View MoE: Letting Every Router Shape Expert Computation",
-      "url": "https://arxiv.org/abs/2610.40577v1",
-      "summary": "Sparse mixture-of-experts (MoE) models expand parameter capacity by activating a small subset of experts per token. Expert selection directly affects model capabilities under a fixed active-expert budget. Dense evaluation of all experts reveals weak agreement between single-router rankings and expert-utility evaluation rankings, especially in middle and deep layers. Richer signals for selection and computation incur additional cost: selection based on internal expert activations requires preliminary computation, while processing multiple full representations separately through the same expert",
-      "published": "2026-10-29T17:45:12Z",
+      "title": "PersonaChatBench: Evaluating Chat Assistants with Diverse Simulated Users",
+      "url": "https://arxiv.org/abs/2610.42060v1",
+      "summary": "Conversational assistants are expected to help people with diverse backgrounds, preferences, and communication styles. Yet evaluations centered on a single cooperative user provide limited insight into how reliably an assistant serves users with different personas. We introduce PersonaChatBench, a framework for evaluating task competence and responsiveness to diverse user needs. PersonaChatBench pairs the same underlying task with multiple simulated users, each guided by a private persona card that specifies distinct needs, preferences, and interaction behaviors. By holding the task fixed whil",
+      "published": "2026-10-30T17:23:14Z",
       "category": "cs.CL"
     },
     {
-      "title": "PIVOT: Progressive Intervention via Online Teacher Correction",
-      "url": "https://arxiv.org/abs/2610.40576v1",
-      "summary": "Reinforcement learning from verifiable rewards (RLVR) is limited by sparse outcome-level feedback on hard reasoning tasks: when all rollouts in a group fail, rewards provide no learning signal. Stronger teachers can provide additional guidance, but this raises a central question: how can such signals be incorporated into RLVR to support successful rollouts while remaining learnable for the student? We distinguish two complementary mechanisms: trajectory-level intervention, which improves access to reward-bearing trajectories, and token-level supervision, which provides dense targets to guide s",
-      "published": "2026-10-29T17:45:07Z",
+      "title": "CRoS: Causality Reward on Scrambled CoTs Improves Accuracy and Reasoning Faithfulness",
+      "url": "https://arxiv.org/abs/2610.42054v1",
+      "summary": "Reinforcement learning with verifiable rewards (RLVR) has become the standard method for training language models to reason. However, RLVR typically relies solely on outcome correctness, which does not guarantee that the CoT causally contributes to the final answer. Without this connection, outcome rewards may fail to reinforce high-quality reasoning. Existing causality metrics assess CoT causality by perturbing the CoT, such as deleting reasoning steps or injecting errors, and measuring changes in the final answer. However, these perturbations inevitably alter information in each step. Conseq",
+      "published": "2026-10-30T17:18:35Z",
       "category": "cs.CL"
     },
     {
-      "title": "Every Token Needs Its Own Teacher: Multi-teacher Adaptive On-policy Self-distillation",
-      "url": "https://arxiv.org/abs/2610.40574v1",
-      "summary": "On-policy Self-distillation (OPSD) has proven effective for post-training large language models by constructing a teacher conditioned on privileged references. However, existing approaches keep the teacher fixed either throughout training by consistently exposing it to the full reference, or within each response by adaptively varying partial reference exposure only across responses. In this paper, we argue that neither of them is sufficient. Instead, every token needs its own teacher, as the teacher preference can vary token by token within the same response. Through a teacher-intervention pil",
-      "published": "2026-10-29T17:44:42Z",
+      "title": "Asynchronous Flow Map Language Models",
+      "url": "https://arxiv.org/abs/2610.42018v1",
+      "summary": "The order in which tokens are predicted in language modeling has a profound impact on the quality of generated sequences. Autoregressive and masked diffusion models iteratively fill in tokens and can exploit such orderings across generation steps, but how to leverage an ordering for one-step parallel language modeling is unclear. We introduce asynchronous flow map language models (aFMLMs), which incorporate prediction order into one-step modeling by learning the flow maps of asynchronous flows. These flows specify an ordering through a tokenwise time schedule that controls the relative denoisi",
+      "published": "2026-10-30T16:51:40Z",
       "category": "cs.CL"
     },
     {
-      "title": "Comparing Human Role-Players and LLM-Simulated Clients in Online Counselling Training: An Analysis of Counselling Patterns",
-      "url": "https://arxiv.org/abs/2610.40563v1",
-      "summary": "This study investigates the capabilities of Large Language Models to simulate counselling clients in educational role-plays in comparison to human role-players. Initially, we recorded role-playing sessions, where novice counsellors interacted with human peers acting as clients, followed by role-plays between humans and clients simulated by Mistrals Mixtral 8x7b using 4-bit quantization. These interactions were analysed with a counselling communication pattern system at sentence level. We investigated two key questions: (1) to what extent LLM-generated responses replicate authentic conversation",
-      "published": "2026-10-29T17:41:59Z",
+      "title": "TurnTurk-GPT: Text-Based Turn-Taking Prediction for Turkish",
+      "url": "https://arxiv.org/abs/2610.42010v1",
+      "summary": "This paper presents TurnTurk-GPT, a text-based turn-taking predictor for Turkish obtained by fine-tuning a Turkish GPT-2 model with the TurnGPT objective on synthetic and real dialogue, and evaluates it on real Turkish conversation against rule baselines, a zero-shot Turkish language model and a widely used multilingual end-of-turn detector. Evaluation uses word-level decision points on unpunctuated, lower-cased text approximating the output of streaming speech recognisers, recording-disjoint and speaker-disjoint folds, nested threshold selection and paired cluster bootstrap tests. TurnTurk-GP",
+      "published": "2026-10-30T16:48:32Z",
       "category": "cs.CL"
     }
   ]
