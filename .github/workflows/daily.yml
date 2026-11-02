@@ -11,6 +11,11 @@ on:
         description: "대상 날짜 (YYYY-MM-DD, 미입력 시 KST 오늘)"
         required: false
         default: ""
+      ai_only:
+        description: "AI/IT 리포트만 재생성 (주식 수집·처리·페이지 배포·주식 링크 전송 생략)"
+        type: boolean
+        required: false
+        default: false
 
 concurrency:
   group: daily-report
@@ -71,7 +76,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: python scripts/collect_data.py
 
+      # ai_only: 이미 발행된 주식 리포트를 건드리지 않도록 주식 쪽 수집을 전부 건너뛴다.
+      # 스케줄 실행에는 inputs가 없어 !inputs.ai_only 가 true다.
       - name: Collect stock data
+        if: ${{ !inputs.ai_only }}
         run: python scripts/collect_stock.py
 
       # KRX 정보데이터시스템이 로그인을 요구해 pykrx가 계정으로 세션을 만든다.
@@ -79,6 +87,7 @@ jobs:
       # 스크립트 자체가 모든 예외를 삼키지만(주식 리포트를 막지 않기 위해),
       # 설치·인터프리터 단계의 실패까지 덮도록 continue-on-error를 함께 둔다.
       - name: Collect investor trend
+        if: ${{ !inputs.ai_only }}
         continue-on-error: true
         env:
           KRX_ID: ${{ secrets.KRX_ID }}
@@ -89,6 +98,7 @@ jobs:
       # 스크립트가 모든 예외를 삼키지만(주식 리포트를 막지 않기 위해),
       # 설치·인터프리터 단계의 실패까지 덮도록 continue-on-error를 함께 둔다.
       - name: Collect research
+        if: ${{ !inputs.ai_only }}
         continue-on-error: true
         run: python scripts/collect_research.py
 
@@ -135,7 +145,15 @@ jobs:
         env:
           # 이어붙이는 순서가 곧 프롬프트 순서다 — 공통 규칙 → 파트 1(AI/IT) → 파트 2(주식)
           PROMPT_FILES: "prompts/common.md prompts/ai_news.md prompts/stock.md"
+          AI_ONLY: ${{ inputs.ai_only }}
         run: |
+          # ai_only: 파트 2(주식)를 빼고, 파트 1 끝의 "이어서 파트 2" 지시를 뒤에서 덮어쓴다
+          AI_ONLY_NOTE=""
+          if [ "${AI_ONLY}" = "true" ]; then
+            PROMPT_FILES="prompts/common.md prompts/ai_news.md"
+            AI_ONLY_NOTE=$'\n---\n\n**이번 실행은 AI/IT 재생성 모드다. 파트 2(주식)는 수행하지 않는다.** 위의 "이어서 파트 2를 수행할 것" 지시는 무시하고, `/tmp/processed.json`을 쓰면 전체 작업을 종료한다. `/tmp/processed_stock.json`은 만들지 않는다.'
+          fi
+
           for f in ${PROMPT_FILES}; do
             if [ ! -f "$f" ]; then
               echo "::error::프롬프트 파일이 없습니다: $f"
@@ -147,6 +165,7 @@ jobs:
             -e "s|{{TARGET_DATE}}|${TARGET_DATE}|g" \
             -e "s|{{INBOX_PATH}}|${INBOX_PATH}|g" \
             -e "s|{{STOCK_INBOX_PATH}}|${STOCK_INBOX_PATH}|g")
+          PROMPT="${PROMPT}${AI_ONLY_NOTE}"
 
           # 오타로 플레이스홀더가 남으면 Claude에게 의미 없는 문자열이 그대로 간다.
           # 조용히 넘어가면 원인 파악이 어려우므로 여기서 멈춘다.
@@ -215,8 +234,10 @@ jobs:
 
       # 여기부터 실패해도 job은 계속된다 (AI/IT는 위에서 이미 푸시됐다).
       # 실패는 continue-on-error로 삼켜지는 대신 stock_outcome 으로 후속 job에 전달된다.
+      # ai_only 이면 건너뛴다 → stock_outcome 이 'skipped' 가 되어 publish_stock 도 돌지 않는다
       - name: Process stock report
         id: stock
+        if: ${{ !inputs.ai_only }}
         continue-on-error: true
         run: |
           if [ ! -f /tmp/processed_stock.json ]; then
@@ -241,7 +262,7 @@ jobs:
           git push origin main
 
       - name: Report stock failure
-        if: steps.stock.outcome != 'success'
+        if: ${{ !inputs.ai_only && steps.stock.outcome != 'success' }}
         run: |
           echo "::warning::주식 리포트 처리 실패 — AI/IT 리포트는 정상 전송되고 주식 전송만 건너뜁니다"
 
@@ -276,6 +297,8 @@ jobs:
     needs: [collect, curate]
     # 주식 처리가 실패해도 배포한다 — SDK 업데이트는 채팅에 없고 이 페이지에만 있다.
     # 주식 링크 전송만 publish_stock 에서 stock_outcome 으로 막는다.
+    # ai_only 재실행도 배포한다 — 주식 archive는 그대로라 주식 페이지는 같고,
+    # 재생성 중 새로 잡힌 SDK 업데이트는 반영된다.
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -317,7 +340,8 @@ jobs:
   # ---------------------------------------------------------------------------
   publish_stock:
     needs: [collect, curate, pages]
-    # 주식 처리가 실패한 날은 그날 페이지가 비어 있으므로 링크를 보내지 않는다
+    # 주식 처리가 실패한 날은 그날 페이지가 비어 있으므로 링크를 보내지 않는다.
+    # ai_only 재실행은 Process stock report가 skipped라 여기서 함께 걸러진다.
     if: needs.curate.outputs.stock_outcome == 'success'
     runs-on: ubuntu-latest
     env:

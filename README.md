@@ -490,6 +490,10 @@ claude              # Claude Code CLI
 
 Actions 탭 → **Daily Report** → **Run workflow** (manual trigger):
 - `date`: 빈칸 (오늘 KST 자동) 또는 특정 날짜 입력
+- `ai_only`: 체크하면 **AI/IT 리포트만** 다시 만든다. 주식 수집(`collect_stock`·`collect_investor`·`collect_research`),
+  curate 프롬프트의 파트 2, 주식 처리·커밋, 주식 링크 전송을 건너뛴다. 이미 발행된 그날 주식 리포트는 그대로 남는다.
+  (전체 재실행은 주식 기사가 이미 `seen_stock_urls.json`에 있어 중복으로 빠지고, 주식 리포트가 줄어든 내용으로 덮어써진다.)
+  AI/IT 채널에는 다시 만든 리포트가 한 번 더 전송된다
 
 성공 체크리스트:
 - [ ] `collect` job: `inbox/YYYY-MM-DD-raw.json`, `inbox/YYYY-MM-DD-stock-raw.json` 커밋됨
