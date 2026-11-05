@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-05",
+  "news": [
+    {
+      "title": "Ripple-65B Preview — 미국 오픈웨이트 모델 중 에이전트 코딩 SOTA",
+      "summary": "Ricursive Intelligence가 오픈웨이트 모델 Ripple-65B Preview를 공개했다. MoE가 아닌 dense Transformer(hidden dim 5120, 80 layers)로 12조 토큰을 사전학습했고 최대 1M 토큰 컨텍스트를 지원하며, TerminalBench 2.1에서 80.52점을 기록해 Reflection Beam(501B, 80.1)·Meta Muse Spark Open(816B, 76.4) 등 더 큰 모델을 앞섰다. 회사는 총 R&D 비용 약 3,200만 달러, RL 단계 롤아웃 약 140만 회로 기존 오픈웨이트 SOTA 대비 비용은 약 1/10, 롤아웃은 약 70분의 1이라고 밝혔다(Ricursive Intelligence 자체 추정). 현재 Hugging Face·Together AI·GMI Cloud·OpenRouter에서 제공된다.",
+      "url": "https://www.ricursive.com/ripple"
+    },
+    {
+      "title": "PHP2Shell 취약점 — AI가 40년치 기술 부채를 드러내고 있다",
+      "summary": "2026년 10월 말 공개된 PHP2Shell은 NASA·Wikipedia·백악관 사이트와 WordPress·Drupal 기반 사이트를 포함해 PHP로 구동되는 웹을 광범위하게 노출시킨 취약점으로, 민감 데이터 열람과 서버상 임의 코드 실행이 가능했다. 원래 버그는 2024년에 PHP Foundation에 보고된 out-of-memory 오류였으나 단순 크래시로 치부돼 방치됐고, OpenAI가 후원한 보안업체 Calif의 연구자가 AI 도구의 도움으로 2주 만에 이를 임의 코드 실행으로 전환하는 방법을 찾아냈다(악용 전 패치 완료). 기사는 패치 작업이 4인 PHP 팀의 두 달 작업이었다는 점과 함께, AI가 숨어 있던 레거시 코드의 결함을 쉽게 찾아내면서 지난 40년간 쌓인 기술 부채를 청산해야 하는 상황이라는 Tolmo의 Matt Suiche 주장을 전한다.",
+      "url": "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "Investigating vault particles with Claude",
+      "content": "Anthropic 생물학 연구팀이 Claude를 활용해 원핵세포에서 발견된 vault particle의 3D 구조(단일 단백질 96개 복사본으로 구성된 박테리오파지 유래 vault)를 처음으로 규명했으며, Claude는 단백질 DB 검색·DNA construct 설계·cryo-EM 데이터 처리와 vault 분리 시간을 약 3일에서 90분으로 단축하는 데 쓰였다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/research/investigating-vault-particles-with-claude",
+      "url": "https://www.anthropic.com/research/investigating-vault-particles-with-claude"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v2.5.0",
+      "content": "HTTP 상태·API 오류 코드별 예외 클래스와 `APIStatusError`의 `error_code`·`details`·`api_message` 필드, 워크스페이스 목록의 `ids` 필터가 추가됐고, Bedrock·Vertex 경로에서 model·project ID·region을 검증·퍼센트 인코딩하도록 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v2.5.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v2.5.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk-v1.5.0",
+      "content": "HTTP 상태·API 오류 코드별 에러 클래스와 `APIError`의 `apiMessage`·`errorCode`·`details`가 추가됐고, 경로 파라미터 검증 강화와 chunk당 SSE 디코딩 1회로 줄인 스트리밍 성능 개선이 포함됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v1.5.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v1.5.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript vertex-sdk-v1.1.2",
+      "content": "Vertex 요청 경로의 project ID·region·model을 퍼센트 인코딩해 model에 포함된 `/`로 요청이 `/publishers/anthropic/models/` 밖으로 벗어나지 못하게 했고, model이 비었거나 project ID·region이 `.`·`..`이면 `AnthropicError`를 던진다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::vertex-sdk-v1.1.2",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/vertex-sdk-v1.1.2"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript google-cloud-sdk-v1.1.3",
+      "content": "파생 base URL에 들어가는 project·location·workspace ID를 퍼센트 인코딩하고, 값이 `.`·`..`인 경우 `AnthropicError`를 던지도록 수정했다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::google-cloud-sdk-v1.1.3",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/google-cloud-sdk-v1.1.3"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 1
+  }
+}
