@@ -1,0 +1,947 @@
+{
+  "date": "2026-11-06",
+  "collected_at": "2026-11-06T01:43:20Z",
+  "watchlist": [
+    {
+      "symbol": "005930.KS",
+      "name": "삼성전자",
+      "aliases": [
+        "삼성전자",
+        "삼전",
+        "Samsung Electronics"
+      ]
+    },
+    {
+      "symbol": "000660.KS",
+      "name": "SK하이닉스",
+      "aliases": [
+        "SK하이닉스",
+        "하이닉스",
+        "SK hynix"
+      ]
+    },
+    {
+      "symbol": "688825.SS",
+      "name": "창신메모리",
+      "aliases": [
+        "창신메모리",
+        "CXMT",
+        "ChangXin"
+      ]
+    }
+  ],
+  "quotes": {
+    "indices": [
+      {
+        "symbol": "^KS11",
+        "price": 4961.92,
+        "prev_close": 5383.8,
+        "change": -421.88,
+        "change_pct": -7.836,
+        "volume": 95965,
+        "currency": "KRW",
+        "market_time": 1793928210,
+        "quote_time": "2026-11-06T01:23:30Z",
+        "name": "코스피"
+      },
+      {
+        "symbol": "^KQ11",
+        "price": 635.97,
+        "prev_close": 678.41,
+        "change": -42.44,
+        "change_pct": -6.256,
+        "volume": 194291,
+        "currency": "KRW",
+        "market_time": 1793928220,
+        "quote_time": "2026-11-06T01:23:40Z",
+        "name": "코스닥"
+      },
+      {
+        "symbol": "^IXIC",
+        "price": 24314.998,
+        "prev_close": 25736.514,
+        "change": -1421.516,
+        "change_pct": -5.523,
+        "volume": 10902980000,
+        "currency": "USD",
+        "market_time": 1793916959,
+        "quote_time": "2026-11-05T22:15:59Z",
+        "name": "나스닥"
+      },
+      {
+        "symbol": "KRW=X",
+        "price": 1355.22,
+        "prev_close": 1356.68,
+        "change": -1.4601,
+        "change_pct": -0.1076,
+        "volume": 0,
+        "currency": "KRW",
+        "market_time": 1793929415,
+        "quote_time": "2026-11-06T01:43:35Z",
+        "name": "원/달러"
+      }
+    ],
+    "stocks": [
+      {
+        "symbol": "005930.KS",
+        "price": 184900.0,
+        "prev_close": 201500.0,
+        "change": -16600.0,
+        "change_pct": -8.238,
+        "volume": 11126531,
+        "currency": "KRW",
+        "market_time": 1793928221,
+        "quote_time": "2026-11-06T01:23:41Z",
+        "name": "삼성전자",
+        "stale": false
+      },
+      {
+        "symbol": "000660.KS",
+        "price": 1120000.0,
+        "prev_close": 1264000.0,
+        "change": -144000.0,
+        "change_pct": -11.392,
+        "volume": 1901964,
+        "currency": "KRW",
+        "market_time": 1793928220,
+        "quote_time": "2026-11-06T01:23:40Z",
+        "name": "SK하이닉스",
+        "stale": false
+      },
+      {
+        "symbol": "688825.SS",
+        "price": 42.53,
+        "prev_close": 44.09,
+        "change": -1.56,
+        "change_pct": -3.538,
+        "volume": 11770355,
+        "currency": "CNY",
+        "market_time": 1793928303,
+        "quote_time": "2026-11-06T01:25:03Z",
+        "name": "창신메모리",
+        "stale": false,
+        "krw_rate": {
+          "symbol": "CNYKRW=X",
+          "rate": 203.36,
+          "quote_time": "2026-11-06T01:39:29Z"
+        }
+      }
+    ]
+  },
+  "market_news": [
+    {
+      "title": "폭락장에도 꿋꿋…노무라 “코스피 목표 1만 유지…상승 동력 4가지 있어”",
+      "url": "https://www.mk.co.kr/news/stock/12200293",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T01:41:01Z",
+      "summary": "“한국 주식 과매도…단기목표 8천” 기업실적 상승·자사주매입 확대에 상법 개정·행동주의 압박 긍정평가 AI 데이터센터 건설 중단은 주정부만증시 폭락에도 일본계 투자은행 노무라는 기..",
+      "matched": []
+    },
+    {
+      "title": "기아, 전남광주서 PBV 모빌리티 생태계 조성…미래차 3조 투자",
+      "url": "https://www.yna.co.kr/view/AKR20261106070200003",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:40:33Z",
+      "summary": "(서울=연합뉴스) 장하나 기자 = 기아가 전남광주 지역에서 목적기반모빌리티(PBV) 중심의 미래 모빌리티 생태계 조성에 나선다. 오는 2029년...",
+      "matched": []
+    },
+    {
+      "title": "국산 '라이신' 브라질 첫 수출…대상, 내년 200만달러 수출 목표",
+      "url": "https://www.yna.co.kr/view/AKR20261106069700030",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:38:52Z",
+      "summary": "(서울=연합뉴스) 한주홍 기자 = 대상이 생산한 사료용 필수 아미노산 라이신이 브라질 수출 인허가를 획득해 현지 시장에 처음 진출한다.",
+      "matched": []
+    },
+    {
+      "title": "증시급락에 코스피 변동성지수 껑충…3개월만에 60선 웃돌아",
+      "url": "https://www.yna.co.kr/view/AKR20261106069400008",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:38:14Z",
+      "summary": "(서울=연합뉴스) 김유아 기자 = 인공지능(AI) 투자 수익성과 데이터센터 건설 지연 우려가 글로벌 증시를 한꺼번에 덮치면서 &apos;한국형 공포지수&apos;...",
+      "matched": []
+    },
+    {
+      "title": "파마리서치 3분기 영업이익 626억원…1% 증가(종합)",
+      "url": "https://www.yna.co.kr/view/AKR20261106070700017",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:35:55Z",
+      "summary": "(서울=연합뉴스) 신선미 기자 = 파마리서치[214450]는 연결 기준 올해 3분기 영업이익이 626억원으로 지난해 동기보다 1.2% 증가한 것...",
+      "matched": []
+    },
+    {
+      "title": "울주군, 2028년 '두동면 공공복합시설 건립'…설계 당선작 선정",
+      "url": "https://www.yna.co.kr/view/AKR20261106064600057",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:34:47Z",
+      "summary": "(울산=연합뉴스) 장영은 기자 = 울산 울주군은 &apos;두동면 공공복합시설 건립&apos; 건축 설계공모 당선작으로 아르카건축사사무소가 출품한 &apos;마실 가는 집...",
+      "matched": []
+    },
+    {
+      "title": "국민은행 'KB아동수당통장' 출시…최고 연 3.1% 금리",
+      "url": "https://www.yna.co.kr/view/AKR20261106070100002",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:32:39Z",
+      "summary": "(서울=연합뉴스) 한지훈 기자 = KB국민은행은 6일 아동수당 수령 고객에게 우대금리와 수수료 면제 혜택을 제공하는 &apos;KB아동수당통장&apos;을 출시했...",
+      "matched": []
+    },
+    {
+      "title": "부산은행, BNK썸농구단 우승 기원 적금 출시…최고 4.9% 금리",
+      "url": "https://www.yna.co.kr/view/AKR20261106068800051",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:31:07Z",
+      "summary": "(부산=연합뉴스) 오수희 기자 = BNK부산은행은 6일 여자프로 농구단의 선전을 기원하고 팬들과 함께 응원하는 즐거움을 나누기 위해 &apos;BNK 썸...",
+      "matched": []
+    },
+    {
+      "title": "'파업 중 공정위 조사방해' 화물연대 2심 벌금형…무죄 뒤집혀",
+      "url": "https://www.yna.co.kr/view/AKR20261106068600004",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:30:45Z",
+      "summary": "(서울=연합뉴스) 이영섭 기자 = 총파업 도중 이뤄진 공정거래위원회 조사를 방해한 혐의로 기소된 민주노총 공공운수노조 화물연대본부(화물연대)가 ...",
+      "matched": []
+    },
+    {
+      "title": "[연합뉴스 이 시각 헤드라인] - 10:30",
+      "url": "https://www.yna.co.kr/view/AKR20261106063800011",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:30:00Z",
+      "summary": "■ 8%대 급락으로 장중 5천피 붕괴…서킷브레이커 발동",
+      "matched": []
+    },
+    {
+      "title": "피노, 1830억 원 규모 유증 단행…이차전지 소재 사업 체질 개선",
+      "url": "https://www.mk.co.kr/news/stock/12200277",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T01:29:44Z",
+      "summary": "이차전지 소재 전문기업 피노가 사업 경쟁력 강화와 중장기 성장 기반을 다지기 위해 약 1830억 원 규모의 대규모 유상증자를 단행한다. 피노는 6일 공시를 통해 약 1830억 원 ..",
+      "matched": []
+    },
+    {
+      "title": "울주군, 중국 쿤산시와 우호교류도시 수립의향서 체결",
+      "url": "https://www.yna.co.kr/view/AKR20261106064300057",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:28:16Z",
+      "summary": "(울산=연합뉴스) 장영은 기자 = 울산 울주군은 중국 장쑤성 쿤산시에서 두 도시 간 우호교류도시 수립 의향서를 체결했다고 6일 밝혔다.",
+      "matched": []
+    },
+    {
+      "title": "에브리봇, 中 CMS증권 주관 DDT 설명회 참석…국내 기관투자자 대거 관심",
+      "url": "https://www.mk.co.kr/news/stock/12200263",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T01:24:44Z",
+      "summary": "피지컬 AI 로봇 전문기업 에브리봇이 중국 대형 증권사인 CMS증권이 주관한 로봇 기업 설명회에 파트너로 참석해 중국 DDT(Direct Drive Tech)와의 협력 청사진을 제..",
+      "matched": []
+    },
+    {
+      "title": "\"70달러가 1달러 됐다\"…'블루 쓰나미'에 트럼프 코인 폭락",
+      "url": "https://www.hankyung.com/article/2026110602507",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T01:13:31Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[MK시그널] 마라톤 페트롤리엄 매도신호 포착, 수익률 25.6% 달성",
+      "url": "https://www.mk.co.kr/news/stock/12200243",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T01:13:14Z",
+      "summary": "안녕하세요. 미국 주식 핫 이슈 종목을 분석해드리는 AI 기자 ‘MK시그널’입니다. 5일, 마라톤 페트롤리엄(MPC)이 MK시그널에서 매도 신호가 포착돼 수익률 25.61% 달성했..",
+      "matched": []
+    },
+    {
+      "title": "\"울고 싶다\" \"연봉 날아갈 판\"…삼전닉스 등 증시 폭락에 개미들 패닉",
+      "url": "https://www.yna.co.kr/view/AKR20261106060700008",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:09:53Z",
+      "summary": "(서울=연합뉴스) 고은지 기자 = 장이 열리자마자 코스피가 5,000선 아래로 급락하면서 개인투자자(개미)들은 그야말로 패닉에 빠졌다.",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "'그래서 돈 언제 버나'…진짜 공포는 AI 데이터센터 지연",
+      "url": "https://www.hankyung.com/article/202611060230i",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T01:01:06Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "평창군, 외국인 계절근로자 산불예방 정보 '언어 장벽' 낮춘다",
+      "url": "https://www.yna.co.kr/view/AKR20261106058500062",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:00:56Z",
+      "summary": "(평창=연합뉴스) 임보연 기자 = 강원 평창군이 언어 차이로 외국인 계절근로자에 산불 예방수칙이 제대로 전달되지 않는 문제를 줄이기 위해 다국어...",
+      "matched": []
+    },
+    {
+      "title": "빗썸, 국회 입법박람회서 보이스피싱 예방 교육 책무 제안",
+      "url": "https://www.yna.co.kr/view/AKR20261106059200002",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:00:41Z",
+      "summary": "(서울=연합뉴스) 유동현 기자 = 가상자산 거래소 빗썸은 &apos;2026 국회 입법박람회&apos;에 참가해 국가와 지방자치단체의 보이스피싱 예방 교육 책무를...",
+      "matched": []
+    },
+    {
+      "title": "창고43, 서브 브랜드 '창고43 온' 출시…현대百 중동점에 1호점",
+      "url": "https://www.yna.co.kr/view/AKR20261106058900030",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:00:13Z",
+      "summary": "(서울=연합뉴스) 한주홍 기자 = 다이닝브랜즈그룹의 한우 전문점 &apos;창고43&apos;이 서브 브랜드 &apos;창고43 온&apos;을 출시하고 외식 사업 영역을 넓힌다.",
+      "matched": []
+    },
+    {
+      "title": "여의도 목화아파트 416세대로…창신동 정비사업도 통과",
+      "url": "https://www.yna.co.kr/view/AKR20261105162800004",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:00:02Z",
+      "summary": "(서울=연합뉴스) 유한주 기자 = 서울 영등포구 여의도 목화아파트 부지와 종로구 창신1구역 3지구에 총 707세대의 공동주택이 들어선다.",
+      "matched": []
+    },
+    {
+      "title": "독과점 사업자, 해외보다 국내서 터무니 없이 비싸게 팔면 제재",
+      "url": "https://www.yna.co.kr/view/AKR20261106045400002",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T01:00:01Z",
+      "summary": "(세종=연합뉴스) 김수현 기자 = 앞으로 독과점 사업자가 해외 시장보다 국내 시장에서 가격을 부당하게 높게 결정하거나 원가 상승기 상품 가격을 ...",
+      "matched": []
+    },
+    {
+      "title": "기능장 초청해 울주군 제과점 영업주에 베이커리 기술교육",
+      "url": "https://www.yna.co.kr/view/AKR20261106045300057",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T00:59:55Z",
+      "summary": "(울산=연합뉴스) 장영은 기자 = 울산 울주군은 대한제과협회 울산시지회 세미나실에서 지역 내 제과점 영업주를 대상으로 &apos;요즘 뜨는 빵집 비법, ...",
+      "matched": []
+    },
+    {
+      "title": "세계증시 급락 속…증권가 \"데이터센터 규제 우려 과도\"",
+      "url": "https://www.yna.co.kr/view/AKR20261106050600008",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T00:51:21Z",
+      "summary": "(서울=연합뉴스) 강수지 기자 = 미국 중간선거 이후 데이터센터 규제 강화 우려로 미국 및 국내 증시 등이 큰 폭으로 하락하는 가운데, 증권가에...",
+      "matched": []
+    },
+    {
+      "title": "횡성 청년토마토 공동브랜드 'REDCREW' 개발",
+      "url": "https://www.yna.co.kr/view/AKR20261106055000062",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T00:49:46Z",
+      "summary": "(횡성=연합뉴스) 임보연 기자 = 강원 횡성군이 청년 토마토 농업인의 공동 판촉과 상품 경쟁력 강화를 위해 공동브랜드 &apos;REDCREW&apos;(레드크루...",
+      "matched": []
+    },
+    {
+      "title": "[게시판] 롯데칠성, 현대건설에 동절기 안전보건 지원 물품 전달",
+      "url": "https://www.yna.co.kr/view/AKR20261106050700030",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T00:42:26Z",
+      "summary": "▲ 롯데칠성음료[005300]는 지난 5일 서울 종로구 현대건설 본사에서 한랭질환 예방 물품 전달식을 진행했다고 6일 밝혔다. 롯데칠성음료는 현...",
+      "matched": []
+    },
+    {
+      "title": "첨단바이오·신규 생물의약품 허가 수수료 2천만원대로 오른다",
+      "url": "https://www.yna.co.kr/view/AKR20261106052600017",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T00:42:19Z",
+      "summary": "(서울=연합뉴스) 신선미 기자 = 첨단바이오의약품과 신규 생물의약품 품목 허가 수수료가 800만원대에서 2천만원대로 오른다.",
+      "matched": []
+    },
+    {
+      "title": "[게시판] 한미글로벌 통일한반도건설전략연구소 국제세미나",
+      "url": "https://www.yna.co.kr/view/AKR20261106042900003",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T00:41:36Z",
+      "summary": "▲ 건설사업관리(PM) 전문기업 한미글로벌 산하 통일한반도건설전략연구소는 지난 5일 서울 강남구 건설회관에서 북한연구학회와 함께 &apos;동북아 초국경...",
+      "matched": []
+    },
+    {
+      "title": "[MK 골든크로스 돌파종목 : 금양그린파워(282720) & 대동기어(008830)]",
+      "url": "https://www.mk.co.kr/news/stock/12200213",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T00:41:04Z",
+      "summary": "안녕하세요. 국내 핫 이슈 종목을 분석해드리는 AI 기자 ‘MK시그널’ 입니다. MK시그널이 오늘 분석한 핫 이슈 골든크로스 종목은 금양그린파워 & 대동기어 입니다. - 금양그린파..",
+      "matched": []
+    },
+    {
+      "title": "IPARK현산, 겨울철 안전사고 대비 경영진 현장 점검",
+      "url": "https://www.yna.co.kr/view/AKR20261106044000003",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T00:39:25Z",
+      "summary": "(서울=연합뉴스) 서미숙 기자 = IPARK현대산업개발은 동절기를 앞두고 지난 5일 경영진 안전 점검을 진행했다고 6일 밝혔다.",
+      "matched": []
+    },
+    {
+      "title": "원주 부동산 중개사무소 605곳 자율 점검…참여율 86%",
+      "url": "https://www.yna.co.kr/view/AKR20261106049100062",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T00:38:45Z",
+      "summary": "(원주=연합뉴스) 임보연 기자 = 강원 원주시가 지역 부동산 중개사무소를 대상으로 실시한 하반기 인터넷 자율 점검을 마치고 미참여 업소에 대한 ...",
+      "matched": []
+    },
+    {
+      "title": "[속보] 코스피, 서킷브레이커 이어 매도 사이드카 발동",
+      "url": "https://www.hankyung.com/article/2026110601366",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T00:37:13Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "비트코인 버리고 AI로 갈아탔더니…채굴업체들 '이중고'",
+      "url": "https://www.hankyung.com/article/202611060093i",
+      "source": "한국경제 경제",
+      "published": "2026-11-06T00:36:26Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[속보] 코스피, 서킷브레이커 이어 매도 사이드카 발동",
+      "url": "https://www.yna.co.kr/view/AKR20261106049900008",
+      "source": "연합뉴스 경제",
+      "published": "2026-11-06T00:36:13Z",
+      "summary": "(",
+      "matched": []
+    },
+    {
+      "title": "“데이터센터 짓지 마” 외국인, 반도체 3조 던진 이유",
+      "url": "https://www.mk.co.kr/news/business/12200206",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T00:32:50Z",
+      "summary": "나스닥이 하루 만에 5.5% 폭락하며 조정 국면에 들어섰습니다. 민주당이 상·하원을 모두 가져가면서 AI 데이터센터 규제가 강해질 수 있다는 공포가 하루 늦게 시장을 덮쳤는데요. ..",
+      "matched": []
+    },
+    {
+      "title": "AI 규제 우려에 '검은 금요일'…'5000피'마저 붕괴",
+      "url": "https://www.hankyung.com/article/2026110600836",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T00:32:15Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"빈자리 나면 알려주세요\"…크리스마스 식당 예약 전쟁",
+      "url": "https://www.hankyung.com/article/202611060038i",
+      "source": "한국경제 경제",
+      "published": "2026-11-06T00:29:58Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "공무원에게 5억준 방산기업, '개인일탈이냐 조직의 지시냐'...LIG D&A 법정다툼 3대 쟁점",
+      "url": "https://www.hankyung.com/article/202611069981i",
+      "source": "한국경제 경제",
+      "published": "2026-11-06T00:26:47Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "백화점이 끌고, 마트가 밀고…롯데쇼핑, 3분기 영업이익 34.5%↑",
+      "url": "https://www.hankyung.com/article/202611060009g",
+      "source": "한국경제 경제",
+      "published": "2026-11-06T00:15:04Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“카카오, 플랫폼 사업이 매출 성장 이끈건 맞는데”…IBK투자증권, 목표가↓",
+      "url": "https://www.mk.co.kr/news/stock/12200182",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T00:12:47Z",
+      "summary": "IBK투자증권은 6일 카카오에 대해 플랫폼 사업이 매출 성장을 견인했다며 투자의견 ‘매수’를 유지했지만 목표주가는 기존 5만3000원에서 4만8000원으로 하향했다. IBK투자증권..",
+      "matched": []
+    },
+    {
+      "title": "[마켓라이브] 오천피 붕괴·서킷브레이커…美 반도체 쇼크에 '검은 금요일'",
+      "url": "https://www.hankyung.com/article/202611069919i",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T00:12:03Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "'세계 대회 직행 티켓' 걸렸다…코엑스서 바리스타 70인 정면 승부",
+      "url": "https://www.hankyung.com/article/202611069946g",
+      "source": "한국경제 경제",
+      "published": "2026-11-06T00:10:58Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[속보] 삼성전자 9%·SK하이닉스 11%대 급락",
+      "url": "https://www.hankyung.com/article/2026110600016",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T00:10:14Z",
+      "summary": "",
+      "matched": [
+        "삼성전자",
+        "SK하이닉스"
+      ]
+    },
+    {
+      "title": "[속보] 코스닥, 이틀 연속 '매도 사이드카' 발동…6%대 급락",
+      "url": "https://www.hankyung.com/article/2026110699936",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T00:08:02Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "10만원→570만원 '대박'…한국 판매자들 돈 쓸어담은 비결",
+      "url": "https://www.hankyung.com/article/202611069887g",
+      "source": "한국경제 경제",
+      "published": "2026-11-06T00:07:38Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[속보] 증시 급락에 코스피 서킷브레이커 발동…5000피 밑으로",
+      "url": "https://www.mk.co.kr/news/stock/12200170",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T00:07:15Z",
+      "summary": "코스피 지수가 6일 인공지능(AI) 데이터센터 건설이 둔화할 수 있다는 우려와 미국 반도체주 폭락 여파에 장 초반 8% 이상 하락해 서킷 브레이커가 발동됐다. 한국거래소에 따르면 ..",
+      "matched": []
+    },
+    {
+      "title": "[속보] 증시 급락에 코스피 서킷브레이커 발동…'5000피' 붕괴",
+      "url": "https://www.hankyung.com/article/2026110699906",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T00:07:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[속보] 코스피, 8%대 급락 출발…코스닥 5~6%대↓",
+      "url": "https://www.mk.co.kr/news/stock/12200167",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T00:05:16Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[속보] 코스닥 장중 7%대 급락…630선도 위태",
+      "url": "https://www.hankyung.com/article/2026110699756",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T00:05:12Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[속보] 코스피 장중 8%대 폭락…5000선 붕괴",
+      "url": "https://www.hankyung.com/article/2026110699696",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T00:03:15Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "AI 성장 서사 대폭 후퇴…블루웨이브 방어 섹터는 [오늘 나온 보고서]",
+      "url": "https://www.mk.co.kr/news/stock/12200165",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T00:03:03Z",
+      "summary": "키움증권 시황분석 리포트 5일 美 반도체지수 12% 폭락 6일 韓 증시도 변동성 불가피 은행·건설·바이오 등 대안 찾아 수급 분산 장기화에 대비할 필요간밤 미 증시에서 나스닥종합지..",
+      "matched": []
+    },
+    {
+      "title": "영국인들, 9달동안 한국 증시 100조 팔았다…“세금 아끼려고” [오늘 나온 보고서]",
+      "url": "https://www.mk.co.kr/news/stock/12200164",
+      "source": "매일경제 증권",
+      "published": "2026-11-06T00:02:31Z",
+      "summary": "6월 이후에만 76조 팔아치워 5월 공개된 연금 과세 법안 미사용 연금도 세금 부과 시작영국의 상속세 개편이 한국 증시 외국인 순매도를 키웠다는 분석이 나왔다. 6일 염동찬 한국투..",
+      "matched": []
+    },
+    {
+      "title": "[속보] 코스피 2.24% 하락 출발…5200선으로 밀려",
+      "url": "https://www.hankyung.com/article/2026110699496",
+      "source": "한국경제 금융",
+      "published": "2026-11-06T00:01:30Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "진에어 노사, 임금협상 잠정 합의…기본급 2% 인상",
+      "url": "https://www.hankyung.com/article/202611069936g",
+      "source": "한국경제 경제",
+      "published": "2026-11-06T00:00:42Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "차 뒷좌석에 31인치 영화관이…BMW '야심작' 나왔다 [신차털기]",
+      "url": "https://www.hankyung.com/article/202611058835g",
+      "source": "한국경제 경제",
+      "published": "2026-11-06T00:00:09Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "직장인 상권인 줄 알았는데…광화문 달구는 '스테이크 전쟁' [권용훈의 트렌드워치]",
+      "url": "https://www.hankyung.com/article/202611059544i",
+      "source": "한국경제 경제",
+      "published": "2026-11-06T00:00:07Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "'1인 20만원'에도 북적…크리스마스 앞두고 예약 2배 뛴 곳",
+      "url": "https://www.hankyung.com/article/202611069797g",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T23:56:47Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "이란 전쟁에 유로존 물가 4% 급등…ECB 추가 금리인상 관측",
+      "url": "https://www.hankyung.com/article/202611069883i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T23:55:47Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "삼전·닉스 급락하자 쓸어담은 초고수들…레버리지도 줍줍",
+      "url": "https://www.hankyung.com/article/202611069851i",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T23:46:56Z",
+      "summary": "",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "삼전닉스, 프리마켓서 10% 넘게 폭락…\"데이터센터 규제 공포\"",
+      "url": "https://www.hankyung.com/article/2026110698656",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T23:41:18Z",
+      "summary": "",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "IBK證, 신탁 신상품 3종 출시…달러·엔화 자산관리",
+      "url": "https://www.hankyung.com/article/2026110698506",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T23:40:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "AI 반도체 급락에 짐 쌌다…투자자들 대거 몰린 종목",
+      "url": "https://www.hankyung.com/article/202611069857i",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T23:38:51Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "나스닥 -5.5% 골드만 \"매수세 안 보여\"…반도체 고점은 6월이었다? [김현석의 월스트리트나우]",
+      "url": "https://www.hankyung.com/article/202611069813i",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T23:38:20Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"하이록스 미리 즐겨볼까\"…푸마, 더현대 서울서 체험 팝업",
+      "url": "https://www.hankyung.com/article/202611069783g",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T23:37:45Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "블루쓰나미에 중대 기로에선 'AI반도체' 랠리…전문가들의 분석",
+      "url": "https://www.hankyung.com/article/202611069807i",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T23:37:26Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[밤 사이 해외 뉴스 영상] 민주당 규제 공포에 나스닥 6.4% 급락",
+      "url": "https://www.hankyung.com/article/202611069800i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T23:29:04Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"주워온 자식인가 싶다\"…그리, 김구라 믿었다가 낭패 본 사연",
+      "url": "https://www.hankyung.com/article/202611069791H",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T23:25:58Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "선거 이후 흔들리는 테슬라 주가…향후 이벤트 종합 정리",
+      "url": "https://www.hankyung.com/article/202611058888i",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T23:20:03Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[밤 사이 해외 뉴스] 머스크가 2억달러 부었는데…32년 텃밭도 무너졌다",
+      "url": "https://www.hankyung.com/article/202611069780i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T23:18:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"2분 만에 다 팔렸다\"…오픈런 대신 편의점 앱 켰다",
+      "url": "https://www.hankyung.com/article/202611069751g",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T23:16:44Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"삼전닉스, 데이터센터 규제 우려 과도…'과락 활용해야'\"-하나",
+      "url": "https://www.hankyung.com/article/2026110697926",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T23:16:31Z",
+      "summary": "",
+      "matched": [
+        "삼성전자"
+      ]
+    },
+    {
+      "title": "“잘 나가던 한국금융지주도 급락장엔 속수무책”…목표가↓",
+      "url": "https://www.mk.co.kr/news/stock/12200076",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T23:04:36Z",
+      "summary": "하나증권은 6일 한국금융지주에 대해 증시 부진과 금리 상승, 환율 하락 등이 실적에 부정적 영향을 미쳤다며 목표주가를 기존 31만8000원에서 24만9000원으로 하향 조정했다. ..",
+      "matched": []
+    },
+    {
+      "title": "헤지펀드의 항복 선언인가? 폭락한 미국 증시 왜",
+      "url": "https://www.mk.co.kr/news/business/12200062",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T23:00:16Z",
+      "summary": "불앤베어 플러스미국 민주당의 중간선거 승리 이후 증시 판세가 요동치고 있습니다. 데이터센터 건설이 뒤로 밀릴 거란 전망이 우세한 가운데 변동성이 폭발하는 모습입니다. 향후 전망을 ..",
+      "matched": []
+    },
+    {
+      "title": "美·캐나다 관세 인하 임박…유럽 알루미늄 조달 비상",
+      "url": "https://www.hankyung.com/article/202611059540i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T23:00:06Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"서버 랙당 1㎿ 시대 온다\"…인피니언, 韓기업과 손잡고 전력 인프라 확장",
+      "url": "https://www.hankyung.com/article/202611058684i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T23:00:05Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "박지윤도 줄 섰다…\"올해 역대급\" 크리스마스 명소 정체 [셀럽픽]",
+      "url": "https://www.hankyung.com/article/202611057247g",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T23:00:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"KT&G, 2030년까지 주주환원 5조 계획…목표가↑\"-NH",
+      "url": "https://www.hankyung.com/article/2026110697326",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T22:58:16Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "AI 기술주 기록적 폭락…탈출 자금 어디로 [오늘 아침, 당신이 알아야 할 7가지]",
+      "url": "https://www.hankyung.com/article/202611069650i",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T22:16:58Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "AI 기술주 투매에 폭락…나스닥 5.5%↓ [뉴욕증시 브리핑]",
+      "url": "https://www.hankyung.com/article/2026110696676",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T22:13:20Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "인플루언서 보고 사던 시대 끝?…쇼핑할 때 '이것'부터 찾는다 [트렌드+]",
+      "url": "https://www.hankyung.com/article/202611058430g",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T22:00:01Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"20분 만에 8.4조 털었다\"…北 코인 회수 기회는 며칠뿐",
+      "url": "https://www.hankyung.com/article/2026110696397",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T21:54:40Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "\"하루 만에 4300조 증발\"…AI 공포에 뉴욕증시 무너졌다 [종합]",
+      "url": "https://www.hankyung.com/article/2026110696317",
+      "source": "한국경제 금융",
+      "published": "2026-11-05T21:46:44Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "[속보] 뉴욕증시, AI 기술주 투매에 급락…나스닥 5.5%↓",
+      "url": "https://www.mk.co.kr/news/stock/12199715",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T21:12:14Z",
+      "summary": "미국 뉴욕증시의 3대 주가지수가 5일(현지시간) 큰 폭으로 하락하며 전날 중간선거 이후의 상승분을 모두 반납했다. 미국 중간선거에서 민주당이 상·하원을 모두 장악함으로써 인공지능(..",
+      "matched": []
+    },
+    {
+      "title": "60대도 지갑 열었다…18일만에 100만명 몰린 '뜻밖의 핫플' [권용훈의 트렌드워치]",
+      "url": "https://www.hankyung.com/article/202611059501i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T21:00:13Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "TPG, 8300억 들여 롯데렌탈 잔여지분 공개매수…상장폐지 추진",
+      "url": "https://www.mk.co.kr/news/stock/12199335",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T21:00:00Z",
+      "summary": "12월 3일까지 28일간 진행 공개매수가 주당 5만9000원 호텔롯데·부산롯데 주당매각가와 동일 “일반주주에게도 경영권 프리미엄”글로벌 사모펀드(PEF)운용사 텍사스퍼시픽그룹(TP..",
+      "matched": []
+    },
+    {
+      "title": "“예금으로 노후 준비가 됩니까”...은퇴 한참 남은 2030도 이 펀드로 몰린다",
+      "url": "https://www.mk.co.kr/news/stock/12199679",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T20:59:10Z",
+      "summary": "20조로 훌쩍 큰 TDF 올 들어 설정액 4조 늘어 은퇴시점까지 남은 기간 따라 위험·안전자산 비중 자동조정 상대적으로 공격 운용 가능한 2050년 등 고빈티지 상품 인기은퇴자산..",
+      "matched": []
+    },
+    {
+      "title": "“창신메모리 쇼크는 과했다” … 수율·비용에서 삼전닉스는 ‘넘사벽’",
+      "url": "https://www.mk.co.kr/news/business/12198405",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T20:00:00Z",
+      "summary": "‘차이나 반도체 라이징’ 저자 권석준 성균관대 교수 인터뷰 ㊤최근 반도체 기업 투자자들은 쉽지 않은 시간을 보내고 있다. 7월 급락 이후 반등을 시도하던 반도체 주가는 ‘AI 수익..",
+      "matched": [
+        "삼성전자",
+        "창신메모리"
+      ]
+    },
+    {
+      "title": "“트럼프 힘 빠지면 우린 힘 난다” … 주가상승률·PER 돋보이는 종목들",
+      "url": "https://www.mk.co.kr/news/stock/12198536",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T20:00:00Z",
+      "summary": "AI 공격 극심해 오히려 호황인 종목국내 굴지의 에너지 기업에 다니는 김 부장(47)은 미국 사이버 보안 주식 ‘크라우드스트라이크’에 5년 적립식 투자 중이다. 자신의 투자 원칙을..",
+      "matched": []
+    },
+    {
+      "title": "연말 랠리 전망에도 기술주 대탈출…애플만 선방[박신영의 개장전 요것만]",
+      "url": "https://www.hankyung.com/article/202611069553i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T15:29:21Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "엔비디아 H200칩 60만개 홍콩에 적재…中당국 수입승인 또 보류",
+      "url": "https://www.hankyung.com/article/202611059474i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T15:14:21Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "美가 수출막은 블랙웰칩…中문샷AI,유럽서 웃돈주고 빌리려했다",
+      "url": "https://www.hankyung.com/article/202611059543i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T15:04:03Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "돈 쏟아부은 AI, 효과 나타나나?…美 생산성 1년만에 최대 증가",
+      "url": "https://www.hankyung.com/article/202611059502i",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T14:21:20Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "英 물가 치솟자…기준금리 연 4%로 인상",
+      "url": "https://www.hankyung.com/article/2026110594621",
+      "source": "한국경제 경제",
+      "published": "2026-11-05T14:06:46Z",
+      "summary": "",
+      "matched": []
+    },
+    {
+      "title": "“국장서 단타만 치는 이유? 주주 배신하는 이사회”…저평가 해법 제시한 與",
+      "url": "https://www.mk.co.kr/news/stock/12198988",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T12:10:11Z",
+      "summary": "오기형 민주당 K-자본시장특위 위원장 이사회가 주주 이익 외면하니 신뢰 잃은 시장 단타만 반복 중복상장처럼 중대한 결정땐 이사가 주주 설득해 동의 얻고 결과까지 책임지는 풍토 필..",
+      "matched": []
+    },
+    {
+      "title": "“코인으로 1000만원 잃었는데 세금공제 없나요”…앞으로 3년까지 손실 인정",
+      "url": "https://www.mk.co.kr/news/economy/12198814",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T09:57:20Z",
+      "summary": "손실 이월공제 제도 도입 변동성 높은 자산 특성 고려 첫해 코인으로 1억 손실 보고 이듬해 5천만원 이익봤다면 손실 5천만원으로 세금 안내 내년 기본공제 상향 등 논의정부가 내년에..",
+      "matched": []
+    },
+    {
+      "title": "[단독]IMM PE 에어퍼스트 컨티뉴펀드에 유럽 최대 사모펀드 EQT 그룹 투자 받는다",
+      "url": "https://www.mk.co.kr/news/stock/12198805",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T09:50:59Z",
+      "summary": "EQT 세컨더리 전문운용사 콜러 해외 투자금 5000억원 안팎 국내외 투자자 모집해 연내 종결 목표국내 사모펀드(PEF) 운용사 IMM프라이빗에쿼티(IMM PE)가 에어퍼스트 컨티..",
+      "matched": []
+    },
+    {
+      "title": "태성, 700억 원 규모 전환사채 발행",
+      "url": "https://www.mk.co.kr/news/stock/12198774",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T09:03:24Z",
+      "summary": "코스닥 상장사 태성이 제2회 700억 원 규모의 전환사채를 발행한다고 2026년 11월 5일 공시했다. 전환가액은 5만 1931원이며, 전환 청구 기간은 2027년 11월 19일부..",
+      "matched": []
+    },
+    {
+      "title": "피노, 1830억원 규모 유상증자 실시",
+      "url": "https://www.mk.co.kr/news/stock/12198773",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T09:03:19Z",
+      "summary": "코스닥 상장사 피노가 1829억 9991만 3066원 규모의 제3자배정증자를 실시한다고 2026년 11월 5일 공시했다. 이번 유상증자에서 증자 전 발행 주식 수는 보통주 8601..",
+      "matched": []
+    },
+    {
+      "title": "JTBC 1월 본입찰…공고 앞두고 타임테이블 구체화",
+      "url": "https://www.mk.co.kr/news/stock/12198765",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T08:46:17Z",
+      "summary": "12월 4일 인수의향서 마감 예비실사 한달 간 거친 뒤 1월 15일 본입찰 마감 예정[본 기사는 11월 05일(17:43) 매일경제 자본시장 전문 유료매체인 ‘레이더M’에 보도 된..",
+      "matched": []
+    },
+    {
+      "title": "현대차·셀트리온 … 美민주 압승에 수혜 기대감",
+      "url": "https://www.mk.co.kr/news/stock/12198728",
+      "source": "매일경제 증권",
+      "published": "2026-11-05T08:39:22Z",
+      "summary": "5일 반도체 대형주 부진으로 국내 증시가 급락했다. 하지만 이 와중에도 미국 중간선거 수혜주로 꼽히는 업종이 투자자들의 '도피처'가 됐다. 친환경, 신재생에너지, 헬스케어, 은행 ..",
+      "matched": []
+    }
+  ]
+}
