@@ -1,0 +1,201 @@
+{
+  "date": "2026-11-08",
+  "collected_at": "2026-11-08T00:51:52Z",
+  "consensus": {
+    "005930.KS": {
+      "price_targets": {
+        "current": 188700.0,
+        "high": 690000.0,
+        "low": 290000.0,
+        "mean": 475628.56,
+        "median": 450000.0
+      },
+      "recommendations": [
+        {
+          "period": "0m",
+          "strongBuy": 12,
+          "buy": 24,
+          "hold": 0,
+          "sell": 0,
+          "strongSell": 0
+        },
+        {
+          "period": "-1m",
+          "strongBuy": 12,
+          "buy": 24,
+          "hold": 0,
+          "sell": 0,
+          "strongSell": 0
+        },
+        {
+          "period": "-2m",
+          "strongBuy": 11,
+          "buy": 24,
+          "hold": 1,
+          "sell": 0,
+          "strongSell": 0
+        },
+        {
+          "period": "-3m",
+          "strongBuy": 11,
+          "buy": 25,
+          "hold": 1,
+          "sell": 0,
+          "strongSell": 0
+        }
+      ]
+    },
+    "000660.KS": {
+      "price_targets": {
+        "current": 1132000.0,
+        "high": 4700000.0,
+        "low": 1575000.0,
+        "mean": 3126639.5,
+        "median": 3000000.0
+      },
+      "recommendations": [
+        {
+          "period": "0m",
+          "strongBuy": 12,
+          "buy": 28,
+          "hold": 1,
+          "sell": 0,
+          "strongSell": 0
+        },
+        {
+          "period": "-1m",
+          "strongBuy": 12,
+          "buy": 28,
+          "hold": 1,
+          "sell": 0,
+          "strongSell": 0
+        },
+        {
+          "period": "-2m",
+          "strongBuy": 11,
+          "buy": 28,
+          "hold": 1,
+          "sell": 0,
+          "strongSell": 0
+        },
+        {
+          "period": "-3m",
+          "strongBuy": 11,
+          "buy": 27,
+          "hold": 1,
+          "sell": 0,
+          "strongSell": 0
+        }
+      ]
+    },
+    "688825.SS": {
+      "price_targets": {
+        "current": 40.41,
+        "high": 131.0,
+        "low": 22.0,
+        "mean": 74.13077,
+        "median": 70.0
+      },
+      "recommendations": [
+        {
+          "period": "0m",
+          "strongBuy": 4,
+          "buy": 8,
+          "hold": 1,
+          "sell": 1,
+          "strongSell": 0
+        },
+        {
+          "period": "-1m",
+          "strongBuy": 4,
+          "buy": 8,
+          "hold": 1,
+          "sell": 1,
+          "strongSell": 0
+        },
+        {
+          "period": "-2m",
+          "strongBuy": 3,
+          "buy": 5,
+          "hold": 1,
+          "sell": 1,
+          "strongSell": 0
+        },
+        {
+          "period": "-3m",
+          "strongBuy": 3,
+          "buy": 3,
+          "hold": 1,
+          "sell": 1,
+          "strongSell": 0
+        }
+      ]
+    }
+  },
+  "reports": {
+    "005930.KS": [
+      {
+        "report_idx": "653749",
+        "date": "2026-11-04",
+        "title": "삼성전자(005930) STRESS TEST",
+        "target_price": "370,000",
+        "opinion": "Buy",
+        "analyst": "고의영",
+        "broker": "iM증권",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=653749"
+      },
+      {
+        "report_idx": "653517",
+        "date": "2026-10-30",
+        "title": "삼성전자(005930) 실적은 좋지만, 주주환원은 아쉽다",
+        "target_price": "350,000",
+        "opinion": "매수",
+        "analyst": "김운호",
+        "broker": "IBK투자증권",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=653517"
+      },
+      {
+        "report_idx": "653481",
+        "date": "2026-10-30",
+        "title": "삼성전자(005930) 결국 제자리를 찾아갈 것",
+        "target_price": "500,000",
+        "opinion": "Buy",
+        "analyst": "류형근",
+        "broker": "대신증권",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=653481"
+      }
+    ],
+    "000660.KS": [
+      {
+        "report_idx": "653750",
+        "date": "2026-11-04",
+        "title": "SK하이닉스(000660) HBM 하나로 시가총액 설명",
+        "target_price": "2,300,000",
+        "opinion": "Buy",
+        "analyst": "고의영",
+        "broker": "iM증권",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=653750"
+      },
+      {
+        "report_idx": "653446",
+        "date": "2026-10-29",
+        "title": "SK하이닉스(000660) 실적은 우려를 불식시킬 것",
+        "target_price": "3,200,000",
+        "opinion": "매수",
+        "analyst": "김운호",
+        "broker": "IBK투자증권",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=653446"
+      },
+      {
+        "report_idx": "653440",
+        "date": "2026-10-29",
+        "title": "SK하이닉스(000660) 여전히 강력하다",
+        "target_price": "4,000,000",
+        "opinion": "매수",
+        "analyst": "한동희",
+        "broker": "SK증권",
+        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=653440"
+      }
+    ]
+  }
+}
