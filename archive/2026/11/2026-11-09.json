@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-09",
+  "news": [
+    {
+      "title": "골드만삭스, Claude Code·GitHub Copilot 사용을 엔지니어로 제한",
+      "summary": "골드만삭스가 지난 10월 내부 가이드라인을 갱신해 Anthropic의 Claude Code와 Microsoft의 GitHub Copilot 사용을 엔지니어와 strats 직군으로 제한했고, 트레이더·뱅커 대부분은 접근 권한을 잃었다고 블룸버그가 보도했다. 블룸버그 취재원에 따르면 이 조치는 생산성과 리스크에 대한 내부 검토를 거쳐 이뤄졌으며, 골드만삭스 측은 \"최적의 활용 사례를 찾기 위해 일부 AI 도구를 제공한다\"는 입장을 밝혔다. 전체 직원 약 4만7000명 중 엔지니어는 약 1만2000명 수준으로, 앞서 4월에는 홍콩 뱅커들의 Claude 접근이 차단된 바 있다.",
+      "url": "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers"
+    },
+    {
+      "title": "SpecCTMC: diffusion 언어모델의 연속시간 샘플링을 정확도 손실 없이 가속",
+      "summary": "마스크 diffusion 언어모델은 토큰을 병렬로 생성할 수 있지만, 여러 토큰을 독립적으로 샘플링하면 토큰 간 의존성이 깨져 출력 분포가 달라진다. 연구진은 별도의 draft 모델이 필요 없는 training-free 투기적 샘플러 SpecCTMC를 제안했다. 이전에 계산된 모델 예측으로 다음 토큰 갱신을 제안하고 중간 상태를 병렬로 평가한 뒤 정확한 수락·보정 단계를 적용하는 방식으로, 시간 이산화 오차나 병렬 디코딩의 분해 오차 없이 기저 연속시간 마르코프 연쇄의 결합 분포를 보존한다. LLaDA-8B-Instruct와 Dream-v0-Instruct-7B에서 5개 벤치마크를 평가한 결과, 연속시간 직접 샘플링 대비 순차적 모델 호출 수를 1.73~4.38배 줄이면서 기준 샘플링 분포를 그대로 유지했다.",
+      "url": "https://arxiv.org/abs/2611.08362v1"
+    },
+    {
+      "title": "\"에이전트 메모리에도 OpenTelemetry 같은 합의가 필요하다\"",
+      "summary": "AGENTS.md, .cursor/rules, Anthropic memory tool, GitHub Copilot Memory, Mem0, LangGraph BaseStore 등 에이전트 메모리가 도구마다 제각각인 형식으로 저장돼 서로 읽을 수 없다는 문제를 지적하며, 부족한 것은 또 하나의 도구가 아니라 공통 합의라고 주장하는 글이다. 2019년 OpenTelemetry가 관측성 분야에서 데이터 모델·시맨틱 컨벤션·프로토콜(OTLP)·참조 구현을 합의한 사례를 들어, address·key·id·written_by·lifecycle·content_type·attributes 같은 frontmatter 필드를 가진 레코드 형식과 MCP로 노출되는 최소 계약(write·read·list·search·archive), 그리고 참조 구현 대신 conformance test를 스펙 범위로 제안한다. 기존 Portable Memory(.mem), Open Memory Protocol, Cognee COGX 형식은 벤더 간 내보내기에 머물러 있어, 여러 도구가 동시에 같은 메모리를 읽고 쓰는 live addressing은 아직 미해결 과제로 남아 있다고 평가한다.",
+      "url": "https://www.lorekit.io/blog/open-agent-memory-format"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
