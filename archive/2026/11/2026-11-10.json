@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-10",
+  "news": [
+    {
+      "title": "Google Gemini routes personal Drive files and emails to human annotators",
+      "summary": "한 개발자가 소비자용 Gemini가 사용자가 @로 직접 호출하지 않아도 대화 주제에 따라 Google Drive 문서와 Gmail 메일을 배경에서 끌어오고, 그 내용이 인간 검토자에게 노출될 수 있다고 주장하는 문서를 공개했다. 근거로는 \"Gmail·Docs·Drive의 개인 콘텐츠를 사람이 보지 않는다\"던 2023년 Gemini Workspace 공지와 도움말이 올해 10월 \"검토자가 메일이나 파일 자체를 볼 수 있다\"는 문구로 수정된 점을 든다. 다만 제시된 증거는 작성자 본인의 비공식 테스트 기록뿐이며 로그·스크린샷이나 제3자 검증은 없다.",
+      "url": "https://github.com/thisisme6598/gemini_files/"
+    },
+    {
+      "title": "I'm not convinced the AI bubble exists",
+      "summary": "AI 업계 지출이 약정 3조 달러를 포함해 총 5조 달러 규모로 추정되지만 대부분은 데이터센터 건설이라는 일회성 비용이므로 증설이 끝나면 줄어든다는 주장을 담은 분석 글이다. 저자는 Anthropic의 S-1에 컴퓨트 1달러당 매출 2.08달러가 기재됐고 매출이 2023년 4,100만 달러에서 2026년 상반기 163억 달러로 늘었다는 점, Alphabet·Meta·NVIDIA의 P/E가 20배 수준으로 닷컴 버블과 다르다는 점을 근거로 든다. 동시에 데이터센터 반발, 규제, 5조 달러 부채의 복잡성, OpenAI의 불투명한 재무는 남은 위험으로 인정한다.",
+      "url": "https://matteoraso.github.io/im-not-convinced-the-ai-bubble-exists.html"
+    },
+    {
+      "title": "The Race to Build a \"Find My\" for AI Chips",
+      "summary": "미국이 선진 AI 칩의 밀수·우회 수출을 억제하기 위해 칩 자체의 위치를 검증하는 기술을 검토하고 있다는 IEEE Spectrum 기사다. 칩과 신뢰된 랜드마크 서버 사이의 신호 왕복 시간으로 반경을 추정하는 ping 기반 위치 검증(PLV), Lucid Computing이 제안한 칩 내 개인키 서명 방식의 sovereignty certificate, 제조 편차로 Nvidia H200 GPU의 고유 지문을 만드는 개념증명이 후보로 거론된다. CSET 연구진은 PLV가 이미 일어난 우회만 사후에 탐지할 수 있고 오프라인·운송 중이거나 미활성 상태인 칩은 추적할 수 없어 물리 실사와 병행해야 한다고 지적했다.",
+      "url": "https://spectrum.ieee.org/find-my-ai-chip"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Claude Fable 5.2와 Claude Mythos 5.2 공개",
+      "content": "코딩·추론·비전이 개선된 Claude Fable 5.2와, 사이버·생명과학 검증 프로그램을 통과한 조직에만 제공되는 동일 모델 Claude Mythos 5.2를 공개했으며, 가격은 입력 100만 토큰당 $8 / 출력 $40이고 최대 2.5배 빠른 fast mode는 $16 / $80이다.",
+      "special": true,
+      "id": "news::https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+    },
+    {
+      "category": "모델/API",
+      "title": "Fable 5.2·Mythos 5.2는 모든 계정에 prefix check를 적용",
+      "content": "두 모델은 계정 생성 시점과 무관하게 prefix check를 강제하므로, system 프롬프트·tools·이전 메시지를 수정한 뒤 이후 턴의 thinking block을 다시 보내면 요청이 400 오류로 실패한다.",
+      "special": true,
+      "id": "rn::2026-11-09::prefix-check",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#prefix-check"
+    },
+    {
+      "category": "모델/API",
+      "title": "computer use는 computer_toolset_20260801만 지원",
+      "content": "Fable 5.2·Mythos 5.2에서 구버전 `computer_20251124` 툴을 선언한 요청은 Amazon Bedrock을 제외한 모든 플랫폼에서 400 오류를 반환하므로 `computer_toolset_20260801`로 이전해야 한다.",
+      "special": true,
+      "id": "rn::2026-11-09::computer-toolset-20260801",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124"
+    },
+    {
+      "category": "모델/API",
+      "title": "Claude API Messages API에 Fable 5.2용 fast mode 추가",
+      "content": "요청에 `speed: \"fast\"`를 지정하면(베타 헤더 불필요) 초당 출력 토큰이 최대 2.5배 늘어나며, 가격은 입력 100만 토큰당 $16 / 출력 $80이다.",
+      "special": false,
+      "id": "rn::2026-11-09::fast-mode",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/fast-mode"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.322",
+      "content": "Vertex의 global·us·eu 리전에서 fast mode를 지원하며, Vertex가 거부하면 표준 속도로 되돌아간다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.322",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.321",
+      "content": "Claude Fable 5.2(`claude-fable-5-2`)를 기본 Fable 모델로 추가하고, MCP OAuth 요청이 리다이렉트 시 refresh token 등 비밀값을 다른 호스트로 보내던 문제와 읽기 전용 Bash 명령이 권한 확인 없이 샌드박스 밖에서 실행되던 문제를 고쳤다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.321",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v2.7.0",
+      "content": "`claude-fable-5-2`·`claude-mythos-5-2` 모델과 `user_profile.program_status_updated` 웹훅 이벤트를 추가하고, 사용량·비용 리포트에 상위 조직 필터링과 그룹화를 지원한다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v2.7.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v2.7.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk-v1.7.0",
+      "content": "`claude-fable-5-2`·`claude-mythos-5-2` 모델과 `user_profile.program_status_updated` 웹훅 이벤트를 추가하고, structured output 스키마에서 const·enum을 유지하도록 helpers를 수정했다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v1.7.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v1.7.0"
+    },
+    {
+      "category": "생태계",
+      "title": "Claude can design electronic prototypes from start to finish",
+      "content": "Anthropic이 회로기판 업체 Diode Computers와 함께 Claude에게 스피커폰·음성 비서 허브·휴대용 가상 펫 3종의 전자 하드웨어를 설계하게 한 결과 회로 수정 없이 동작하는 시제품이 나왔고, Diode의 PCB Gym 벤치마크 점수는 이전 모델 25%에서 69%로 올랐다(인증·양산 테스트는 거치지 않은 초기 시제품).",
+      "special": false,
+      "id": "news::https://www.anthropic.com/research/claude-electronics-design",
+      "url": "https://www.anthropic.com/research/claude-electronics-design"
+    }
+  ],
+  "specials": [
+    "Claude Fable 5.2와 Claude Mythos 5.2 공개",
+    "Fable 5.2·Mythos 5.2는 모든 계정에 prefix check를 적용",
+    "computer use는 computer_toolset_20260801만 지원"
+  ],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
