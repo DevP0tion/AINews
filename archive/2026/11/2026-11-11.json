@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-11",
+  "news": [
+    {
+      "title": "Gemini 4 Carbon 정식 출시",
+      "summary": "Google이 11월 10일 Gemini 4 Argon 상위 모델인 Gemini 4 Carbon을 공개했다. 에이전트 코딩, 법률·재무 문서 분석, 보안 취약점 탐색 등 난도 높은 작업을 겨냥했고 CursorBench 4.0·Perplexity WANDR·Zapier AutomationBench에서 1위라고 밝혔다. 도입 가격은 입력 $2·출력 $10/MTok이며 도입 기간이 끝나는 11월 30일 이후에는 $4·$20으로 오른다.",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/"
+    },
+    {
+      "title": "가중치 0.05%를 삭제하는 것만으로 full fine-tuning에 맞먹는 LLM 포스트트레이닝",
+      "summary": "사전학습된 LLM 가중치의 0.05% 미만을 0으로 만드는 것 외에 아무 수정도 하지 않고 RLVR·SFT·on-policy distillation 세 가지 포스트트레이닝 환경에서 full fine-tuning과 동등한 성능을 냈다는 연구다. transformer 블록의 gate projection에 이진 마스크를 학습하는 Deletion Tuning 방식으로, 학습된 마스크는 같은 full fine-tuning 체크포인트보다 수백~수천 배 작다. 강화학습 후에도 이전 과제 정확도가 기본 모델 수준으로 유지돼, 최대 5.4포인트 하락한 full fine-tuning·LoRA·random sparse fine-tuning과 대비됐다.",
+      "url": "https://arxiv.org/abs/2611.10866"
+    },
+    {
+      "title": "픽셀 공간 flow matching에서 v-prediction이 무너지는 이유 — patch-wise PCA 분석",
+      "summary": "패치 단위 PCA로 분석한 결과 minor component의 속도가 원본 노이즈 입력에 크게 의존해 backbone이 이를 그대로 보존해야 하는 '대역폭 병목'이 v-prediction 학습 난조의 원인이라고 지적했다. x-prediction이 잘 작동하는 것은 파라미터화 자체가 원본 입력에 우회 경로를 주고 학습된 입력 표현이 주성분 방향에 집중되기 때문이라는 설명이다. 저자들은 raw 조건 디코더와 출력단 shortcut을 결합한 Raw-injected Transformer(RiT)를 제안해 v-prediction으로도 ImageNet 256×256에서 경쟁력 있는 성능을 얻었다고 밝혔다.",
+      "url": "https://arxiv.org/abs/2611.12852v1"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "Anthropic, 기업공개(IPO) 로드쇼 개시",
+      "content": "Class A 보통주 총 8억 2,500만 주를 주당 $70~78에 공모하는 IPO 로드쇼를 시작했고 나스닥 Global Select Market에 종목코드 'ANT'로 상장을 신청했으며, SEC 증권신고서는 아직 효력이 발생하지 않은 상태다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/roadshow-launch",
+      "url": "https://www.anthropic.com/news/roadshow-launch"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v2.8.0",
+      "content": "analytics summaries·users 리포트에 Claude Tag 지표가 추가되고 Claude Tag Slack 채널 설정에 `reply_mode`가 생겼으며, Bedrock·Vertex·Google Cloud 클라이언트가 빈 project·location·model 값을 요청 경로에 넣지 않고 거부하도록 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v2.8.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v2.8.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk-v1.8.0",
+      "content": "Python v2.8.0과 같이 analytics 리포트의 Claude Tag 지표와 Claude Tag Slack 채널 `reply_mode` 설정이 추가됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v1.8.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v1.8.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript vertex-sdk-v1.1.3",
+      "content": "Vertex 요청 경로에서 모델명의 `;`를 `%3B`로 보내고, `;x`·`.;x`·`..;x` 같은 프로젝트 ID·리전·모델 값에는 `AnthropicError`를 던지도록 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::vertex-sdk-v1.1.3",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/vertex-sdk-v1.1.3"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript google-cloud-sdk-v1.1.4",
+      "content": "`;x`·`.;x`·`..;x` 같은 project·location·workspace ID에 대해 `AnthropicError`를 던지도록 고쳤다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::google-cloud-sdk-v1.1.4",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/google-cloud-sdk-v1.1.4"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript bedrock-sdk-v1.1.2",
+      "content": "`;x`·`.;x`·`..;x` 같은 모델 값에 대해 `AnthropicError`를 던지도록 고쳤다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::bedrock-sdk-v1.1.2",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/bedrock-sdk-v1.1.2"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 7
+  }
+}
