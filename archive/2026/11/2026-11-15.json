@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-15",
+  "news": [
+    {
+      "title": "GPU 한 장으로 부족할 때: DGX Station 2대에 vLLM으로 GLM-5.3 서빙하기",
+      "summary": "NVIDIA가 753B 파라미터(토큰당 40B 활성)의 MoE 모델 GLM-5.3 NVFP4를 DGX Station 2대에 나눠 서빙한 실측 사례를 공개했다. 체크포인트가 464GB로 GB300 한 장의 HBM3e 252GB를 넘기 때문에 ConnectX-8 RDMA로 두 노드를 묶고 tensor parallelism(TP=2)으로 분할했으며, GPU당 약 218GiB의 가중치가 올라간다. SPEED-Bench 코딩 벤치마크에서 동시요청 16에서 전체 처리량 607.8 tok/s로 정점을 찍고 32에서는 385.0 tok/s로 되밀리며 평균 지연이 453초까지 늘어, 동시성을 올리는 것만으로는 처리량이 계속 늘지 않음을 보여준다.",
+      "url": "https://developer.nvidia.com/blog/when-one-gpu-isnt-enough-serving-glm-5-3-across-two-nvidia-dgx-stations-with-vllm/"
+    },
+    {
+      "title": "Diffusion 언어모델은 언제 다시 생성해야 하는가 — 검증기 DiVR",
+      "summary": "Diffusion 언어모델의 remasking은 생성된 텍스트를 되돌려 고칠 수 있게 하지만, 저자들은 토큰 confidence가 hidden state에 담긴 오류 정보를 제대로 드러내지 못하고, 주변 문맥을 그대로 둔 채 오류 토큰만 remasking하면 같은 오류가 재생산된다는 두 가지 한계를 Sudoku 진단으로 확인했다. 제안 기법 DiVR은 부분 생성된 시퀀스가 정답에 도달할지를 예측하는 검증기로, 모델 자신의 생성 궤적의 최종 정답 여부로 학습해 블록을 다시 생성할 시점과 어떤 후보를 채택할지 결정한다. 생성기 가중치는 건드리지 않고 LLaDA-8B-Base 기준 5개 추론 벤치마크 평균 정확도를 35.3%에서 43.4%로 올렸고, 비용은 greedy decoding의 1.9~3.5배로 탐색 기반 baseline(3.8~7.4배)보다 낮다.",
+      "url": "https://arxiv.org/abs/2611.17320v1"
+    },
+    {
+      "title": "에너지 기반 모델이 looped model보다 1,000배 빠르게 추론을 학습한다 (CRAM)",
+      "summary": "Sudoku-Extreme·Maze-Unique 같은 퍼즐 추론에서 주류가 된 looped model이 학습이 불안정하고 느리며 파라미터·FLOPs를 많이 쓴다는 문제에, 저자들은 1980년대 Hopfield & Tank 에너지를 학습 가능한 형태로 되살린 CRAM을 제시했다. 에너지에 대한 descent 방식은 early stopping이 내장되고 문제 난이도에 따라 연산량이 적응하며, solver를 미분하지 않아 학습이 빠르고 가중치가 퍼즐 제약을 해석 가능한 형태로 학습한다. GPU 1대에서 학습 시간은 Sudoku-Extreme 42ms·Maze-Unique 132ms로 looped model 대비 최소 1,000배 빠르고, 정확도는 각각 99.996%·100%, Sudoku-Extreme에서 baseline 최고 정확도를 최소 282배 적은 추론 FLOPs로 달성했다고 보고한다. 저자들은 동시에 Sudoku·Maze처럼 쉽게 풀리는 벤치마크로 looped 추론의 확장성을 평가하는 관행에 주의를 당부한다.",
+      "url": "https://arxiv.org/abs/2611.17309v1"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
