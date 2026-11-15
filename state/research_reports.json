@@ -140,16 +140,6 @@
         "analyst": "-",
         "broker": "iM증권",
         "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=650178"
-      },
-      {
-        "report_idx": "649480",
-        "date": "2026-05-18",
-        "title": "SK하이닉스(000660) 아직 여유 있는 Valuation",
-        "target_price": "2,760,000",
-        "opinion": "Buy",
-        "analyst": "-",
-        "broker": "iM증권",
-        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=649480"
       }
     ],
     "005930": [
@@ -312,16 +302,6 @@
         "analyst": "-",
         "broker": "iM증권",
         "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=650179"
-      },
-      {
-        "report_idx": "649481",
-        "date": "2026-05-18",
-        "title": "삼성전자(005930) P/B 4.0배적용가능",
-        "target_price": "400,000",
-        "opinion": "Buy",
-        "analyst": "-",
-        "broker": "iM증권",
-        "url": "http://consensus.hankyung.com/analysis/downpdf?report_idx=649481"
       }
     ]
   }
