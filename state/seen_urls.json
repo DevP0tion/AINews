@@ -82,6 +82,7 @@
     "https://arxiv.org/abs/2611.17309v1",
     "https://arxiv.org/abs/2611.17320v1",
     "https://arxiv.org/abs/2611.17334v1",
+    "https://arxiv.org/abs/2611.19560v1",
     "https://authorsguild.org/news/ag-v-openai-top-execs-knew-mass-book-piracy-was-illegal",
     "https://aws.amazon.com/bedrock/openai",
     "https://blog.character.ai/an-update-on-character-ai",
@@ -470,6 +471,7 @@
     "https://www.thestateofai.com/news/goldman-sachs-claude-code-traders-bankers",
     "https://www.theverge.com/tech/930447/microsoft-claude-code-discontinued-notepad",
     "https://www.tno.nl/en/digital/artificial-intelligence/gpt-nl",
+    "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-says-claude-mythos-slashed-software-work-to-onboard-amd-gpus-from-up-to-12-months-to-around-three-days-writing-almost-100-percent-of-kernels-autonomously-chips-away-at-nvidias-cuda-moat",
     "https://www.tomshardware.com/tech-industry/artificial-intelligence/microsoft-director-called-ai-scraping-the-largest-theft-of-labor-in-human-history-while-openai-head-brands-chatgpt-an-existential-threat-to-publishers-revelations-come-from-legal-briefs-filed-in-nyt-lawsuit",
     "https://www.tryai.dev/blog/ai-music-video-arena-claude-vs-gpt-5.6",
     "https://www.ubicloud.com/blog/fixing-tool-call-accuracy-in-vllm",
@@ -477,6 +479,7 @@
     "https://www.warp.dev/blog/introducing-the-warp-agent-cli-coding-agent",
     "https://www.wiz.io/blog/php2shell-php-rce",
     "https://x.com/kimi_moonshot/status/2078855608565207130",
+    "https://xusheng.dev/posts/windows-coding-agent-telemetry",
     "https://zed.dev/blog/parallel-agents"
   ]
 }
