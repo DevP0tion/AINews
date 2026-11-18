@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-18",
+  "news": [
+    {
+      "title": "Microsoft, 코딩 전용 모델 MAI Code 2·MAI Code 2 Flash 공개",
+      "summary": "Microsoft AI가 2026년 11월 17일 Ignite에서 코딩 특화 모델 MAI Code 2와 MAI Code 2 Flash를 발표했다. 회사는 DeepSWE 1.1·Terminal Bench 2.1·SWE-Atlas·FrontierCode v1.1 평균 기준으로 MAI Code 2가 GPT 6.1 Sol 성능의 98%를 비용 40%에, Claude Opus 5.5 성능의 96%를 비용 5%에 달성했다고 주장했다. 두 모델은 GitHub Copilot에서 쓸 수 있고 Code 2 Flash는 Microsoft Foundry 제한 프리뷰로 제공되며, 기초 과학 연구나 초장기 에이전트 작업 같은 어려운 문제에는 아직 튜닝되지 않았다고 명시했다.",
+      "url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/"
+    },
+    {
+      "title": "RISA: 블록 디퓨전 언어모델의 KV 캐시 병목을 줄이는 복구 가능 희소 어텐션",
+      "summary": "블록 단위 diffusion language model(DLM)은 여러 토큰을 병렬로 정제하지만, denoising 단계마다 계속 커지는 KV 캐시를 반복해 읽어야 해 장문 추론이 메모리 병목에 걸린다. RISA는 블록 안에서 과거 KV가 고정된다는 점을 이용해 seed query로 블록 전체가 재사용하는 제한된 read plan을 만들고, 새로 생성된 history를 priority·recovery 계층으로 나눠 영구 eviction 없이 복구 가능하게 한다. backbone·decoder 수정 없이 적용되며, DreamReasoner-8B에서 dense 대비 과제 성능은 비슷하게 유지하면서 32K 컨텍스트에서 어텐션 2.67배, 128K에서 5.53배 속도 향상을 보고했다.",
+      "url": "https://arxiv.org/abs/2611.22191v1"
+    },
+    {
+      "title": "OpenAI, GPT-6.2 Astra·Sol 발표",
+      "summary": "OpenAI가 공식 블로그를 통해 신규 모델 GPT-6.2 Astra와 GPT-6.2 Sol을 발표했다. Hacker News에서 1,122점을 받아 당일 AI 관련 최상위 화제였다. 원문 페이지 접근이 제한돼 벤치마크·가격 등 세부 사양은 확인하지 못했으므로 공식 발표 페이지를 참고해야 한다.",
+      "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "모델/API",
+      "title": "Linked billing 베타 출시 — 고객 조직이 앱의 Claude 사용료를 직접 부담",
+      "content": "`user-profiles-billing-2026-10-01` 베타 헤더와 함께 Linked billing이 베타로 출시돼, 고객이 자신의 Claude 조직을 연결하면 `/v1/messages`·`/v1/chat/completions` 요청마다 `billing_policy`로 비용 부담 주체를 지정할 수 있고 고객은 Console에서 지출 한도 설정·연결 해제가 가능하다.",
+      "special": false,
+      "id": "rn::2026-11-17::linked-billing",
+      "url": "https://platform.claude.com/docs/en/manage-claude/oauth-apps/organization-billing-connections"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Desktop 업데이트 채널 선택 기능",
+      "content": "Claude Desktop에서 업데이트 채널을 고를 수 있게 돼, 기본값 Stable은 더 많은 테스트를 거쳐 드물게 새 버전을 받고 Latest는 약 하루에 한 번 새 버전을 받아 수정·신기능을 더 빨리 쓸 수 있다.",
+      "special": false,
+      "id": "app::2026-11-17::release-channel",
+      "url": "https://support.claude.com/en/articles/10065433-install-claude-desktop#h_ac219b3bde"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.327",
+      "content": "`/install-github-app`의 저장소 변경 전 확인 절차, 토큰을 커맨드라인에 남기지 않는 `claude mcp add-json <name> -`(stdin 입력), 깨진 agent·skill·command 파일과 설정 충돌을 보여주는 `/status`·`/config` 표시가 추가됐고, worktree 모드 서버 중지 시 `.env` 등 git-ignored 파일이 삭제되던 문제와 `claude mcp add/remove`가 `.mcp.json`의 다른 최상위 키를 지우던 문제 등이 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.327",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v2.10.0",
+      "content": "`billing_policy` 요청 파라미터 베타 지원과 linked billing 관련 오류 코드(`contract_spend_limit_reached`, `user_profile_billing_not_authorized`), 외부 키 실패·복구 webhook 이벤트가 추가됐고, 실패한 aiohttp 연결을 timeout으로 보고하던 버그가 수정되면서 오류 데이터 모델 이름이 변경(기존 이름은 deprecated)됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-python::v2.10.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v2.10.0"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk-v1.10.0",
+      "content": "Python SDK와 동일하게 `billing_policy` 베타 지원과 linked billing·외부 키 관련 오류 코드·webhook 이벤트가 추가됐고, 종료된 세션의 tool 호출을 실행하지 않도록 session tool runner와 EnvironmentWorker 동작이 수정됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v1.10.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v1.10.0"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
