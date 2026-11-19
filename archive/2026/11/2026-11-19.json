@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-19",
+  "news": [
+    {
+      "title": "Google, Gemini 4 Neon 공개 — 에이전트·코딩 벤치마크 상위권",
+      "summary": "Google DeepMind가 11월 18일 Gemini 4 Neon을 공개했다. Google 자체 집계로 Artificial Analysis Coding Agent Index 1위(58.6), AutomationBench 1위(56.3%), Agent Arena 2위(1336)를 기록했고 Artificial Analysis Intelligence Index는 xhigh 사고 수준에서 61점으로 3위다. 1M 토큰 컨텍스트에 입력 100만 토큰당 $3, 출력 $15, 캐시된 입력은 $0.15이며 기본 사고 수준(high)은 Gemini 4 Carbon보다 작업당 비용이 32% 낮다고 밝혔다.",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+    },
+    {
+      "title": "Diffusion 언어모델에 삽입·삭제 편집을 더한 LED",
+      "summary": "기존 diffusion 언어모델(DLM)은 이미 디코딩한 토큰을 다른 토큰으로 '교체'하는 방식(replacement-only editing)만 지원해, 토큰이 빠지거나 더해져 시퀀스가 밀리는 오류를 고치기 어려웠다. 논문은 삽입·삭제까지 허용하는 LED(Levenshtein Editing for Diffusion)를 제안하고, 최장 공통 부분수열 정렬로 편집 지도를 만들고 다단계 학습으로 모델이 자기 오류를 교정하도록 훈련했다. LLaDA2.1-Mini Base(16B) 12개 벤치마크에서 confidence-guided 디코딩 평균 점수가 54.86→57.10, forward pass당 토큰 수가 6.14→7.05로 올랐고, confidence-free 디코딩에서는 27.52→47.19로 개선됐다.",
+      "url": "https://arxiv.org/abs/2611.23750v1"
+    },
+    {
+      "title": "Ambient SFT — 사전학습 모델을 '노이즈 교사'로 쓰는 데이터 효율적 파인튜닝",
+      "summary": "지도 파인튜닝(SFT)은 사전학습 대비 훨씬 작은 데이터셋에서 수행되는 탓에 과적합과 데이터 분포 꼬리 부분의 망각(catastrophic forgetting)이 발생한다. 논문은 이를 막기 위해 동결(frozen)한 사전학습 모델을 불완전한 교사로 두고 그 예측을 활용해 파인튜닝 데이터셋을 증강하는 Ambient SFT 프레임워크를 제시했다.",
+      "url": "https://arxiv.org/abs/2611.23229v1"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "생태계",
+      "title": "Anthropic, IPO 공모가 주당 83달러로 확정",
+      "content": "Anthropic이 Class A 보통주 9억 8,000만 주를 주당 83달러로 공모가 확정했으며, 11월 19일 나스닥 Global Select Market에서 티커 'ANT'로 거래를 시작하고 11월 20일 거래 종결이 예정됐다.",
+      "special": false,
+      "id": "news::https://www.anthropic.com/news/anthropic-prices-initial-public-offering",
+      "url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.328 릴리즈",
+      "content": "Amazon Bedrock·Google Cloud Agent Platform·Microsoft Foundry·Claude apps gateway에서 Claude Opus 4.6과 Sonnet 4.6용 auto mode가 추가되어 권한 모드를 지정하지 않은 대화형 세션이 이 모드로 시작하고, `mcp_tool` 훅에도 `\"onFailure\": \"block\"`이 지원되며 self-hosted runner 관련 옵션·메트릭이 늘었다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.328",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.328"
+    }
+  ],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
