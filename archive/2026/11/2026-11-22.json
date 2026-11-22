@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-22",
+  "news": [
+    {
+      "title": "Claude Fable 5.2, 블랙홀 물리학의 미해결 문제 두 건을 풀다",
+      "summary": "Anthropic은 Claude Fable 5.2가 블랙홀 물리학의 두 가지 미해결 문제를 풀었다고 밝혔다. 하나는 2003년에 설정된 뒤 끝내지 못했던 Hawking-Page 전이 계산으로, 약결합·강결합 양쪽에서 전이가 매끄럽지 않고 급격하다는 결과를 얻었고, 다른 하나는 modular bootstrap의 가장 단순한 형태에서 블랙홀 질량 상한 M₁ ≤ c/Λ (Λ ≈ 9.1266)을 도출한 것이다. 연구자 Hongbin Chen이 후보 문제 22건에 에이전트를 붙여 약 6주간 백그라운드로 돌린 결과이며, 결과는 Lean으로 형식 검증되고 물리학자가 주요 결론을 검토했다. 다만 두 결과 모두 우리 우주를 직접 기술하지 않고 실용적 응용도 없다고 명시했다.",
+      "url": "https://www.anthropic.com/research/claude-black-hole-physics"
+    },
+    {
+      "title": "LLM이 hex dump만 보고 실행 파일을 읽고 고치고 새로 쓸 수 있는가 — 다섯 가지 실험",
+      "summary": "George Xenos와 Sotiris Giannopoulos는 도구 없이 GPT-6.1 Sol에 hex dump만 주는 실험 5건을 수행했다. 모델은 네 개 프로그램의 기능을 hex dump만으로 파악했고(FreeBSD ministat의 신뢰구간 임계값 버그도 지적), 바이트를 직접 고쳐 세 프로그램에 기능을 추가해 숨겨진 테스트를 통과했으며, 명세만으로 동작하는 ELF64 실행 파일 3종을 만들어냈다. 저자들은 결과가 작은 프로그램·단일 시도에 기반한 예비 결과임을 강조하고, hex dump가 바이트당 약 2.4 토큰을 쓰기 때문에 10MB 프로그램이면 약 2,400만 토큰이 필요하다는 컨텍스트 한계를 주요 제약으로 지적했다.",
+      "url": "https://sgiannopoulos.github.io/blog/machine-code-programming/"
+    },
+    {
+      "title": "O²LaF: 사전학습된 video DiT 하나를 inverse·forward dynamics 양쪽에 재활용하는 잠재 행동 학습",
+      "summary": "라벨 없는 영상에서 행동(action) 지도를 복원하는 latent action learning은 보통 동역학을 처음부터 학습하는데, O²LaF는 'one prior, two dynamics' 원칙으로 사전학습된 video Diffusion Transformer(DiT) 하나를 inverse·forward dynamics 양쪽의 초기값으로 쓴다. inverse 쪽은 학습 가능한 action query를 가진 feed-forward transition encoder로, forward 쪽은 행동 조건부 causal 영상 생성기로 각각 적응시키고 좁은 병목을 통해 end-to-end로 학습한다. 논문은 내비게이션·로봇 조작에서 few-shot action probing 최고 성능과 시각 맥락·몸체를 넘나드는 zero-shot 행동 전이 개선을 보고하며, abstract에는 구체적 수치가 제시되지 않았다.",
+      "url": "https://arxiv.org/abs/2611.26617v1"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 4
+  }
+}
