@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-23",
+  "news": [
+    {
+      "title": "Anthropic 컴퓨트 확보의 전력 구성 분석 — 2028년 가스 87%, 석탄 11% 추정",
+      "summary": "Better Data Center Project가 Anthropic이 계약한 컴퓨트 15GW(이 중 5.9~9.6GW는 특정 부지 확정)의 전력원을 분석한 케이스 스터디를 냈다. 보고서는 2028년 기준 전력의 약 87%가 가스, 11%가 석탄에서 나올 것으로 추정하며, 전력 관련 CO2e 배출량을 연 1,700만~3,800만 톤(중간값 3,200만 톤)으로 봤다. 미국 내 직접 재생에너지 계약은 공개된 바 없고 노르웨이·캐나다 건만 공개돼 있으며, 계약 전력의 약 25%(2.5GW)는 부지 내 가스 발전이라고 지적했다. 수치는 PUE 1.1~1.2, 가동률 60~80% 가정에 기반한 저자들의 추정치다.",
+      "url": "https://betterdatacenterproject.com/2026/11/16/how-ai-is-powered-a-breakdown-of-byop-and-grid-power/"
+    },
+    {
+      "title": "로컬 LLM 입문 가이드 — Unsloth Desktop으로 Qwen·Inkling 모델 돌리기",
+      "summary": "GPU Partner 블로그가 터미널·Python 설정 없이 가정용 Windows PC에서 로컬 LLM을 구동하는 입문 가이드를 공개했다. Unsloth Desktop 앱으로 4비트 양자화 모델을 받아 실행하는 방식으로, 예시는 Qwen3.8-27B의 UD-Q4_K_XL 빌드(약 18GB)와 Apache 2.0 라이선스에 1M 토큰 컨텍스트를 지원하는 Inkling 2 Mini(26.4B, 17.6GB)다. VRAM 용량대별 모델 선택표(8~12GB, 16GB, 24GB, 32GB+)와 MoE 모델을 시스템 RAM에 일부 올려 작은 카드에서 돌리는 방법, Unsloth의 Remote & LAN 설정으로 가정 내 공유하는 절차를 다룬다.",
+      "url": "https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth"
+    },
+    {
+      "title": "HiSA: RoPE 어텐션의 hidden 차원을 희소화하는 새 방식",
+      "summary": "대부분의 sparse attention이 토큰 축을 건너뛰는 것과 달리, HiSA(Hidden Sparse Attention)는 query·key projection을 그대로 둔 채 hidden(feature) 차원에서 내적을 부분적으로만 계산한다. 토큰 위치에 따라 정해지는 정적·무파라미터 규칙을 RoPE 구조에서 끌어내며, query-key 곱의 약 3분의 1만 계산한다고 보고했다. 저자들은 FlashAttention-3 커널로 학습·추론 양쪽에 확장했고, 부분 내적이 전체 내적 대비 성능을 떨어뜨리지 않았으며 디코딩 속도와 추론 시 메모리 사용량이 개선됐다고 밝혔다(구체적 수치는 초록에 미공개).",
+      "url": "https://arxiv.org/abs/2611.26363v1"
+    }
+  ],
+  "claude_updates": [],
+  "specials": [],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
