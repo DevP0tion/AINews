@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-25",
+  "news": [
+    {
+      "title": "PrismML, 3비트 미만 ternary 압축 모델 'Ternary Bonsai 2.5 27B' 공개",
+      "summary": "PrismML이 Qwen3.8 27B를 기반으로 압축한 Ternary Bonsai 2.5 27B를 11월 24일 공개했다. 메모리 사용량은 이전 버전과 같은 5.9GB를 유지하면서 SWE-bench Verified 점수를 60.8점에서 75.6점으로 끌어올려(원본 full-precision 모델 80.6점) 압축 손실을 크게 줄였고, AppWorld 90.5점, τ³-Bench 73.9점으로 원본에 근접했다. H100에서 MTP 적용 시 초당 291토큰을 생성하며, llama.cpp(NVIDIA·Intel GPU)와 MLX(Mac·iPhone·iPad)에서 돌아간다. 가중치는 Apache 2.0으로 공개됐다.",
+      "url": "https://prismml.com/news/bonsai-2-5-27b"
+    },
+    {
+      "title": "OpenAI: GPT-6가 전용 생물학 모델 없이 단백질 설계 능력을 보였다",
+      "summary": "OpenAI는 GPT-6 계열이 전용 단백질 설계 모델을 호출하지 않고 추론과 범용 코드만으로 단백질 구조·서열을 설계하는 능력을 보였다고 발표했다. GPT-6.2가 설계한 미니바인더 322개 중 35개(10.9%)가 표적에 결합했고, 기존 구조에 대한 서열 재설계에서는 MDM2 85%·VEGF-A 62%·PD-1 14%의 결합률을 기록했다. 다만 서열에서 전체 구조를 예측하는 과제는 TM-score 0.26(내부 모델 0.38)으로 ESMFold2의 0.93에 크게 못 미쳤고, 후보 선별에 Boltz-2·ESMFold2 같은 전용 모델을 썼기 때문에 완전한 end-to-end 설계는 아니라고 밝혔다. OpenAI는 같은 능력이 악용될 수 있어 Preparedness Framework에 따라 바이오 보안 위험을 관리한다고 덧붙였다.",
+      "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities/"
+    },
+    {
+      "title": "\"LLM 에이전트는 사용자가 아니라 제작사를 위해 일한다\"",
+      "summary": "Hacker News에서 945점을 받은 개인 블로그 글로, 에이전트의 행동이 결국 모델 제작사가 허용하는 범위에 묶인다는 문제를 제기한다. 저자는 Instagram 릴스의 음악을 찾아 Bandcamp에서 구매하는 Claude Code skill을 만들었는데, Bandcamp가 검색 API에 챌린지를 추가한 뒤 Claude가 우회를 거부한 반면 아티스트에게 수익이 가지 않는 YouTube 다운로드는 그대로 수행했다며 일관성 문제를 지적했다. 그는 광고·정부 압력에 따라 모델 응답이 좌우될 수 있다고 우려하며, 홈랩에서 돌리는 로컬 오픈 모델로 옮기되 라이선스보다 학습 데이터·과정이 더 중요할 수 있다고 적었다.",
+      "url": "https://michaelharley.net/posts/2026/11/01/llm-agents-work-for-their-parent-companies-not-for-you/"
+    }
+  ],
+  "claude_updates": [
+    {
+      "category": "제품",
+      "title": "월간 리캡(Reflect) 베타 종료, 전 플랜에 정식 제공",
+      "content": "설정의 월간 리캡(Reflect)이 베타를 벗어나 웹·데스크톱·iOS·Android의 Free·Pro·Max·Ultra 플랜에 정식 제공되며, Claude Code 세션과 클라우드의 Claude Cowork 작업까지 반영하고 저장된 리캡을 삭제할 수 있다.",
+      "special": true,
+      "id": "app::2026-11-24::monthly-recap",
+      "url": "https://support.claude.com/en/articles/15672559-see-your-monthly-recap"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-python v2.14.0 — proxy 처리 변경, Google 관리형 데이터 제어 추가",
+      "content": "Google Cloud 프로젝트·사용자 프로필용 Google-managed data controls와 compliance review case·notice·item 지원이 추가됐고, `proxy=`를 넘기면 `NO_PROXY` 등 환경변수를 더 이상 읽지 않도록 바뀌어 기존에 `NO_PROXY`로 제외했던 호스트가 프록시를 타게 되므로 `mounts={\"all://host\": None}`로 대응해야 한다.",
+      "special": true,
+      "id": "gh::anthropic-sdk-python::v2.14.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v2.14.0"
+    },
+    {
+      "category": "제품",
+      "title": "Claude Code v2.1.332 — MCP 서버 제공 skills(베타)와 PreSkillShellCommand 훅",
+      "content": "MCP 서버가 제공하는 skills가 `/` 메뉴에 `server:skill` 형태로 노출되는 베타 기능과, skill·커맨드가 로드될 때 인라인 셸 명령을 차단할 수 있는 `PreSkillShellCommand` 훅 이벤트가 추가되고 compaction 실패·장시간 멈춤 관련 버그가 다수 수정됐다.",
+      "special": false,
+      "id": "gh::claude-code::v2.1.332",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332"
+    },
+    {
+      "category": "SDK",
+      "title": "anthropic-sdk-typescript sdk-v1.14.0",
+      "content": "Google Cloud 프로젝트·사용자 프로필용 Google-managed data controls와 compliance review case·notice·item 지원이 추가됐다.",
+      "special": false,
+      "id": "gh::anthropic-sdk-typescript::sdk-v1.14.0",
+      "url": "https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v1.14.0"
+    },
+    {
+      "category": "제품",
+      "title": "아티팩트를 Mac·Windows 앱으로 설치 (베타)",
+      "content": "Claude가 만든 아티팩트를 Mac·Windows에 앱으로 설치해 자체 창과 아이콘을 갖고 운영체제와 상호작용하도록 실행할 수 있는 기능이 베타로 공개됐다.",
+      "special": false,
+      "id": "app::2026-11-24::install-artifacts-as-apps",
+      "url": "https://support.claude.com/en/articles/18516354-install-an-artifact-as-an-app"
+    },
+    {
+      "category": "제품",
+      "title": "연결된 앱으로 파일 보내기·받기 (베타)",
+      "content": "Claude가 연결된 앱으로 파일을 보내거나 앱이 제공하는 파일을 저장할 수 있게 되며, Pro·Max·Ultra에 베타로 순차 적용되고 Team·Enterprise는 소유자가 켜야 쓸 수 있다.",
+      "special": false,
+      "id": "app::2026-11-24::send-files-to-connected-apps",
+      "url": "https://support.claude.com/en/articles/18534325"
+    }
+  ],
+  "specials": [
+    "월간 리캡(Reflect) 베타 종료, 전 플랜에 정식 제공",
+    "anthropic-sdk-python v2.14.0 — proxy 처리 변경, Google 관리형 데이터 제어 추가"
+  ],
+  "duplicate_counts": {
+    "news": 0,
+    "claude": 0
+  }
+}
